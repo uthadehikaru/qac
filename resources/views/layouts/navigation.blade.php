@@ -16,17 +16,17 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @can('is-admin')
-                    <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.index')">
+                    <x-nav-link :href="route('admin.members.index')" :active="request()->is('admin/members*')">
                         {{ __('Members') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.courses.index')" :active="request()->routeIs('admin.courses.index')">
+                    <x-nav-link :href="route('admin.courses.index')" :active="request()->is('admin/courses*')">
                         {{ __('Courses') }}
                     </x-nav-link>
                     @elsecan('is-member')
-                    <x-nav-link :href="route('member.profile')" :active="request()->routeIs('member.profile')">
+                    <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('Courses')" :active="request()->routeIs('course')">
+                    <x-nav-link :href="url('Courses')" :active="request()->is('member/course')">
                         {{ __('Course') }}
                     </x-nav-link>
                     @endcan

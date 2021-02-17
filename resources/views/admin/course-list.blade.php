@@ -12,7 +12,6 @@
         <table class="table-auto datatable">
             <thead>
                 <tr>
-                    <th>No</th>
                     <th>Name</th>
                     <th>Fee</th>
                     <th>Batch</th>
@@ -35,22 +34,44 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
-  $(function () {
-    
-    var table = $('.datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('admin.courses.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'fee', name: 'fee'},
-            {data: 'batch', name: 'batch', orderable: false, searchable: false},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+    $(function () {
+        
+        var table = $('.datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.courses.index') }}",
+            columns: [
+                {data: 'name', name: 'name'},
+                {data: 'fee', name: 'fee'},
+                {data: 'batch', name: 'batch', orderable: false, searchable: false},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+        
     });
-    
-  });
+
+    $(document).on('click', '.delete', function (e) {
+        e.preventDefault();
+
+        if(confirm("Delete this record?")) {
+            var id = $(this).data("id");
+            var token = $("meta[name='csrf-token']").attr("content");
+        
+            $.ajax(
+            {
+                url: "{{ route('admin.courses.index') }}/"+id,
+                type: 'DELETE',
+                data: {
+                    "id": id,
+                    "_token": token,
+                },
+                success: function (data){
+                    $('#delete-'+id).closest('tr').remove();
+                    alert(data.status);
+                }
+            });
+        }
+    });
 </script>
 </x-slot>
 </x-app-layout>

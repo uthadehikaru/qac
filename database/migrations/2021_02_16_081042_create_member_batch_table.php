@@ -14,6 +14,7 @@ class CreateMemberBatchTable extends Migration
     public function up()
     {
         Schema::create('member_batch', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('member_id')->constrained();
             $table->foreignId('batch_id')->constrained();
             $table->timestamp('approved_at')->nullable();

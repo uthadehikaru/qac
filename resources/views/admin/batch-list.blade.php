@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Data Batches') }} - Course {{ $course->name }}
+            {{ __('Data Batches') }} - <a href="{{ route('admin.courses.index') }}" class="pointer text-blue-500">Course {{ $course->name }}</a>
         </h2>
-        <x-link-button href="{{ route('admin.batches.create', $course->id) }}" class="float-right">New Batch</x-button>
+        <x-link-button href="{{ route('admin.courses.batches.create', $course->id) }}" class="float-right">New Batch</x-button>
     </x-slot>
 
     <x-panel>
@@ -40,7 +40,7 @@
     var table = $('.datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.batches.index', $course->id) }}",
+        ajax: "{{ route('admin.courses.batches.index', $course->id) }}",
         columns: [
             {data: 'batch_no', name: 'batch_no'},
             {data: 'start_at', name: 'Duration'},
@@ -51,6 +51,32 @@
     });
     
   });
+
+  $(document).on('click', '.delete', function (e) {
+        e.preventDefault();
+        var id = $(this).data("id");
+
+        if(confirm("Delete this record?")) {
+            var token = $("meta[name='csrf-token']").attr("content");
+        
+            $.ajax(
+            {
+                url: "{{ route('admin.courses.batches.index', $course->id) }}/"+id,
+                type: 'DELETE',
+                data: {
+                    "id": id,
+                    "_token": token,
+                },
+                success: function (data){
+                    $('#delete-'+id).closest('tr').remove();
+                    alert(data.status);
+                },
+                error: function (data){
+                    alert('error : '+data);
+                }
+            });
+        }
+    });
 </script>
 </x-slot>
 </x-app-layout>

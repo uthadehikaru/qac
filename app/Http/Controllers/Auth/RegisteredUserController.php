@@ -7,9 +7,11 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
+use App\Models\Batch;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +22,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $data['batches'] = Batch::where('registration_start_at', '<=', date('Y-m-d'))
+        ->where('registration_end_at', '>=', date('Y-m-d'))
+        ->get();
+        return view('auth.register', $data);
     }
 
     /**
@@ -39,7 +44,10 @@ class RegisteredUserController extends Controller
             'password' => 'required|string|confirmed|min:8',
             'phone' => 'required|numeric|unique:members|min:8',
             'gender' => 'required|in:pria,wanita',
+            'batch_id' => 'required',
         ]);
+
+        DB::beginTransaction();
 
         Auth::login($user = User::create([
             'name' => $request->name,
@@ -48,13 +56,17 @@ class RegisteredUserController extends Controller
             'role' => 'member',
         ]));
 
-        Member::create([
+        $member = Member::create([
             'user_id'=> $user->id,
             'phone' => $request->phone,
             'gender' => $request->gender,
         ]);
 
+        $member->batches()->attach($request->batch_id);
+
         event(new Registered($user));
+
+        DB::commit();
 
         return redirect(RouteServiceProvider::HOME);
     }

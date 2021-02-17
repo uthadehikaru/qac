@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\BatchController;
+use App\Http\Controllers\Admin\MemberBatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +26,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','verified'])->name('dashboard');
 
-Route::middleware(['auth', 'roles:admin'])->namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('/members', MemberController::class);
-    Route::resource('/courses', CourseController::class);
-    Route::resource('/courses/{course_id}/batches', BatchController::class);
+Route::middleware(['auth', 'roles:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('members', MemberController::class);
+    Route::resource('courses', CourseController::class);
+    Route::resource('courses.batches', BatchController::class);
+    Route::get('coureses/{course}/batches/{batch}/members', [MemberBatchController::class, 'index'])->name('courses.batches.members');
+    Route::get('coureses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'update'])->name('courses.batches.members.update');
 });
 
-Route::middleware(['auth', 'roles:member'])->namespace('App\Http\Controllers\Member')->prefix('member')->name('member.')->group(function () {
+Route::middleware(['auth', 'roles:member'])->prefix('member')->name('member.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });

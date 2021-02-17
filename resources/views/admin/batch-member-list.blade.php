@@ -1,20 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Data Members') }}
+            {{ __('Data Members') }} - <a href="{{ route('admin.courses.batches.index', $batch->course_id) }}" class="pointer text-blue-500">Course {{ $batch->name }}</a>
         </h2>
-        <x-link-button href="{{ route('admin.members.create') }}" class="float-right">New Member</x-button>
     </x-slot>
 
     <x-panel>
         <table class="table-auto datatable">
             <thead>
                 <tr>
-                    <th>Register Date</th>
                     <th>Name</th>
-                    <th>Gender</th>
-                    <th>Phone</th>
-                    <th width="100px">Action</th>
+                    <th>Approved</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,40 +35,15 @@
     var table = $('.datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.members.index') }}",
+        ajax: "{{ route('admin.courses.batches.members', ['course'=>$batch->course_id,'batch'=>$batch->id]) }}",
         columns: [
-            {data: 'created_at', name: 'created_at'},
             {data: 'name', name: 'name'},
-            {data: 'gender', name: 'gender'},
-            {data: 'phone', name: 'phone'},
+            {data: 'approved_at', name: 'approved'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
     
   });
-
-    $(document).on('click', '.delete', function (e) {
-        e.preventDefault();
-
-        if(confirm("Delete this record?")) {
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-        
-            $.ajax(
-            {
-                url: "{{ route('admin.members.index') }}/"+id,
-                type: 'DELETE',
-                data: {
-                    "id": id,
-                    "_token": token,
-                },
-                success: function (data){
-                    $('#delete-'+id).closest('tr').remove();
-                    alert(data.status);
-                }
-            });
-        }
-    });
 </script>
 </x-slot>
 </x-app-layout>

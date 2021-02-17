@@ -21,15 +21,16 @@ class CourseController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('batch', function($row){
-                            $btn = '<a href="'.route('admin.batches.index', $row->id).'" class="pointer text-blue-500">'.$row->batches->count().'</a>';
+                            $btn = $row->batches->count();
                             return $btn;
                     })
                     ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.courses.edit', $row->id).'" class="text-yellow-500">Edit</a>';
-                            $btn .= '<a href="'.route('admin.courses.destroy', $row->id).'" class="ml-3 text-red-500">Delete</a>';
+                        $btn = '<a href="'.route('admin.courses.batches.index', $row->id).'" class="text-blue-500">Batches</a>';
+                            $btn .= '<a href="'.route('admin.courses.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
+                            $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                             return $btn;
                     })
-                    ->rawColumns(['batch','action'])
+                    ->rawColumns(['action'])
                     ->make(true);
         }
 
@@ -43,7 +44,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.course-form');
+        $data['course'] = null;
+        return view('admin.course-form', $data);
     }
 
     /**
@@ -88,7 +90,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['course'] = Course::find($id);
+        return view('admin.course-form', $data);
     }
 
     /**
@@ -100,7 +103,19 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'fee' => 'required|numeric|min:0',
+            'description' => '',
+        ]);
+
+        Course::where('id',$id)->update([
+            'name'=>$request->name,
+            'fee'=>$request->fee,
+            'description'=>$request->description,
+        ]);
+
+        return redirect()->route('admin.courses.index')->with('status','Course updated');
     }
 
     /**
@@ -111,6 +126,8 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Course::find($id)->delete();
+
+        return response()->json(['status'=>'Deleted successfully']);
     }
 }

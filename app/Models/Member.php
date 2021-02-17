@@ -16,6 +16,16 @@ class Member extends Model
         'address'
     ];
 
+    public function getNameAttribute($value)
+    {
+        return $this->user?$this->user->name:'';
+    }
+
+    public function getEmailAttribute($value)
+    {
+        return $this->user?$this->user->email:'';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -23,6 +33,6 @@ class Member extends Model
 
     public function batches()
     {
-        return $this->belongsToMany(Batch::class);
+        return $this->belongsToMany(Batch::class,'member_batch')->using(MemberBatch::class);
     }
 }

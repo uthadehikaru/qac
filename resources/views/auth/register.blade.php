@@ -62,6 +62,17 @@
                                 name="password_confirmation" required />
             </div>
 
+            <!-- Course -->
+            <div class="mt-4">
+                <x-label for="course" :value="__('Course')" />
+
+                <select id="course" class="block mt-1 w-full" name="batch_id" required>
+                    @foreach($batches as $batch)
+                        <option value="{{ $batch->id }}">{{ $batch->course->name }} batch {{ $batch->batch_no }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}

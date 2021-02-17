@@ -20,6 +20,13 @@ class Batch extends Model
         'registration_end_at',
     ];
     
+    protected $dates = [
+        'start_at',
+        'end_at',
+        'registration_start_at',
+        'registration_end_at',
+    ];
+    
     protected $casts = [
         'start_at' => 'date:Y-m-d',
         'end_at' => 'date:Y-m-d',
@@ -34,6 +41,11 @@ class Batch extends Model
 
     public function members()
     {
-        return $this->belongsToMany(Member::class, 'member_batch');
+        return $this->belongsToMany(Member::class,'member_batch')->using(MemberBatch::class);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return $this->course->name.' batch '.$this->batch_no;
     }
 }
