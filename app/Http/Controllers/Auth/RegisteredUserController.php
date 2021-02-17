@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Member;
 
 class RegisteredUserController extends Controller
 {
@@ -36,13 +37,22 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'phone' => 'required|numeric|unique:members|min:8',
+            'gender' => 'required|in:pria,wanita',
         ]);
 
         Auth::login($user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'member',
         ]));
+
+        Member::create([
+            'user_id'=> $user->id,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+        ]);
 
         event(new Registered($user));
 

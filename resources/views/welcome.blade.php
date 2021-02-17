@@ -49,6 +49,7 @@
                 <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Kontak</a>
                 </li>
             </ul>
+            @guest
             <a
                 id="navAction"
                 href="{{ route('login') }}"
@@ -56,6 +57,15 @@
             >
                 Masuk
             </a>
+            @else
+            <a
+                id="navAction"
+                href="{{ route('dashboard') }}"
+                class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            >
+                {{ Auth::user()->name }}
+            </a>
+            @endguest
             </div>
         </div>
         <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
@@ -65,16 +75,16 @@
         <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
             <!--Left Col-->
             <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-            <p class="uppercase tracking-loose w-full">What business are you?</p>
+            <p class="uppercase tracking-loose w-full">@lang('Ingin lebih mendalami Al-Qur\'an?')</p>
             <h1 class="my-4 text-5xl font-bold leading-tight">
-                Main Hero Message to sell yourself!
+                @lang('Jadilah bagian dari para pejuang.')
             </h1>
             <p class="leading-normal text-2xl mb-8">
-                Sub-hero message, not too long and not too short. Make it just right!
+                @lang('Ikuti kursus bahasa arab Al-Qur\'an')
             </p>
-            <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                Subscribe
-            </button>
+            <a href="{{ route('register') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                @lang('Daftar')
+            </a>
             </div>
             <!--Right Col-->
             <div class="w-full md:w-3/5 py-6 text-center">
@@ -104,7 +114,7 @@
         <section class="bg-white border-b py-8">
         <div class="container max-w-5xl mx-auto m-8">
             <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            Title
+            @lang('Tentang Kami')
             </h1>
             <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -423,83 +433,62 @@
         <section class="bg-white border-b py-8">
         <div class="container mx-auto flex flex-wrap pt-4 pb-12">
             <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            Title
+            @lang('Testimoni Alumni')
             </h1>
             <div class="w-full mb-4">
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                    xGETTING STARTED
-                </p>
-                <div class="w-full font-bold text-xl text-gray-800 px-6">
-                    Lorem ipsum dolor sit amet.
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                        xGETTING STARTED
+                    </p>
+                    <div class="w-full font-bold text-xl text-gray-800 px-6">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <p class="text-gray-800 text-base px-6 mb-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                    </p>
+                    </a>
                 </div>
-                <p class="text-gray-800 text-base px-6 mb-5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                </p>
-                </a>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-start">
-                <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Action
-                </button>
-                </div>
-            </div>
             </div>
             <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                    xGETTING STARTED
-                </p>
-                <div class="w-full font-bold text-xl text-gray-800 px-6">
-                    Lorem ipsum dolor sit amet.
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                        xGETTING STARTED
+                    </p>
+                    <div class="w-full font-bold text-xl text-gray-800 px-6">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <p class="text-gray-800 text-base px-6 mb-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                    </p>
+                    </a>
                 </div>
-                <p class="text-gray-800 text-base px-6 mb-5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                </p>
-                </a>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-center">
-                <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Action
-                </button>
-                </div>
-            </div>
             </div>
             <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                    xGETTING STARTED
-                </p>
-                <div class="w-full font-bold text-xl text-gray-800 px-6">
-                    Lorem ipsum dolor sit amet.
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                        xGETTING STARTED
+                    </p>
+                    <div class="w-full font-bold text-xl text-gray-800 px-6">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <p class="text-gray-800 text-base px-6 mb-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                    </p>
+                    </a>
                 </div>
-                <p class="text-gray-800 text-base px-6 mb-5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                </p>
-                </a>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-end">
-                <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Action
-                </button>
-                </div>
-            </div>
             </div>
         </div>
         </section>
         <section class="bg-gray-100 py-8">
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
             <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            Pricing
+            @lang('PILIHAN KURSUS')
             </h1>
             <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -523,7 +512,7 @@
                 </div>
                 <div class="flex items-center justify-center">
                     <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Sign Up
+                    @lang('Daftar')
                     </button>
                 </div>
                 </div>
@@ -546,7 +535,7 @@
                 </div>
                 <div class="flex items-center justify-center">
                     <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Sign Up
+                    @lang('Daftar')
                     </button>
                 </div>
                 </div>
@@ -569,7 +558,7 @@
                 </div>
                 <div class="flex items-center justify-center">
                     <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Sign Up
+                    @lang('Daftar')
                     </button>
                 </div>
                 </div>
@@ -601,33 +590,26 @@
         </svg>
         <section class="container mx-auto text-center py-6 mb-12">
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-            Call to Action
+            @lang('Bergabung Bersama Para Pejuang')
         </h1>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <h3 class="my-4 text-3xl leading-tight">
-            Main Hero Message to sell yourself!
+            @lang('Jadilah bagian dari ratusan alumni')
         </h3>
-        <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            Action!
-        </button>
+        <a href="{{ route('register') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            @lang('Daftar')
+        </a>
         </section>
         <!--Footer-->
         <footer class="bg-white">
         <div class="container mx-auto px-8">
             <div class="w-full flex flex-col md:flex-row py-6">
             <div class="flex-1 mb-6 text-black">
-                <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-                <!--Icon from: http://www.potlabicons.com/ -->
-                <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
-                    <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" />
-                    <path
-                    class="plane-take-off"
-                    d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "
-                    />
-                </svg>
-                LANDING
+                <a class="text-pink-600 no-underline hover:no-underline font-bold text-l lg:text-2xl" href="#">
+                <img class="w-10 inline" src="qacjakarta.png" />
+                {{ config('app.name') }}
                 </a>
             </div>
             <div class="flex-1">
