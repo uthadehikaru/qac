@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
             {{ __('Profile') }}
         </h2>
-        <x-link-button  href="javascript:void(0)" onclick="document.getElementById('profile').submit();" id="save" class="float-right">Save</x-button>
+        <x-link-button  href="javascript:void(0)" onclick="document.getElementById('profile').submit();" id="save" class="float-right">Simpan</x-button>
     </x-slot>
 
     <x-panel>

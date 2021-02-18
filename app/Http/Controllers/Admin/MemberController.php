@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Member;
+use App\Models\MemberBatch;
 use DataTables;
 use Hash;
 use Str;
@@ -92,8 +93,25 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        if ($request->ajax()) {
+            $data = MemberBatch::select('*')->where('member_id',$id);
+            return Datatables::of($data)
+                    ->addColumn('batch_id', function($row){
+                        return $row->batch->name;
+                    })
+                    ->editColumn('approved_at',function($row){
+                        return $row->approved_at?'Approved at '.$row->approved_at->format('d-M-Y H:i'):'Not Approved';
+                    })
+                    ->addColumn('action', function($row){
+                        $btn = '';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $data['member'] = Member::find($id);
         return view('admin.member-detail', $data);
     }

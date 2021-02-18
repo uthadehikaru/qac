@@ -42,6 +42,11 @@ class User extends Authenticatable //implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function getIsMemberAttribute($value)
+    {
+        return $this->role=='member';
+    }
+
     public function member()
     {
         return $this->hasOne(Member::class);

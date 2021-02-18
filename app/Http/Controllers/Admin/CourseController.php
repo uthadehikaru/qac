@@ -59,7 +59,7 @@ class CourseController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'fee' => 'required|numeric|min:0',
-            'description' => '',
+            'description' => 'required',
         ]);
 
         Course::create([
@@ -106,7 +106,7 @@ class CourseController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'fee' => 'required|numeric|min:0',
-            'description' => '',
+            'description' => 'required',
         ]);
 
         Course::where('id',$id)->update([

@@ -1,20 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Data Members') }} - <a href="{{ route('admin.courses.batches.index', $batch->course_id) }}" class="pointer text-blue-500">Course {{ $batch->name }}</a>
+            {{ __('Courses') }}
         </h2>
-        <x-link-button href="{{ route('admin.courses.batches.members.create', [$batch->course_id,$batch->id]) }}" class="float-right">Add Member</x-button>
     </x-slot>
 
     <x-panel>
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-        
         <table class="table-auto datatable">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Course</th>
                     <th>Approved</th>
-                    <th>Action</th>
+                    <th width="100px">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,20 +30,20 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
-  $(function () {
-    
-    var table = $('.datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('admin.courses.batches.members', ['course'=>$batch->course_id,'batch'=>$batch->id]) }}",
-        columns: [
-            {data: 'name', name: 'name'},
-            {data: 'approved_at', name: 'approved'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+    $(function () {
+        
+        var table = $('.datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('member.batches') }}",
+            columns: [
+                {data: 'batch_id', name: 'batch_id'},
+                {data: 'approved_at', name: 'approved_at'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+        
     });
-    
-  });
 </script>
 </x-slot>
 </x-app-layout>

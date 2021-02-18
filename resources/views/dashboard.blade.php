@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <x-panel>
-    Welcome
-    </x-panel>
+    @if(Auth::user()->is_member && !Auth::user()->member->isCompleted())
+        <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
+    @endif
 </x-app-layout>

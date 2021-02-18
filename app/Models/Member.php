@@ -16,6 +16,11 @@ class Member extends Model
         'address'
     ];
 
+    public function isCompleted()
+    {
+        return $this->phone && $this->gender && $this->address;
+    }
+
     public function getNameAttribute($value)
     {
         return $this->user?$this->user->name:'';

@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MemberBatch;
 use App\Models\Batch;
+use App\Models\Member;
 use DataTables;
+use Validator;
+use DB;
 use Carbon\Carbon;
 
 class MemberBatchController extends Controller
@@ -35,7 +38,7 @@ class MemberBatchController extends Controller
         return view('admin/batch-member-list', $data);
     }
 
-    public function update(Request $request, $batch_id, $id)
+    public function update(Request $request, $course_id, $batch_id, $id)
     {
         $memberBatch = MemberBatch::find($id);
 
@@ -50,5 +53,39 @@ class MemberBatchController extends Controller
                 return back()->with('status','Member Approved');
             }
         }
+    }
+
+    public function create(Request $request, $course_id, $batch_id)
+    {
+        $data['batch'] = Batch::find($batch_id);
+        $data['members'] = Member::whereNotExists(function($query)use($batch_id)
+            {
+                $query->select(DB::raw(1))
+                    ->from('member_batch')
+                    ->whereRaw('member_batch.member_id=members.id and member_batch.batch_id='.$batch_id);
+            })->get();
+        return view('admin.batch-member-form', $data);
+    }
+
+    public function store(Request $request, $course_id, $batch_id)
+    {
+        $data['batch'] = Batch::find($batch_id);
+
+        $validator = Validator::make($request->all(), [
+            'member_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.courses.batches.members.create', [$course_id, $batch_id])
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        $memberBatch = MemberBatch::create([
+            'batch_id'=>$batch_id,
+            'member_id'=>$request->member_id,
+        ]);
+        return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
+            ->with('status','Member added');
     }
 }
