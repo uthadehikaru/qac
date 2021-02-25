@@ -22,12 +22,12 @@ class RegisteredUserController extends Controller
      */
     public function create(Request $request)
     {
-        $batch = Batch::where('registration_start_at', '<=', date('Y-m-d'))
+        $batch = Batch::with('course')->where('registration_start_at', '<=', date('Y-m-d'))
         ->where('registration_end_at', '>=', date('Y-m-d'))
         ->where('id',$request->batch_id)
         ->first();
 
-        if($batch){
+        if($batch && $batch->is_open && $batch->course->level==1){
             $data['batch'] = $batch;
             $data['sessions'] = explode(',', $batch->sessions);
             return view('auth.register', $data);

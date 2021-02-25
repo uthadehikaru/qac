@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DateTimeInterface;
+use Carbon\Carbon;
 
 class Batch extends Model
 {
@@ -54,5 +55,30 @@ class Batch extends Model
     public function getNameAttribute($value)
     {
         return $this->course->name.' batch '.$this->batch_no;
+    }
+
+    public function getDurationAttribute($value)
+    {
+        $duration = '';
+        if($this->start_at)
+            $duration .= $this->start_at->format('d-M-Y');
+            
+        if($this->end_at)
+            $duration .= ' - '.$this->end_at->format('d-M-Y');
+
+        return $duration;
+    }
+
+    public function getIsOpenAttribute()
+    {
+        return Carbon::now()->betweenIncluded($this->registration_start_at,$this->registration_end_at);
+    }
+
+    public function sessionList()
+    {
+        if($this->sessions)
+            return explode(',',$this->sessions);
+        
+        return null;
     }
 }

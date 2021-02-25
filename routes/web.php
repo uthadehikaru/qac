@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\DashboardController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\BatchMemberController;
+use App\Http\Controllers\Member\BatchController as MBatchController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\BatchController;
@@ -43,6 +44,8 @@ Route::middleware(['auth', 'roles:member'])->prefix('member')->name('member.')->
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/courses', [BatchMemberController::class, 'index'])->name('batches');
     Route::get('/courses/{member_batch_id}', [BatchMemberController::class, 'detail'])->name('batches.detail');
+    Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');
+    Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
 });
 
 require __DIR__.'/auth.php';
