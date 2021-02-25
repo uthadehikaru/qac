@@ -20,21 +20,21 @@
             <div class="-mx-3 md:flex mb-6">
                 <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-name">
-                        Name
+                        Short Name
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-name" name="name" type="text" placeholder="Your name" value="{{ Auth::user()->name }}">
+                    id="grid-name" name="name" type="text" placeholder="Your name" value="{{ Auth::user()->name }}" required>
                 </div>
                 <div class="md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-phone">
-                        Phone
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-full_name">
+                        Full Name
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                    id="grid-phone" name="phone" type="text" placeholder="Your Phone" value="{{ Auth::user()->member->phone }}">
+                    id="grid-full_name" name="full_name" type="text" placeholder="Your Full Name" value="{{ Auth::user()->member->full_name }}" required>
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-email">
                         Email
                     </label>
@@ -42,13 +42,20 @@
                     id="grid-email" name="email" type="email" placeholder="Your Email" value="{{ Auth::user()->email }}" disabled>
                     <p class="text-red text-xs italic">@lang('Email tidak dapat diubah')</p>
                 </div>
-                <div class="md:w-1/2 px-3">
+                <div class="md:w-1/3 px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-phone">
+                        Phone
+                    </label>
+                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                    id="grid-phone" name="phone" type="text" placeholder="Your Phone" value="{{ Auth::user()->member->phone }}" required>
+                </div>
+                <div class="md:w-1/3 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-gender">
                         Gender
                     </label>
                     <div class="relative">
                         <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
-                        id="grid-gender" name="gender">
+                        id="grid-gender" name="gender" required>
                         <option value="pria" {{ Auth::user()->member->gender=='pria'?'selected':'' }}>Pria</option>
                         <option value="wanita" {{ Auth::user()->member->gender=='wanita'?'selected':'' }}>Wanita</option>
                         </select>
@@ -63,6 +70,22 @@
                     <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
                     id="grid-address" name="address" placeholder="your address">{{ Auth::user()->member->address }}</textarea>
                     <p class="text-red text-xs italic">@lang('Digunakan untuk pengiriman')</p>
+                </div>
+            </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+                        City
+                    </label>
+                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                    id="grid-city" name="city" type="text" placeholder="Your city" value="{{ Auth::user()->member->city }}">
+                </div>
+                <div class="md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
+                        Instagram
+                    </label>
+                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                    id="grid-instagram" name="instagram" type="text" placeholder="Your Instagram" value="{{ Auth::user()->member->instagram }}">
                 </div>
             </div>
         </div>

@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->decimal('fee');
+            $table->unsignedTinyInteger('level')->default(1);
         });
     }
 

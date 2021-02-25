@@ -26,7 +26,7 @@
         <nav id="header" class="fixed w-full z-30 top-0 text-white">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <div class="pl-4 flex items-center">
-            <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+            <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ url('') }}">
                 <img class="w-10 inline" src="qacjakarta.png" />
                 {{ config('app.name') }}
             </a>
@@ -81,70 +81,11 @@
         {{ $slot }}
         <!--Footer-->
         <footer class="bg-white">
-        <div class="container mx-auto px-8">
-            <div class="w-full flex flex-col md:flex-row py-6">
-            <div class="flex-1 mb-6 text-black">
-                <a class="text-pink-600 no-underline hover:no-underline font-bold text-l lg:text-2xl" href="#">
-                <img class="w-10 inline" src="qacjakarta.png" />
-                {{ config('app.name') }}
-                </a>
-            </div>
-            <div class="flex-1">
-                <p class="uppercase text-gray-500 md:mb-6">Links</p>
-                <ul class="list-reset mb-6">
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">FAQ</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Help</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Support</a>
-                </li>
-                </ul>
-            </div>
-            <div class="flex-1">
-                <p class="uppercase text-gray-500 md:mb-6">Legal</p>
-                <ul class="list-reset mb-6">
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Terms</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Privacy</a>
-                </li>
-                </ul>
-            </div>
-            <div class="flex-1">
-                <p class="uppercase text-gray-500 md:mb-6">Social</p>
-                <ul class="list-reset mb-6">
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Facebook</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Linkedin</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Twitter</a>
-                </li>
-                </ul>
-            </div>
-            <div class="flex-1">
-                <p class="uppercase text-gray-500 md:mb-6">Company</p>
-                <ul class="list-reset mb-6">
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Official Blog</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">About Us</a>
-                </li>
-                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                    <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Contact</a>
-                </li>
-                </ul>
-            </div>
+        <div class="container mx-auto p-6">
+            <div class="w-full text-center text-black">
+                Copyright &copy; 2021 QAC Jakarta, All right reserved.
             </div>
         </div>
-        <a href="https://www.freepik.com/free-photos-vectors/background" class="text-gray-500">Background vector created by freepik - www.freepik.com</a>
         </footer>
         <!-- jQuery if you need it
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

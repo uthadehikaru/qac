@@ -14,6 +14,7 @@ class Batch extends Model
         'course_id',
         'batch_no',
         'description',
+        'sessions',
         'start_at',
         'end_at',
         'registration_start_at',
@@ -42,6 +43,12 @@ class Batch extends Model
     public function members()
     {
         return $this->belongsToMany(Member::class,'member_batch')->using(MemberBatch::class);
+    }
+
+    public function scopeOpen($query)
+    {
+        return $query->where('registration_start_at', '<=', date('Y-m-d'))
+            ->where('registration_end_at', '>=', date('Y-m-d'));
     }
 
     public function getNameAttribute($value)

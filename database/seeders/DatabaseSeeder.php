@@ -35,9 +35,12 @@ class DatabaseSeeder extends Seeder
 
             \App\Models\Member::create([
                 'user_id' => $user->id,
+                'full_name' => 'Member QAC',
                 'gender' => 'pria',
                 'phone' => '081112341234',
                 'address' => 'Jakarta, Indonesia',
+                'city' => 'Jakarta',
+                'instagram' => 'memberqac',
             ]);
         }
     }

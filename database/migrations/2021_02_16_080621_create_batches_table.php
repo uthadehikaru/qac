@@ -17,7 +17,8 @@ class CreateBatchesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedSmallInteger('batch_no');
-            $table->longText('description');
+            $table->longText('description')->nullable();
+            $table->string('sessions')->nullable();
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->timestamp('registration_start_at')->nullable();

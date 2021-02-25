@@ -11,9 +11,12 @@ class Member extends Model
 
     protected $fillable = [
         'user_id',
+        'full_name',
         'phone',
         'gender',
-        'address'
+        'address',
+        'city',
+        'instagram',
     ];
 
     public function isCompleted()

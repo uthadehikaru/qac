@@ -4,15 +4,14 @@
         <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
             <!--Left Col-->
             <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-            <p class="uppercase tracking-loose w-full">@lang('Ingin lebih mendalami Al-Qur\'an?')</p>
             <h1 class="my-4 text-5xl font-bold leading-tight">
-                @lang('Jadilah bagian dari para pejuang.')
+                @lang('LET QUR\'AN EMBRACES YOUR HEART')
             </h1>
             <p class="leading-normal text-2xl mb-8">
-                @lang('Ikuti kursus bahasa arab Al-Qur\'an')
+                @lang('Because Every Muslim has right to learn it and get one step closer')
             </p>
-            <a href="{{ route('register') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                @lang('Daftar')
+            <a href="#about" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                @lang('Tentang QAC')
             </a>
             </div>
             <!--Right Col-->
@@ -420,78 +419,41 @@
             @lang('PILIHAN KURSUS')
             </h1>
             <div class="w-full mb-4">
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-                <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                    Free
-                </div>
-                <ul class="w-full text-center text-sm">
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                </ul>
-                </div>
-                <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                    £0
-                    <span class="text-base">for one user</span>
-                </div>
-                <div class="flex items-center justify-center">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    @lang('Daftar')
-                    </button>
-                </div>
-                </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
-                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="w-full p-8 text-3xl font-bold text-center">Basic</div>
-                <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
-                <ul class="w-full text-center text-base font-bold">
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                </ul>
-                </div>
-                <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-4xl font-bold text-center">
-                    £x.99
-                    <span class="text-base">/ per user</span>
-                </div>
-                <div class="flex items-center justify-center">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    @lang('Daftar')
-                    </button>
-                </div>
-                </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-                <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                    Pro
-                </div>
-                <ul class="w-full text-center text-sm">
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                    <li class="border-b py-4">Thing</li>
-                </ul>
-                </div>
-                <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                    £x.99
-                    <span class="text-base">/ per user</span>
-                </div>
-                <div class="flex items-center justify-center">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    @lang('Daftar')
-                    </button>
-                </div>
-                </div>
-            </div>
+                @foreach($courses as $course)
+                    @if($course->id==1)
+                    <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+                    @else
+                    <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
+                    @endif
+                        <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                            <div class="p-8 text-3xl font-bold text-center">
+                                {{ $course->name }}
+                            </div>
+                            <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
+                            <p class="p-3">{!! nl2br($course->description) !!}</p>
+                            </div>
+                            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
+                            <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
+                                {{ $course->fee_format }}
+                                <span class="text-base">/ per orang</span>
+                            </div>
+                            @foreach($course->batches()->open()->get() as $batch)
+                            <div class="flex items-center justify-center">
+                                @if($course->level==1)
+                                <a href="{{ route('register', ['batch_id'=>$batch->id]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                @else
+                                <a href="{{ route('login') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                @endif
+                                @lang('Daftar')
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
         </section>
@@ -527,7 +489,7 @@
         <h3 class="my-4 text-3xl leading-tight">
             @lang('Jadilah bagian dari ratusan alumni')
         </h3>
-        <a href="{{ route('register') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+        <a href="#courses" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
             @lang('Daftar')
         </a>
         </section>

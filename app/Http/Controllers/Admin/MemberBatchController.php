@@ -27,7 +27,8 @@ class MemberBatchController extends Controller
                     })
                     ->addColumn('action', function($row){
                         $btn = '<a href="'.route('admin.members.show', $row->member_id).'" class="text-blue-500">Detail</a>';
-                            $btn .= '<a href="'.route('admin.courses.batches.members.update', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-yellow-500">'.($row->approved_at?'Unapprove':'Approve').'</a>';
+                        $btn .= '<a href="'.route('admin.courses.batches.members.approve', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">'.($row->approved_at?'Unapprove':'Approve').'</a>';
+                        $btn .= '<a href="#" id="delete-'.$row->id.'" data-id="'.$row->id.'" class="delete ml-3 text-red-500">Delete</a>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
@@ -38,7 +39,7 @@ class MemberBatchController extends Controller
         return view('admin/batch-member-list', $data);
     }
 
-    public function update(Request $request, $course_id, $batch_id, $id)
+    public function approve(Request $request, $course_id, $batch_id, $id)
     {
         $memberBatch = MemberBatch::find($id);
 
@@ -57,7 +58,9 @@ class MemberBatchController extends Controller
 
     public function create(Request $request, $course_id, $batch_id)
     {
-        $data['batch'] = Batch::find($batch_id);
+        $batch = Batch::find($batch_id);
+        $data['batch'] = $batch;
+        $data['sessions'] = $batch->sessions!=''?explode(',',$batch->sessions):[];
         $data['members'] = Member::whereNotExists(function($query)use($batch_id)
             {
                 $query->select(DB::raw(1))
@@ -73,6 +76,7 @@ class MemberBatchController extends Controller
 
         $validator = Validator::make($request->all(), [
             'member_id' => 'required',
+            'session' => '',
         ]);
 
         if ($validator->fails()) {
@@ -84,8 +88,20 @@ class MemberBatchController extends Controller
         $memberBatch = MemberBatch::create([
             'batch_id'=>$batch_id,
             'member_id'=>$request->member_id,
+            'session'=>$request->session,
         ]);
         return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
             ->with('status','Member added');
+    }
+
+    public function destroy($course_id, $batch_id, $id)
+    {
+        $memberBatch = MemberBatch::find($id);
+        
+        if($memberBatch){
+            $memberBatch->delete();
+            return response()->json(['status'=>'Deleted successfully']);
+        }else
+            return response()->json(['status'=>'No Member Batch Found for id '.$id], 404);
     }
 }

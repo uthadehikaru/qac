@@ -13,7 +13,13 @@ class Course extends Model
         'name',
         'description',
         'fee',
+        'level',
     ];
+
+    public function getFeeFormatAttribute($value)
+    {
+        return "Rp. ".($this->fee/1000).'rb';
+    }
 
     public function batches()
     {

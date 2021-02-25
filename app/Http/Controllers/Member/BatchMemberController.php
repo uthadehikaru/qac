@@ -18,13 +18,16 @@ class BatchMemberController extends Controller
             $data = MemberBatch::select('*')->where('member_id',$member->id);
             return Datatables::of($data)
                     ->addColumn('batch_id', function($row){
-                        return $row->batch->name;
+                        $value = $row->batch->name;
+                        if($row->session)
+                            $value .= ' '.$row->session;
+                        return $value;
                     })
                     ->editColumn('approved_at',function($row){
                         return $row->approved_at?'Approved at '.$row->approved_at->format('d-M-Y H:i'):'Not Approved';
                     })
                     ->addColumn('action', function($row){
-                        $btn = '';
+                        $btn = '<a href="'.route('member.batches.detail', $row->id).'" class="text-blue-500 pointer">Detail</a>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
@@ -33,5 +36,17 @@ class BatchMemberController extends Controller
 
         $data['member'] = $member;
         return view('member/batch-member-list', $data);
+    }
+
+    public function detail($member_batch_id)
+    {
+        $batchMember = MemberBatch::with('batch')->find($member_batch_id);
+
+        if(!$batchMember)
+            abort(404);
+
+        $data['batchMember'] = $batchMember;
+        return view('member.batch-member-detail', $data);
+        
     }
 }

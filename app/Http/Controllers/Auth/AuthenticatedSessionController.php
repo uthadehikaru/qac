@@ -32,6 +32,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(Auth::user()->is_member)
+            return redirect()->route('member.dashboard');
+
         return redirect(RouteServiceProvider::HOME);
     }
 

@@ -16,7 +16,7 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         @if($batch)
-        <form id="form" method="post" action="{{ route('admin.courses.batches.update', ['course_id'=>$course_id, 'batch'=>$batch->id]) }}">
+        <form id="form" method="post" action="{{ route('admin.courses.batches.update', ['course'=>$course_id, 'batch'=>$batch->id]) }}">
         @else
         <form id="form" method="post" action="{{ route('admin.courses.batches.store', $course_id) }}">
         @endif
@@ -33,6 +33,15 @@
                     </label>
                     <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
                     id="grid-description" name="description" placeholder="batch description">{{ old('description',$batch?$batch->description:'') }}</textarea>
+                </div>
+            </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-full px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-sessions">
+                        Session Options
+                    </label>
+                    <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
+                    id="grid-sessions" name="sessions" placeholder="batch sessions">{{ old('sessions',$batch?$batch->sessions:'') }}</textarea>
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">

@@ -20,7 +20,7 @@
 
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3 mb-6 md:mb-0">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-member_id">
                         Member
                     </label>
@@ -29,6 +29,18 @@
                         <option value="">-- choose member --</option>
                         @foreach($members as $member)
                             <option value="{{ $member->id }}">{{ $member->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-session">
+                        Session
+                    </label>
+                    <select id="grid-session" name="session"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
+                        <option value="">-- choose session --</option>
+                        @foreach($sessions as $session)
+                            <option value="{{ $session }}">{{ $session }}</option>
                         @endforeach
                     </select>
                 </div>

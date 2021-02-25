@@ -71,6 +71,7 @@ class BatchController extends Controller
     {
         $request->validate([
             'description' => 'required|string',
+            'sessions' => '',
             'start_at' => 'date|after_or_equal:registration_end_at',
             'end_at' => 'date|after_or_equal:start_at',
             'registration_start_at' => 'date|after_or_equal:today',
@@ -84,6 +85,7 @@ class BatchController extends Controller
             'course_id'=>$course_id,
             'batch_no'=>$batch_no,
             'description'=>$request->description,
+            'sessions'=>$request->sessions,
             'start_at'=>$request->start_at,
             'end_at'=>$request->end_at,
             'registration_start_at'=>$request->registration_start_at,
@@ -128,14 +130,16 @@ class BatchController extends Controller
     {
         $request->validate([
             'description' => 'required|string',
-            'start_at' => 'date|after_or_equal:today',
+            'sessions' => '',
+            'start_at' => 'date|after_or_equal:registration_end_at',
             'end_at' => 'date|after_or_equal:start_at',
-            'registration_start_at' => 'date|after_or_equal:today',
+            'registration_start_at' => 'date',
             'registration_end_at' => 'date|after_or_equal:registration_start_at',
         ]);
 
         Batch::where('id',$id)->update([
             'description'=>$request->description,
+            'sessions'=>$request->sessions,
             'start_at'=>$request->start_at,
             'end_at'=>$request->end_at,
             'registration_start_at'=>$request->registration_start_at,

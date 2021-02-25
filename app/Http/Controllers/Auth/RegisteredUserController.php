@@ -20,12 +20,20 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        $data['batches'] = Batch::where('registration_start_at', '<=', date('Y-m-d'))
+        $batch = Batch::where('registration_start_at', '<=', date('Y-m-d'))
         ->where('registration_end_at', '>=', date('Y-m-d'))
-        ->get();
-        return view('auth.register', $data);
+        ->where('id',$request->batch_id)
+        ->first();
+
+        if($batch){
+            $data['batch'] = $batch;
+            $data['sessions'] = explode(',', $batch->sessions);
+            return view('auth.register', $data);
+        }
+        
+        return abort('404');
     }
 
     /**
@@ -40,10 +48,15 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
             'phone' => 'required|numeric|unique:members|min:8',
             'gender' => 'required|in:pria,wanita',
+            'session' => 'sometimes',
+            'address' => 'required',
+            'city' => 'required',
+            'instagram' => '',
             'batch_id' => 'required',
         ]);
 
@@ -58,11 +71,19 @@ class RegisteredUserController extends Controller
 
         $member = Member::create([
             'user_id'=> $user->id,
+            'full_name' => $request->full_name,
             'phone' => $request->phone,
             'gender' => $request->gender,
+            'address' => $request->address,
+            'city' => $request->city,
+            'instagram' => $request->instagram,
         ]);
 
-        $member->batches()->attach($request->batch_id);
+        $additional = [];
+        if($request->has('session'))
+            $additional = ['session'=>$request->session];
+        
+        $member->batches()->attach($request->batch_id, $additional);
 
         event(new Registered($user));
 

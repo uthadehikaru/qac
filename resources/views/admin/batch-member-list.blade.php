@@ -13,6 +13,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Session</th>
                     <th>Approved</th>
                     <th>Action</th>
                 </tr>
@@ -41,12 +42,36 @@
         ajax: "{{ route('admin.courses.batches.members', ['course'=>$batch->course_id,'batch'=>$batch->id]) }}",
         columns: [
             {data: 'name', name: 'name'},
+            {data: 'session', name: 'session'},
             {data: 'approved_at', name: 'approved'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
     
   });
+
+  $(document).on('click', '.delete', function (e) {
+        e.preventDefault();
+
+        if(confirm("Delete this record?")) {
+            var id = $(this).data("id");
+            var token = $("meta[name='csrf-token']").attr("content");
+        
+            $.ajax(
+            {
+                url: "{{ route('admin.courses.batches.members', [$batch->course_id,$batch->id]) }}/"+id,
+                type: 'DELETE',
+                data: {
+                    "id": id,
+                    "_token": token,
+                },
+                success: function (data){
+                    $('#delete-'+id).closest('tr').remove();
+                    alert(data.status);
+                }
+            });
+        }
+    });
 </script>
 </x-slot>
 </x-app-layout>

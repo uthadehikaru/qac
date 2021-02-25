@@ -12,7 +12,8 @@
         <table class="table-auto datatable">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th>Batch No</th>
+                    <th>Sessions</th>
                     <th>Duration</th>
                     <th>Registration</th>
                     <th>Members</th>
@@ -43,6 +44,7 @@
         ajax: "{{ route('admin.courses.batches.index', $course->id) }}",
         columns: [
             {data: 'batch_no', name: 'batch_no'},
+            {data: 'sessions', name: 'sessions'},
             {data: 'start_at', name: 'Duration'},
             {data: 'registration_start_at', name: 'Registration'},
             {data: 'members', name: 'Members', searchable: false},
