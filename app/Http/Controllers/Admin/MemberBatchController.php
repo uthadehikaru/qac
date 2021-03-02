@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MemberBatch;
 use App\Models\Batch;
 use App\Models\Member;
+use App\Notifications\BatchApproval;
 use DataTables;
 use Validator;
 use DB;
@@ -51,6 +52,7 @@ class MemberBatchController extends Controller
             }else{
                 $memberBatch->approved_at = Carbon::now();
                 $memberBatch->save();
+                $memberBatch->member->user->notify(new BatchApproval($memberBatch));
                 return back()->with('status','Member Approved');
             }
         }

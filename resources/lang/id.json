@@ -1,0 +1,11 @@
+{
+    "A":"A",
+
+    "B":"B",
+    "batch.approval" : "Pendaftaran :batch telah disetujui",
+
+    "U":"U",
+    "user.registration":":member telah mendaftar :batch",
+
+    "Z":"Z"
+}

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
 use App\Models\Batch;
+use App\Notifications\BatchRegistration;
 
 class RegisteredUserController extends Controller
 {
@@ -85,10 +86,15 @@ class RegisteredUserController extends Controller
         
         $member->batches()->attach($request->batch_id, $additional);
 
+        $memberBatch = $member->batches()->latest()->first()->pivot;
+
+        foreach(User::where('role','admin')->get() as $admin)
+            $admin->notify(new BatchRegistration($memberBatch));
+
         event(new Registered($user));
 
         DB::commit();
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('member.dashboard');
     }
 }

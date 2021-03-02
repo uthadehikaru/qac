@@ -13,6 +13,7 @@
                     <th>Register Date</th>
                     <th>Name</th>
                     <th>Gender</th>
+                    <th>Email</th>
                     <th>Phone</th>
                     <th width="100px">Action</th>
                 </tr>
@@ -38,11 +39,12 @@
     var table = $('.datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.members.index') }}",
+        ajax: "{{ route('admin.members.index',['unverified'=>request()->has('unverified')]) }}",
         columns: [
             {data: 'created_at', name: 'created_at'},
             {data: 'name', name: 'name'},
             {data: 'gender', name: 'gender'},
+            {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

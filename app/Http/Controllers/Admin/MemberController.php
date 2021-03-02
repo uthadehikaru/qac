@@ -28,7 +28,11 @@ class MemberController extends Controller
                         return $row->created_at->format('d-M-Y');
                     })
                     ->addColumn('name', function($row){
-                        return $row->user->name;
+                        return $row->full_name.' ('.$row->user->name.')';
+                    })
+                    ->addColumn('email', function($row){
+                        $value = $row->user->email;
+                        return $value;
                     })
                     ->addColumn('action', function($row){
                             $btn = '<a href="'.route('admin.members.show', $row->id).'" class="text-blue-500">Detail</a>';
@@ -99,13 +103,13 @@ class MemberController extends Controller
             $data = MemberBatch::select('*')->where('member_id',$id);
             return Datatables::of($data)
                     ->addColumn('batch_id', function($row){
-                        return $row->batch->name;
+                        return $row->batch->name.' '.$row->session;
                     })
                     ->editColumn('approved_at',function($row){
                         return $row->approved_at?'Approved at '.$row->approved_at->format('d-M-Y H:i'):'Not Approved';
                     })
                     ->addColumn('action', function($row){
-                        $btn = '';
+                        $btn = '<a href="'.route('admin.courses.batches.members.approve', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">'.($row->approved_at?'Unapprove':'Approve').'</a>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
