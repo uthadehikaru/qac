@@ -1,8 +1,52 @@
 {
     "A":"A",
+    "Address":"Alamat",
 
     "B":"B",
     "batch.approval" : "Pendaftaran :batch telah disetujui",
+    "batch.status_1":"Terdaftar",
+    "batch.status_2":"Assesment Selesai",
+    "batch.status_3":"Pembayaran Lunas",
+    "batch.status_4":"Modul Dikirim",
+    "batch.status_5":"Siap Belajar",
+    "Batch":"Angkatan",
+
+    "C":"C",
+    "City":"Kota",
+    "Confirm Password":"Konfirmasi Kata Sandi",
+    "Course Detail":"Detail Kelas",
+    "Courses":"Kelas",
+
+    "D":"D",
+    "Dashboard":"Beranda",
+
+    "F":"F",
+    "Forgot your password?":"Lupa kata sandi?",
+    "Full Name":"Nama Lengkap",
+
+    "G":"G",
+    "Gender":"Jenis Kelamin",
+    "Go Home":"Kembali ke beranda",
+
+    "L":"L",
+    "Login":"Masuk",
+    "Logout":"Keluar",
+
+    "M":"M",
+    "Members":"Anggota",
+
+    "N":"N",
+    "Not Found":"Tidak ditemukan",
+
+    "P":"P",
+    "Password":"Kata Sandi",
+    "Phone":"Nomor Telepon",
+
+    "R":"R",
+    "Register":"Daftar",
+
+    "S":"S",
+    "Short Name":"Nama Panggilan",
 
     "U":"U",
     "user.registration":":member telah mendaftar :batch",

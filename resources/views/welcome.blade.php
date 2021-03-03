@@ -436,11 +436,11 @@
                             <p class="p-3">{!! nl2br($course->description) !!}</p>
                             </div>
                             <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                            <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                                {{ $course->fee_format }}
-                                <span class="text-base">/ per orang</span>
-                            </div>
                             @foreach($course->batches()->open()->get() as $batch)
+                            <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
+                                Batch {{ $batch->batch_no }}
+                                <span class="text-base">{{ $batch->start_at->format('d-M-Y') }}</span>
+                            </div>
                             <div class="flex items-center justify-center">
                                 @if($course->level==1)
                                 <a href="{{ route('register', ['batch_id'=>$batch->id]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
@@ -456,6 +456,91 @@
                 @endforeach
             </div>
         </div>
+        </section>
+        <section id="faq" class="bg-white text-gray-700">
+            <div class="container px-5 py-24 mx-auto">
+            <div class="text-center mb-20">
+                <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
+                Frequently Asked Question
+                </h1>
+                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+                The most common questions about how our business works and what
+                can do for you.
+                </p>
+            </div>
+            <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                <div class="w-full lg:w-1/2 px-4 py-2">
+                <details class="mb-4">
+                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+                    How Long is this site live?
+                    </summary>
+
+                    <span>
+                    Laboris qui labore cillum culpa in sunt quis sint veniam.
+                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
+                    minim velit nostrud pariatur culpa magna in aute.
+                    </span>
+                </details>
+                <details class="mb-4">
+                    <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
+                    Can I install/upload anything I want on there?
+                    </summary>
+
+                    <span>
+                    Laboris qui labore cillum culpa in sunt quis sint veniam.
+                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
+                    minim velit nostrud pariatur culpa magna in aute.
+                    </span>
+                </details>
+                <details class="mb-4">
+                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+                    How can I migrate to another site?
+                    </summary>
+
+                    <span>
+                    Laboris qui labore cillum culpa in sunt quis sint veniam.
+                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
+                    minim velit nostrud pariatur culpa magna in aute.
+                    </span>
+                </details>
+                </div>
+                <div class="w-full lg:w-1/2 px-4 py-2">
+                <details class="mb-4">
+                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+                    Can I change the domain you give me?
+                    </summary>
+
+                    <span class="px-4 py-2">
+                    Laboris qui labore cillum culpa in sunt quis sint veniam.
+                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
+                    minim velit nostrud pariatur culpa magna in aute.
+                    </span>
+                </details>
+                <details class="mb-4">
+                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+                    How many sites I can create at once?
+                    </summary>
+
+                    <span class="px-4 py-2">
+                    Laboris qui labore cillum culpa in sunt quis sint veniam.
+                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
+                    minim velit nostrud pariatur culpa magna in aute.
+                    </span>
+                </details>
+                <details class="mb-4">
+                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+                    How can I communicate with you?
+                    </summary>
+
+                    <span class="px-4 py-2">
+                    Laboris qui labore cillum culpa in sunt quis sint veniam.
+                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
+                    minim velit nostrud pariatur culpa magna in aute.
+                    </span>
+                </details>
+                </div>
+            </div>
+            </div>
         </section>
         <!-- Change the colour #f8fafc to match the previous section colour -->
         <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -489,7 +574,7 @@
         <h3 class="my-4 text-3xl leading-tight">
             @lang('Jadilah bagian dari ratusan alumni')
         </h3>
-        <a href="#courses" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+        <a href="#courses" class="mt-2 mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
             @lang('Daftar')
         </a>
         </section>

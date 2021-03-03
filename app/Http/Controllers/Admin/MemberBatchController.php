@@ -21,10 +21,10 @@ class MemberBatchController extends Controller
             $data = MemberBatch::select('*')->where('batch_id',$batch_id);
             return Datatables::of($data)
                     ->addColumn('name', function($row){
-                        return $row->member->name;
+                        return $row->member->full_name.' ('.$row->member->name.')';
                     })
-                    ->editColumn('approved_at',function($row){
-                        return $row->approved_at?'Approved at '.$row->approved_at->format('d-M-Y H:i'):'Not Approved';
+                    ->editColumn('status',function($row){
+                        return __('batch.status_'.$row->status);
                     })
                     ->addColumn('action', function($row){
                         $btn = '<a href="'.route('admin.members.show', $row->member_id).'" class="text-blue-500">Detail</a>';

@@ -48,7 +48,13 @@
                             {{ $batch->batch->duration }}
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap">
-                            {{ $batch->approved_at?'Approved':'Please finish your assesment' }}
+                            @if($batch->batch->is_active)
+                                @lang('Kelas Sedang Berjalan')
+                            @elseif($batch->batch->is_open)
+                                @lang('batch.status_'.$batch->status)
+                            @else
+                                @lang('Kelas Selesai')
+                            @endif
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
 

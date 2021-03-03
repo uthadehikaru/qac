@@ -26,9 +26,6 @@
                     <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('member.batches')" :active="request()->is('member/courses*')">
-                        {{ __('Courses') }}
-                    </x-nav-link>
                     @endcan
                 </div>
             </div>

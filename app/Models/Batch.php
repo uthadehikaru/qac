@@ -74,6 +74,11 @@ class Batch extends Model
         return Carbon::now()->betweenIncluded($this->registration_start_at,$this->registration_end_at);
     }
 
+    public function getIsActiveAttribute()
+    {
+        return Carbon::now()->betweenIncluded($this->start_at,$this->end_at);
+    }
+
     public function sessionList()
     {
         if($this->sessions)

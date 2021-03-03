@@ -28,7 +28,7 @@ class MemberController extends Controller
                         return $row->created_at->format('d-M-Y');
                     })
                     ->addColumn('name', function($row){
-                        return $row->full_name.' ('.$row->user->name.')';
+                        return $row->full_name.' ('.$row->name.')';
                     })
                     ->addColumn('email', function($row){
                         $value = $row->user->email;

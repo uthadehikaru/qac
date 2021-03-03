@@ -16,6 +16,7 @@ class MemberBatch extends Pivot
         'batch_id',
         'approved_at',
         'session',
+        'status',
     ];
 
     public $timestamps = false;

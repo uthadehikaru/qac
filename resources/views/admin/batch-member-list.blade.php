@@ -14,7 +14,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Session</th>
-                    <th>Approved</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -43,7 +43,7 @@
         columns: [
             {data: 'name', name: 'name'},
             {data: 'session', name: 'session'},
-            {data: 'approved_at', name: 'approved'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

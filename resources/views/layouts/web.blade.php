@@ -42,19 +42,22 @@
             <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
             <ul class="list-reset lg:flex justify-end flex-1 items-center">
                 <li class="mr-3">
-                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Beranda</a>
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="{{ url('/') }}">Beranda</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#about">Tentang Kami</a>
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#about">Tentang Kami</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#testimonial">Testimoni</a>
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#testimonial">Testimoni</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#courses">Kelas</a>
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#courses">Kelas</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#register">Pendaftaran</a>
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#faq">FAQ</a>
+                </li>
+                <li class="mr-3">
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#register">Pendaftaran</a>
                 </li>
             </ul>
             @guest

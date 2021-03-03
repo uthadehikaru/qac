@@ -6,6 +6,8 @@ if($type=='success')
     $color = 'green';
 elseif($type=='error')
     $color = 'red';
+elseif($type=='warning')
+    $color = 'yellow';
 elseif($type=='info')
     $color = 'blue';
 else
