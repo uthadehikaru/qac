@@ -28,7 +28,7 @@ class MemberBatchController extends Controller
                     })
                     ->addColumn('action', function($row){
                         $btn = '<a href="'.route('admin.members.show', $row->member_id).'" class="text-blue-500">Detail</a>';
-                        $btn .= '<a href="'.route('admin.courses.batches.members.approve', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">'.($row->approved_at?'Unapprove':'Approve').'</a>';
+                        $btn .= '<a href="'.route('admin.courses.batches.members.edit', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">Edit</a>';
                         $btn .= '<a href="#" id="delete-'.$row->id.'" data-id="'.$row->id.'" class="delete ml-3 text-red-500">Delete</a>';
                         return $btn;
                     })
@@ -60,6 +60,7 @@ class MemberBatchController extends Controller
 
     public function create(Request $request, $course_id, $batch_id)
     {
+        $data['batchMember'] = null;
         $batch = Batch::find($batch_id);
         $data['batch'] = $batch;
         $data['sessions'] = $batch->sessions!=''?explode(',',$batch->sessions):[];
@@ -79,6 +80,7 @@ class MemberBatchController extends Controller
         $validator = Validator::make($request->all(), [
             'member_id' => 'required',
             'session' => '',
+            'status' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -91,9 +93,44 @@ class MemberBatchController extends Controller
             'batch_id'=>$batch_id,
             'member_id'=>$request->member_id,
             'session'=>$request->session,
+            'status'=>$request->status,
         ]);
         return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
             ->with('status','Member added');
+    }
+
+    public function edit(Request $request, $course_id, $batch_id, $id)
+    {
+        $batchMember = MemberBatch::find($id);
+        $data['batchMember'] = $batchMember;
+        $batch = Batch::find($batch_id);
+        $data['batch'] = $batch;
+        $data['sessions'] = $batch->sessions!=''?explode(',',$batch->sessions):[];
+        return view('admin.batch-member-form', $data);
+    }
+
+    public function update(Request $request, $course_id, $batch_id, $id)
+    {
+        $data['batch'] = Batch::find($batch_id);
+
+        $validator = Validator::make($request->all(), [
+            'session' => '',
+            'status' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.courses.batches.members.edit', [$course_id, $batch_id, $id])
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        $memberBatch = MemberBatch::find($id);
+        $memberBatch->update([
+            'session'=>$request->session,
+            'status'=>$request->status,
+        ]);
+        return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
+            ->with('status','Member updated');
     }
 
     public function destroy($course_id, $batch_id, $id)

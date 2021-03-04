@@ -43,7 +43,7 @@ class Batch extends Model
 
     public function members()
     {
-        return $this->belongsToMany(Member::class,'member_batch')->using(MemberBatch::class);
+        return $this->belongsToMany(Member::class,'member_batch')->withPivot('id','session', 'status')->using(MemberBatch::class);
     }
 
     public function scopeOpen($query)

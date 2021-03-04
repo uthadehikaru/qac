@@ -9,45 +9,56 @@
         <p class="">{{ $member->address }}</p>
     </x-slot>
 
-    <x-panel>
-        <table class="table-auto datatable">
-            <thead>
-                <tr>
-                    <th>Batch</th>
-                    <th>Approved Date</th>
-                    <th width="100px">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </x-panel>
+    <div class="m-6">
+        <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>
+        <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
 
-<x-slot name="styles">
-<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-</x-slot>
+            <table class="w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
 
-<x-slot name="scripts">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        
-        var table = $('.datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('admin.members.show', $member->id) }}",
-            columns: [
-                {data: 'batch_id', name: 'batch_id'},
-                {data: 'approved_at', name: 'approved_at'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ]
-        });
-        
-    });
-</script>
-</x-slot>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Kelas
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            jadwal
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white text-xs divide-y divide-gray-200">
+                    @foreach($member->batches as $batch)
+                    <tr>
+
+                        <td class="px-2 py-4 whitespace-nowrap">
+                            {{ $batch->name }} {{ $batch->pivot->session }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap">
+                            {{ $batch->duration }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap">
+                            @lang('batch.status_'.$batch->pivot->status)
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+
+                            <div class="flex justify-start space-x-1">
+                                <a href="{{ route('admin.courses.batches.members.edit', [$batch->course_id,$batch->id,$batch->pivot->id]) }}" class="border-2 border-indigo-200 rounded-md p-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-indigo-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </x-app-layout>

@@ -35,11 +35,12 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::resource('members', MemberController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('courses.batches', BatchController::class);
-        Route::get('coureses/{course}/batches/{batch}/members', [MemberBatchController::class, 'index'])->name('courses.batches.members');
-        Route::get('coureses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'create'])->name('courses.batches.members.create');
-        Route::post('coureses/{course}/batches/{batch}/members/update', [MemberBatchController::class, 'store'])->name('courses.batches.members.update');
-        Route::get('coureses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'approve'])->name('courses.batches.members.approve');
-        Route::delete('coureses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'destroy'])->name('courses.batches.members.delete');
+        Route::get('courses/{course}/batches/{batch}/members', [MemberBatchController::class, 'index'])->name('courses.batches.members');
+        Route::get('courses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'create'])->name('courses.batches.members.create');
+        Route::post('courses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'store'])->name('courses.batches.members.store');
+        Route::get('courses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'edit'])->name('courses.batches.members.edit');
+        Route::post('courses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'update'])->name('courses.batches.members.update');
+        Route::delete('courses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'destroy'])->name('courses.batches.members.delete');
     });
 
     Route::middleware(['roles:member'])->prefix('member')->name('member.')->group(function () {

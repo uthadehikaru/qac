@@ -16,7 +16,7 @@
     @endforeach
 
     <div class="m-6">
-        <p class="block text-lg font-bold text-gray-700">Your Courses</p>
+        <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>
         <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
 
             <table class="w-full divide-y divide-gray-200">
@@ -24,16 +24,16 @@
                     <tr>
 
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Course
+                            Kelas
                         </th>
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Schedule
+                            Jadwal
                         </th>
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                         </th>
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Actions
+                            Aksi
                         </th>
                     </tr>
                 </thead>

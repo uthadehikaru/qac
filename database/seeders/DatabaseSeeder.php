@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             'role'=>'admin',
         ]);
 
+        $this->call([
+            SystemSeeder::class,
+        ]);
+
         if(env('APP_ENV')!='production'){
             $user = \App\Models\User::create([
                 'name' => 'Member',

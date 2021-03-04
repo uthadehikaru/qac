@@ -44,8 +44,8 @@ class BatchRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line(__('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->name]))
-                    ->action(__('Detail'), url('/'));
+                    ->line($this->getMessage())
+                    ->action(__('Detail'), $this->getLink());
     }
 
     /**
@@ -58,8 +58,18 @@ class BatchRegistration extends Notification
     {
         return [
             'type'=>'batch_registration',
-            'link'=>route('admin.courses.batches.members', ['course'=>$this->memberBatch->batch->course_id,'batch'=>$this->memberBatch->batch_id]),
-            'message'=>__('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->name])
+            'link'=>$this->getLink(),
+            'message'=>$this->getMessage(),
         ];
+    }
+
+    private function getLink()
+    {
+        return route('admin.courses.batches.members.edit', [$this->memberBatch->batch->course_id,$this->memberBatch->batch_id, $this->memberBatch->id]);
+    }
+
+    private function getMessage()
+    {
+        return __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->name]);
     }
 }

@@ -366,51 +366,23 @@
             <div class="w-full mb-4">
                 <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
-            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+            @foreach($testimonials->value as $testimonial)
+            <div class="w-full md:w-1/{{ count($testimonials->value) }} p-6 flex flex-col flex-grow flex-shrink">
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                     <a href="#" class="flex flex-wrap no-underline hover:no-underline">
                     <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                        xGETTING STARTED
+                        {{ $testimonial->title }}
                     </p>
                     <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        Lorem ipsum dolor sit amet.
+                        {{ $testimonial->name }}
                     </div>
                     <p class="text-gray-800 text-base px-6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                        {{ $testimonial->message }}
                     </p>
                     </a>
                 </div>
             </div>
-            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                        xGETTING STARTED
-                    </p>
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        Lorem ipsum dolor sit amet.
-                    </div>
-                    <p class="text-gray-800 text-base px-6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                    </p>
-                    </a>
-                </div>
-            </div>
-            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                        xGETTING STARTED
-                    </p>
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        Lorem ipsum dolor sit amet.
-                    </div>
-                    <p class="text-gray-800 text-base px-6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                    </p>
-                    </a>
-                </div>
-            </div>
+            @endforeach
         </div>
         </section>
         <section id="courses" class="bg-gray-100 pt-12 py-8">
@@ -469,75 +441,18 @@
                 </p>
             </div>
             <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                <div class="w-full lg:w-1/2 px-4 py-2">
+                <div class="w-full px-4 py-2">
+                @foreach($faqs->value as $faq)
                 <details class="mb-4">
                     <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                    How Long is this site live?
+                    {{ $faq->title }}
                     </summary>
 
                     <span>
-                    Laboris qui labore cillum culpa in sunt quis sint veniam.
-                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                    minim velit nostrud pariatur culpa magna in aute.
+                    {{ $faq->message }}
                     </span>
                 </details>
-                <details class="mb-4">
-                    <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-                    Can I install/upload anything I want on there?
-                    </summary>
-
-                    <span>
-                    Laboris qui labore cillum culpa in sunt quis sint veniam.
-                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                    minim velit nostrud pariatur culpa magna in aute.
-                    </span>
-                </details>
-                <details class="mb-4">
-                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                    How can I migrate to another site?
-                    </summary>
-
-                    <span>
-                    Laboris qui labore cillum culpa in sunt quis sint veniam.
-                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                    minim velit nostrud pariatur culpa magna in aute.
-                    </span>
-                </details>
-                </div>
-                <div class="w-full lg:w-1/2 px-4 py-2">
-                <details class="mb-4">
-                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                    Can I change the domain you give me?
-                    </summary>
-
-                    <span class="px-4 py-2">
-                    Laboris qui labore cillum culpa in sunt quis sint veniam.
-                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                    minim velit nostrud pariatur culpa magna in aute.
-                    </span>
-                </details>
-                <details class="mb-4">
-                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                    How many sites I can create at once?
-                    </summary>
-
-                    <span class="px-4 py-2">
-                    Laboris qui labore cillum culpa in sunt quis sint veniam.
-                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                    minim velit nostrud pariatur culpa magna in aute.
-                    </span>
-                </details>
-                <details class="mb-4">
-                    <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                    How can I communicate with you?
-                    </summary>
-
-                    <span class="px-4 py-2">
-                    Laboris qui labore cillum culpa in sunt quis sint veniam.
-                    Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                    minim velit nostrud pariatur culpa magna in aute.
-                    </span>
-                </details>
+                @endforeach
                 </div>
             </div>
             </div>

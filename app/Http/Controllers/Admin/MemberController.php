@@ -99,24 +99,8 @@ class MemberController extends Controller
      */
     public function show(Request $request, $id)
     {
-        if ($request->ajax()) {
-            $data = MemberBatch::select('*')->where('member_id',$id);
-            return Datatables::of($data)
-                    ->addColumn('batch_id', function($row){
-                        return $row->batch->name.' '.$row->session;
-                    })
-                    ->editColumn('approved_at',function($row){
-                        return $row->approved_at?'Approved at '.$row->approved_at->format('d-M-Y H:i'):'Not Approved';
-                    })
-                    ->addColumn('action', function($row){
-                        $btn = '<a href="'.route('admin.courses.batches.members.approve', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">'.($row->approved_at?'Unapprove':'Approve').'</a>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        $data['member'] = Member::find($id);
+        $member = Member::with('batches')->find($id);
+        $data['member'] = $member;
         return view('admin.member-detail', $data);
     }
 
