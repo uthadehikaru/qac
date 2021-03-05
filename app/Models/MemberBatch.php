@@ -32,4 +32,9 @@ class MemberBatch extends Pivot
     {
         return $this->belongsTo(Batch::class);
     }
+
+    public function file()
+    {
+        return $this->hasOne(File::class,'record_id')->where('tablename','member_batch');
+    }
 }

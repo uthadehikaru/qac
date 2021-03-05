@@ -13,7 +13,7 @@ class Batch extends Model
 
     protected $fillable = [
         'course_id',
-        'batch_no',
+        'name',
         'description',
         'sessions',
         'start_at',
@@ -46,15 +46,20 @@ class Batch extends Model
         return $this->belongsToMany(Member::class,'member_batch')->withPivot('id','session', 'status')->using(MemberBatch::class);
     }
 
+    public function file()
+    {
+        return $this->hasOne(File::class,'record_id')->where('tablename','batches');
+    }
+
     public function scopeOpen($query)
     {
         return $query->where('registration_start_at', '<=', date('Y-m-d'))
             ->where('registration_end_at', '>=', date('Y-m-d'));
     }
 
-    public function getNameAttribute($value)
+    public function getFullNameAttribute($value)
     {
-        return $this->course->name.' batch '.$this->batch_no;
+        return $this->course->name.' batch '.$this->name;
     }
 
     public function getDurationAttribute($value)

@@ -18,7 +18,7 @@ class BatchMemberController extends Controller
             $data = MemberBatch::select('*')->where('member_id',$member->id);
             return Datatables::of($data)
                     ->addColumn('batch_id', function($row){
-                        $value = $row->batch->name;
+                        $value = $row->batch->full_name;
                         if($row->session)
                             $value .= ' '.$row->session;
                         return $value;
@@ -40,11 +40,10 @@ class BatchMemberController extends Controller
 
     public function detail($member_batch_id)
     {
-        $batchMember = MemberBatch::with('batch')->find($member_batch_id);
+        $batchMember = MemberBatch::with(['batch.file','file'])->find($member_batch_id);
 
         if(!$batchMember)
             abort(404);
-
         $data['batchMember'] = $batchMember;
         return view('member.batch-member-detail', $data);
         

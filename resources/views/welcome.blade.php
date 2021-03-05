@@ -410,8 +410,8 @@
                             <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                             @foreach($course->batches()->open()->get() as $batch)
                             <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                                Batch {{ $batch->batch_no }}
-                                <span class="text-base">{{ $batch->start_at->format('d-M-Y') }}</span>
+                                Batch {{ $batch->full_name }}
+                                <p class="text-base">{{ $batch->duration }}</p>
                             </div>
                             <div class="flex items-center justify-center">
                                 @if($course->level==1)

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Data Courses') }}
+            {{ __('Data Kelas') }}
         </h2>
         <x-link-button href="{{ route('admin.courses.create') }}" class="float-right">New Course</x-button>
     </x-slot>
@@ -13,7 +13,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Fee</th>
                     <th>Batch</th>
                     <th width="100px">Action</th>
                 </tr>
@@ -42,7 +41,6 @@
             ajax: "{{ route('admin.courses.index') }}",
             columns: [
                 {data: 'name', name: 'name'},
-                {data: 'fee', name: 'fee'},
                 {data: 'batch', name: 'batch', orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]

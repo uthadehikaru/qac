@@ -47,6 +47,6 @@ class BatchController extends Controller
         
         Auth::user()->member->batches()->attach($batch->id, $additional);
 
-        return back()->with('success','Selamat, Anda telah terdaftar pada '.$batch->name.', Tim kami akan segera menghubungi anda');
+        return back()->with('success','Selamat, Anda telah terdaftar pada '.$batch->full_name.', Tim kami akan segera menghubungi anda');
     }
 }

@@ -36,7 +36,7 @@
                     <tr>
 
                         <td class="px-2 py-4 whitespace-nowrap">
-                            {{ $batch->name }} {{ $batch->pivot->session }}
+                            {{ $batch->full_name }} {{ $batch->pivot->session }}
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap">
                             {{ $batch->duration }}
@@ -52,6 +52,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
                                 </a>
+                                @if($batch->pivot->file)
+                                <a href="{{ $batch->pivot->file->fileUrl('filename') }}" target="_blank" class="border-2 border-indigo-200 rounded-md p-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-indigo-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                </a>
+                                @endif
                             </div>
 
                         </td>

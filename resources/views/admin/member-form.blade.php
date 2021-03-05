@@ -69,6 +69,22 @@
                     id="grid-address" name="address" placeholder="member address">{{ old('address', $member?$member->address:'') }}</textarea>
                 </div>
             </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+                        City
+                    </label>
+                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                    id="grid-city" name="city" type="text" placeholder="Your city" value="{{ old('city', $member?$member->city:'') }}">
+                </div>
+                <div class="md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
+                        Instagram
+                    </label>
+                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                    id="grid-instagram" name="instagram" type="text" placeholder="Your Instagram" value="{{ old('instagram', $member?$member->instagram:'') }}">
+                </div>
+            </div>
         </div>
         </form>
     </x-panel>

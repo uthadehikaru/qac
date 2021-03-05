@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\MemberBatch;
 
-class BatchApproval extends Notification
+class BatchStatusUpdate extends Notification
 {
     use Queueable;
 
@@ -44,8 +44,9 @@ class BatchApproval extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line(__('batch.approval', ['batch'=>$this->memberBatch->batch->full_name]))
-                    ->action(__('Detail'), route('member.batches.detail', $this->memberBatch->id));
+                    ->subject($this->memberBatch->batch->full_name. ' : Status diperbaharui')
+                    ->line($this->getMessage())
+                    ->action(__('Detail'), $this->getLink());
     }
 
     /**
@@ -57,9 +58,19 @@ class BatchApproval extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'batch_approval',
-            'link'=>route('member.batches.detail', $this->memberBatch->id),
-            'message'=>__('batch.approval', ['batch'=>$this->memberBatch->batch->full_name])
+            'type'=>'batch_status',
+            'link'=>$this->getLink(),
+            'message'=>$this->getMessage()
         ];
+    }
+
+    private function getLink()
+    {
+        return route('member.batches.detail', $this->memberBatch->id);
+    }
+
+    private function getMessage()
+    {
+        return __('batch.status', ['batch'=>$this->memberBatch->batch->full_name,'status'=>__('batch.status_'.$this->memberBatch->status)]);
     }
 }

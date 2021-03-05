@@ -44,6 +44,7 @@ class BatchRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
                     ->line($this->getMessage())
                     ->action(__('Detail'), $this->getLink());
     }
@@ -70,6 +71,6 @@ class BatchRegistration extends Notification
 
     private function getMessage()
     {
-        return __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->name]);
+        return __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->full_name]);
     }
 }

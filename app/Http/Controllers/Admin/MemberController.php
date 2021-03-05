@@ -73,6 +73,8 @@ class MemberController extends Controller
             'phone' => 'required|numeric|unique:members,phone|min:8',
             'gender' => 'required|in:pria,wanita',
             'address' => '',
+            'city' => '',
+            'instagram' => '',
         ]);
 
         $user = new User();
@@ -86,6 +88,8 @@ class MemberController extends Controller
         $member->phone = $request->phone;
         $member->gender = $request->gender;
         $member->address = $request->address;
+        $member->city = $request->city;
+        $member->instagram = $request->instagram;
         $member->save();
 
         return redirect()->route('admin.members.index')->with('status','Member created successfully');
@@ -133,6 +137,8 @@ class MemberController extends Controller
             'phone' => 'required|numeric|unique:members,phone,'.$member->id.'|min:8',
             'gender' => 'required|in:pria,wanita',
             'address' => '',
+            'city' => '',
+            'instagram' => '',
         ]);
 
         $user = $member->user;
@@ -143,6 +149,8 @@ class MemberController extends Controller
         $member->phone = $request->phone;
         $member->gender = $request->gender;
         $member->address = $request->address;
+        $member->city = $request->city;
+        $member->instagram = $request->instagram;
         $member->save();
 
         return redirect()->route('admin.members.index')->with('status','Member updated successfully');

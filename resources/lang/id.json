@@ -4,21 +4,27 @@
 
     "B":"B",
     "batch.approval" : "Pendaftaran :batch telah disetujui",
+    "batch.status" : ":batch telah berubah status menjadi :status",
     "batch.status_1":"Terdaftar",
     "batch.status_2":"Assesment Selesai",
     "batch.status_3":"Pembayaran Lunas",
     "batch.status_4":"Modul Dikirim",
-    "batch.status_5":"Siap Belajar",
+    "batch.status_5":"Persyaratan Lengkap",
+    "batch.status_6":"Lulus",
     "Batch":"Angkatan",
 
     "C":"C",
     "City":"Kota",
     "Confirm Password":"Konfirmasi Kata Sandi",
     "Course Detail":"Detail Kelas",
+    "Course":"Kelas",
     "Courses":"Kelas",
 
     "D":"D",
     "Dashboard":"Beranda",
+
+    "E":"E",
+    "Edit":"Ubah",
 
     "F":"F",
     "Forgot your password?":"Lupa kata sandi?",
@@ -28,22 +34,29 @@
     "Gender":"Jenis Kelamin",
     "Go Home":"Kembali ke beranda",
 
+    "H":"H",
+    "Hello!":"Assalaamu'alaikum.",
+
     "L":"L",
     "Login":"Masuk",
     "Logout":"Keluar",
 
     "M":"M",
+    "Member":"Anggota",
     "Members":"Anggota",
 
     "N":"N",
+    "New":"Buat",
     "Not Found":"Tidak ditemukan",
 
     "P":"P",
     "Password":"Kata Sandi",
     "Phone":"Nomor Telepon",
+    "Please click the button below to verify your email address.":"Mohon klik tombol dibawah untuk memverifikasi alamat email anda.",
 
     "R":"R",
     "Register":"Daftar",
+    "Regards":"Wassalaamu'alaikum",
 
     "S":"S",
     "Short Name":"Nama Panggilan",

@@ -5,11 +5,10 @@
         </h2>
     </x-slot>
 
-    @if($batchMember->batch->is_open)
     <div class="w-full mt-4 py-6">
         <div class="flex">
-            @for($i=1;$i<=5;$i++)
-            <div class="w-1/5">
+            @for($i=1;$i<=6;$i++)
+            <div class="w-1/6">
                 <div class="relative mb-2">
                     @if($i>1)
                     <div class="absolute flex align-center items-center align-middle content-center" style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
@@ -28,18 +27,20 @@
                     </div>
                 </div>
 
-                <div class="text-xs text-center md:text-base">@lang('batch.status_'.$i)</div>
+                <div class="text-xs text-center md:text-base">@lang('batch.status_'.$i){{ $batchMember->batch->course->level==1 && $i==2?'*':'' }}</div>
             </div>
             @endfor
         </div>
     </div>
-    @endif
+    <p class="w-full px-10 text-sm">
+    * Hanya berlaku untuk level lanjutan.
+    </p>
 
     <x-panel>
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                {{ $batchMember->batch->name }} {{ $batchMember->session }}
+                {{ $batchMember->batch->full_name }} {{ $batchMember->session }}
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
                 {{ $batchMember->batch->duration }}
@@ -69,6 +70,7 @@
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
                     <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                        @if($batchMember->batch->file)
                         <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <!-- Heroicon name: solid/paper-clip -->
@@ -76,15 +78,18 @@
                             <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
                             </svg>
                             <span class="ml-2 flex-1 w-0 truncate">
-                            brosur.pdf
+                            {{ $batchMember->batch->file->name }}
                             </span>
                         </div>
                         <div class="ml-4 flex-shrink-0">
-                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                            <a href="{{ $batchMember->batch->file->fileUrl('filename') }}" 
+                            target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
                             Unduh
                             </a>
                         </div>
                         </li>
+                        @endif
+                        @if($batchMember->file)
                         <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <!-- Heroicon name: solid/paper-clip -->
@@ -92,15 +97,17 @@
                             <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
                             </svg>
                             <span class="ml-2 flex-1 w-0 truncate">
-                            sertifikat.pdf
+                            {{ $batchMember->file->name }}
                             </span>
                         </div>
                         <div class="ml-4 flex-shrink-0">
-                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                            <a href="{{ $batchMember->file->fileUrl('filename') }}" 
+                            target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
                             Unduh
                             </a>
                         </div>
                         </li>
+                        @endif
                     </ul>
                     </dd>
                 </div>

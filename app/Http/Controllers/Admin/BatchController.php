@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Batch;
+use App\Models\File;
 use DataTables;
 
 class BatchController extends Controller
@@ -56,7 +57,7 @@ class BatchController extends Controller
      */
     public function create($course_id)
     {
-        $data['course_id'] = $course_id;
+        $data['course'] = Course::find($course_id);
         $data['batch'] = null;
         return view('admin.batch-form', $data);
     }
@@ -70,20 +71,18 @@ class BatchController extends Controller
     public function store(Request $request, $course_id)
     {
         $request->validate([
-            'description' => 'required|string',
+            'name' => 'required|string',
+            'description' => '',
             'sessions' => '',
             'start_at' => 'date|after_or_equal:registration_end_at',
             'end_at' => 'date|after_or_equal:start_at',
-            'registration_start_at' => 'date|after_or_equal:today',
+            'registration_start_at' => 'date',
             'registration_end_at' => 'date|after_or_equal:registration_start_at',
         ]);
 
-        $batch_no = Batch::where('course_id', $course_id)->count();
-        $batch_no++;
-
-        Batch::create([
+        $batch = Batch::create([
             'course_id'=>$course_id,
-            'batch_no'=>$batch_no,
+            'name'=>$request->name,
             'description'=>$request->description,
             'sessions'=>$request->sessions,
             'start_at'=>$request->start_at,
@@ -91,6 +90,17 @@ class BatchController extends Controller
             'registration_start_at'=>$request->registration_start_at,
             'registration_end_at'=>$request->registration_end_at,
         ]);
+
+        if($request->hasFile('filename')){
+            $file = File::create([
+                'name'=>'Brosur '.$batch->full_name,
+                'filename'=>$request->file('filename')->getClientOriginalName(),
+                'tablename'=>'batches',
+                'record_id'=>$batch->id,
+                'type'=>$request->file('filename')->getClientOriginalExtension(),
+                'size'=>$request->file('filename')->getSize(),
+            ]);
+        }
 
         return redirect()->route('admin.courses.batches.index', $course_id)->with('status','Batch created');
     }
@@ -114,8 +124,8 @@ class BatchController extends Controller
      */
     public function edit($course_id, $id)
     {
-        $data['course_id'] = $course_id;
-        $data['batch'] = Batch::find($id);
+        $data['course'] = Course::find($course_id);
+        $data['batch'] = Batch::with('file')->find($id);
         return view('admin.batch-form', $data);
     }
 
@@ -129,7 +139,8 @@ class BatchController extends Controller
     public function update(Request $request, $course_id, $id)
     {
         $request->validate([
-            'description' => 'required|string',
+            'name' => 'required|string',
+            'description' => '',
             'sessions' => '',
             'start_at' => 'date|after_or_equal:registration_end_at',
             'end_at' => 'date|after_or_equal:start_at',
@@ -137,7 +148,9 @@ class BatchController extends Controller
             'registration_end_at' => 'date|after_or_equal:registration_start_at',
         ]);
 
-        Batch::where('id',$id)->update([
+        $batch = Batch::find($id);
+        $batch->update([
+            'name'=>$request->name,
             'description'=>$request->description,
             'sessions'=>$request->sessions,
             'start_at'=>$request->start_at,
@@ -145,6 +158,25 @@ class BatchController extends Controller
             'registration_start_at'=>$request->registration_start_at,
             'registration_end_at'=>$request->registration_end_at,
         ]);
+        if($request->hasFile('filename')){
+            $file = $batch->file;
+            if($file){
+                $file->deleteFile($file->filename);
+                $file->update([
+                    'type'=>$request->file('filename')->getClientOriginalExtension(),
+                    'size'=>$request->file('filename')->getSize(),
+                ]);
+            }else{
+                $file = File::create([
+                    'name'=>'Brosur '.$batch->full_name,
+                    'filename'=>$request->file('filename')->getClientOriginalName(),
+                    'tablename'=>'batches',
+                    'record_id'=>$batch->id,
+                    'type'=>$request->file('filename')->getClientOriginalExtension(),
+                    'size'=>$request->file('filename')->getSize(),
+                ]);
+            }
+        }
 
         return redirect()->route('admin.courses.batches.index', $course_id)->with('status','Batch created');
     }

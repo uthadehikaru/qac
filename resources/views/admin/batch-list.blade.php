@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Data Batches') }} - <a href="{{ route('admin.courses.index') }}" class="pointer text-blue-500">Course {{ $course->name }}</a>
+            Data {{ __('Batch') }} - <a href="{{ route('admin.courses.index') }}" class="pointer text-blue-500">@lang('Course') {{ $course->name }}</a>
         </h2>
-        <x-link-button href="{{ route('admin.courses.batches.create', $course->id) }}" class="float-right">New Batch</x-button>
+        <x-link-button href="{{ route('admin.courses.batches.create', $course->id) }}" class="float-right">New @lang('Batch')</x-button>
     </x-slot>
 
     <x-panel>
@@ -12,7 +12,7 @@
         <table class="table-auto datatable">
             <thead>
                 <tr>
-                    <th>Batch No</th>
+                    <th>Batch Name</th>
                     <th>Sessions</th>
                     <th>Duration</th>
                     <th>Registration</th>
@@ -43,7 +43,7 @@
         serverSide: true,
         ajax: "{{ route('admin.courses.batches.index', $course->id) }}",
         columns: [
-            {data: 'batch_no', name: 'batch_no'},
+            {data: 'name', name: 'name'},
             {data: 'sessions', name: 'sessions'},
             {data: 'start_at', name: 'Duration'},
             {data: 'registration_start_at', name: 'Registration'},

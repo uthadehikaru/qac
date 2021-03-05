@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\MemberBatch;
 use App\Models\Batch;
 use App\Models\Member;
+use App\Models\File;
 use App\Notifications\BatchApproval;
+use App\Notifications\BatchStatusUpdate;
 use DataTables;
 use Validator;
 use DB;
@@ -95,6 +97,17 @@ class MemberBatchController extends Controller
             'session'=>$request->session,
             'status'=>$request->status,
         ]);
+
+        if($request->hasFile('filename')){
+            $file = File::create([
+                'name'=>'Sertifikat '.$memberBatch->member->name.' '.$memberBatch->batch->full_name,
+                'filename'=>$request->file('filename')->getClientOriginalName(),
+                'tablename'=>'member_batch',
+                'record_id'=>$memberBatch->id,
+                'type'=>$request->file('filename')->getClientOriginalExtension(),
+                'size'=>$request->file('filename')->getSize(),
+            ]);
+        }
         return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
             ->with('status','Member added');
     }
@@ -125,10 +138,38 @@ class MemberBatchController extends Controller
         }
 
         $memberBatch = MemberBatch::find($id);
-        $memberBatch->update([
+        $data = [
             'session'=>$request->session,
             'status'=>$request->status,
-        ]);
+        ];
+        if($request->status==6)
+            $data['approved_at'] = Carbon::now();
+        else
+            $data['approved_at'] = null;
+        
+        $memberBatch->update($data);
+        if($memberBatch->wasChanged('status'))
+            $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
+
+        if($request->hasFile('filename')){
+            $file = $memberBatch->file;
+            if($file){
+                $file->deleteFile($file->filename);
+                $file->update([
+                    'type'=>$request->file('filename')->getClientOriginalExtension(),
+                    'size'=>$request->file('filename')->getSize(),
+                ]);
+            }else{
+                $file = File::create([
+                    'name'=>'Sertifikat '.$memberBatch->member->name.' '.$memberBatch->batch->full_name,
+                    'filename'=>$request->file('filename')->getClientOriginalName(),
+                    'tablename'=>'member_batch',
+                    'record_id'=>$memberBatch->id,
+                    'type'=>$request->file('filename')->getClientOriginalExtension(),
+                    'size'=>$request->file('filename')->getSize(),
+                ]);
+            }
+        }
         return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
             ->with('status','Member updated');
     }
