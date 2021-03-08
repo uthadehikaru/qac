@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Data Members') }} - <a href="{{ route('admin.courses.batches.index', $batch->course_id) }}" class="pointer text-blue-500">Course {{ $batch->full_name }}</a>
+            Data Anggota - <a href="{{ route('admin.courses.batches.index', $batch->course_id) }}" class="pointer text-blue-500">Angkatan {{ $batch->full_name }}</a>
         </h2>
         <x-link-button href="{{ route('admin.courses.batches.members.create', [$batch->course_id,$batch->id]) }}" class="float-right">Add Member</x-button>
     </x-slot>

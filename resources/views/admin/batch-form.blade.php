@@ -35,7 +35,7 @@
                         Name
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
-                    id="grid-name" name="name" placeholder="batch name" value="{{ old('name',$batch?$batch->full_name:'') }}">
+                    id="grid-name" name="name" placeholder="batch name" value="{{ old('name',$batch?$batch->name:'') }}">
                 </div>
                 <div class="md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-sessions">

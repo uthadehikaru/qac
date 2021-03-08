@@ -68,6 +68,7 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'full_name' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric|unique:members,phone|min:8',
@@ -85,6 +86,7 @@ class MemberController extends Controller
 
         $member = new Member();
         $member->user_id = $user->id;
+        $member->full_name = $request->full_name;
         $member->phone = $request->phone;
         $member->gender = $request->gender;
         $member->address = $request->address;
@@ -132,6 +134,7 @@ class MemberController extends Controller
         $member = Member::find($id);
 
         $request->validate([
+            'full_name' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$member->user_id,
             'phone' => 'required|numeric|unique:members,phone,'.$member->id.'|min:8',
@@ -146,6 +149,7 @@ class MemberController extends Controller
         $user->email = $request->email;
         $user->save();
 
+        $member->full_name = $request->full_name;
         $member->phone = $request->phone;
         $member->gender = $request->gender;
         $member->address = $request->address;

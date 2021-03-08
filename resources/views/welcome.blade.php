@@ -388,7 +388,7 @@
         <section id="courses" class="bg-gray-100 pt-12 py-8">
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
             <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            @lang('PILIHAN KURSUS')
+            @lang('PILIHAN KELAS')
             </h1>
             <div class="w-full mb-4">
                 <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -410,12 +410,20 @@
                             <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                             @foreach($course->batches()->open()->get() as $batch)
                             <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                                Batch {{ $batch->full_name }}
+                                Batch {{ $batch->name }}
                                 <p class="text-base">{{ $batch->duration }}</p>
+                                
+                                @if($batch->file)
+                                <a href="{{ $batch->file->fileUrl('filename') }}" 
+                                class="pointer text-sm text-blue-500">
+                                @lang('Unduh') {{ $batch->file->name }} ({{ $batch->file->type }})
+                                </a>
+                                @endif
                             </div>
-                            <div class="flex items-center justify-center">
+                            <div class="flex flex-col items-center justify-center">
                                 @if($course->level==1)
-                                <a href="{{ route('register', ['batch_id'=>$batch->id]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                <a href="{{ route('register', ['batch_id'=>$batch->id]) }}" 
+                                class="hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                 @else
                                 <a href="{{ route('login') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                 @endif

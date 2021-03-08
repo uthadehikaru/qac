@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Batch Member') }}
+        {{ __($batch?'Edit':'Buat') }} Anggota
+        - <a href="{{ route('admin.courses.batches.members', [$batch->course->id, $batch->id]) }}" class="pointer text-blue-500">@lang('Batch') {{ $batch->full_name }}</a>
         </h2>
         <div class="float-right">
             <x-link-button  href="javascript:void(0)" onclick="document.getElementById('form').submit();" id="save" class=" ml-3">Simpan</x-button>

@@ -32,6 +32,8 @@ class MemberBatchController extends Controller
                         $btn = '<a href="'.route('admin.members.show', $row->member_id).'" class="text-blue-500">Detail</a>';
                         $btn .= '<a href="'.route('admin.courses.batches.members.edit', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">Edit</a>';
                         $btn .= '<a href="#" id="delete-'.$row->id.'" data-id="'.$row->id.'" class="delete ml-3 text-red-500">Delete</a>';
+                        if($row->file)
+                        $btn .= '<a href="'.$row->file->fileUrl('filename').'" class="ml-3 text-green-500">Sertifikat</a>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
@@ -77,7 +79,7 @@ class MemberBatchController extends Controller
 
     public function store(Request $request, $course_id, $batch_id)
     {
-        $data['batch'] = Batch::find($batch_id);
+        $batch = Batch::find($batch_id);
 
         $validator = Validator::make($request->all(), [
             'member_id' => 'required',
@@ -91,19 +93,19 @@ class MemberBatchController extends Controller
             ->withInput();
         }
 
-        $memberBatch = MemberBatch::create([
-            'batch_id'=>$batch_id,
-            'member_id'=>$request->member_id,
+        $additional = [
             'session'=>$request->session,
             'status'=>$request->status,
-        ]);
+        ];
+        $batch->members()->attach($request->member_id, $additional);
 
+        $member = $batch->members()->where('member_id',$request->member_id)->first();
         if($request->hasFile('filename')){
             $file = File::create([
-                'name'=>'Sertifikat '.$memberBatch->member->name.' '.$memberBatch->batch->full_name,
+                'name'=>'Sertifikat '.$member->name.' '.$batch->full_name,
                 'filename'=>$request->file('filename')->getClientOriginalName(),
                 'tablename'=>'member_batch',
-                'record_id'=>$memberBatch->id,
+                'record_id'=>$member->pivot->id,
                 'type'=>$request->file('filename')->getClientOriginalExtension(),
                 'size'=>$request->file('filename')->getSize(),
             ]);

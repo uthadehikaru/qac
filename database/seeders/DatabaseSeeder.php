@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SystemSeeder::class,
+            CourseSeeder::class,
+            BatchSeeder::class,
         ]);
     }
 }
