@@ -9,30 +9,26 @@
         <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
     @endif
 
-    <!-- This is an example component -->
-    <div id="wrapper" class="w-full p-4 mx-auto">
-        <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
-            <div id="jh-stats" class="flex flex-col justify-center px-4 py-4 bg-white border border-gray-300 rounded">
-                <div>
-                    <p class="text-3xl font-semibold text-center text-gray-800">{{ $all_members }}</p>
-                    <p class="text-lg text-center text-gray-500">All Members</p>
-                    <p class="text-center"><a href="{{ route('admin.members.index') }}" class="text-sm text-blue-500 pointer">details</a></p>
-                </div>
-            </div>
-            <div id="jh-stats" class="flex flex-col justify-center px-4 py-4 bg-white border border-gray-300 rounded">
-                <div>
-                    <p class="text-3xl font-semibold text-center text-gray-800">{{ $unverified_members }}</p>
-                    <p class="text-lg text-center text-gray-500">Unverified Members</p>
-                    <p class="text-center"><a href="{{ route('admin.members.index', ['unverified'=>true]) }}" class="text-sm text-blue-500 pointer">details</a></p>
-                </div>
-            </div>
-            <div id="jh-stats" class="flex flex-col justify-center px-4 py-4 bg-white border border-gray-300 rounded">
-                <div>
-                    <p class="text-3xl font-semibold text-center text-gray-800">{{ $unapproved_members }}</p>
-                    <p class="text-lg text-center text-gray-500">Unapproved Members</p>
-                    <p class="text-center"><a href="#" class="text-sm text-blue-500 pointer">details</a></p>
-                </div>
-            </div>
-        </div>
+    @foreach(Auth::user()->unreadNotifications as $notification)
+        <x-alert type="info"><a href="{{ $notification->data['link'] }}" class="text-blue-500 pointer">{{ $notification->data['message']}}</a></x-alert>
+    @endforeach
+
+    <section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap -m-4 text-center">
+      <div class="p-4 sm:w-1/3 w-1/2">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $all_members }}</h2>
+        <p class="leading-relaxed">Anggota</p>
+      </div>
+      <div class="p-4 sm:w-1/3 w-1/2">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $all_courses }}</h2>
+        <p class="leading-relaxed">Kelas</p>
+      </div>
+      <div class="p-4 sm:w-1/3 w-1/2">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $all_batches }}</h2>
+        <p class="leading-relaxed">Batch</p>
+      </div>
     </div>
+  </div>
+</section>
 </x-app-layout>

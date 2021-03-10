@@ -25,6 +25,7 @@
 
     "E":"E",
     "Edit":"Ubah",
+    "event.created":"Event akan datang, :event pada :date",
 
     "F":"F",
     "Forgot your password?":"Lupa kata sandi?",
@@ -60,6 +61,9 @@
 
     "S":"S",
     "Short Name":"Nama Panggilan",
+
+    "T":"T",
+    "Title":"Judul",
 
     "U":"U",
     "user.registration":":member telah mendaftar :batch",

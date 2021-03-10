@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use App\Models\Member;
+use App\Models\Course;
+use App\Models\Batch;
 use App\Models\MemberBatch;
 
 class DashboardController extends Controller
@@ -14,8 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         $data['all_members'] = Member::count();
-        $data['unverified_members'] = User::whereNull('email_verified_at')->count();
-        $data['unapproved_members'] = MemberBatch::whereNull('approved_at')->count();
+        $data['all_courses'] = Course::count();
+        $data['all_batches'] = Batch::count();
         return view('admin.dashboard', $data);
     }
 

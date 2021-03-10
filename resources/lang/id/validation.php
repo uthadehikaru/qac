@@ -148,6 +148,9 @@ return [
 
     'attributes' => [
         'email_or_phone'=>'Email atau Telp',
+        'title'=>'Judul',
+        'created_at'=>'Tanggal',
+        'content'=>'Konten',
     ],
 
 ];

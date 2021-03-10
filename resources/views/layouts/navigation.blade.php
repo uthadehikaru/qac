@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('admin.courses.index')" :active="request()->is('admin/courses*')">
                         {{ __('Courses') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
+                        {{ __('Events') }}
+                    </x-nav-link>
                     @elsecan('is-member')
                     <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}

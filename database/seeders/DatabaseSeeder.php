@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SystemSeeder::class,
             CourseSeeder::class,
             BatchSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }

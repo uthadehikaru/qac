@@ -27,7 +27,7 @@
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <div class="pl-4 flex items-center">
             <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ url('') }}">
-                <img class="w-10 inline" src="qacjakarta.png" />
+                <img class="w-10 inline" src="{{ asset('qacjakarta.png') }}" />
                 {{ config('app.name') }}
             </a>
             </div>
@@ -57,7 +57,7 @@
                 <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#faq">FAQ</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#register">Pendaftaran</a>
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#events">Event</a>
                 </li>
             </ul>
             @guest
@@ -86,7 +86,7 @@
         <footer class="text-gray-600 body-font bg-white">
             <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
                 <a href="https://web.facebook.com/groups/673819220093340" target="_blank" class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                <img class="w-10 inline" src="qacjakarta.png" />
+                <img class="w-10 inline" src="{{ asset('qacjakarta.png') }}" />
                 <span class="ml-3 text-xl">{{ config('app.name') }}</span>
                 </a>
                 <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020 {{ config('app.name') }}
