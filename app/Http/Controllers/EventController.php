@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -19,6 +20,8 @@ class EventController extends Controller
         if(!$event)
             abort(404);
         $event->increment('views');
-        return view('event-detail', ['event'=>$event]);
+
+        $incomingEvents = Event::oldest()->where('event_at','>=',Carbon::now())->take(3)->get();
+        return view('event-detail', ['event'=>$event, 'incomingEvents'=>$incomingEvents]);
     }
 }

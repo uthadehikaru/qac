@@ -15,6 +15,15 @@ class System extends Model
         'is_array',
     ];
 
+    static function value($key)
+    {
+        $system = System::where('key',$key)->first();
+        if($system)
+            return $system->value;
+
+        return null;
+    }
+
     public function getValueAttribute($value)
     {
         if($this->is_array)

@@ -33,7 +33,7 @@ class Event extends Model
             'crop' => true,
             'disk' => 'public',
             'path' => 'events',
-            'placeholder' => '/qacjakarta.png',
+            'placeholder' => '/event qac.jpg',
             'rules' => 'image|max:2000',
         ],
     ];

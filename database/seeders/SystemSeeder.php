@@ -15,18 +15,18 @@ class SystemSeeder extends Seeder
     public function run()
     {
         $testimonials[] = [
-            'name'=>'Member 1',
-            'title'=>'job title',
+            'name'=>'Andrew - Freelancer',
+            'title'=>'QAC 1',
             'message'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis turpis at purus fermentum placerat. Nullam at justo ut sem eleifend viverra. Proin vehicula at sapien non dignissim.',
         ];
         $testimonials[] = [
-            'name'=>'Member 2',
-            'title'=>'job title',
+            'name'=>'Diana - Apoteker',
+            'title'=>'QAC 2.1',
             'message'=>'Nulla facilisi. Curabitur eu nisi magna. Phasellus mollis vel sapien sit amet fermentum. Cras mattis iaculis scelerisque. Suspendisse quis nisi est. Nulla facilisi.',
         ];
         $testimonials[] = [
-            'name'=>'Member 3',
-            'title'=>'job title',
+            'name'=>'Laila - Dosen',
+            'title'=>'QAC 2.2',
             'message'=>'In at tristique tellus. Vestibulum porttitor orci vitae arcu porttitor venenatis. Quisque a aliquet lorem, vitae efficitur purus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
         ];
 
@@ -43,11 +43,17 @@ class SystemSeeder extends Seeder
                 'message'=>'In at tristique tellus. Vestibulum porttitor orci vitae arcu porttitor venenatis. Quisque a aliquet lorem, vitae efficitur purus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
             ];    
         }
-
+        
         System::create([
             'key'=>'faqs',
             'value'=>json_encode($faqs),
             'is_array'=>true,
+        ]);
+
+        System::create([
+            'key'=>'whatsapp',
+            'value'=>'62895423485054',
+            'is_array'=>false,
         ]);
     }
 }

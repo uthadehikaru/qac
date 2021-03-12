@@ -47,7 +47,7 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-content">
                         @lang('Content')
                     </label>
-                    <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
+                    <textarea rows="10" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
                     id="grid-content" name="content" placeholder="event content">{{ old('content', $event?$event->content:'') }}</textarea>
                 </div>
             </div>
