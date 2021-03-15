@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('slug');
             $table->string('thumbnail')->nullable();
             $table->longText('content');
+            $table->boolean('is_public')->default(false);
             $table->unsignedInteger('views')->default(0);
         });
     }

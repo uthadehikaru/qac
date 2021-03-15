@@ -12,6 +12,7 @@
                 <tr>
                     <th>Date</th>
                     <th>Title</th>
+                    <th>Type</th>
                     <th>Views</th>
                     <th width="100px">Action</th>
                 </tr>
@@ -41,6 +42,7 @@
         columns: [
             {data: 'event_at', name: 'event_at'},
             {data: 'title', name: 'title'},
+            {data: 'is_public', name: 'is_public'},
             {data: 'views', name: 'views'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

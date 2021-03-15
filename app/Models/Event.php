@@ -18,6 +18,7 @@ class Event extends Model
         'content',
         'views',
         'event_at',
+        'is_public',
     ];
     
     protected $casts = [

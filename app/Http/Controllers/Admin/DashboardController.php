@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Member;
 use App\Models\Course;
 use App\Models\Batch;
+use App\Models\Event;
 use App\Models\MemberBatch;
 
 class DashboardController extends Controller
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $data['all_members'] = Member::count();
         $data['all_courses'] = Course::count();
         $data['all_batches'] = Batch::count();
+        $data['all_events'] = Event::count();
         return view('admin.dashboard', $data);
     }
 

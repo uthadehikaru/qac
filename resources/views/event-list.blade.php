@@ -40,7 +40,11 @@
                     </div>
                     <div class="md:ml-4 md:flex-grow">
                     <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $event->title }}</h2>
+                    @if($event->is_public || Auth::check())
                     <p>{!! nl2br($event->content) !!}</p>
+                    @else
+                    <p>Khusus Anggota QAC</p>
+                    @endif
                     <a href="{{ route('event.detail', $event->slug) }}" class="text-indigo-500 inline-flex items-center mt-4">Selengkapnya
                         <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14"></path>

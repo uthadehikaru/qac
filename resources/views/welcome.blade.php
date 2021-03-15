@@ -204,7 +204,10 @@
                         <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                             <img class="w-full object-cover object-center" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
                             <div class="p-6">
-                                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $event->event_at->format('d M Y H:i') }}</h2>
+                                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                    {{ $event->event_at->format('d M Y H:i') }}
+                                    | {{ $event->is_public?'Umum':'Khusus Anggota QAC' }}
+                                </h2>
                                 <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $event->title }}</h1>
                                 <div class="flex items-center flex-wrap ">
                                     <a href="{{ route('event.detail', $event->slug) }}" class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Selengkapnya

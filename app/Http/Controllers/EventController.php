@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Carbon\Carbon;
+use Auth;
 
 class EventController extends Controller
 {
@@ -19,6 +20,12 @@ class EventController extends Controller
         $event = Event::where('slug',$slug)->first();
         if(!$event)
             abort(404);
+
+        if(!$event->is_public && !Auth::check()){
+            session(['url.intended' => url()->current()]);
+            return redirect()->route('login')->withError('Silahkan login terlebih dahulu');
+        }
+
         $event->increment('views');
 
         $incomingEvents = Event::oldest()->where('event_at','>=',Carbon::now())->take(3)->get();

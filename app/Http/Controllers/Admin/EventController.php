@@ -33,6 +33,9 @@ class EventController extends Controller
                     ->editColumn('event_at', function ($row){
                         return $row->event_at->format('d M Y H:i');
                     })
+                    ->editColumn('is_public', function ($row){
+                        return $row->is_public?'Umum':'Khusus Anggota';
+                    })
                     ->rawColumns(['action'])
                     ->make(true);
         }
@@ -63,6 +66,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'event_at' => 'required|date',
             'content' => 'required',
+            'is_public' => 'required|boolean',
         ]);
 
         $slug = Str::slug($request->title.' '.Str::random(5));
@@ -71,6 +75,7 @@ class EventController extends Controller
             'slug'=>$slug,
             'event_at'=>$request->event_at,
             'content'=>$request->content,
+            'is_public'=>$request->is_public,
         ]);
 
         $users = User::where('role','member')->whereNotNull('email_verified_at')->get();
@@ -117,6 +122,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'event_at' => 'required|date',
             'content' => 'required',
+            'is_public' => 'required|boolean',
         ]);
 
         $event = Event::find($id);
@@ -126,6 +132,7 @@ class EventController extends Controller
             'slug'=>$slug,
             'event_at'=>$request->event_at,
             'content'=>$request->content,
+            'is_public'=>$request->is_public,
         ]);
 
         return redirect()->route('admin.events.index')->with('status','Event updated');

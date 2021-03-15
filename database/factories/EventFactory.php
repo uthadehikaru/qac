@@ -28,6 +28,7 @@ class EventFactory extends Factory
             'slug' => Str::slug($title.' '.Str::random(5)),
             'event_at'=> $this->faker->dateTime,
             'content' => $this->faker->text,
+            'is_public' => $this->faker->boolean,
             'views' => $this->faker->numberBetween(100, 500),
         ];
     }
