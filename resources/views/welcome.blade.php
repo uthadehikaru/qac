@@ -92,7 +92,7 @@
             @foreach($testimonials->value as $testimonial)
             <div class="w-full md:w-1/{{ count($testimonials->value) }} p-6 flex flex-col flex-grow flex-shrink">
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                    <a class="flex flex-wrap no-underline hover:no-underline">
                     <p class="w-full text-gray-600 text-xs md:text-sm px-6">
                         {{ $testimonial->title }}
                     </p>
@@ -152,6 +152,7 @@
                                 @endif
                                 @lang('Daftar')
                                 </a>
+                                <p class="text-sm font-italic text-yellow-600">pendaftaran sampai {{ $batch->registration_end_at->format('d F Y')}}</p>
                             </div>
                             @endforeach
                         </div>
@@ -160,34 +161,7 @@
             </div>
         </div>
         </section>
-        <section id="faq" class="bg-white text-gray-700">
-            <div class="container px-5 py-2 mx-auto">
-                <div class="text-center mb-20">
-                    <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-                    Frequently Asked Question
-                    </h1>
-                    <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-                    The most common questions about how our business works and what
-                    can do for you.
-                    </p>
-                </div>
-                <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                    <div class="w-full px-4 py-2">
-                    @foreach($faqs->value as $faq)
-                    <details class="mb-4">
-                        <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                        {{ $faq->title }}
-                        </summary>
-
-                        <span>
-                        {{ $faq->message }}
-                        </span>
-                    </details>
-                    @endforeach
-                    </div>
-                </div>
-            </div>
-        </section>
+        <x-faq />
         <section id="events" class="bg-white text-gray-600 body-font">
             <div class="container px-5 py-2 mx-auto">
                 <div class="text-center mb-20">

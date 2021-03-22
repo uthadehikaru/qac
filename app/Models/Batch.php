@@ -66,10 +66,10 @@ class Batch extends Model
     {
         $duration = '';
         if($this->start_at)
-            $duration .= $this->start_at->format('d-M-Y');
+            $duration .= $this->start_at->format('d F Y');
             
         if($this->end_at)
-            $duration .= ' - '.$this->end_at->format('d-M-Y');
+            $duration .= ' s/d '.$this->end_at->format('d F Y');
 
         return $duration;
     }

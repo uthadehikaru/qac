@@ -38,4 +38,9 @@ class Event extends Model
             'rules' => 'image|max:2000',
         ],
     ];
+
+    public function scopeIncoming($query)
+    {
+        return $query->where('event_at', '>=', date('Y-m-d'));
+    }
 }

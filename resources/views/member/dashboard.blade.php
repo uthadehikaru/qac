@@ -75,4 +75,58 @@
             </table>
         </div>
     </div>
+
+    <div class="m-6">
+        <p class="block text-lg font-bold text-gray-700">Event QAC Mendatang</p>
+        <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+
+            <table class="w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Event
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Jadwal
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white text-xs divide-y divide-gray-200">
+                    @forelse($incomingEvents as $event)
+                    <tr>
+
+                        <td class="px-2 py-4 whitespace-nowrap">
+                            {{ $event->title }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap">
+                            {{ $event->event_at->format('d F Y H:i') }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap">
+                            {{ $event->is_public?'Umum':'Khusus Anggota QAC' }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <div class="flex justify-start space-x-1">
+                                <a href="{{ route('event.detail', $event->slug) }}" class="border-2 border-indigo-200 rounded-md p-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-indigo-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td colspan="4" class="px-2 py-4 whitespace-nowrap">Belum ada event</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 </x-app-layout>
