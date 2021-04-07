@@ -89,23 +89,21 @@
             <div class="w-full mb-4">
                 <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
-            @foreach($testimonials->value as $testimonial)
-            <div class="w-full md:w-1/{{ count($testimonials->value) }} p-6 flex flex-col flex-grow flex-shrink">
+            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <a class="flex flex-wrap no-underline hover:no-underline">
-                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                        {{ $testimonial->title }}
-                    </p>
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        {{ $testimonial->name }}
-                    </div>
-                    <p class="text-gray-800 text-base px-6 mb-5">
-                        {{ $testimonial->message }}
-                    </p>
-                    </a>
+                    <img src="{{ asset('testimoni qac 1.jpg') }}" title="testimoni QAC 1" />
                 </div>
             </div>
-            @endforeach
+            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <img src="{{ asset('testimoni qac 2.1.jpg') }}" title="testimoni QAC 2.1" />
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <img src="{{ asset('testimoni qac 2.2.jpg') }}" title="testimoni QAC 2.2" />
+                </div>
+            </div>
         </div>
         </section>
         <section id="courses" class="bg-gray-100 pt-2 py-8">
