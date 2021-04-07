@@ -194,6 +194,8 @@
             }
             return false;
         }
-        </script>
+        @if(config('app.analytic'))
+        <x-analytic/>
+        @endif
     </body>
 </html>

@@ -230,4 +230,6 @@ return [
 
     ],
 
+    'analytic' => env('GOOGLE_ANALYTIC_KEY'),
+
 ];
