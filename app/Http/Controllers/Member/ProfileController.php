@@ -10,7 +10,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('member.profile');
+        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+        return view('member.profile', $data);
     }
 
     public function update(Request $request)
@@ -23,6 +24,8 @@ class ProfileController extends Controller
             'address' => '',
             'city' => '',
             'instagram' => '',
+            'profesi' => 'required|string|max:255',
+            'pendidikan' => 'required|string|max:255',
         ]);
 
         $user = Auth::user();
@@ -36,6 +39,8 @@ class ProfileController extends Controller
         $member->address = $request->address;
         $member->city = $request->city;
         $member->instagram = $request->instagram;
+        $member->profesi = $request->profesi;
+        $member->pendidikan = $request->pendidikan;
         $member->save();
 
         return back()->with('status','Profile updated successfully');

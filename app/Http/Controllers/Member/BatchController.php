@@ -16,7 +16,7 @@ class BatchController extends Controller
     {
         $batch = Batch::with('course')->find($id);
 
-        if(!$batch || !$batch->is_open || $batch->course->level<=1)
+        if(!$batch || !$batch->is_open)
             abort(404);
 
         $data['batch'] = $batch;
@@ -27,7 +27,7 @@ class BatchController extends Controller
     {
         $batch = Batch::with('course')->find($id);
 
-        if(!$batch || !$batch->is_open || $batch->course->level<=1)
+        if(!$batch || !$batch->is_open)
             return back()->with('error','Data tidak ditemukan');
 
         $request->validate([

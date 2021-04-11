@@ -17,6 +17,8 @@ class Member extends Model
         'address',
         'city',
         'instagram',
+        'profesi',
+        'pendidikan',
     ];
 
     public function isCompleted()

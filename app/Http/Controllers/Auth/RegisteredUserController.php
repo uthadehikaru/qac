@@ -28,6 +28,8 @@ class RegisteredUserController extends Controller
         ->where('id',$request->batch_id)
         ->first();
 
+        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+
         if($batch && $batch->is_open && $batch->course->level==1){
             $data['batch'] = $batch;
             $data['sessions'] = explode(',', $batch->sessions);
@@ -57,8 +59,11 @@ class RegisteredUserController extends Controller
             'session' => 'sometimes',
             'address' => 'required',
             'city' => 'required',
+            'profesi' => 'required',
+            'pendidikan' => 'required',
             'instagram' => '',
             'batch_id' => 'required',
+            'term_condition'=>'required',
         ]);
 
         DB::beginTransaction();
@@ -77,12 +82,17 @@ class RegisteredUserController extends Controller
             'gender' => $request->gender,
             'address' => $request->address,
             'city' => $request->city,
+            'profesi' => $request->profesi,
+            'pendidikan' => $request->pendidikan,
             'instagram' => $request->instagram,
         ]);
 
         $additional = [];
         if($request->has('session'))
             $additional = ['session'=>$request->session];
+        
+        if($request->diary_2)
+            $additional = ['note'=>'tambah diary 2'];
         
         $member->batches()->attach($request->batch_id, $additional);
 

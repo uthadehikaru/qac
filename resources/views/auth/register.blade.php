@@ -8,6 +8,12 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+                <p class="py-4">{!! nl2br($batch->course->description) !!}</p>
+
+                <p class="py-4">{!! nl2br($batch->description) !!}</p>
+
+                <p class="py-4">Waktu kursus : {{ $batch->duration }}</p>
+
                 <form method="POST" action="{{ route('register', ['batch_id'=>request('batch_id')]) }}">
                     @csrf
 
@@ -48,6 +54,7 @@
                         <x-label for="address" :value="__('Address')" />
 
                         <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+                        <p class="text-sm text-gray-500">* digunakan untuk pengiriman modul, mohon menulis alamat lengkap</p>
                     </div>
 
                     <!-- City -->
@@ -57,6 +64,22 @@
                         <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required />
                     </div>
 
+                    <div class="mt-4">
+                        <x-label for="profesi" :value="__('Profesi')" />
+
+                        <x-input id="profesi" class="block mt-1 w-full" type="text" name="profesi" :value="old('profesi')" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="pendidikan" :value="__('Pendidikan')" />
+
+                        <select id="pendidikan" class="block mt-1 w-full" name="pendidikan" required>
+                            @foreach($educations as $education)
+                            <option value="{{ $education }}">{{ $education }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <!-- Instagram -->
                     <div class="mt-4">
                         <x-label for="instagram" :value="__('Instagram')" />
@@ -64,26 +87,27 @@
                         <x-input id="instagram" class="block mt-1 w-full" type="text" name="instagram" :value="old('instagram')" />
                     </div>
 
-                    <!-- Email Address -->
-                    <div class="mt-4">
-                        <x-label for="email" :value="__('Email')" />
-
-                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                        <p class="text-sm text-gray-500">* digunakan untuk login</p>
-                    </div>
-
                     @if(is_array($sessions))
                     <!-- Session -->
                     <div class="mt-4">
-                        <x-label for="session" :value="__('Sesi')" />
+                        <x-label for="session" :value="__('Pilihan Waktu Kursus')" />
 
                         <select id="session" class="block mt-1 w-full" name="session" required>
                             @foreach($sessions as $session)
                             <option value="{{ $session }}">{{ $session }}</option>
                             @endforeach
                         </select>
+                        <p class="text-sm text-gray-500">mohon pastikan waktu yang sesuai dengan pilihan anda</p>
                     </div>
                     @endif
+
+                    <!-- Email Address -->
+                    <div class="mt-4">
+                        <x-label for="email" :value="__('Email')" />
+
+                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                        <p class="text-sm text-gray-500">digunakan untuk login</p>
+                    </div>
 
                     <!-- Password -->
                     <div class="mt-4">
@@ -93,6 +117,8 @@
                                         type="password"
                                         name="password"
                                         required autocomplete="new-password" />
+                                        
+                        <p class="text-sm text-gray-500">digunakan untuk login</p>
                     </div>
 
                     <!-- Confirm Password -->
@@ -102,6 +128,37 @@
                         <x-input id="password_confirmation" class="block mt-1 w-full"
                                         type="password"
                                         name="password_confirmation" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="password_confirmation" :value="__('Syarat dan Ketentuan')" />
+
+                        <p class="text-sm text-gray-700">Saya dengan senang hati akan melakukan hal berikut: *</p>
+                        <p class="text-sm text-gray-700">1. Saya berperan aktif mengikuti rangkaian kursus dengan bahagia, ceria dan tetap positif</p>
+                        <p class="text-sm text-gray-700">2. Akan bersungguh-sungguh mengikuti kursus ini</p>
+                        <p class="text-sm text-gray-700">3. Akan menjalin kerjasama baik antar peserta dan penyelenggara</p>
+                        <p class="text-sm text-gray-700">4. Komitmen waktu 60 menit pada setiap sesi yang telah ditentukan (Konsekuensi terlambat/tidak hadir online, tidak ada pengulangan)</p>
+                        <p class="text-sm text-gray-700">5. Bila berhalangan darurat, silahkan menginformasikan 1 hari sebelumnya</p>
+                        <p class="text-sm text-gray-700">6. Bersabar menunggu respon dari penyelenggara</p>
+                        <P class="font-bold">Perhatian! Pendaftaran ini hanya untuk 1 orang, anda tidak diperbolehkan untuk membagikan materi dalam bentuk apapun kepada orang lain. *</p>
+                    </div>
+
+                    <div class="md:flex md:items-left my-6">
+                        <label class="md:w-full block text-gray-500 font-bold">
+                        <input class="mr-2 leading-tight" type="checkbox" name="term_condition" required>
+                        <span class="text-sm">
+                            dengan mendaftar, saya menyetujui <span class="modal-open text-blue-500 cursor-pointer">syarat dan ketentuan</span> yang berlaku
+                        </span>
+                        </label>
+                    </div>
+
+                    <div class="md:flex md:items-left my-6">
+                        <label class="md:w-full block text-gray-500 font-bold">
+                        <input class="mr-2 leading-tight" type="checkbox" name="diary_2" required>
+                        <span class="text-sm">
+                        Apakah Anda berminat membeli buku dairy ke 2 seharga Rp. 40.000? Buku ini akan digunakan selama 30 hari Tadabbur Alumni QAC pada bulan Ramadhan. Dengan membeli sekarang Anda akan menghemat biaya pengiriman
+                        </span>
+                        </label>
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

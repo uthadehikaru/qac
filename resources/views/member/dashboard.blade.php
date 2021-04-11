@@ -10,9 +10,7 @@
     @endif
 
     @foreach($openBatches as $openBatch)
-        @if($openBatch->course->level>1)
-            <x-alert type="info">Pendaftaran {{ $openbatch->full_name }} telah dibuka sampai {{ $openBatch->end_at->format('d-M-Y ')}}, <a href="{{ route('member.batch.detail',$openBatch->id) }}" class="text-red-500 pointer mx-1">klik disini</a> untuk mendaftar</x-alert>
-        @endif
+        <x-alert type="info">Pendaftaran {{ $openBatch->full_name }} telah dibuka sampai {{ $openBatch->end_at->format('d-M-Y ')}}, <a href="{{ route('member.batch.detail',$openBatch->id) }}" class="text-red-500 pointer mx-1">klik disini</a> untuk mendaftar</x-alert>
     @endforeach
 
     <div class="m-6">
