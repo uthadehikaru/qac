@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
 
         if($batch && $batch->is_open && $batch->course->level==1){
             $data['batch'] = $batch;
-            $data['sessions'] = explode(',', $batch->sessions);
+            $data['sessions'] = $batch->sessions?explode(',', $batch->sessions):false;
             return view('auth.register', $data);
         }
         
@@ -90,9 +90,6 @@ class RegisteredUserController extends Controller
         $additional = [];
         if($request->has('session'))
             $additional = ['session'=>$request->session];
-        
-        if($request->diary_2)
-            $additional = ['note'=>'tambah diary 2'];
         
         $member->batches()->attach($request->batch_id, $additional);
 

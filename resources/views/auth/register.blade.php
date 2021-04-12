@@ -147,16 +147,7 @@
                         <label class="md:w-full block text-gray-500 font-bold">
                         <input class="mr-2 leading-tight" type="checkbox" name="term_condition" required>
                         <span class="text-sm">
-                            dengan mendaftar, saya menyetujui <span class="modal-open text-blue-500 cursor-pointer">syarat dan ketentuan</span> yang berlaku
-                        </span>
-                        </label>
-                    </div>
-
-                    <div class="md:flex md:items-left my-6">
-                        <label class="md:w-full block text-gray-500 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" name="diary_2" required>
-                        <span class="text-sm">
-                        Apakah Anda berminat membeli buku dairy ke 2 seharga Rp. 40.000? Buku ini akan digunakan selama 30 hari Tadabbur Alumni QAC pada bulan Ramadhan. Dengan membeli sekarang Anda akan menghemat biaya pengiriman
+                            dengan mendaftar, saya menyetujui <span class="text-blue-500">syarat dan ketentuan</span> yang berlaku
                         </span>
                         </label>
                     </div>

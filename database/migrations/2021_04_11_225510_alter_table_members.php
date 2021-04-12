@@ -18,7 +18,7 @@ class AlterTableMembers extends Migration
             $table->string('pendidikan')->nullable();
         });
         Schema::table('member_batch', function (Blueprint $table) {
-            $table->string('note')->nullable;
+            $table->string('note')->nullable();
         });
     }
 
