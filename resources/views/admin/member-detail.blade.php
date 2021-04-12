@@ -6,7 +6,8 @@
         <div class="float-right">
         {{ $member->user->email }} | {{ $member->phone }}
         </div>
-        <p class="">{{ $member->address }}</p>
+        <p class="">Pendidikan {{ $member->pendidikan }} | Profesi {{ $member->profesi }}</p>
+        <p class="">Alamat : {{ $member->address }}</p>
     </x-slot>
 
     <div class="m-6">

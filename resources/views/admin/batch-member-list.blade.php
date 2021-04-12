@@ -14,6 +14,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Session</th>
+                    <th>Note</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -43,6 +44,7 @@
         columns: [
             {data: 'name', name: 'name'},
             {data: 'session', name: 'session'},
+            {data: 'note', name: 'note'},
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
