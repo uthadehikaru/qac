@@ -14,34 +14,16 @@ use DataTables;
 use Validator;
 use DB;
 use Carbon\Carbon;
+use App\DataTables\MemberBatchDataTable;
 
 class MemberBatchController extends Controller
 {
-    public function index(Request $request, $course_id, $batch_id)
+    public function index(MemberBatchDataTable $dataTable, $course_id, $batch_id)
     {
-        if ($request->ajax()) {
-            $data = MemberBatch::select('*')->where('batch_id',$batch_id);
-            return Datatables::of($data)
-                    ->addColumn('name', function($row){
-                        return $row->member->full_name.' ('.$row->member->name.')';
-                    })
-                    ->editColumn('status',function($row){
-                        return __('batch.status_'.$row->status);
-                    })
-                    ->addColumn('action', function($row){
-                        $btn = '<a href="'.route('admin.members.show', $row->member_id).'" class="text-blue-500">Detail</a>';
-                        $btn .= '<a href="'.route('admin.courses.batches.members.edit', ['course'=>$row->batch->course_id,'batch'=>$row->batch_id,'id'=>$row->id]).'" class="ml-3 text-green-500">Edit</a>';
-                        $btn .= '<a href="#" id="delete-'.$row->id.'" data-id="'.$row->id.'" class="delete ml-3 text-red-500">Delete</a>';
-                        if($row->file)
-                        $btn .= '<a href="'.$row->file->fileUrl('filename').'" class="ml-3 text-green-500">Sertifikat</a>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        $data['batch'] = Batch::find($batch_id);
-        return view('admin/batch-member-list', $data);
+        $batch = Batch::find($batch_id);
+        $data['title'] = 'Data Anggota - <a href="'.route('admin.courses.batches.index', $batch->course_id).'" class="pointer text-blue-500">Angkatan '.$batch->full_name.'</a>';
+        $dataTable->setBatch($batch_id);
+        return $dataTable->render('admin.datatable', $data);
     }
 
     public function approve(Request $request, $course_id, $batch_id, $id)

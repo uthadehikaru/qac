@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Member;
 use App\Models\MemberBatch;
-use DataTables;
 use Hash;
 use Str;
+use App\DataTables\MemberDataTable;
 
 class MemberController extends Controller
 {
@@ -18,34 +18,10 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(MemberDataTable $dataTable)
     {
-        if ($request->ajax()) {
-            $data = Member::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->editColumn('created_at', function($row){
-                        return $row->created_at->format('d-M-Y');
-                    })
-                    ->addColumn('name', function($row){
-                        return $row->full_name.' ('.$row->name.')';
-                    })
-                    ->addColumn('email', function($row){
-                        $value = $row->user->email;
-                        return $value;
-                    })
-                    ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.members.show', $row->id).'" class="text-blue-500">Detail</a>';
-                            $btn .= '<a href="'.route('admin.members.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
-                            $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
-    
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('admin/member-list');
+        $data['title'] = "Data Anggota";
+        return $dataTable->render('admin.datatable', $data);
     }
 
     /**
