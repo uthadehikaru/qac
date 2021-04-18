@@ -21,6 +21,14 @@ class Member extends Model
         'pendidikan',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($member) { 
+             $member->batches()->detach();
+        });
+    }
+
     public function isCompleted()
     {
         return $this->phone && $this->gender && $this->address;

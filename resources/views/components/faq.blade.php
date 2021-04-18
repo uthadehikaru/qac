@@ -80,7 +80,7 @@
                 Bagaimana cara ikutan kursus QAC ?
                 </summary>
                 <span>
-                <p class="py-1">Caranya mendaftar dengan mengisi form pendaftaran di @QACJakarta, tetapi sebelumnya peserta harus sudah menyetujui beberapa aturan main selama belajar di QAC yang ada di brosur QAC.</p>
+                <p class="py-1">Caranya dengan mendaftar di website QACJakarta.id, tetapi sebelumnya peserta harus sudah menyetujui beberapa aturan main selama belajar di QAC yang ada di brosur QAC.</p>
                 </span>
             </details>
             <details class="mb-4">

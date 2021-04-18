@@ -22,6 +22,7 @@
                         <x-label for="full_name" :value="__('Full Name')" />
 
                         <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required autofocus />
+                        <p class="text-sm text-gray-500">* digunakan untuk pembuatan e-sertifikat</p>
                     </div>
 
                     <!-- Short Name -->
@@ -37,6 +38,7 @@
                         <x-label for="phone" :value="__('Phone')" />
 
                         <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+                        <p class="text-sm text-gray-500">* pastikan nomor whatsapp aktif</p>
                     </div>
 
                     <!-- Gender -->
@@ -59,7 +61,7 @@
 
                     <!-- City -->
                     <div class="mt-4">
-                        <x-label for="city" :value="__('City')" />
+                        <x-label for="city" :value="__('Kota')" />
 
                         <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required />
                     </div>
