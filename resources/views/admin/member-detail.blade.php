@@ -4,7 +4,13 @@
             {{ __('Member') }} - {{ $member->name }}
         </h2>
         <div class="float-right">
-        {{ $member->user->email }} | {{ $member->phone }}
+        {{ $member->user->email }} 
+        @if($member->user->email_verified_at)
+            <span class="text-green-500">(Terverifikasi)</span>
+        @else
+            <a href="{{ route('admin.members.verify', $member->user_id) }}" class="text-blue-500 cursor-pointer">(Verifikasi Email)</a>
+        @endif
+        | {{ $member->phone }}
         </div>
         <p class="">Pendidikan {{ $member->pendidikan }} | Profesi {{ $member->profesi }}</p>
         <p class="">Alamat : {{ $member->address }}</p>

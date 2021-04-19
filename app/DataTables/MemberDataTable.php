@@ -28,7 +28,7 @@ class MemberDataTable extends DataTable
                 return $row->full_name.' ('.$row->name.')';
             })
             ->addColumn('email', function($row){
-                $value = $row->user->email;
+                $value = "<a href='".route('admin.members.verify',$row->user_id)."' class='".($row->user->email_verified_at?'text-green-500':'text-red-500')."'>".$row->user->email."</a>";
                 return $value;
             })
             ->addColumn('action', function($row){
@@ -38,7 +38,7 @@ class MemberDataTable extends DataTable
 
                     return $btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['email','action']);
     }
 
     /**

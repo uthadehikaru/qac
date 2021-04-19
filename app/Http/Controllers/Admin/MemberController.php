@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\MemberBatch;
 use Hash;
 use Str;
+use Carbon\Carbon;
 use App\DataTables\MemberDataTable;
 
 class MemberController extends Controller
@@ -149,5 +150,13 @@ class MemberController extends Controller
         $member->delete();
         $user->delete();
         return response()->json(['status'=>'Deleted Successfully']);
+    }
+
+    public function verify($user_id)
+    {
+        $user = User::find($user_id);
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+        return back()->with('message','Berhasil diverifikasi');
     }
 }

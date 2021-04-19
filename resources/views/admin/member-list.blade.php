@@ -6,6 +6,10 @@
         <x-link-button href="{{ route('admin.members.create') }}" class="float-right">New Member</x-button>
     </x-slot>
 
+    @if(session('message'))
+    <x-alert class="mb-4" :type="success" :title="Sukses">{{ session('message') }}</x-alert>
+    @endif
+
     <x-panel>
         {!! $dataTable->table() !!}
     </x-panel>
