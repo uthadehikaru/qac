@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\Batch;
 use App\Models\MemberBatch;
+use App\Exports\MemberBatchExport;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -11,6 +13,8 @@ use Yajra\DataTables\Services\DataTable;
 
 class MemberBatchDataTable extends DataTable
 {
+    protected $exportClass = MemberBatchExport::class;
+
     private $batch_id = 0;
 
     public function setBatch($batch_id)
@@ -28,8 +32,20 @@ class MemberBatchDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('email', function($row){
+                return $row->member->user->email;
+            })
+            ->addColumn('gender', function($row){
+                return $row->member->gender;
+            })
+            ->addColumn('address', function($row){
+                return $row->member->address;
+            })
+            ->addColumn('phone', function($row){
+                return $row->member->phone;
+            })
             ->addColumn('name', function($row){
-                return $row->member->full_name.' ('.$row->member->name.')';
+                return $row->member->full_name;
             })
             ->editColumn('status',function($row){
                 return __('batch.status_'.$row->status);
@@ -103,6 +119,7 @@ class MemberBatchDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'MemberBatch_' . date('YmdHis');
+        $batch = Batch::find($this->batch_id);
+        return 'Data Peserta Kelas ' . $batch->full_name . ' per ' . date('d M Y');
     }
 }

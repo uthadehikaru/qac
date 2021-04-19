@@ -17,10 +17,12 @@
         <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>
         <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
 
-            <table class="w-full divide-y divide-gray-200">
+            <table class="table-auto w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aksi
+                        </th>
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Kelas
                         </th>
@@ -30,25 +32,12 @@
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                         </th>
-                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aksi
-                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white text-xs divide-y divide-gray-200">
                     @foreach($batches as $batch)
                     <tr>
-
-                        <td class="px-2 py-4 whitespace-nowrap">
-                            {{ $batch->batch->full_name }} {{ $batch->session }}
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap">
-                            {{ $batch->batch->duration }}
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap">
-                            @lang('batch.status_'.$batch->status)
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-2 py-4 text-sm text-gray-500">
 
                             <div class="flex justify-start space-x-1">
                                 <a href="{{ route('member.batches.detail', $batch->id) }}" class="border-2 border-indigo-200 rounded-md p-1">
@@ -65,7 +54,15 @@
                                 </a>
                                 @endif
                             </div>
-
+                        </td>
+                        <td class="px-2 py-4">
+                            {{ $batch->batch->full_name }} {{ $batch->session }}
+                        </td>
+                        <td class="px-2 py-4">
+                            {{ $batch->batch->duration }}
+                        </td>
+                        <td class="px-2 py-4">
+                            @lang('batch.status_'.$batch->status)
                         </td>
                     </tr>
                     @endforeach
@@ -100,16 +97,16 @@
                     @forelse($incomingEvents as $event)
                     <tr>
 
-                        <td class="px-2 py-4 whitespace-nowrap">
+                        <td class="px-2 py-4">
                             {{ $event->title }}
                         </td>
-                        <td class="px-2 py-4 whitespace-nowrap">
+                        <td class="px-2 py-4">
                             {{ $event->event_at->format('d F Y H:i') }}
                         </td>
-                        <td class="px-2 py-4 whitespace-nowrap">
+                        <td class="px-2 py-4">
                             {{ $event->is_public?'Umum':'Khusus Anggota QAC' }}
                         </td>
-                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-2 py-4 text-sm text-gray-500">
                             <div class="flex justify-start space-x-1">
                                 <a href="{{ route('event.detail', $event->slug) }}" class="border-2 border-indigo-200 rounded-md p-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-indigo-500">
@@ -121,7 +118,7 @@
                         </td>
                     </tr>
                     @empty
-                    <tr><td colspan="4" class="px-2 py-4 whitespace-nowrap">Belum ada event</td></tr>
+                    <tr><td colspan="4" class="px-2 py-4">Belum ada event</td></tr>
                     @endforelse
                 </tbody>
             </table>

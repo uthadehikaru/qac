@@ -87,6 +87,21 @@
             <x-responsive-nav-link :href="route(Auth::user()->is_member?'member.dashboard':'admin.dashboard')" :active="request()->is('*dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @can('is-admin')
+            <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->is('admin/members*')">
+                {{ __('Members') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.courses.index')" :active="request()->is('admin/courses*')">
+                {{ __('Courses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
+                {{ __('Events') }}
+            </x-responsive-nav-link>
+            @elsecan('is-member')
+            <x-responsive-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
+                {{ __('Profile') }}
+            </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

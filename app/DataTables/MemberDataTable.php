@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Member;
+use App\Exports\MembersExport;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -11,6 +12,8 @@ use Yajra\DataTables\Services\DataTable;
 
 class MemberDataTable extends DataTable
 {
+    protected $exportClass = MembersExport::class;
+
     /**
      * Build DataTable class.
      *
@@ -28,6 +31,9 @@ class MemberDataTable extends DataTable
                 return $row->full_name.' ('.$row->name.')';
             })
             ->addColumn('email', function($row){
+                return $row->user->email;
+            })
+            ->addColumn('email_link', function($row){
                 $value = "<a href='".route('admin.members.verify',$row->user_id)."' class='".($row->user->email_verified_at?'text-green-500':'text-red-500')."'>".$row->user->email."</a>";
                 return $value;
             })
@@ -38,7 +44,7 @@ class MemberDataTable extends DataTable
 
                     return $btn;
             })
-            ->rawColumns(['email','action']);
+            ->rawColumns(['email_link','action']);
     }
 
     /**
@@ -81,7 +87,7 @@ class MemberDataTable extends DataTable
         return [
             Column::make('created_at'),
             Column::make('name'),
-            Column::make('email'),
+            Column::make('email_link'),
             Column::make('phone'),
             Column::computed('action')
                   ->exportable(false)
@@ -98,6 +104,6 @@ class MemberDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Member_' . date('YmdHis');
+        return 'Data Anggota per ' . date('j M Y');
     }
 }
