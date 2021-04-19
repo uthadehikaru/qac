@@ -86,6 +86,7 @@ class MemberBatchDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
+                    ->pageLength(100)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export')

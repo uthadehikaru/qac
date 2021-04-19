@@ -71,6 +71,7 @@ class MemberDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
+                    ->pageLength(100)
                     ->buttons(
                         Button::make('export'),
                         Button::make('create')
