@@ -27,13 +27,16 @@
 
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-full px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-member_id">
                         Member
                     </label>
                     @if($batchMember)
-                    <input type="text" id="grid-member_id" value="{{ $batchMember->member->name }}" name="member_id" disabled
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"/>
+                    <textarea id="grid-member_id" name="member_id" disabled rows="5"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">{{ $batchMember->member->full_name }} | {{ $batchMember->member->gender }}
+Email : {{ $batchMember->member->user->email }} | Telp : {{ $batchMember->member->phone }}
+Alamat : {{ $batchMember->member->address }}
+                    </textarea>
                     @else
                     <select id="grid-member_id" name="member_id" required
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
@@ -44,7 +47,9 @@
                     </select>
                     @endif
                 </div>
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-session">
                         Session
                     </label>
@@ -56,9 +61,7 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-status">
                         Status
                     </label>

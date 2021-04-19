@@ -15,7 +15,7 @@ class MemberBatchExport extends DataTablesCollectionExport implements WithMappin
             'Jenis Kelamin',
             'Alamat',
             'Telp',
-            'Session',
+            'Sesi',
             'Status',
         ];
     }
