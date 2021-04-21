@@ -24,7 +24,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password">{{ __('Password') }} <span toggle="#password" class="toggle-password text-blue-500 cursor-pointer">(lihat kata sandi)</span></x-label>
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -53,4 +53,15 @@
             </div>
         </form>
     </x-auth-card>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(".toggle-password").click(function() {
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+    </script>
 </x-guest-layout>

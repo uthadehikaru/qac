@@ -32,11 +32,8 @@
                         Member
                     </label>
                     @if($batchMember)
-                    <textarea id="grid-member_id" name="member_id" disabled rows="5"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">{{ $batchMember->member->full_name }} | {{ $batchMember->member->gender }}
-Email : {{ $batchMember->member->user->email }} | Telp : {{ $batchMember->member->phone }}
-Alamat : {{ $batchMember->member->address }}
-                    </textarea>
+                    <input id="grid-member_id" name="member_id" disabled value="{{ $batchMember->member->full_name }}"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"/>
                     @else
                     <select id="grid-member_id" name="member_id" required
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">

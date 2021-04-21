@@ -9,8 +9,12 @@
         <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
     @endif
 
-    @foreach(Auth::user()->unreadNotifications as $notification)
+    @foreach(Auth::user()->unreadNotifications()->take(5) as $notification)
         <x-alert type="info"><a href="{{ $notification->data['link'] }}" class="text-blue-500 pointer">{{ $notification->data['message']}}</a></x-alert>
+    @endforeach
+
+    @foreach($openBatches as $openBatch)
+        <x-alert type="success" title="Quick Access"><a href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}" class="text-green-500 pointer mx-1">Pendaftaran {{ $openBatch->full_name }} sebanyak {{ $openBatch->members()->count() }} orang. klik disini untuk lihat daftar peserta</a></x-alert>
     @endforeach
 
     <section class="text-gray-600 body-font">

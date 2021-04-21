@@ -48,7 +48,7 @@
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <div class="flex flex-wrap">
-            <div class="w-5/6 sm:w-1/2 p-6">
+            <div class="w-5/6 sm:w-1/3 p-6">
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
                 Apa itu QAC?
                 </h3>
@@ -56,9 +56,14 @@
                 QAC adalah singkatan dari Qur'anic Arabic Course.
                 </p>
             </div>
-            <div class="w-full sm:w-1/2 p-6">
+            <div class="w-full sm:w-1/3 p-6">
             <video width="400" height="400" controls>
             <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
+            </video>
+            </div>
+            <div class="w-full sm:w-1/3 p-6">
+            <video width="400" height="400" controls>
+            <source src="{{ asset('apa itu qac2.mp4') }}" type="video/mp4">
             </video>
             </div>
             </div>

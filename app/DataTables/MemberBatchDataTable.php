@@ -57,7 +57,8 @@ class MemberBatchDataTable extends DataTable
                 if($row->file)
                 $btn .= '<a href="'.$row->file->fileUrl('filename').'" class="ml-3 text-green-500">Sertifikat</a>';
                 return $btn;
-            });
+            })
+            ->rawColumns(['action','phone']);
     }
 
     /**
@@ -85,8 +86,9 @@ class MemberBatchDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->pageLength(100)
+                    ->responsive(true)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export')
@@ -101,10 +103,14 @@ class MemberBatchDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('id'),
             Column::make('name'),
+            Column::make('gender'),
+            Column::make('email'),
+            Column::make('address'),
+            Column::make('phone'),
             Column::make('session'),
             Column::make('status'),
-            Column::make('note'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
