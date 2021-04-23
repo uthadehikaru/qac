@@ -88,7 +88,7 @@ class MemberBatchDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(0)
                     ->pageLength(100)
-                    ->responsive(true)
+                    ->scrollX(true)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export')

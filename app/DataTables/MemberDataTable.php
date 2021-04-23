@@ -72,7 +72,7 @@ class MemberDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->pageLength(100)
-                    ->responsive(true)
+                    ->scrollX(true)
                     ->buttons(
                         Button::make('export'),
                         Button::make('create')

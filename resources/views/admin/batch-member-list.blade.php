@@ -39,6 +39,7 @@
     
     var table = $('.datatable').DataTable({
         processing: true,
+        "scrollX":true,
         serverSide: true,
         ajax: "{{ route('admin.courses.batches.members', ['course'=>$batch->course_id,'batch'=>$batch->id]) }}",
         columns: [

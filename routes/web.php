@@ -30,7 +30,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
     

@@ -37,6 +37,7 @@
     
     var table = $('.datatable').DataTable({
         processing: true,
+        "scrollX":true,
         serverSide: true,
         ajax: "{{ route('admin.events.index') }}",
         columns: [
