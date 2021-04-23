@@ -102,6 +102,6 @@ class RegisteredUserController extends Controller
 
         DB::commit();
 
-        return redirect()->route('member.dashboard');
+        return redirect()->route('member.batches.detail', $memberBatch->id);
     }
 }

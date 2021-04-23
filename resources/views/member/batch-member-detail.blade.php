@@ -33,8 +33,13 @@
         </div>
     </div>
     <p class="w-full px-10 text-sm">
-    * Hanya berlaku untuk level lanjutan.
+    * Tidak berlaku untuk QAC 1.0
     </p>
+    @if($batchMember->batch->course->level==1 && $batchMember->status<3)
+    <p class="w-full px-10 pt-5 text-sm">
+    silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi. <a target="_blank" href="https://wa.me/{{ \App\Models\System::value('whatsapp') }}?text={{ urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$batchMember->batch->full_name.' atas nama '.$batchMember->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih') }}" class="text-blue-500 cursor-pointer">klik disini</a>
+    </p>
+    @endif
 
     <x-panel>
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">

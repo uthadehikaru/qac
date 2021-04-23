@@ -21,7 +21,7 @@
                     <div>
                         <x-label for="full_name" :value="__('Full Name')" />
 
-                        <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required autofocus />
+                        <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required />
                         <p class="text-sm text-gray-500">* digunakan untuk pembuatan e-sertifikat</p>
                     </div>
 
