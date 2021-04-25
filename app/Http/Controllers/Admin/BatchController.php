@@ -19,7 +19,7 @@ class BatchController extends Controller
     public function index(Request $request, $course_id)
     {
         if ($request->ajax()) {
-            $data = Batch::select('*')->where('course_id',$course_id);
+            $data = Batch::select('*')->where('course_id',$course_id)->orderBy('id','desc');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->editColumn('start_at', function($row){

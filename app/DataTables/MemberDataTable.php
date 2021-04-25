@@ -31,9 +31,6 @@ class MemberDataTable extends DataTable
                 return $row->full_name.' ('.$row->name.')';
             })
             ->addColumn('email', function($row){
-                return $row->user->email;
-            })
-            ->addColumn('email_link', function($row){
                 $value = "<a href='".route('admin.members.verify',$row->user_id)."' class='".($row->user->email_verified_at?'text-green-500':'text-red-500')."'>".$row->user->email."</a>";
                 return $value;
             })
@@ -44,7 +41,7 @@ class MemberDataTable extends DataTable
 
                     return $btn;
             })
-            ->rawColumns(['email_link','action']);
+            ->rawColumns(['email','action']);
     }
 
     /**
@@ -70,7 +67,7 @@ class MemberDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->pageLength(100)
                     ->scrollX(true)
                     ->buttons(
@@ -89,7 +86,10 @@ class MemberDataTable extends DataTable
         return [
             Column::make('created_at'),
             Column::make('name'),
-            Column::make('email_link'),
+            Column::make('email'),
+            Column::make('gender'),
+            Column::make('address'),
+            Column::make('city'),
             Column::make('phone'),
             Column::computed('action')
                   ->exportable(false)

@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-panel>
-        {!! $dataTable->table(['class' => 'table table-bordered'], true) !!}
+        {!! $dataTable->table(['class' => 'cell-border stripe'], true) !!}
     </x-panel>
 
 <x-slot name="styles">

@@ -11,7 +11,7 @@
     @endif
 
     <x-panel>
-        {!! $dataTable->table() !!}
+        {!! $dataTable->table(['class' => 'cell-border stripe'], true) !!}
     </x-panel>
 
 <x-slot name="styles">

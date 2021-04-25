@@ -9,7 +9,7 @@
     <x-panel>
         <x-auth-session-status class="mb-4" :status="session('status')" />
         
-        <table class="table-auto datatable">
+        <table class="table-auto datatable cell-border stripe">
             <thead>
                 <tr>
                     <th>Name</th>

@@ -7,7 +7,7 @@
     </x-slot>
 
     <x-panel>
-        <table class="table-auto datatable">
+        <table class="table-auto datatable cell-border stripe">
             <thead>
                 <tr>
                     <th>Date</th>

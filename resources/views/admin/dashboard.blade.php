@@ -14,12 +14,29 @@
     @endforeach
 
     @foreach($openBatches as $openBatch)
-        <x-alert type="success" title="Quick Access"><a href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}" class="text-green-500 pointer mx-1">Pendaftaran {{ $openBatch->full_name }} sebanyak {{ $openBatch->members()->count() }} orang. klik disini untuk lihat daftar peserta</a></x-alert>
+    <section class="text-gray-600 body-font">
+      <div class="container px-5 py-8 mx-auto">
+        <div class="flex flex-wrap -m-4 text-center bg-white">
+          <a href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}" class="w-full pt-2 block text-lg font-bold text-green-500 pointer mx-1">Pendaftaran {{ $openBatch->full_name }}</a>
+          <p class="w-full pt-2 block text-sm text-gray-700">Total Peserta : {{ $openBatch->members()->count() }} orang</p>
+          @for($i=1;$i<=6;$i++)
+          <div class="p-4 sm:w-1/6 w-1/2">
+            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $openBatch->members()->wherePivot('status', $i)->count() }}</h2>
+            <p class="leading-relaxed">{{ __('batch.status_'.$i)}}</p>
+          </div>
+          @endfor
+          <div class="w-full pt-2 block mb-2">
+            <x-link-button href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}">Lihat data</x-link-button>
+          </div>
+        </div>
+      </div>
+    </section>
     @endforeach
 
     <section class="text-gray-600 body-font">
       <div class="container px-5 py-8 mx-auto">
         <div class="flex flex-wrap -m-4 text-center bg-white">
+          <p class="w-full pt-2 block text-lg font-bold text-gray-700">Statistik Data Keseluruhan</p>
           <div class="p-4 sm:w-1/4 w-1/2">
             <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $all_members }}</h2>
             <p class="leading-relaxed">Anggota</p>
