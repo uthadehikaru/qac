@@ -5,6 +5,7 @@
     "B":"B",
     "batch.approval" : "Pendaftaran :batch telah disetujui",
     "batch.status" : ":batch telah berubah status menjadi :status",
+    "batch.status_0":"Batal",
     "batch.status_1":"Terdaftar",
     "batch.status_2":"Assesment Selesai",
     "batch.status_3":"Pembayaran Lunas",
