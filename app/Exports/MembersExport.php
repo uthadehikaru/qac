@@ -13,9 +13,14 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             'Tanggal daftar',
             'Email',
             'Nama Lengkap',
+            'Nama Panggilan',
             'Jenis Kelamin',
             'Alamat',
             'Telp',
+            'Kota',
+            'Profesi',
+            'Pendidikan',
+            'Instagram',
         ];
     }
 
@@ -25,9 +30,14 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             $row['created_at'],
             $row['email'],
             $row['full_name'],
+            $row['name'],
             $row['gender'],
             $row['address'],
             $row['phone'],
+            $row['city'],
+            $row['profesi'],
+            $row['pendidikan'],
+            $row['instagram'],
         ];
     }
 }

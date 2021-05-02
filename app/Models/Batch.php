@@ -57,9 +57,27 @@ class Batch extends Model
             ->where('registration_end_at', '>=', date('Y-m-d'));
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('registration_start_at', '<=', date('Y-m-d'))
+            ->where('end_at', '>=', date('Y-m-d'));
+    }
+
     public function getFullNameAttribute($value)
     {
         return $this->course->name.' batch '.$this->name;
+    }
+
+    public function getRegistrationDurationAttribute($value)
+    {
+        $duration = '';
+        if($this->registration_start_at)
+            $duration .= $this->registration_start_at->format('d F Y');
+            
+        if($this->registration_end_at)
+            $duration .= ' s/d '.$this->registration_end_at->format('d F Y');
+
+        return $duration;
     }
 
     public function getDurationAttribute($value)

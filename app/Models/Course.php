@@ -25,4 +25,9 @@ class Course extends Model
     {
         return $this->hasMany(Batch::class);
     }
+
+    public function lastBatch()
+    {
+        return $this->batches()->orderBy('end_at','DESC')->first();
+    }
 }

@@ -32,20 +32,25 @@ class MemberBatchDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('email', function($row){
-                return $row->member->user->email;
+            ->filterColumn('full_name', function($query, $keyword) {
+                $sql = "members.full_name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('gender', function($row){
-                return $row->member->gender;
+            ->filterColumn('gender', function($query, $keyword) {
+                $sql = "members.gender like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('address', function($row){
-                return $row->member->address;
+            ->filterColumn('address', function($query, $keyword) {
+                $sql = "members.address like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('phone', function($row){
-                return $row->member->phone;
+            ->filterColumn('phone', function($query, $keyword) {
+                $sql = "members.phone like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('name', function($row){
-                return $row->member->full_name;
+            ->filterColumn('email', function($query, $keyword) {
+                $sql = "users.email like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('status',function($row){
                 return __('batch.status_'.$row->status);
@@ -70,6 +75,9 @@ class MemberBatchDataTable extends DataTable
     public function query(MemberBatch $model)
     {
         $query = $model->newQuery();
+        $query->select('member_batch.*', 'members.full_name', 'members.phone', 'members.gender', 'members.address', 'users.email');
+        $query->join('members','member_batch.member_id','=','members.id');
+        $query->join('users','members.user_id','=','users.id');
         $query->where('batch_id',$this->batch_id);
         return $query;
     }
@@ -103,14 +111,15 @@ class MemberBatchDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('gender'),
-            Column::make('email'),
-            Column::make('address'),
-            Column::make('phone'),
-            Column::make('session'),
+            Column::make('id')->title('#'),
+            Column::make('full_name')->title('Nama'),
+            Column::make('gender')->title('Jenis Kelamin'),
+            Column::make('email')->title('Email'),
+            Column::make('address')->title('alamat'),
+            Column::make('phone')->title('Telp'),
+            Column::make('session')->title('Sesi'),
             Column::make('status'),
+            Column::make('note')->title('Catatan'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

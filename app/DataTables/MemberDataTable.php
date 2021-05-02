@@ -24,15 +24,12 @@ class MemberDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->filterColumn('email', function($query, $keyword) {
+                $sql = "users.email like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-M-Y');
-            })
-            ->addColumn('name', function($row){
-                return $row->full_name.' ('.$row->name.')';
-            })
-            ->addColumn('email', function($row){
-                $value = "<a href='".route('admin.members.verify',$row->user_id)."' class='".($row->user->email_verified_at?'text-green-500':'text-red-500')."'>".$row->user->email."</a>";
-                return $value;
             })
             ->addColumn('action', function($row){
                     $btn = '<a href="'.route('admin.members.show', $row->id).'" class="text-blue-500">Detail</a>';
@@ -52,7 +49,10 @@ class MemberDataTable extends DataTable
      */
     public function query(Member $model)
     {
-        return $model->newQuery();
+        $model = $model->newQuery();
+        $model->select('members.*','users.email','users.name');
+        $model->join('users','members.user_id','=','users.id');
+        return $model;
     }
 
     /**
@@ -85,7 +85,7 @@ class MemberDataTable extends DataTable
     {
         return [
             Column::make('created_at'),
-            Column::make('name'),
+            Column::make('full_name'),
             Column::make('email'),
             Column::make('gender'),
             Column::make('address'),

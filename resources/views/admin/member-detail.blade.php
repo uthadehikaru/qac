@@ -20,7 +20,7 @@
         <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>
         <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
 
-            <table class="w-full divide-y divide-gray-200">
+            <table class="table-auto w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
 
