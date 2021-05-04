@@ -14,6 +14,8 @@ class Queue extends Pivot
         'course_id',
     ];
 
+    protected $table = 'queues';
+
     public function member()
     {
         return $this->belongsTo(Member::class);

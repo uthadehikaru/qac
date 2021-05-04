@@ -4,6 +4,14 @@
             {!! $title !!}
         </h2>
     </x-slot>
+    
+    @if(session('message'))
+        <x-alert type="success">{{ session('message') }}</x-alert>
+    @endif
+    
+    @if(session('error'))
+        <x-alert type="error">{{ session('error') }}</x-alert>
+    @endif
 
     <x-panel>
         {!! $dataTable->table(['class' => 'cell-border stripe'], true) !!}

@@ -1,5 +1,6 @@
 {
     "A":"A",
+    "admin.waitinglist":":member mendaftar waitinglist :course.",
     "Address":"Alamat",
 
     "B":"B",
@@ -44,6 +45,8 @@
     "Logout":"Keluar",
 
     "M":"M",
+    "member.registration":"Selamat, :member telah mendaftar :batch. Kami akan menghubungi anda segera.",
+    "member.waitinglist":"Selamat, :member telah masuk dalam waiting list :course. Kami akan menginformasikan ketika ada kelas yang tersedia.",
     "Member":"Anggota",
     "Members":"Anggota",
 

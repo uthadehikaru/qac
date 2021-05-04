@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
 use App\Models\Course;
 use App\Models\Batch;
+use App\Models\Queue;
 use App\Notifications\BatchRegistration;
+use App\Notifications\MemberBatchRegistration;
+use App\Notifications\AdminWaitinglist;
+use App\Notifications\MemberWaitinglist;
 
 class RegisteredUserController extends Controller
 {
@@ -107,10 +111,18 @@ class RegisteredUserController extends Controller
 
             $memberBatch = $member->batches()->latest()->first()->pivot;
 
+            $member->user->notify(new MemberBatchRegistration($memberBatch));
+
             foreach(User::where('role','admin')->get() as $admin)
                 $admin->notify(new BatchRegistration($memberBatch));
         }elseif($request->has('course_id')){
-            $member->courses()->attach($request->course_id);
+            $queue = Queue::create([
+                'course_id'=>$request->course_id,
+                'member_id'=>$member->id,
+            ]);
+            $member->user->notify(new MemberWaitinglist($queue));
+            foreach(User::where('role','admin')->get() as $admin)
+                $admin->notify(new AdminWaitinglist($queue));
         }
 
         event(new Registered($user));

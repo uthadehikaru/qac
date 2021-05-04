@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
-use DataTables;
+use App\DataTables\CourseDataTable;
 
 class CourseController extends Controller
 {
@@ -14,27 +14,10 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(CourseDataTable $dataTable)
     {
-        if ($request->ajax()) {
-            $data = Course::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('batch', function($row){
-                            $btn = $row->batches->count();
-                            return $btn;
-                    })
-                    ->addColumn('action', function($row){
-                        $btn = '<a href="'.route('admin.courses.batches.index', $row->id).'" class="text-blue-500">Batches</a>';
-                            $btn .= '<a href="'.route('admin.courses.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
-                            $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('admin/course-list');
+        $data['title'] = "Data Anggota";
+        return $dataTable->render('admin.datatable', $data);
     }
 
     /**
