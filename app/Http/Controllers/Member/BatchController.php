@@ -35,11 +35,13 @@ class BatchController extends Controller
         ]);
 
         $lastBatch = Auth::user()->member->batches()->latest()->first();
-        if($lastBatch->id==$batch->id)
-            return back()->with('error','Anda telah mendaftar kelas ini');
+        if($lastBatch){
+            if($lastBatch->id==$batch->id)
+                return back()->with('error','Anda telah mendaftar kelas ini');
 
-        if(Carbon::now()->isBefore($lastBatch->end_at) || $lastBatch->course->level<=$batch->course->level)
-            return back()->with('error','Maaf, Anda belum menyelesaikan level sebelumnya');
+            if(Carbon::now()->isBefore($lastBatch->end_at) || $lastBatch->course->level<=$batch->course->level)
+                return back()->with('error','Maaf, Anda belum menyelesaikan level sebelumnya');
+        }
 
         $additional = [];
         if($request->has('session'))

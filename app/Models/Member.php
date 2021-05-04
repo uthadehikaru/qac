@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Member extends Model
 {
@@ -26,6 +27,7 @@ class Member extends Model
 
         static::deleting(function($member) { 
              $member->batches()->detach();
+             $member->queues()->delete();
         });
     }
 
@@ -52,5 +54,20 @@ class Member extends Model
     public function batches()
     {
         return $this->belongsToMany(Batch::class,'member_batch')->withPivot('id','session', 'status')->using(MemberBatch::class);
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class,'queues')->withTimestamps()->using(Queue::class);
+    }
+
+    public function level()
+    {
+        return DB::table('member_batch')
+        ->join('batches', 'batches.id', '=', 'member_batch.batch_id')
+        ->join('courses', 'courses.id', '=', 'batches.course_id')
+        ->where('member_batch.member_id',$this->id)
+        ->where('member_batch.status','6')
+        ->max('courses.level');
     }
 }

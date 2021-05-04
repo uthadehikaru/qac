@@ -134,7 +134,7 @@
                             <p class="p-3">{!! nl2br($course->description) !!}</p>
                             </div>
                             <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                            @foreach($course->batches()->open()->get() as $batch)
+                            @forelse($course->batches()->open()->get() as $batch)
                             <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
                                 Batch {{ $batch->name }}
                                 <p class="text-base">{{ $batch->duration }}</p>
@@ -157,7 +157,18 @@
                                 </a>
                                 <p class="text-sm font-italic text-yellow-600">pendaftaran sampai {{ $batch->registration_end_at->format('d F Y')}}</p>
                             </div>
-                            @endforeach
+                            @empty
+                            <div class="flex flex-col items-center justify-center">
+                                <p class="text-sm font-italic text-yellow-600">Maaf, saat ini tidak ada pendaftaran yang dibuka. silahkan masuk daftar tunggu untuk mengikut kelas selanjutnya.</p>
+                                @if($course->level==1)
+                                <a href="{{ route('register', ['course_id'=>$course->id]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                @else
+                                <a href="{{ route('member.waitinglist', $course->id) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                @endif
+                                @lang('Waiting List') {{ $course->name }}
+                                </a>
+                            </div>
+                            @endforelse
                         </div>
                     </div>
                 @endforeach

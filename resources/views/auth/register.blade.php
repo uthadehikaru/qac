@@ -3,18 +3,26 @@
     <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <h2 class="text-4xl text-center w-full">@lang('Pendaftaran') {{ $batch->full_name }}</h2>
+                <h2 class="text-4xl text-center w-full">
+                @lang('Pendaftaran')
+                {{ $batch?$batch->full_name:'' }}
+                {{ $course?'Waiting List '.$course->name:'' }}
+                </h2>
 
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+                @if($batch)
                 <p class="py-4">{!! nl2br($batch->course->description) !!}</p>
-
                 <p class="py-4">{!! nl2br($batch->description) !!}</p>
-
                 <p class="py-4">Waktu kursus : {{ $batch->duration }}</p>
+                @endif
 
+                @if($batch)
                 <form method="POST" action="{{ route('register', ['batch_id'=>request('batch_id')]) }}">
+                @elseif($course)
+                <form method="POST" action="{{ route('register', ['course_id'=>request('course_id')]) }}">
+                @endif
                     @csrf
 
                     <!-- Full Name -->
@@ -134,8 +142,8 @@
 
                     <div class="mt-4">
                         <x-label for="password_confirmation" :value="__('Syarat dan Ketentuan')" />
-
                         <p class="text-sm text-gray-700">Saya dengan senang hati akan melakukan hal berikut: *</p>
+                        @if($batch)
                         <p class="text-sm text-gray-700">1. Saya berperan aktif mengikuti rangkaian kursus dengan bahagia, ceria dan tetap positif</p>
                         <p class="text-sm text-gray-700">2. Akan bersungguh-sungguh mengikuti kursus ini</p>
                         <p class="text-sm text-gray-700">3. Akan menjalin kerjasama baik antar peserta dan penyelenggara</p>
@@ -143,6 +151,11 @@
                         <p class="text-sm text-gray-700">5. Bila berhalangan darurat, silahkan menginformasikan 1 hari sebelumnya</p>
                         <p class="text-sm text-gray-700">6. Bersabar menunggu respon dari penyelenggara</p>
                         <P class="font-bold">Perhatian! Pendaftaran ini hanya untuk 1 orang, anda tidak diperbolehkan untuk membagikan materi dalam bentuk apapun kepada orang lain. *</p>
+                        @elseif($course)
+                        <p class="text-sm text-gray-700">1. Saya berperan aktif mengikuti rangkaian kursus dengan bahagia, ceria dan tetap positif</p>
+                        <p class="text-sm text-gray-700">2. Akan bersungguh-sungguh mengikuti kursus ini</p>
+                        <p class="text-sm text-gray-700">3. Akan menjalin kerjasama baik antar peserta dan penyelenggara</p>
+                        @endif
                     </div>
 
                     <div class="md:flex md:items-left my-6">

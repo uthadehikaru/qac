@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
 
@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [MDashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/courses/{course_id}/waitinglist', [MDashboardController::class, 'waitingList'])->name('waitinglist');
         Route::get('/courses', [BatchMemberController::class, 'index'])->name('batches');
         Route::get('/courses/{member_batch_id}', [BatchMemberController::class, 'detail'])->name('batches.detail');
         Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');

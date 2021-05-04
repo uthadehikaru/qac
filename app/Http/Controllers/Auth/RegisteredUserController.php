@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
+use App\Models\Course;
 use App\Models\Batch;
 use App\Notifications\BatchRegistration;
 
@@ -23,17 +24,26 @@ class RegisteredUserController extends Controller
      */
     public function create(Request $request)
     {
-        $batch = Batch::with('course')->where('registration_start_at', '<=', date('Y-m-d'))
-        ->where('registration_end_at', '>=', date('Y-m-d'))
-        ->where('id',$request->batch_id)
-        ->first();
-
         $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+        $data['batch'] = $data['course'] = $data['sessions'] = null;
 
-        if($batch && $batch->is_open && $batch->course->level==1){
-            $data['batch'] = $batch;
-            $data['sessions'] = $batch->sessions?explode(',', $batch->sessions):false;
-            return view('auth.register', $data);
+        if($request->has('batch_id')){
+            $batch = Batch::with('course')->where('registration_start_at', '<=', date('Y-m-d'))
+            ->where('registration_end_at', '>=', date('Y-m-d'))
+            ->where('id',$request->batch_id)
+            ->first();
+
+            if($batch && $batch->is_open && $batch->course->level==1){
+                $data['batch'] = $batch;
+                $data['sessions'] = $batch->sessions?explode(',', $batch->sessions):false;
+                return view('auth.register', $data);
+            }
+        }elseif($request->has('course_id')){
+            $course = Course::find($request->course_id);
+            if($course){
+                $data['course'] = $course;
+                return view('auth.register', $data);
+            }
         }
         
         return abort('404');
@@ -62,7 +72,8 @@ class RegisteredUserController extends Controller
             'profesi' => 'required',
             'pendidikan' => 'required',
             'instagram' => '',
-            'batch_id' => 'required',
+            'batch_id' => 'sometimes',
+            'course_id' => 'sometimes',
             'term_condition'=>'required',
         ]);
 
@@ -87,21 +98,30 @@ class RegisteredUserController extends Controller
             'instagram' => $request->instagram,
         ]);
 
-        $additional = [];
-        if($request->has('session'))
-            $additional = ['session'=>$request->session];
-        
-        $member->batches()->attach($request->batch_id, $additional);
+        if($request->has('batch_id')){
+            $additional = [];
+            if($request->has('session'))
+                $additional = ['session'=>$request->session];
+            
+            $member->batches()->attach($request->batch_id, $additional);
 
-        $memberBatch = $member->batches()->latest()->first()->pivot;
+            $memberBatch = $member->batches()->latest()->first()->pivot;
 
-        foreach(User::where('role','admin')->get() as $admin)
-            $admin->notify(new BatchRegistration($memberBatch));
+            foreach(User::where('role','admin')->get() as $admin)
+                $admin->notify(new BatchRegistration($memberBatch));
+        }elseif($request->has('course_id')){
+            $member->courses()->attach($request->course_id);
+        }
 
         event(new Registered($user));
 
         DB::commit();
 
-        return redirect()->route('member.batches.detail', $memberBatch->id);
+        if($request->has('batch_id'))
+            return redirect()->route('member.batches.detail', $memberBatch->id);
+        elseif($request->has('course_id'))
+            return redirect()->route('member.dashboard')->with('message','Anda telah berhasil didaftarkan dalam waiting list');
+
+        return redirect('/');
     }
 }
