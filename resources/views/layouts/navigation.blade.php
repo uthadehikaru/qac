@@ -25,6 +25,9 @@
                     <x-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
                         {{ __('Events') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
+                        {{ __('Settings') }}
+                    </x-nav-link>
                     @elsecan('is-member')
                     <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}
@@ -96,6 +99,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
                 {{ __('Events') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
+                {{ __('Settings') }}
             </x-responsive-nav-link>
             @elsecan('is-member')
             <x-responsive-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">

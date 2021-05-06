@@ -14,39 +14,15 @@ class SystemSeeder extends Seeder
      */
     public function run()
     {
-        $testimonials[] = [
-            'name'=>'Andrew - Freelancer',
-            'title'=>'QAC 1',
-            'message'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis turpis at purus fermentum placerat. Nullam at justo ut sem eleifend viverra. Proin vehicula at sapien non dignissim.',
-        ];
-        $testimonials[] = [
-            'name'=>'Diana - Apoteker',
-            'title'=>'QAC 2.1',
-            'message'=>'Nulla facilisi. Curabitur eu nisi magna. Phasellus mollis vel sapien sit amet fermentum. Cras mattis iaculis scelerisque. Suspendisse quis nisi est. Nulla facilisi.',
-        ];
-        $testimonials[] = [
-            'name'=>'Laila - Dosen',
-            'title'=>'QAC 2.2',
-            'message'=>'In at tristique tellus. Vestibulum porttitor orci vitae arcu porttitor venenatis. Quisque a aliquet lorem, vitae efficitur purus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
-        ];
-
         System::create([
-            'key'=>'testimonials',
-            'value'=>json_encode($testimonials),
+            'key'=>'about_1',
+            'value'=>'[{"title":"Apa itu QAC?","content":"QAC adalah singkatan dari Qur\'anic Arabic Course."}]',
             'is_array'=>true,
         ]);
 
-        $faqs = [];
-        for($i=1;$i<=10;$i++){
-            $faqs[] = [
-                'title'=>'Question '.$i,
-                'message'=>'In at tristique tellus. Vestibulum porttitor orci vitae arcu porttitor venenatis. Quisque a aliquet lorem, vitae efficitur purus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
-            ];    
-        }
-        
         System::create([
-            'key'=>'faqs',
-            'value'=>json_encode($faqs),
+            'key'=>'about_2',
+            'value'=>'{"title":"Apa saja kelas di QAC?","content":"terdiri dari 3 level: level 1 QAC 1.0, level 2 QAC 2.1, level 2 QAC 2.2"}',
             'is_array'=>true,
         ]);
 

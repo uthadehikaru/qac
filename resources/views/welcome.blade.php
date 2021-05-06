@@ -50,10 +50,10 @@
             <div class="flex flex-wrap">
             <div class="w-5/6 sm:w-1/3 p-6">
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                Apa itu QAC?
+                {{ $about_1->title }}
                 </h3>
                 <p class="text-gray-600 mb-8">
-                QAC adalah singkatan dari Qur'anic Arabic Course.
+                {{ $about_1->content }}
                 </p>
             </div>
             <div class="w-full sm:w-1/3 p-6">
@@ -76,10 +76,10 @@
             <div class="w-full sm:w-1/2 p-6 mt-6">
                 <div class="align-middle">
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                    Apa saja kelas di QAC?
+                    {{ $about_2->title }}
                 </h3>
                 <p class="text-gray-600 mb-8">
-                    terdiri dari 3 level: level 1 QAC 1.0, level 2 QAC 2.1, level 2 QAC 2.2
+                    {{ $about_2->content }}
                 </p>
                 </div>
             </div>
