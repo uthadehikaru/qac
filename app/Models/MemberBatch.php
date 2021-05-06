@@ -18,6 +18,7 @@ class MemberBatch extends Pivot
         'session',
         'status',
         'note',
+        'testimonial',
     ];
 
     public $timestamps = false;
@@ -37,5 +38,12 @@ class MemberBatch extends Pivot
     public function file()
     {
         return $this->hasOne(File::class,'record_id')->where('tablename','member_batch');
+    }
+    
+    public function scopeTestimonial($query)
+    {
+        return $query->where('status', 6)
+            ->whereNotNull('testimonial')
+            ->orderBy('id','desc');
     }
 }

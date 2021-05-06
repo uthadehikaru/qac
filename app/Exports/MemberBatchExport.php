@@ -19,6 +19,7 @@ class MemberBatchExport extends DataTablesCollectionExport implements WithMappin
             'Sesi',
             'Status',
             'Catatan',
+            'Testimoni',
         ];
     }
 
@@ -34,6 +35,7 @@ class MemberBatchExport extends DataTablesCollectionExport implements WithMappin
             $row['session'],
             $row['status'],
             $row['note'],
+            $row['testimonial'],
         ];
     }
 }

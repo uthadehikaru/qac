@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\MemberBatchController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\SystemController;
+use App\Http\Controllers\Admin\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ use App\Http\Controllers\Admin\SystemController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
+Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
@@ -43,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('courses.batches', BatchController::class);
         Route::resource('events', AdminEventController::class);
         Route::resource('systems', SystemController::class);
+        Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');
+        Route::resource('testimonials', TestimonialController::class);
         Route::get('courses/{course}/batches/{batch}/members', [MemberBatchController::class, 'index'])->name('courses.batches.members');
         Route::get('courses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'create'])->name('courses.batches.members.create');
         Route::post('courses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'store'])->name('courses.batches.members.store');

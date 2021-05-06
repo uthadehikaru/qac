@@ -86,30 +86,30 @@
             </div>
         </div>
         </section>
-        <section id="testimonial" class="bg-white border-b pt-12 py-8">
-        <div class="container mx-auto flex flex-wrap pt-4 pb-12">
-            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            @lang('Testimoni Alumni')
-            </h1>
-            <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <img src="{{ asset('testimoni qac 1.jpg') }}" title="testimoni QAC 1" />
+        <section id="testimonial" class="text-gray-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+                <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
+                    @lang('Testimoni Alumni')
+                </h1>
+                <div class="flex flex-wrap -m-4">
+                    @foreach($testimonials as $testimonial)
+                    <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
+                        <div class="h-full text-center">
+                        <p class="text-gray-800 text-xl font-bold my-3">{{ $testimonial->batch->full_name }}</p>
+                        <p class="leading-relaxed text-white">{{ $testimonial->testimonial }}</p>
+                        <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                        <p class="text-white text-xl">{{ $testimonial->member->full_name }}</p>
+                        <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">{{ $testimonial->member->profesi }}</h2>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="flex flex-wrap px-6 justify-center">
+                    <a href="{{ route('testimonials') }}" class="mx-auto lg:mx-0 hover:underline text-black bg-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                        Lihat Semua
+                    </a>
                 </div>
             </div>
-            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <img src="{{ asset('testimoni qac 2.1.jpg') }}" title="testimoni QAC 2.1" />
-                </div>
-            </div>
-            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                    <img src="{{ asset('testimoni qac 2.2.jpg') }}" title="testimoni QAC 2.2" />
-                </div>
-            </div>
-        </div>
         </section>
         <section id="courses" class="bg-gray-100 pt-2 py-8">
         <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">

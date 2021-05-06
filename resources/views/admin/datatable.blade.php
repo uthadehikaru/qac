@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <x-panel>
+        <x-auth-session-status class="mb-4" :status="session('status')" />
         {!! $dataTable->table(['class' => 'cell-border stripe'], true) !!}
     </x-panel>
 

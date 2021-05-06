@@ -68,6 +68,7 @@ class MemberBatchController extends Controller
             'session' => '',
             'status' => 'required',
             'note'=>'',
+            'testimonial'=>'',
         ]);
 
         if ($validator->fails()) {
@@ -80,6 +81,7 @@ class MemberBatchController extends Controller
             'session'=>$request->session,
             'status'=>$request->status,
             'note'=>$request->note,
+            'testimonial'=>$request->testimonial,
         ];
         $batch->members()->attach($request->member_id, $additional);
 
@@ -116,6 +118,7 @@ class MemberBatchController extends Controller
             'session' => '',
             'status' => 'required',
             'note'=>'',
+            'testimonial'=>'',
         ]);
 
         if ($validator->fails()) {
@@ -129,6 +132,7 @@ class MemberBatchController extends Controller
             'session'=>$request->session,
             'status'=>$request->status,
             'note'=>$request->note,
+            'testimonial'=>$request->testimonial,
         ];
         if($request->status==6)
             $data['approved_at'] = Carbon::now();
