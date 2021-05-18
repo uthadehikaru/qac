@@ -20,6 +20,7 @@ class Batch extends Model
         'end_at',
         'registration_start_at',
         'registration_end_at',
+        'certificate_id',
     ];
     
     protected $dates = [
@@ -35,6 +36,11 @@ class Batch extends Model
         'registration_start_at' => 'date:Y-m-d',
         'registration_end_at' => 'date:Y-m-d',
     ];
+
+    public function certificate()
+    {
+        return $this->belongsTo(Certificate::class);
+    }
 
     public function course()
     {

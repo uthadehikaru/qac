@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Certificate;
 use App\Models\MemberBatch;
 use App\Models\Batch;
 use App\Models\Member;
 use App\Models\File;
 use App\Notifications\BatchApproval;
 use App\Notifications\BatchStatusUpdate;
+use App\DataTables\MemberBatchDataTable;
+use Carbon\Carbon;
 use DataTables;
 use Validator;
 use DB;
-use Carbon\Carbon;
-use App\DataTables\MemberBatchDataTable;
+use Image;
 
 class MemberBatchController extends Controller
 {
@@ -22,6 +24,7 @@ class MemberBatchController extends Controller
     {
         $batch = Batch::find($batch_id);
         $data['title'] = 'Data Anggota - <a href="'.route('admin.courses.batches.index', $batch->course_id).'" class="pointer text-blue-500">Angkatan '.$batch->full_name.'</a>';
+        $data['button'] = '<a class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'" class="float-right">Create Certificates</a>';
         $dataTable->setBatch($batch_id);
         return $dataTable->render('admin.datatable', $data);
     }
@@ -175,5 +178,52 @@ class MemberBatchController extends Controller
             return response()->json(['status'=>'Deleted successfully']);
         }else
             return response()->json(['status'=>'No Member Batch Found for id '.$id], 404);
+    }
+
+    public function certificates($course_id, $batch_id)
+    {
+        $batch = Batch::find($batch_id);
+        $memberBatches = MemberBatch::where('batch_id',$batch_id)->get();
+        $template = $batch->certificate;
+        
+        foreach($memberBatches as $memberBatch)
+        {
+            if($memberBatch->status==6 && !$memberBatch->file){
+                $this->generateCertificate($template, $memberBatch);
+            }
+        }
+
+        return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
+            ->with('status','Certificates created');
+    }
+
+    private function generateCertificate(Certificate $template, MemberBatch $memberBatch)
+    {
+        $name = "certificate ".$memberBatch->batch->full_name." ".$memberBatch->member->full_name;
+        $config = json_decode($template->config, true);
+
+        $certificate = Image::make(storage_path('app/public/templates/0lx0Wn7UtP62lvZsA0byMlImfM7HdD3aSpPsNZ1j.png'))
+        ->resize(1200, 800);
+        if(isset($config['nama_anggota'])){
+            $certificate->text($memberBatch->member->full_name, $config['nama_anggota']['position_x'], $config['nama_anggota']['position_y'], function($font) use($config) {
+                $font->file(public_path('Roboto-Regular.ttf'));
+                $font->size($config['nama_anggota']['font_size']);
+                $font->color('#000000');
+                $font->align('center');
+                $font->valign('top');
+            });
+        }
+
+        $filepath = 'files/'.$name.'.jpg';
+        $certificate->save(storage_path('app/public/'.$filepath), 90, 'jpg');
+
+        $file = File::create([
+            'name'=>$name,
+            'filename'=>$filepath,
+            'tablename'=>'member_batch',
+            'record_id'=>$memberBatch->id,
+            'type'=>'jpg',
+            'size'=>0,
+        ]);
     }
 }

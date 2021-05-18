@@ -106,6 +106,20 @@
                 </div>
                 @endif
             </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-certificate_id">
+                        Sertifikat
+                    </label>
+                    <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                    id="grid-certificate_id" name="certificate_id">
+                        <option value="">-- pilih template sertifikat --</option>
+                        @foreach($certificates as $certificate)
+                        <option value="{{ $certificate->id }}" {{ $batch && $batch->certificate_id==$certificate->id?'selected':'' }}>{{ $certificate->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
         </form>
     </x-panel>

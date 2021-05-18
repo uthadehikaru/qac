@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/4 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-session">
                         Session
                     </label>
@@ -58,7 +58,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="md:w-1/4 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-status">
                         Status
                     </label>
@@ -68,13 +68,6 @@
                             <option value="{{ $i }}" {{ $batchMember && $batchMember->status==$i?'selected':'' }}>@lang('batch.status_'.$i)</option>
                         @endfor
                     </select>
-                </div>
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-filename">
-                        Sertifikat
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-filename" name="filename" type="file">
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
@@ -94,6 +87,26 @@
                     <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                     id="grid-testimonial" name="testimonial">{{ $batchMember?$batchMember->testimonial:'' }}</textarea>
                 </div>
+            </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-filename">
+                        Sertifikat
+                    </label>
+                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                    id="grid-filename" name="filename" type="file">
+                </div>
+                @if($batchMember && $batchMember->file)
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-filename">
+                        unduh
+                    </label>
+                    <a href="{{ $batchMember->file->fileUrl('filename') }}" target="_blank"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
+                    {{ $batchMember->file->name }}
+                    </a>
+                </div>
+                @endif
             </div>
         </div>
         </form>

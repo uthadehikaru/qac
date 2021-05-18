@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\System;
+use App\Models\Certificate;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SystemDataTable extends DataTable
+class CertificateDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,31 +21,25 @@ class SystemDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('updated_at', function($row){
-                return $row->updated_at->format('d/M/Y H:i');
-            })
-            ->editColumn('value', function($row){
-                if($row->is_array)
-                    return json_encode($row->value);
-                else
-                    return $row->value;
+            ->editColumn('template', function($row){
+                return '<img src="'.$row->imageUrl('template').'" width="300" />';
             })
             ->addColumn('action', function($row){
                 $btn = "";
-                $btn .= '<a href="'.route('admin.systems.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
+                $btn .= '<a href="'.route('admin.certificates.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['template','action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\System $model
+     * @param \App\Models\Certificate $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(System $model)
+    public function query(Certificate $model)
     {
         return $model->newQuery();
     }
@@ -58,7 +52,7 @@ class SystemDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('system-table')
+                    ->setTableId('certificate-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -77,9 +71,8 @@ class SystemDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('key'),
-            Column::make('value'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('template'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -95,6 +88,6 @@ class SystemDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'System_' . date('YmdHis');
+        return 'Certificate_' . date('YmdHis');
     }
 }

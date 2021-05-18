@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\File;
@@ -58,6 +59,7 @@ class BatchController extends Controller
     public function create($course_id)
     {
         $data['course'] = Course::find($course_id);
+        $data['certificates'] = Certificate::all();
         $data['batch'] = null;
         return view('admin.batch-form', $data);
     }
@@ -89,6 +91,7 @@ class BatchController extends Controller
             'end_at'=>$request->end_at,
             'registration_start_at'=>$request->registration_start_at,
             'registration_end_at'=>$request->registration_end_at,
+            'certificate_id'=>$request->certificate_id,
         ]);
 
         if($request->hasFile('filename')){
@@ -126,6 +129,7 @@ class BatchController extends Controller
     {
         $data['course'] = Course::find($course_id);
         $data['batch'] = Batch::with('file')->find($id);
+        $data['certificates'] = Certificate::all();
         return view('admin.batch-form', $data);
     }
 
@@ -157,6 +161,7 @@ class BatchController extends Controller
             'end_at'=>$request->end_at,
             'registration_start_at'=>$request->registration_start_at,
             'registration_end_at'=>$request->registration_end_at,
+            'certificate_id'=>$request->certificate_id,
         ]);
         if($request->hasFile('filename')){
             $file = $batch->file;
