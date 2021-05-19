@@ -35,10 +35,10 @@ class AuthenticatedSessionController extends Controller
         if(session()->has('url.intended'))
             return redirect(session()->get('url.intended'));
 
-        if(Auth::user()->is_member)
-            return redirect()->route('member.dashboard');
+        if(Auth::user()->is_admin)
+            return redirect()->route('admin.dashboard');
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('member.dashboard');
     }
 
     /**

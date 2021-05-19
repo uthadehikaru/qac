@@ -7,6 +7,14 @@
                 {!! $button !!}
             @endif
     </x-slot>
+    
+    @if(session('message'))
+        <x-alert type="success">{{ session('message') }}</x-alert>
+    @endif
+    
+    @if(session('error'))
+        <x-alert type="error">{{ session('error') }}</x-alert>
+    @endif
 
 
     <x-panel>

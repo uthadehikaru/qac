@@ -9,10 +9,15 @@
         <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
     @endif
 
-    @foreach($openBatches as $openBatch)
-        <x-alert type="info">Pendaftaran {{ $openBatch->full_name }} telah dibuka sampai {{ $openBatch->end_at->format('d-M-Y ')}}, <a href="{{ route('member.batch.detail',$openBatch->id) }}" class="text-red-500 pointer mx-1">klik disini</a> untuk mendaftar</x-alert>
-    @endforeach
+    @if(session('message'))
+        <x-alert type="info">{{ session('message') }}</x-alert>
+    @endif
+    
+    @if(session('error'))
+        <x-alert type="error">{{ session('error') }}</x-alert>
+    @endif
 
+    @if($member->batches->count()>0)
     <div class="m-6">
         <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>
         <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
@@ -35,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white text-xs divide-y divide-gray-200">
-                    @foreach($batches as $batch)
+                    @foreach($member->batches as $batch)
                     <tr>
                         <td class="px-2 py-4 text-sm text-gray-500">
 
@@ -56,13 +61,61 @@
                             </div>
                         </td>
                         <td class="px-2 py-4">
-                            {{ $batch->batch->full_name }} {{ $batch->session }}
+                            {{ $batch->full_name }} {{ $batch->session }}
                         </td>
                         <td class="px-2 py-4">
-                            {{ $batch->batch->duration }}
+                            {{ $batch->duration }}
                         </td>
                         <td class="px-2 py-4">
-                            @lang('batch.status_'.$batch->status)
+                            @lang('batch.status_'.$batch->pivot->status)
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endif
+
+    <div class="m-6">
+        <p class="block text-lg font-bold text-gray-700">Kelas yang tersedia</p>
+        <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+
+            <table class="table-auto w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Level
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Kelas
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white text-xs divide-y divide-gray-200">
+                    @foreach($courses as $course)
+                    <tr>
+                        <td class="px-2 py-4">
+                            {{ $course->name }}
+                        </td>
+                        <td class="px-2 py-4">
+                            @if($course->lastBatch() && $course->lastBatch()->isOpen)
+                                {{ $course->lastBatch()->full_name }}
+                            @else
+                                Kelas belum tersedia
+                            @endif
+                        </td>
+                        <td class="px-2 py-4">
+                            @if($course->lastBatch() && $course->lastBatch()->isOpen)
+                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="text-green-500 pointer">Daftarkan kelas</a>
+                            @elseif($course->members()->where('member_id',$member->id)->exists())
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-red-500 pointer">Batalkan waiting list</a>
+                            @else
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-blue-500 pointer">Daftarkan waiting list</a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
