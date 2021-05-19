@@ -64,9 +64,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [MDashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/courses/{course_id}/waitinglist', [MDashboardController::class, 'waitingList'])->name('waitinglist');
         Route::get('/courses', [BatchMemberController::class, 'index'])->name('batches');
         Route::get('/courses/{member_batch_id}', [BatchMemberController::class, 'detail'])->name('batches.detail');
+        Route::get('/courses/{course_id}/waitinglist', [MDashboardController::class, 'waitingList'])->name('waitinglist');
         Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');
         Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
     });
