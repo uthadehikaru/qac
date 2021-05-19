@@ -203,7 +203,7 @@ class MemberBatchController extends Controller
         $name = "certificate ".$memberBatch->batch->full_name."-".$memberBatch->member->full_name."-".$memberBatch->member->id;
         $config = json_decode($template->config, true);
 
-        $certificate = Image::make(storage_path('app/public/templates/0lx0Wn7UtP62lvZsA0byMlImfM7HdD3aSpPsNZ1j.png'))
+        $certificate = Image::make(storage_path('app/public/'.$template->template))
         ->resize(1200, 800);
         if(isset($config['nama_anggota'])){
             $certificate->text($memberBatch->member->full_name, $config['nama_anggota']['position_x'], $config['nama_anggota']['position_y'], function($font) use($config) {
