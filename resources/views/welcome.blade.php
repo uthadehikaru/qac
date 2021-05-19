@@ -132,9 +132,9 @@
                             </div>
                             <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
                             <p class="p-3">{!! nl2br($course->description) !!}</p>
-                            </div>
-                            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                            @forelse($course->batches()->open()->get() as $batch)
+                        </div>
+                        <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
+                        @forelse($course->batches()->open()->get() as $batch)
                             <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
                                 Batch {{ $batch->name }}
                                 <p class="text-base">{{ $batch->duration }}</p>
@@ -157,7 +157,8 @@
                                 </a>
                                 <p class="text-sm font-italic text-yellow-600">pendaftaran sampai {{ $batch->registration_end_at->format('d F Y')}}</p>
                             </div>
-                            @empty
+                        @empty
+                            @if($waitinglist)
                             <div class="flex flex-col items-center justify-center">
                                 <p class="text-sm font-italic text-yellow-600">Maaf, saat ini tidak ada pendaftaran yang dibuka. silahkan masuk daftar tunggu untuk mengikut kelas selanjutnya.</p>
                                 @if($course->level==1)
@@ -168,7 +169,12 @@
                                 @lang('Waiting List') {{ $course->name }}
                                 </a>
                             </div>
-                            @endforelse
+                            @else
+                            <div class="flex flex-col items-center justify-center">
+                                <p class="text-sm font-italic text-yellow-600">Maaf, saat ini tidak ada pendaftaran yang dibuka. silahkan menunggu informasi untuk mengikut kelas selanjutnya.</p>
+                            </div>
+                            @endif
+                        @endforelse
                         </div>
                     </div>
                 @endforeach

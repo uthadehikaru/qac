@@ -31,5 +31,11 @@ class SystemSeeder extends Seeder
             'value'=>'62895423485054',
             'is_array'=>false,
         ]);
+
+        System::create([
+            'key'=>'waitinglist',
+            'value'=>0,
+            'is_array'=>false,
+        ]);
     }
 }

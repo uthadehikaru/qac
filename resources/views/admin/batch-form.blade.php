@@ -113,7 +113,7 @@
                     </label>
                     <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                     id="grid-certificate_id" name="certificate_id">
-                        <option value="">-- pilih template sertifikat --</option>
+                        <option value="0">-- pilih template sertifikat --</option>
                         @foreach($certificates as $certificate)
                         <option value="{{ $certificate->id }}" {{ $batch && $batch->certificate_id==$certificate->id?'selected':'' }}>{{ $certificate->name }}</option>
                         @endforeach
