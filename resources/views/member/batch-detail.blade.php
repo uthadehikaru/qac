@@ -10,7 +10,7 @@
     @endif
 
     @if(session('success'))
-        <x-alert type="success">{{ session('success') }}</x-alert>
+        <x-alert type="success">{!! session('success') !!}</x-alert>
     @endif
 
     <x-panel>

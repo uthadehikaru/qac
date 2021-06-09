@@ -59,7 +59,7 @@ class MemberBatchController extends Controller
                 $query->select(DB::raw(1))
                     ->from('member_batch')
                     ->whereRaw('member_batch.member_id=members.id and member_batch.batch_id='.$batch_id);
-            })->get();
+            })->orderBy('full_name')->get();
         return view('admin.batch-member-form', $data);
     }
 
