@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['roles:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('members/verify/{id}', [MemberController::class, 'verify'])->name('members.verify');
+        Route::get('members/reset/{id}', [MemberController::class, 'reset'])->name('members.reset');
         Route::resource('members', MemberController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('courses.batches', BatchController::class);

@@ -11,6 +11,7 @@ use Hash;
 use Str;
 use Carbon\Carbon;
 use App\DataTables\MemberDataTable;
+use App\Notifications\MemberResetPassword;
 
 class MemberController extends Controller
 {
@@ -158,5 +159,16 @@ class MemberController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
         return back()->with('message','Berhasil diverifikasi');
+    }
+
+    public function reset($user_id)
+    {
+        $user = User::find($user_id);
+        $pass = Str::random(6);
+        $user->password = Hash::make($pass);
+        $user->save();
+        $user->notify(new MemberResetPassword($pass));
+        $message = 'Berhasil mereset kata sandi menjadi '.$pass;
+        return back()->with('message',$message);
     }
 }

@@ -11,10 +11,15 @@
             <a href="{{ route('admin.members.verify', $member->user_id) }}" class="text-blue-500 cursor-pointer">(Verifikasi Email)</a>
         @endif
         | {{ $member->phone }}
+        | <a href="{{ route('admin.members.reset', $member->user_id) }}" class="text-red-500 cursor-pointer">Reset Kata Sandi</a>
         </div>
         <p class="">Pendidikan {{ $member->pendidikan }} | Profesi {{ $member->profesi }}</p>
         <p class="">Alamat : {{ $member->address }}</p>
     </x-slot>
+    
+    @if(session('message'))
+        <x-alert type="success">{!! session('message') !!}</x-alert>
+    @endif
 
     <div class="m-6">
         <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>
