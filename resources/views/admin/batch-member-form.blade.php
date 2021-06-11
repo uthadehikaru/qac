@@ -64,9 +64,9 @@
                     </label>
                     <select id="grid-status" name="status"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
-                        @for($i=0;$i<=6;$i++)
-                            <option value="{{ $i }}" {{ $batchMember && $batchMember->status==$i?'selected':'' }}>@lang('batch.status_'.$i)</option>
-                        @endfor
+                        @foreach($statuses as $status)
+                            <option value="{{ $status }}" {{ $batchMember && $batchMember->status==$status?'selected':'' }}>@lang('batch.status_'.$status)</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

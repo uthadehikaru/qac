@@ -21,6 +21,8 @@ class MemberBatch extends Pivot
         'testimonial',
     ];
 
+    public const statuses = [0,1,3,4,5,6];
+
     public $timestamps = false;
     
     protected $dates = ['approved_at'];

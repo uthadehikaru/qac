@@ -45,6 +45,7 @@ class BatchMemberController extends Controller
         if(!$batchMember)
             abort(404);
         $data['batchMember'] = $batchMember;
+        $data['statuses'] = MemberBatch::statuses;
         return view('member.batch-member-detail', $data);
         
     }

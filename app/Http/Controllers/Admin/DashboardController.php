@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $data['all_batches'] = Batch::count();
         $data['all_events'] = Event::count();
         $data['courses'] = Course::orderBy('level')->get();
+        $data['batchStatuses'] = MemberBatch::statuses;
         return view('admin.dashboard', $data);
     }
 

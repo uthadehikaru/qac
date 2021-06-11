@@ -53,6 +53,7 @@ class MemberBatchController extends Controller
         $data['batchMember'] = null;
         $batch = Batch::find($batch_id);
         $data['batch'] = $batch;
+        $data['statuses'] = MemberBatch::statuses;
         $data['sessions'] = $batch->sessions!=''?explode(',',$batch->sessions):[];
         $data['members'] = Member::whereNotExists(function($query)use($batch_id)
             {
@@ -109,6 +110,7 @@ class MemberBatchController extends Controller
         $batchMember = MemberBatch::find($id);
         $data['batchMember'] = $batchMember;
         $batch = Batch::find($batch_id);
+        $data['statuses'] = MemberBatch::statuses;
         $data['batch'] = $batch;
         $data['sessions'] = $batch->sessions!=''?explode(',',$batch->sessions):[];
         return view('admin.batch-member-form', $data);

@@ -24,16 +24,12 @@
             <a href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}" class="w-full pt-2 block text-lg font-bold text-green-500 pointer mx-1">Kelas {{ $openBatch->full_name }}</a>
             <p class="w-full pt-2 block text-sm text-gray-700">Pendaftaran : {{ $openBatch->registration_duration }} | Kelas : {{ $openBatch->duration }} </p>
             <p class="w-full pt-2 block text-sm text-gray-700">Total Peserta : {{ $openBatch->members()->count() }} orang</p>
-            @for($i=1;$i<=6;$i++)
+            @foreach($batchStatuses as $status)
             <div class="p-4 sm:w-1/3 w-1/2">
-              <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $openBatch->members()->wherePivot('status', $i)->count() }}</h2>
-              <p class="leading-relaxed">{{ __('batch.status_'.$i)}}</p>
+              <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $openBatch->members()->wherePivot('status', $status)->count() }}</h2>
+              <p class="leading-relaxed">{{ __('batch.status_'.$status)}}</p>
             </div>
-            @endfor
-            <div class="p-4 sm:w-1/3 w-1/2">
-              <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ $openBatch->members()->wherePivot('status', 0)->count() }}</h2>
-              <p class="leading-relaxed">{{ __('batch.status_0')}}</p>
-            </div>
+            @endforeach
             <div class="w-full pt-2 block mb-2">
               <x-link-button href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}">Lihat data peserta</x-link-button>
               <x-link-button href="{{ route('admin.courses.batches.index',[$openBatch->course_id]) }}">Lihat Semua Batch</x-link-button>
