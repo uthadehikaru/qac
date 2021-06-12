@@ -52,7 +52,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('certificates', CertificateController::class);
         Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');
         Route::resource('testimonials', TestimonialController::class);
+        Route::get('courses/{course}/batches/{batch}/members/{id}/status/{status}', [MemberBatchController::class, 'updateStatus'])->name('courses.batches.members.status');
         Route::get('courses/{course}/batches/{batch}/members/certificates', [MemberBatchController::class, 'certificates'])->name('courses.batches.members.certificates');
+        Route::get('courses/{course}/batches/{batch}/members/label', [MemberBatchController::class, 'label'])->name('courses.batches.members.label');
         Route::get('courses/{course}/batches/{batch}/members', [MemberBatchController::class, 'index'])->name('courses.batches.members');
         Route::get('courses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'create'])->name('courses.batches.members.create');
         Route::post('courses/{course}/batches/{batch}/members/create', [MemberBatchController::class, 'store'])->name('courses.batches.members.store');

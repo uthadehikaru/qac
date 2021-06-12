@@ -52,8 +52,22 @@ class MemberBatchDataTable extends DataTable
                 $sql = "users.email like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->filterColumn('status', function($query, $keyword) {
+                $keyword = strtolower($keyword);
+                $statuses = ['batal','terdaftar','assesment selesai','pembayaran lunas','modul dikirim','persyaratan lengkap','lulus'];
+                $key = array_search($keyword, $statuses);
+                if($key){
+                    $sql = "member_batch.status=".$key;
+                    $query->whereRaw($sql);
+                }
+            })
             ->editColumn('status',function($row){
-                return __('batch.status_'.$row->status);
+                $value = __('batch.status_'.$row->status);
+                if($row->status!=0 && $row->status<6){
+                    $nextStatus = $row->status==1?$row->status+2:$row->status+1;
+                    $value .= ' <a href="'.route('admin.courses.batches.members.status',['course'=>$row->batch->course_id, 'batch'=>$row->batch_id, 'id'=>$row->id, 'status'=>$nextStatus]).'" class="text-blue-500 pointer">('.__('batch.status_'.$nextStatus).')</a>';
+                }
+                return $value;
             })
             ->addColumn('action', function($row){
                 $btn = '<a href="'.route('admin.members.show', $row->member_id).'" class="text-blue-500">Detail</a>';
@@ -63,7 +77,7 @@ class MemberBatchDataTable extends DataTable
                 $btn .= '<a target="_blank" href="'.$row->file->fileUrl('filename').'" class="ml-3 text-green-500">Sertifikat</a>';
                 return $btn;
             })
-            ->rawColumns(['action','phone']);
+            ->rawColumns(['action','phone','status']);
     }
 
     /**

@@ -24,8 +24,10 @@ class MemberBatchController extends Controller
     {
         $batch = Batch::find($batch_id);
         $data['title'] = 'Data Anggota - <a href="'.route('admin.courses.batches.index', $batch->course_id).'" class="pointer text-blue-500">Angkatan '.$batch->full_name.'</a>';
+        
+        $data['button'] = '<a class="ml-3 inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.label', [$course_id, $batch_id]).'" target="_blank">Print Label</a>';
         if($batch->certificate_id>0)
-            $data['button'] = '<a class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'" class="float-right">Create Certificates</a>';
+            $data['button'] .= '<a class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'">Create Certificates</a>';
         $dataTable->setBatch($batch_id);
         return $dataTable->render('admin.datatable', $data);
     }
@@ -228,5 +230,22 @@ class MemberBatchController extends Controller
             'type'=>'jpg',
             'size'=>0,
         ]);
+    }
+
+    public function label($course_id, $batch_id)
+    {
+        $data['batch'] = Batch::with(['members'=>function($query){
+            return $query->where('member_batch.status',3);
+        }])->find($batch_id);
+        return view('admin.batch-member-label', $data);
+    }
+
+    public function updateStatus($course_id, $batch_id, $id, $status)
+    {
+        $memberBatch = MemberBatch::find($id);
+        $memberBatch->status=$status;
+        $memberBatch->save();
+        $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
+        return back()->with('status','Berhasil memperbaharui status');
     }
 }
