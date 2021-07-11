@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Batch;
 use App\Models\Member;
 use App\Models\MemberBatch;
+use App\Notifications\BatchRegistration;
+use App\Notifications\MemberBatchRegistration;
 
 class BatchController extends Controller
 {
@@ -48,7 +51,16 @@ class BatchController extends Controller
         if($request->has('session'))
             $additional = ['session'=>$request->session];
         
-        Auth::user()->member->batches()->attach($batch->id, $additional);
+        $member = Auth::user()->member;
+        
+        $member->batches()->attach($batch->id, $additional);
+        
+        $memberBatch = $member->batches()->latest()->first()->pivot;
+
+        $member->user->notify(new MemberBatchRegistration($memberBatch));
+        
+        foreach(User::where('role','admin')->get() as $admin)
+            $admin->notify(new BatchRegistration($memberBatch));
 
         return back()->with('success','Selamat, Anda telah terdaftar pada '.$batch->full_name.'. silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi. <a target="_blank" href="https://wa.me/'.\App\Models\System::value('whatsapp').'?text='.urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$batch->full_name.' atas nama '.Auth::user()->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih').'" class="text-blue-500 cursor-pointer">klik disini</a>');
     }

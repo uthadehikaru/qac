@@ -46,7 +46,7 @@ class MemberBatchRegistration extends Notification
         return (new MailMessage)
                     ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
                     ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink());
+                    ->action(__('Whatsapp Admin QAC'), $this->getLink());
     }
 
     /**
@@ -66,7 +66,7 @@ class MemberBatchRegistration extends Notification
 
     private function getLink()
     {
-        return route('member.batches.detail', [$this->memberBatch->id]);
+        return 'https://wa.me/'.\App\Models\System::value('whatsapp').'?text='.urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$this->memberBatch->batch->full_name.' atas nama '.$this->memberBatch->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih');
     }
 
     private function getMessage()
