@@ -27,7 +27,9 @@ class MemberBatchController extends Controller
         
         $data['button'] = '<a class="ml-3 inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.label', [$course_id, $batch_id]).'" target="_blank">Print Label</a>';
         if($batch->certificate_id>0)
-            $data['button'] .= '<a class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'">Create Certificates</a>';
+            $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'">Create Certificates</a>';
+        if(Carbon::now()->greaterThanOrEqualTo($batch->start_at))
+            $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.waitinglist', [$course_id, $batch_id]).'">Proses Waiting List</a>';
         $dataTable->setBatch($batch_id);
         return $dataTable->render('admin.datatable', $data);
     }
@@ -247,5 +249,25 @@ class MemberBatchController extends Controller
         $memberBatch->save();
         $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
         return back()->with('status','Berhasil memperbaharui status');
+    }
+
+    public function waitinglist($course_id, $batch_id)
+    {
+        $batch = Batch::find($batch_id);
+        $memberBatches = MemberBatch::where('batch_id',$batch_id)->get();
+        
+        $count = 0;
+        foreach($memberBatches as $memberBatch)
+        {
+            if($memberBatch->status==1){
+                $memberBatch->status=0;
+                $memberBatch->save();
+                $memberBatch->member->courses()->attach($course_id);
+                $count++;
+            }
+        }
+
+        return redirect()->route('admin.courses.batches.members', [$course_id, $batch_id])
+            ->with('status','Process waiting list done. '.$count.' added to waiting list');
     }
 }
