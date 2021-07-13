@@ -78,11 +78,6 @@ class EventController extends Controller
             'is_public'=>$request->is_public,
         ]);
 
-        $users = User::where('role','member')->whereNotNull('email_verified_at')->get();
-        foreach($users as $user){
-            $user->notify(new EventCreated($event));
-        }
-
         return redirect()->route('admin.events.index')->with('status','Event created');
     }
 
@@ -126,10 +121,8 @@ class EventController extends Controller
         ]);
 
         $event = Event::find($id);
-        $slug = Str::slug($request->title.' '.Str::random(5));
         $event->update([
             'title'=>$request->title,
-            'slug'=>$slug,
             'event_at'=>$request->event_at,
             'content'=>$request->content,
             'is_public'=>$request->is_public,
