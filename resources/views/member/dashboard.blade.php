@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    @if(!Auth::user()->member->isCompleted())
+    @if(!$member->isCompleted())
         <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
     @endif
 
@@ -16,6 +16,8 @@
     @if(session('error'))
         <x-alert type="error">{{ session('error') }}</x-alert>
     @endif
+
+    <a href="{{ route('member.profile') }}"><x-alert type="success" title="Alamat Pengiriman">{{ $member->full_name }} ({{ $member->phone }}) - {{ $member->address }}. <span class="underline text-blue-500"> (perbaharui alamat)</span></x-alert></a>
 
     @if($member->batches->count()>0)
     <div class="m-6">
