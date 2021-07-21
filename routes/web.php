@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\BatchController;
+use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\MemberBatchController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\SystemController;
@@ -47,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('courses', CourseController::class);
         Route::resource('courses.batches', BatchController::class);
         Route::resource('courses.queues', QueueController::class);
+        Route::resource('courses.modules', ModuleController::class);
         Route::resource('events', AdminEventController::class);
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);

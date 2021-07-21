@@ -31,6 +31,11 @@ class Course extends Model
         return $this->belongsToMany(Member::class,'queues')->withTimestamps()->using(Queue::class);
     }
 
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
+    }
+
     public function lastBatch()
     {
         return $this->batches()->orderBy('end_at','DESC')->first();
