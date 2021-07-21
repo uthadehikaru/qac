@@ -44,7 +44,7 @@ class EventCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Event Terbaru : '.$this->event->title)
+                    ->subject('Event QAC : '.$this->event->title)
                     ->line($this->getMessage())
                     ->action(__('Detail'), $this->getLink());
     }

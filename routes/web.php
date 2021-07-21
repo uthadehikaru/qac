@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('courses.batches', BatchController::class);
         Route::resource('courses.queues', QueueController::class);
         Route::resource('courses.modules', ModuleController::class);
+        Route::get('events/{id}/share', [AdminEventController::class, 'share'])->name('events.share');
         Route::resource('events', AdminEventController::class);
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);

@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\User;
 use App\Models\File;
 use App\Models\Course;
+use App\Models\MemberBatch;
 use App\Notifications\EventCreated;
 use App\DataTables\EventDataTable;
 use Str;
@@ -137,5 +138,27 @@ class EventController extends Controller
     {
         Event::find($id)->delete();
         return response()->json(['status'=>'Deleted successfully']);
+    }
+
+    public function share($id)
+    {
+        $event = Event::find($id);
+        $count = 0;
+        if($event->is_public){
+            $users = User::where('role','member')->get();
+            foreach($users as $user){
+                $user->notify(new EventCreated($event));
+                $count++;
+            }
+        }else{
+            $memberBatches = MemberBatch::with('member.user')
+            ->whereRaw("member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$event->course_id.")" )
+            ->get();
+            foreach($memberBatches as $memberBatch){
+                $memberBatch->member->user->notify(new EventCreated($event));
+                $count++;
+            }
+        }
+        return back()->with('status','Sent event notification to '.$count.' members');
     }
 }

@@ -24,6 +24,7 @@ class EventDataTable extends DataTable
             ->addIndexColumn()
                     ->addColumn('action', function($row){
                             $btn = '<a href="'.route('event.detail', $row->slug).'" target="_BLANK" class="ml-3 text-blue-500">View</a>';
+                            $btn .= '<a href="'.route('admin.events.share', $row->id).'" class="ml-3 text-green-500">Share</a>';
                             $btn .= '<a href="'.route('admin.events.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                             $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                             return $btn;
