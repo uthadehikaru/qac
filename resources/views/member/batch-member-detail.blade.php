@@ -121,7 +121,7 @@
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
                     <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                        @foreach($batchMember->batch->course->modules as $module)
+                        @foreach($batchMember->batch->course->modules()->orderBy('module_no')->get() as $module)
                         @if($batchMember->status!=$module->member_status)
                             @continue
                         @endif
