@@ -36,6 +36,11 @@ class Course extends Model
         return $this->hasMany(Module::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
     public function lastBatch()
     {
         return $this->batches()->orderBy('end_at','DESC')->first();

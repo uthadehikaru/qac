@@ -34,12 +34,14 @@
                 </div>
                 <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-is_public">
-                        @lang('Event Type')
+                        @lang('Event Course')
                     </label>
                     <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-is_public" name="is_public">
-                        <option value="1" {{ $event && $event->is_public?'selected':'' }}>Umum</option>
-                        <option value="0" {{ $event && !$event->is_public?'selected':'' }}>Khusus Anggota</option>
+                    id="grid-course_id" name="course_id">
+                        <option value="" {{ $event && $event->is_public?'selected':'' }}>Umum</option>
+                        @foreach($courses as $course)
+                        <option value="{{ $course->id }}" {{ $event && $event->course_id==$course->id?'selected':'' }}>{{ $course->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

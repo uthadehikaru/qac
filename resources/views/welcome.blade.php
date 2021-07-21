@@ -200,7 +200,7 @@
                             <div class="p-6">
                                 <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                                     {{ $event->event_at->format('d M Y H:i') }}
-                                    | {{ $event->is_public?'Umum':'Khusus Anggota QAC' }}
+                                    | {{ $event->course?'Khusus Alumni '.$event->course->name:'Umum' }}
                                 </h2>
                                 <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $event->title }}</h1>
                                 <div class="flex items-center flex-wrap ">

@@ -21,9 +21,13 @@ class EventController extends Controller
         if(!$event)
             abort(404);
 
-        if(!$event->is_public && !Auth::check()){
-            session(['url.intended' => url()->current()]);
-            return redirect()->route('login')->withError('Silahkan login terlebih dahulu');
+        if(!$event->is_public){
+            if(!Auth::check()){
+                session(['url.intended' => url()->current()]);
+                return redirect()->route('login')->withError('Silahkan login terlebih dahulu');
+            }elseif(!$event->isAllowed(Auth::user())){
+                return redirect()->route('event.list')->with('error','Anda tidak memiliki akses ke event '.$event->title);
+            }
         }
 
         $event->increment('views');

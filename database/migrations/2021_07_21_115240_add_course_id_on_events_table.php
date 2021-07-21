@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnCertificateOnBatchesTable extends Migration
+class AddCourseIdOnEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnCertificateOnBatchesTable extends Migration
      */
     public function up()
     {
-        Schema::table('batches', function (Blueprint $table) {
-            $table->foreignId('certificate_id')->constrained();
+        Schema::table('events', function (Blueprint $table) {
+            $table->foreignId('course_id')->nullable()->constrained();
         });
     }
 
@@ -25,9 +25,9 @@ class AddColumnCertificateOnBatchesTable extends Migration
      */
     public function down()
     {
-        Schema::table('batches', function (Blueprint $table) {
-            $table->dropForeign(['certificate_id']);
-            $table->dropColumn(['certificate_id']);
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropForeign(['course_id']);
+            $table->dropColumn(['course_id']);
         });
     }
 }

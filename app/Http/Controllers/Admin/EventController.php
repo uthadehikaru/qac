@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\File;
+use App\Models\Course;
 use App\Notifications\EventCreated;
-use DataTables;
+use App\DataTables\EventDataTable;
 use Str;
 
 class EventController extends Controller
@@ -18,29 +19,10 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(EventDataTable $dataTable)
     {
-        if ($request->ajax()) {
-            $data = Event::select('*')->orderBy('event_at','desc');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('event.detail', $row->slug).'" target="_BLANK" class="ml-3 text-blue-500">View</a>';
-                            $btn .= '<a href="'.route('admin.events.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
-                            $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
-                            return $btn;
-                    })
-                    ->editColumn('event_at', function ($row){
-                        return $row->event_at->format('d M Y H:i');
-                    })
-                    ->editColumn('is_public', function ($row){
-                        return $row->is_public?'Umum':'Khusus Anggota';
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('admin/event-list');
+        $data['title'] = "Data Event";
+        return $dataTable->render('admin.datatable', $data);
     }
 
     /**
@@ -51,6 +33,7 @@ class EventController extends Controller
     public function create()
     {
         $data['event'] = null;
+        $data['courses'] = Course::all();
         return view('admin.event-form', $data);
     }
 
@@ -66,17 +49,23 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'event_at' => 'required|date',
             'content' => 'required',
-            'is_public' => 'required|boolean',
         ]);
 
+        $is_public = $request->course_id==null;
+
         $slug = Str::slug($request->title.' '.Str::random(5));
-        $event = Event::create([
+        $data = [
             'title'=>$request->title,
             'slug'=>$slug,
             'event_at'=>$request->event_at,
             'content'=>$request->content,
-            'is_public'=>$request->is_public,
-        ]);
+            'is_public'=>$is_public,
+        ];
+
+        if(!$is_public)
+            $data['course_id'] = $request->course_id;
+        
+        $event = Event::create($data);
 
         return redirect()->route('admin.events.index')->with('status','Event created');
     }
@@ -101,6 +90,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $data['event'] = Event::find($id);
+        $data['courses'] = Course::all();
         return view('admin.event-form', $data);
     }
 
@@ -117,16 +107,22 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'event_at' => 'required|date',
             'content' => 'required',
-            'is_public' => 'required|boolean',
         ]);
 
+        $is_public = $request->course_id==null;
+
         $event = Event::find($id);
-        $event->update([
+        $data = [
             'title'=>$request->title,
             'event_at'=>$request->event_at,
             'content'=>$request->content,
-            'is_public'=>$request->is_public,
-        ]);
+            'is_public'=>$is_public,
+        ];
+
+        if(!$is_public)
+            $data['course_id'] = $request->course_id;
+
+        $event->update($data);
 
         return redirect()->route('admin.events.index')->with('status','Event updated');
     }

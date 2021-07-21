@@ -29,6 +29,10 @@
         </svg>
         </div>
         <div class="-my-8 pt-12 bg-white divide-y-2 divide-gray-100">
+            
+            @if(session('error'))
+                <x-alert type="warning">{{ session('error') }}</x-alert>
+            @endif
             <div class="w-3/4 mx-auto">
                 @foreach($latestEvents as $event)
                 <div class="py-8 flex flex-wrap md:flex-nowrap">
@@ -40,11 +44,8 @@
                     </div>
                     <div class="md:ml-4 md:flex-grow">
                     <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $event->title }}</h2>
-                    @if($event->is_public || Auth::check())
-                    <p>{!! nl2br($event->content) !!}</p>
-                    @else
-                    <p>Khusus Anggota QAC</p>
-                    @endif
+                    
+                    <p>{{ $event->course?'Khusus Alumni '.$event->course->name:'Umum' }}</p>
                     <a href="{{ route('event.detail', $event->slug) }}" class="text-indigo-500 inline-flex items-center mt-4">Selengkapnya
                         <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14"></path>
