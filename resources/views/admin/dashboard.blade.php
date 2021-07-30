@@ -31,8 +31,9 @@
             </div>
             @endforeach
             <div class="w-full pt-2 block mb-2">
-              <x-link-button href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}">Lihat data peserta</x-link-button>
-              <x-link-button href="{{ route('admin.courses.batches.index',[$openBatch->course_id]) }}">Lihat Semua Batch</x-link-button>
+              <x-link-button href="{{ route('admin.courses.queues.index',[$openBatch->course_id]) }}">Waiting List</x-link-button>
+              <x-link-button type="success" href="{{ route('admin.courses.batches.members',[$openBatch->course_id, $openBatch->id]) }}">data peserta</x-link-button>
+              <x-link-button type="warning" href="{{ route('admin.courses.batches.index',[$openBatch->course_id]) }}">Semua Batch</x-link-button>
             </div>
           </div>
         </div>

@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('members', MemberController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('courses.batches', BatchController::class);
+        Route::get('/courses/{course_id}/queues/{id}/register', [QueueController::class,'register'])->name('courses.queues.register');
         Route::resource('courses.queues', QueueController::class);
         Route::resource('courses.modules', ModuleController::class);
         Route::get('events/{id}/share', [AdminEventController::class, 'share'])->name('events.share');

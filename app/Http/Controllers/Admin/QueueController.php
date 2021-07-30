@@ -8,7 +8,10 @@ use App\DataTables\QueueDataTable;
 use App\Models\Course;
 use App\Models\Queue;
 use App\Models\Member;
+use App\Models\MemberBatch;
+use App\Models\Batch;
 use DB;
+use App\Notifications\MemberBatchRegistration;
 
 class QueueController extends Controller
 {
@@ -102,5 +105,28 @@ class QueueController extends Controller
     {
         Queue::find($id)->delete();
         return response()->json(['status'=>'Deleted successfully']);
+    }
+
+    public function register($course_id, $id)
+    {
+        $queue = Queue::find($id);
+
+        $openBatch = Batch::open()->where('course_id',$course_id)->first();
+        if(!$openBatch)
+            return back()->with('error','No open batch available');
+        
+        $data = [
+            'batch_id'=>$openBatch->id,
+            'status'=>1,
+            'member_id'=>$queue->member_id,
+        ];
+        
+        $memberBatch = MemberBatch::create($data);
+        if($memberBatch)
+            $queue->member->user->notify(new MemberBatchRegistration($memberBatch));
+
+        $queue->delete();
+        
+        return back()->with('message',$queue->member->full_name.' registered to '.$openBatch->full_name);
     }
 }

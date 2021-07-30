@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Queue;
+use App\Models\Batch;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -27,13 +28,17 @@ class QueueDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $openBatch = Batch::open()->where('course_id',$this->course_id)->first();
         return datatables()
             ->eloquent($query)
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-M-Y H:i:s');
             })
-            ->addColumn('action', function($row){
-                $btn = '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
+            ->addColumn('action', function($row) use($openBatch){
+                $btn = "";
+                if($openBatch)
+                    $btn .= ' <a href="'.route('admin.courses.queues.register', [$row->course_id, $row->id]).'" class="ml-3 text-blue-500">Register</a>';
+                $btn .= ' <a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                 return $btn;
             });
     }
