@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name') }}</title>
+        <title>{{ config('app.name') }} {{ $title??'' }}</title>
         
         <link rel="icon" href="{{ asset('qacjakarta.png') }}" type="image/png" sizes="16x16">
 

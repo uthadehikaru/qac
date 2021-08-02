@@ -1,4 +1,5 @@
 <x-web-layout>
+    <x-slot name="title"> - Event {{ $event->title }}</x-slot>
     <section class="mt-20 bg-white text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-24 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">

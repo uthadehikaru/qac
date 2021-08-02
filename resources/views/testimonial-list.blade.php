@@ -1,4 +1,5 @@
 <x-web-layout>
+    <x-slot name="title"> - Testimonial Alumni QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
     <div class="pt-20">
         <div class="text-center mb-20 mx-auto text-white">

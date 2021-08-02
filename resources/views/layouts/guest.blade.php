@@ -23,5 +23,9 @@
             {{ $slot }}
         </div>
         {{ $scripts??'' }}
+        
+        @if(config('app.analytic'))
+        <x-analytic/>
+        @endif
     </body>
 </html>
