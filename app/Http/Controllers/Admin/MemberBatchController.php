@@ -22,13 +22,15 @@ class MemberBatchController extends Controller
 {
     public function index(MemberBatchDataTable $dataTable, $course_id, $batch_id)
     {
-        $batch = Batch::find($batch_id);
+        $batch = Batch::with('members')->find($batch_id);
         $data['title'] = 'Data Anggota - <a href="'.route('admin.courses.batches.index', $batch->course_id).'" class="pointer text-blue-500">Angkatan '.$batch->full_name.'</a>';
-        
-        $data['button'] = '<a class="ml-3 inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.label', [$course_id, $batch_id]).'" target="_blank">Print Label</a>';
-        if($batch->certificate_id>0)
+        $data['button'] = '';
+
+        if($batch->members()->where('member_batch.status',3)->count()>0)
+            $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.label', [$course_id, $batch_id]).'" target="_blank">Print Label</a>';
+        if($batch->members()->where('member_batch.status',6)->count()>0 && $batch->certificate_id>0)
             $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'">Create Certificates</a>';
-        if(Carbon::now()->greaterThanOrEqualTo($batch->start_at))
+        if($batch->members()->where('member_batch.status',1)->count()>0 && Carbon::now()->greaterThanOrEqualTo($batch->start_at))
             $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.waitinglist', [$course_id, $batch_id]).'">Proses Waiting List</a>';
         $dataTable->setBatch($batch_id);
         return $dataTable->render('admin.datatable', $data);
