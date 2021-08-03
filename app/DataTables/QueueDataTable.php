@@ -31,6 +31,26 @@ class QueueDataTable extends DataTable
         $openBatch = Batch::open()->where('course_id',$this->course_id)->first();
         return datatables()
             ->eloquent($query)
+            ->filterColumn('full_name', function($query, $keyword) {
+                $sql = "members.full_name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('gender', function($query, $keyword) {
+                $sql = "members.gender like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('address', function($query, $keyword) {
+                $sql = "members.address like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('phone', function($query, $keyword) {
+                $sql = "members.phone like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('email', function($query, $keyword) {
+                $sql = "users.email like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-M-Y H:i:s');
             })
