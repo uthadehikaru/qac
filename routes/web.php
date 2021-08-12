@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\QueueController;
+use App\Http\Controllers\Admin\JobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +43,15 @@ Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['roles:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+        Route::get('/jobs/retry', [JobController::class, 'retry'])->name('jobs.retry');
+
+        // MEMBERS
         Route::get('members/verify/{id}', [MemberController::class, 'verify'])->name('members.verify');
         Route::get('members/reset/{id}', [MemberController::class, 'reset'])->name('members.reset');
         Route::resource('members', MemberController::class);
+
+        // COURSES
         Route::resource('courses', CourseController::class);
 
         // BATCHES
@@ -63,8 +70,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('events', AdminEventController::class);
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);
+
+        // TESTIMONIALS
         Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');
         Route::resource('testimonials', TestimonialController::class);
+
+        // MEMBER BATCH
         Route::get('courses/{course}/batches/{batch}/members/{id}/status/{status}', [MemberBatchController::class, 'updateStatus'])->name('courses.batches.members.status');
         Route::get('courses/{course}/batches/{batch}/members/certificates', [MemberBatchController::class, 'certificates'])->name('courses.batches.members.certificates');
         Route::get('courses/{course}/batches/{batch}/members/waitinglist', [MemberBatchController::class, 'waitinglist'])->name('courses.batches.members.waitinglist');
