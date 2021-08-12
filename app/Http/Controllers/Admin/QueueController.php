@@ -24,6 +24,16 @@ class QueueController extends Controller
     {
         $course = Course::find($course_id);
         $data['title'] = 'Data Waiting List - <a href="'.route('admin.courses.index').'" class="pointer text-blue-500">Kelas '.$course->name.'</a>';
+
+        $data['buttons'] = [];
+        $batch = $course->batches()->open()->first();
+        if($batch){
+            $data['buttons'][] = [
+                'name'=>'Send Invitation Batch '.$batch->name,
+                'href'=>route('admin.courses.batches.invite.waitinglist',[$course_id, $batch->id]),
+            ];
+        }
+        
         $dataTable->setCourse($course_id);
         return $dataTable->render('admin.datatable', $data);
     }

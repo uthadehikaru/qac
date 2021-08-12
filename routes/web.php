@@ -46,10 +46,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('members/reset/{id}', [MemberController::class, 'reset'])->name('members.reset');
         Route::resource('members', MemberController::class);
         Route::resource('courses', CourseController::class);
+
+        // BATCHES
+        Route::get('/courses/{course_id}/batches/{id}/invite/waitinglist', [BatchController::class,'inviteWaitingList'])->name('courses.batches.invite.waitinglist');
         Route::resource('courses.batches', BatchController::class);
+        
+        // QUEUES
         Route::get('/courses/{course_id}/queues/{id}/register', [QueueController::class,'register'])->name('courses.queues.register');
         Route::resource('courses.queues', QueueController::class);
+
+        // MODULES
         Route::resource('courses.modules', ModuleController::class);
+        
+        // EVENTS
         Route::get('events/{id}/share', [AdminEventController::class, 'share'])->name('events.share');
         Route::resource('events', AdminEventController::class);
         Route::resource('systems', SystemController::class);

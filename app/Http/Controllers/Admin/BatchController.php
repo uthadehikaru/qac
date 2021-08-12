@@ -8,6 +8,7 @@ use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\File;
+use App\Notifications\OpenBatchInvitation;
 use DataTables;
 
 class BatchController extends Controller
@@ -201,5 +202,20 @@ class BatchController extends Controller
             return response()->json(['status'=>'Deleted successfully']);
         }else
             return response()->json(['status'=>'No Batch Found for id '.$id], 404);
+    }
+    
+    public function inviteWaitingList($course_id, $id)
+    {
+        $batch = Batch::find($id);
+        
+        if($batch){
+            $count = 0;
+            foreach($batch->course->members as $member){
+                $member->user->notify(new OpenBatchInvitation($batch));
+                $count++;
+            }
+            return back()->with('message','Sent invitation to '.$count.' members');
+        }else
+            return back()->with('error','Batch not found');
     }
 }

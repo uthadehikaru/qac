@@ -6,6 +6,11 @@
             @if(isset($button))
                 {!! $button !!}
             @endif
+            @if(isset($buttons))
+                @foreach($buttons as $button)
+                    <x-link-button class="float-right ml-2" href="{{ $button['href'] }}">{{ $button['name'] }}</x-link-button>
+                @endforeach
+            @endif
     </x-slot>
     
     @if(session('message'))
