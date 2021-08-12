@@ -32,11 +32,11 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="pb-12">
                 {{ $slot }}
             </main>
 
-            <footer class="text-gray-600 body-font">
+            <footer class="text-gray-600 body-font fixed bottom-0 w-full">
                 <div class="bg-gray-100">
                     <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                     <p class="text-gray-500 text-sm text-center sm:text-left">© 2021 QAC Jakarta
