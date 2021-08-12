@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->role=='member';
     }
 
+    public function getIsAdminAttribute($value)
+    {
+        return $this->role=='admin';
+    }
+
     public function member()
     {
         return $this->hasOne(Member::class);
