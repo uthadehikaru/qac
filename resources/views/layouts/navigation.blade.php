@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('admin.courses.index')" :active="request()->is('admin/courses*')">
                         {{ __('Courses') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.testimonials.index')" :active="request()->is('admin/testimonials*')">
+                        {{ __('Testimonials') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.certificates.index')" :active="request()->is('admin/certificates*')">
                         {{ __('Certificates') }}
                     </x-nav-link>
@@ -99,6 +102,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.courses.index')" :active="request()->is('admin/courses*')">
                 {{ __('Courses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.testimonials.index')" :active="request()->is('admin/testimonials*')">
+                        {{ __('Testimonials') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.certificates.index')" :active="request()->is('admin/certificates*')">
                         {{ __('Certificates') }}
