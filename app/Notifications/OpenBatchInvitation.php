@@ -68,7 +68,14 @@ class OpenBatchInvitation extends Notification implements ShouldQueue
 
     private function getMessage()
     {
-        return "Pendaftaran ".$this->batch->full_name.' telah dibuka mulai '.$this->batch->registration_duration
-        .'. Kelas akan berlangsung '.$this->batch->duration.'. Daftarkan diri anda segera. klik tombol daftar sekarang!';
+        return "Apakabarnya, semoga dalam keadaan sehat.
+
+        Bapak/Ibu sudah terdaftar di waiting list ".$this->batch->course->name.", karena sudah pernah mendaftar di batch sebelumnya.
+
+        Alhamdulillah, sekarang sudah mulai dibuka pendaftaran untuk batch selanjutnya : ".$this->batch->full_name.".
+
+        Apakah masih minat untuk ikut belajar bahasa Arab Al-Qur’an ? Jika YA, maka bapak/ibu tinggal klik dibawah ini untuk mengikuti prosedur selanjutnya.
+
+        Jazakumullah khoiron.";
     }
 }
