@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
         Route::get('/jobs/retry', [JobController::class, 'retry'])->name('jobs.retry');
+        Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class,'index'])->name('logs');
 
         // MEMBERS
         Route::get('members/verify/{id}', [MemberController::class, 'verify'])->name('members.verify');

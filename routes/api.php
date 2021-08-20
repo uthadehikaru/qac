@@ -27,6 +27,6 @@ Route::get('/batches/{course_id}', function (Request $request, $course_id) {
 });
 
 Route::get('/members/{batch_id}', function (Request $request, $batch_id) {
-    $members = Batch::find($batch_id)->members()->pluck('full_name','member_batch.id')->toJson(JSON_PRETTY_PRINT);
+    $members = Batch::find($batch_id)->members()->orderBy('full_name')->pluck('full_name','member_batch.id')->toJson(JSON_PRETTY_PRINT);
     return response($members, 200);
 });
