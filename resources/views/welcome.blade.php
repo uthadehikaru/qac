@@ -96,7 +96,9 @@
                     <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
                         <div class="h-full text-center">
                         <p class="text-gray-800 text-xl font-bold my-3">{{ $testimonial->batch->full_name }}</p>
-                        <p class="leading-relaxed text-white">{{ $testimonial->testimonial }}</p>
+                        <p class="leading-relaxed text-white text-left">
+                            {!! nl2br(substr($testimonial->testimonial,0,500)) !!} ...
+                        </p>
                         <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                         <p class="text-white text-xl">{{ $testimonial->member->full_name }}</p>
                         <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">{{ $testimonial->member->profesi }}</h2>

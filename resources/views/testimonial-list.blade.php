@@ -31,19 +31,18 @@
         </div>
         <div class="-my-8 pt-12 bg-white divide-y-2 divide-gray-100">
             <div class="w-3/4 mx-auto">
-                <div class="flex flex-wrap -m-4">
-                    @foreach($testimonials as $testimonial)
-                    <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
-                        <div class="h-full text-center">
-                        <p class="text-gray-800 text-xl font-bold my-3">{{ $testimonial->batch->full_name }}</p>
-                        <p class="leading-relaxed text-black">{{ $testimonial->testimonial }}</p>
-                        <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
-                        <p class="text-black text-xl">{{ $testimonial->member->full_name }}</p>
-                        <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">{{ $testimonial->member->profesi }}</h2>
-                        </div>
+                @foreach($testimonials as $testimonial)
+                <div class="py-8 flex flex-wrap md:flex-nowrap">
+                    <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                    <span class="font-semibold title-font text-gray-700">{{ $testimonial->batch->full_name }}</span>
                     </div>
-                    @endforeach
+                    <div class="md:ml-4 md:flex-grow">
+                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $testimonial->member->full_name }} {{ $testimonial->member->profesi }}</h2>
+                    
+                    <p>{!! nl2br($testimonial->testimonial) !!}</p>
+                    </div>
                 </div>
+                @endforeach
                 <div class="mt-4 pb-10">
                 {{ $testimonials->links() }}
                 </div>
