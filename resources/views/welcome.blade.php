@@ -198,7 +198,7 @@
                     @foreach($latest_events as $event)
                     <div class="p-4 md:w-1/3">
                         <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                            <img class="w-full object-cover object-center" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
+                        <a href="{{ route('event.detail', $event->slug) }}" class=""><img class="w-full object-cover object-center" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}"></a>
                             <div class="p-6">
                                 <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                                     {{ $event->event_at->format('d M Y H:i') }}

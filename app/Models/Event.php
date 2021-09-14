@@ -56,7 +56,7 @@ class Event extends Model
         if($user->role=='admin')
             return true;
         
-        if($user->member)
+        if($user->member && $this->course_id>0)
             return DB::table('member_batch')
             ->whereRaw("member_batch.member_id=".$user->member->id." AND member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$this->course_id.")" )
             ->exists();

@@ -25,7 +25,7 @@ class EventController extends Controller
             if(!Auth::check()){
                 session(['url.intended' => url()->current()]);
                 return redirect()->route('login')->withError('Silahkan login terlebih dahulu');
-            }elseif(!$event->isAllowed(Auth::user())){
+            }elseif($event->course && !$event->isAllowed(Auth::user())){
                 return redirect()->route('event.list')->with('error','Anda tidak memiliki akses ke event '.$event->title);
             }
         }

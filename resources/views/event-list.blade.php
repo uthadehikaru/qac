@@ -39,9 +39,9 @@
                 <div class="py-8 flex flex-wrap md:flex-nowrap">
                     <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                     <span class="font-semibold title-font text-gray-700">{{ $event->event_at->format('d M Y H:i') }}</span>
-                    <span class="mt-1">
+                    <a href="{{ route('event.detail', $event->slug) }}" class="mt-1">
                         <img class="w-3/4 object-cover object-center" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
-                    </span>
+                    </a>
                     </div>
                     <div class="md:ml-4 md:flex-grow">
                     <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $event->title }}</h2>
