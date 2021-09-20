@@ -51,6 +51,11 @@ class Event extends Model
         return $query->where('event_at', '>=', date('Y-m-d'));
     }
 
+    public function isAvailable()
+    {
+        return $this->event_at->isFuture();
+    }
+
     public function isAllowed($user)
     {
         if($user->role=='admin')
