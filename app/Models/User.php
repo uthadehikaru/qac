@@ -40,6 +40,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'login_at' => 'datetime',
     ];
 
     public function getIsMemberAttribute($value)

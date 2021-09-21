@@ -29,7 +29,14 @@ class MemberDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function($row){
-                return $row->created_at->format('d-M-Y');
+                return $row->created_at->format('d-m-y');
+            })
+            ->editColumn('login_at', function($row){
+                if($row->login_at){
+                    return $row->login_at->format('d-m-y H:i');
+                }
+                
+                return "-";
             })
             ->addColumn('action', function($row){
                     $btn = '<a href="'.route('admin.members.show', $row->id).'" class="text-blue-500">Detail</a>';
@@ -50,7 +57,7 @@ class MemberDataTable extends DataTable
     public function query(Member $model)
     {
         $model = $model->newQuery();
-        $model->select('members.*','users.email','users.name');
+        $model->select('members.*','users.email','users.name','users.login_at');
         $model->join('users','members.user_id','=','users.id');
         return $model;
     }
@@ -84,13 +91,14 @@ class MemberDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('created_at'),
-            Column::make('full_name'),
+            Column::make('created_at')->title('tgl daftar'),
+            Column::make('full_name')->title('Nama'),
             Column::make('email'),
-            Column::make('gender'),
-            Column::make('address'),
-            Column::make('city'),
-            Column::make('phone'),
+            Column::make('gender')->title('jenis kelamin'),
+            Column::make('address')->title('alamat'),
+            Column::make('city')->title('kota'),
+            Column::make('phone')->title('telp'),
+            Column::make('login_at')->title('terakhir login'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

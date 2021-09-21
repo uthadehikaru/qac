@@ -22,6 +22,10 @@ class Member extends Model
         'pendidikan',
     ];
 
+    protected $casts = [
+        'login_at' => 'datetime',
+    ];
+
     public static function boot() {
         parent::boot();
 
