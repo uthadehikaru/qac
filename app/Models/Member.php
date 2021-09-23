@@ -24,6 +24,7 @@ class Member extends Model
 
     protected $casts = [
         'login_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
 
     public static function boot() {

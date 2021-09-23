@@ -31,6 +31,14 @@ class MemberDataTable extends DataTable
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-m-y');
             })
+            ->editColumn('email', function($row){
+                $value = $row->email;
+
+                if($row->email_verified_at)
+                    $value .= "(verified)";
+                
+                return $value;
+            })
             ->editColumn('login_at', function($row){
                 if($row->login_at){
                     return $row->login_at->format('d-m-y H:i');
@@ -57,7 +65,7 @@ class MemberDataTable extends DataTable
     public function query(Member $model)
     {
         $model = $model->newQuery();
-        $model->select('members.*','users.email','users.name','users.login_at');
+        $model->select('members.*','users.email','users.name','users.login_at', 'users.email_verified_at');
         $model->join('users','members.user_id','=','users.id');
         return $model;
     }
@@ -98,7 +106,7 @@ class MemberDataTable extends DataTable
             Column::make('address')->title('alamat'),
             Column::make('city')->title('kota'),
             Column::make('phone')->title('telp'),
-            Column::make('login_at')->title('terakhir login'),
+            Column::make('login_at')->searchable(false)->title('terakhir login'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
