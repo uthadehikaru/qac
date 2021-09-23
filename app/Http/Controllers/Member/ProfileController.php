@@ -14,6 +14,12 @@ class ProfileController extends Controller
         return view('member.profile', $data);
     }
 
+    public function verify()
+    {
+        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+        return view('member.profile', $data);
+    }
+
     public function update(Request $request)
     {
         $request->validate([

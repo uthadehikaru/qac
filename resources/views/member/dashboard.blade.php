@@ -6,7 +6,11 @@
     </x-slot>
 
     @if(!$member->isCompleted())
-        <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
+        <x-alert type="warning" title="Perhatian">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
+    @endif
+    
+    @if(!$member->user->email_verified_at)
+        <x-alert type="warning" title="Perhatian">Mohon konfirmasi alamat email anda sekarang, <a href="{{ route('verification.notice') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
     @endif
 
     @if(session('message'))
