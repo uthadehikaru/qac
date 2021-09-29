@@ -12,11 +12,14 @@ use App\Models\File;
 use App\Notifications\BatchApproval;
 use App\Notifications\BatchStatusUpdate;
 use App\DataTables\MemberBatchDataTable;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 use Carbon\Carbon;
 use DataTables;
 use Validator;
 use DB;
 use Image;
+use Str;
 
 class MemberBatchController extends Controller
 {
@@ -193,7 +196,7 @@ class MemberBatchController extends Controller
             return response()->json(['status'=>'No Member Batch Found for id '.$id], 404);
     }
 
-    public function certificates($course_id, $batch_id)
+    public function certificates($course_id, $batch_id, $regenerate=false)
     {
         $batch = Batch::find($batch_id);
         $memberBatches = MemberBatch::where('batch_id',$batch_id)->get();
@@ -201,7 +204,7 @@ class MemberBatchController extends Controller
         
         foreach($memberBatches as $memberBatch)
         {
-            if($memberBatch->status==6 && !$memberBatch->file){
+            if($memberBatch->status==6 && (!$memberBatch->file || $regenerate)){
                 $this->generateCertificate($template, $memberBatch);
             }
         }
@@ -210,21 +213,68 @@ class MemberBatchController extends Controller
             ->with('status','Certificates created');
     }
 
-    private function generateCertificate(Certificate $template, MemberBatch $memberBatch)
+    public function regenerateCertificates($course_id, $batch_id)
+    {
+        return $this->certificates($course_id, $batch_id, true);
+    }
+
+    public function certificate($course_id, $batch_id, $member_batch_id)
+    {
+        $batch = Batch::find($batch_id);
+        $memberBatch = MemberBatch::find($member_batch_id);
+        $template = $batch->certificate;
+        return $this->generateCertificate($template, $memberBatch, true);
+    }
+
+    private function generateCertificate(Certificate $template, MemberBatch $memberBatch, $preview=false)
     {
         $name = "certificate ".$memberBatch->batch->full_name."-".$memberBatch->member->full_name."-".$memberBatch->member->id;
         $config = json_decode($template->config, true);
 
         $certificate = Image::make(storage_path('app/public/'.$template->template))
-        ->resize(1200, 800);
+        ->resize($config['sertifikat']['width'], $config['sertifikat']['height']);
+
         if(isset($config['nama_anggota'])){
-            $certificate->text($memberBatch->member->full_name, $config['nama_anggota']['position_x'], $config['nama_anggota']['position_y'], function($font) use($config) {
+            $certificate->text(Str::title($memberBatch->member->full_name), $config['nama_anggota']['position_x'],$config['nama_anggota']['position_y'], function($font) use($config) {
                 $font->file(public_path('Roboto-Regular.ttf'));
                 $font->size($config['nama_anggota']['font_size']);
                 $font->color('#000000');
                 $font->align('center');
                 $font->valign('top');
             });
+        }
+
+        if(!$memberBatch->member_batch_uu){
+            $memberBatch->member_batch_uu = Str::random(10);
+            $memberBatch->save();
+        }
+
+        if(isset($config['qrcode'])){
+            $qr = QrCode::create(route('certificate',$memberBatch->member_batch_uu))->setSize(150);
+            $writer = new PngWriter();
+            $result = $writer->write($qr);
+            $certificate->insert($result->getString(), $config['qrcode']['position'], $config['qrcode']['position_x'],$config['qrcode']['position_y']);
+        }
+
+        
+        if(isset($config['unique_code'])){
+            $certificate->text($memberBatch->member_batch_uu, $config['unique_code']['position_x'],$config['unique_code']['position_y'], function($font) use($config) {
+                $font->file(public_path('Roboto-Regular.ttf'));
+                $font->size($config['unique_code']['font_size']);
+                $font->color('#000000');
+                $font->align('center');
+                $font->valign('top');
+            });
+        }
+
+        if(isset($config['footer'])){
+            $certificate->text("*scan barcode untuk verifikasi keaslian sertifikat", $config['footer']['position_x'],$config['footer']['position_y'], function($font) use($config) {
+                $font->file(public_path('Roboto-Regular.ttf'));
+                $font->size($config['footer']['font_size']);
+                $font->color('#000000');
+                $font->align('left');
+                $font->valign('bottom');
+            });;
         }
 
         $filepath = 'files/'.$name.'.jpg';
@@ -238,6 +288,10 @@ class MemberBatchController extends Controller
             'type'=>'jpg',
             'size'=>0,
         ]);
+
+        if($preview)
+            return $certificate->response('png');
+
     }
 
     public function label($course_id, $batch_id)

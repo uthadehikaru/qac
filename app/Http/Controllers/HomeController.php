@@ -26,4 +26,14 @@ class HomeController extends Controller
         $data['testimonials'] = MemberBatch::testimonial()->paginate(9);
         return view('testimonial-list', $data);
     }
+
+    public function certificate($id)
+    {
+        $memberBatch = MemberBatch::where('member_batch_uu',$id)->first();
+        if($memberBatch && $memberBatch->file){
+            return "<img src='".$memberBatch->file->fileUrl('filename')."' />";
+        }
+
+        return abort(404);
+    }
 }

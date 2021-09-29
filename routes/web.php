@@ -37,6 +37,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
 Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');
+Route::get('/sertifikat/{id}', [HomeController::class, 'certificate'])->name('certificate');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -83,7 +84,9 @@ Route::middleware(['auth'])->group(function () {
 
         // MEMBER BATCH
         Route::post('courses/{course}/batches/{batch}/updates', [MemberBatchController::class, 'updateStatuses'])->name('courses.batches.members.updates');
+        Route::get('courses/{course}/batches/{batch}/members/{id}/certificate', [MemberBatchController::class, 'certificate'])->name('courses.batches.members.certificate');
         Route::get('courses/{course}/batches/{batch}/members/{id}/status/{status}', [MemberBatchController::class, 'updateStatus'])->name('courses.batches.members.status');
+        Route::get('courses/{course}/batches/{batch}/members/certificates/regenerate', [MemberBatchController::class, 'regenerateCertificates'])->name('courses.batches.members.certificates.regenerate');
         Route::get('courses/{course}/batches/{batch}/members/certificates', [MemberBatchController::class, 'certificates'])->name('courses.batches.members.certificates');
         Route::get('courses/{course}/batches/{batch}/members/waitinglist', [MemberBatchController::class, 'waitinglist'])->name('courses.batches.members.waitinglist');
         Route::get('courses/{course}/batches/{batch}/members/label', [MemberBatchController::class, 'label'])->name('courses.batches.members.label');
