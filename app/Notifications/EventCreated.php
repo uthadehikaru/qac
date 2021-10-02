@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 use App\Models\Event;
 
 class EventCreated extends Notification implements ShouldQueue
@@ -56,6 +57,8 @@ class EventCreated extends Notification implements ShouldQueue
 
     private function getMessage()
     {
-        return __('event.created', ['event'=>$this->event->title,'date'=>$this->event->event_at->format('d M Y H:i')]);
+        $message = __('event.created', ['event'=>$this->event->title,'date'=>$this->event->event_at->format('d M Y H:i')]);
+        $message .= "<br /><br />".nl2br($this->event->content);
+        return new HtmlString($message);
     }
 }
