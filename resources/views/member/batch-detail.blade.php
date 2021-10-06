@@ -11,6 +11,12 @@
 
     @if(session('success'))
         <x-alert type="success">{!! session('success') !!}</x-alert>
+
+        
+        <x-alert type="error" title="Perhatian">Kami akan mengirimkan modul pembelajaran ke alamat anda, pastikan telah sesuai dengan alamat tempat tinggal anda saat ini!<br/>
+        {{ $member->full_name }} ({{ $member->phone }}) - {{ $member->address }}<br/>
+        <a href="{{ route('member.profile') }}" class="underline text-blue-500"> (klik disini untuk memperbaharui alamat)</a>
+        </x-alert>
     @endif
 
     <x-panel>

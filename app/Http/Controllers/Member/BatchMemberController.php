@@ -46,6 +46,7 @@ class BatchMemberController extends Controller
             abort(404);
         $data['batchMember'] = $batchMember;
         $data['statuses'] = MemberBatch::statuses;
+        $data['member'] = Member::where('user_id',Auth::id())->first();
         return view('member.batch-member-detail', $data);
         
     }

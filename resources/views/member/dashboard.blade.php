@@ -86,19 +86,28 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aksi
+                        </th>
+                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Level
                         </th>
                         <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Kelas
-                        </th>
-                        <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aksi
                         </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white text-xs divide-y divide-gray-200">
                     @foreach($courses as $course)
                     <tr>
+                        <td class="px-2 py-4">
+                            @if($course->lastBatch() && $course->lastBatch()->isOpen)
+                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="text-green-500 border-2 border-indigo-200 rounded-md p-1">Daftar kelas</a>
+                            @elseif($course->members()->where('member_id',$member->id)->exists())
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-red-500 border-2 border-indigo-200 rounded-md p-1">Batalkan waiting list</a>
+                            @else
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-blue-500 border-2 border-indigo-200 rounded-md p-1">Daftar Waiting List</a>
+                            @endif
+                        </td>
                         <td class="px-2 py-4">
                             {{ $course->name }}
                         </td>
@@ -107,15 +116,6 @@
                                 {{ $course->lastBatch()->full_name }}
                             @else
                                 Kelas belum tersedia
-                            @endif
-                        </td>
-                        <td class="px-2 py-4">
-                            @if($course->lastBatch() && $course->lastBatch()->isOpen)
-                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="text-green-500 pointer">Daftarkan kelas</a>
-                            @elseif($course->members()->where('member_id',$member->id)->exists())
-                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-red-500 pointer">Batalkan waiting list</a>
-                            @else
-                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-blue-500 pointer">Daftarkan waiting list</a>
                             @endif
                         </td>
                     </tr>

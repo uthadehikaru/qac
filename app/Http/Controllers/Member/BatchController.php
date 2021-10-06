@@ -23,6 +23,8 @@ class BatchController extends Controller
             abort(404);
 
         $data['batch'] = $batch;
+        $member = Member::with(['batches','courses'])->where('user_id',Auth::id())->first();
+        $data['member'] = $member;
         return view('member.batch-detail', $data);
     }
     
@@ -62,6 +64,6 @@ class BatchController extends Controller
         foreach(User::where('role','admin')->get() as $admin)
             $admin->notify(new BatchRegistration($memberBatch));
 
-        return back()->with('success','Selamat, Anda telah terdaftar pada '.$batch->full_name.'. silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi. <a target="_blank" href="https://wa.me/'.\App\Models\System::value('whatsapp').'?text='.urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$batch->full_name.' atas nama '.Auth::user()->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih').'" class="text-blue-500 cursor-pointer">klik disini</a>');
+        return redirect()->route('member.batches.detail', $memberBatch->id)->with('success','Selamat, Anda telah terdaftar pada '.$batch->full_name.'. silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi. <a target="_blank" href="https://wa.me/'.\App\Models\System::value('whatsapp').'?text='.urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$batch->full_name.' atas nama '.Auth::user()->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih').'" class="text-blue-500 cursor-pointer">klik disini</a>');
     }
 }

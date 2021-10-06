@@ -34,10 +34,24 @@
             @endforeach
         </div>
     </div>
+
+    @if(session('success'))
+        <x-alert type="success">{!! session('success') !!}</x-alert>
+    @endif
+
     @if($batchMember->batch->course->level==1 && $batchMember->status<3)
-    <p class="w-full px-10 pt-5 text-sm">
+    <x-alert type="success" title="Berhasil">
     silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi. <a target="_blank" href="https://wa.me/{{ \App\Models\System::value('whatsapp') }}?text={{ urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$batchMember->batch->full_name.' atas nama '.$batchMember->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih') }}" class="text-blue-500 cursor-pointer">klik disini</a>
-    </p>
+    </x-alert>
+    @endif
+
+    
+    @if($batchMember->status>0 && $batchMember->status<4)
+    <x-alert type="error" title="Perhatian"><p>Kami akan mengirimkan modul pembelajaran ke alamat anda, pastikan telah sesuai dengan alamat tempat tinggal anda saat ini!
+        <br/><br/>
+        <span class="text-black">{{ $member->full_name }} ({{ $member->phone }}) - {{ $member->address }}</span></p>
+        <p><a href="{{ route('member.profile') }}" class="pointer text-blue-500"> (klik disini untuk memperbaharui alamat)</a>
+        </x-alert>
     @endif
 
     <x-panel>
