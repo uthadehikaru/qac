@@ -38,6 +38,9 @@
                     <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('member.password')" :active="request()->is('member/password')">
+                        {{ __('Ubah Password') }}
+                    </x-nav-link>
                     @endcan
                 </div>
             </div>
@@ -118,6 +121,9 @@
             @elsecan('is-member')
             <x-responsive-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                 {{ __('Profile') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('member.password')" :active="request()->is('member/password')">
+                {{ __('Ubah Password') }}
             </x-responsive-nav-link>
             @endcan
         </div>

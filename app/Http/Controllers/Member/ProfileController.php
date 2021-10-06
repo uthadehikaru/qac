@@ -16,8 +16,7 @@ class ProfileController extends Controller
 
     public function verify()
     {
-        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
-        return view('member.profile', $data);
+        return "verified";
     }
 
     public function update(Request $request)

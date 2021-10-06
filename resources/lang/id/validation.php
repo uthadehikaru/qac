@@ -151,6 +151,9 @@ return [
         'title'=>'Judul',
         'created_at'=>'Tanggal',
         'content'=>'Konten',
+        'old_password'=>'Password Lama',
+        'new_password'=>'Password Baru',
+        're_password'=>'Ulangi Password Baru',
     ],
 
 ];

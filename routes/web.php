@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Member\DashboardController as MDashboardController;
 use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Member\PasswordController;
 use App\Http\Controllers\Member\BatchMemberController;
 use App\Http\Controllers\Member\BatchController as MBatchController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -98,6 +99,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [MDashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/password', [PasswordController::class, 'index'])->name('password');
+        Route::post('/password', [PasswordController::class, 'update'])->name('password.update');
         Route::get('/courses', [BatchMemberController::class, 'index'])->name('batches');
         Route::get('/courses/{member_batch_id}', [BatchMemberController::class, 'detail'])->name('batches.detail');
         Route::get('/courses/{course_id}/waitinglist', [MDashboardController::class, 'waitingList'])->name('waitinglist');
