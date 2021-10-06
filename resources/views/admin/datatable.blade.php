@@ -21,9 +21,14 @@
         <x-alert type="error">{{ session('error') }}</x-alert>
     @endif
 
-
     <x-panel>
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        @if(session('status'))
+            <x-alert type="info">{{ session('status') }}</x-alert>
+        @endif
+
+        @hasSection('action')
+            @yield('action')
+        @endif
         {!! $dataTable->table(['class' => 'cell-border stripe'], true) !!}
     </x-panel>
 
@@ -65,5 +70,8 @@
         }
     });
 </script>
+@hasSection('scripts')
+    @yield('scripts')
+@endif
 </x-slot>
 </x-app-layout>

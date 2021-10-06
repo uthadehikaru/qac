@@ -81,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('testimonials', TestimonialController::class);
 
         // MEMBER BATCH
+        Route::post('courses/{course}/batches/{batch}/updates', [MemberBatchController::class, 'updateStatuses'])->name('courses.batches.members.updates');
         Route::get('courses/{course}/batches/{batch}/members/{id}/status/{status}', [MemberBatchController::class, 'updateStatus'])->name('courses.batches.members.status');
         Route::get('courses/{course}/batches/{batch}/members/certificates', [MemberBatchController::class, 'certificates'])->name('courses.batches.members.certificates');
         Route::get('courses/{course}/batches/{batch}/members/waitinglist', [MemberBatchController::class, 'waitinglist'])->name('courses.batches.members.waitinglist');

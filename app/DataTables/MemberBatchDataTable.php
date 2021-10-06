@@ -77,7 +77,10 @@ class MemberBatchDataTable extends DataTable
                 $btn .= '<a target="_blank" href="'.$row->file->fileUrl('filename').'" class="ml-3 text-green-500">Sertifikat</a>';
                 return $btn;
             })
-            ->rawColumns(['action','phone','status']);
+            ->editColumn('id', function($row){
+                return "<input type='checkbox' id='row-".$row->id."' value='".$row->id."' name='ids' onClick='check(this)'  />";
+            })
+            ->rawColumns(['action','phone','status','id']);
     }
 
     /**
@@ -125,7 +128,9 @@ class MemberBatchDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('#'),
+            Column::make('id')->title('#')
+            ->searchable(false)
+            ->orderable(false),
             Column::make('full_name')->title('Nama'),
             Column::make('gender')->title('Jenis Kelamin'),
             Column::make('email')->title('Email'),

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\MemberBatch;
 
-class BatchStatusUpdate extends Notification
+class BatchStatusUpdate extends Notification implements ShouldQueue
 {
     use Queueable;
 

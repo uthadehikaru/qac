@@ -32,8 +32,12 @@ class MemberBatchController extends Controller
             $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.certificates', [$course_id, $batch_id]).'">Create Certificates</a>';
         if($batch->members()->where('member_batch.status',1)->count()>0 && Carbon::now()->greaterThanOrEqualTo($batch->start_at))
             $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.batches.members.waitinglist', [$course_id, $batch_id]).'">Proses Waiting List</a>';
+        
         $dataTable->setBatch($batch_id);
-        return $dataTable->render('admin.datatable', $data);
+
+        $data['statuses'] = MemberBatch::statuses;
+        $data['batch'] = $batch;
+        return $dataTable->render('admin.batch-member-datatable', $data);
     }
 
     public function approve(Request $request, $course_id, $batch_id, $id)
@@ -251,6 +255,31 @@ class MemberBatchController extends Controller
         $memberBatch->save();
         $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
         return back()->with('status','Berhasil memperbaharui status');
+    }
+
+    public function updateStatuses(Request $request, $course_id, $batch_id)
+    {
+        $request->validate([
+            'members' => 'required',
+            'status_id'=>'required',
+        ]);
+
+        $ids = trim($request->members,",");
+        $status_id = $request->status_id;
+
+        $memberBatches = MemberBatch::whereRaw("id in (".$ids.")")->get();
+        $count = 0;
+        foreach($memberBatches as $memberBatch){
+            if($memberBatch->status==$status_id)
+                continue;
+            
+            $memberBatch->status=$status_id;
+            $memberBatch->save();
+            $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
+            $count++;
+        }
+
+        return back()->with('status','Berhasil memperbaharui status '.$count.' peserta');
     }
 
     public function waitinglist($course_id, $batch_id)
