@@ -11,6 +11,7 @@ use App\Models\Member;
 use App\Models\File;
 use App\Notifications\BatchApproval;
 use App\Notifications\BatchStatusUpdate;
+use App\Notifications\CertificateCreated;
 use App\DataTables\MemberBatchDataTable;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -204,7 +205,7 @@ class MemberBatchController extends Controller
         
         foreach($memberBatches as $memberBatch)
         {
-            if($memberBatch->status==6 && (!$memberBatch->file || $regenerate)){
+            if($memberBatch->status==MemberBatch::STATUS_GRADUATED && (!$memberBatch->file || $regenerate)){
                 $this->generateCertificate($template, $memberBatch);
             }
         }
@@ -280,14 +281,26 @@ class MemberBatchController extends Controller
         $filepath = 'files/'.$name.'.jpg';
         $certificate->save(storage_path('app/public/'.$filepath), 90, 'jpg');
 
-        $file = File::create([
-            'name'=>$name,
-            'filename'=>$filepath,
-            'tablename'=>'member_batch',
-            'record_id'=>$memberBatch->id,
-            'type'=>'jpg',
-            'size'=>0,
-        ]);
+        $file = File::where(['tablename'=>'member_batch','record_id'=>$memberBatch->id])->first();
+        
+        if(!$file){
+            $file = File::create([
+                'created_at'=>Carbon::now(),
+                'name'=>$name,
+                'filename'=>$filepath,
+                'tablename'=>'member_batch',
+                'record_id'=>$memberBatch->id,
+                'type'=>'jpg',
+                'size'=>0,
+            ]);
+        }
+
+        $file->name = $name;
+        $file->filename = $filepath;
+        $file->updated_at = Carbon::now();
+        $file->save();
+
+        $memberBatch->member->user->notify(new CertificateCreated($memberBatch));
 
         if($preview)
             return $certificate->response('png');

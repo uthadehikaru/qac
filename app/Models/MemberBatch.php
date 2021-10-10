@@ -24,6 +24,14 @@ class MemberBatch extends Pivot
 
     public const statuses = [0,1,3,4,5,6];
 
+    public const STATUS_CANCELED= 0;
+    public const STATUS_REGISTERED = 1;
+    public const STATUS_CHECKED = 2;
+    public const STATUS_PAID = 3;
+    public const STATUS_SHIPPED = 4;
+    public const STATUS_COMPLETED = 5;
+    public const STATUS_GRADUATED = 6;
+
     public $timestamps = false;
     
     protected $dates = ['approved_at'];
