@@ -20,6 +20,8 @@ class Member extends Model
         'instagram',
         'profesi',
         'pendidikan',
+        'village_id',
+        'zipcode',
     ];
 
     protected $casts = [
@@ -49,6 +51,29 @@ class Member extends Model
     public function getEmailAttribute($value)
     {
         return $this->user?$this->user->email:'';
+    }
+
+    public function getAddressDetailAttribute($value)
+    {
+        $address = $this->address;
+
+        if($this->village_id>0){
+            $data = DB::table('villages')
+                ->select('provinces.name as province','regencies.name as regency','districts.name as district','villages.name as village')
+                ->join('districts','districts.id','villages.district_id')
+                ->join('regencies','regencies.id','districts.regency_id')
+                ->join('provinces','provinces.id','regencies.province_id')
+                ->where('villages.id',$this->village_id)
+                ->first();
+            if($data){
+                $address .= ". ".$data->province.', '.$data->regency.', '.$data->district.', '.$data->village;
+            }
+        }
+
+        if($this->zipcode!='')
+            $address .= " ".$this->zipcode;
+
+        return $address;
     }
 
     public function user()

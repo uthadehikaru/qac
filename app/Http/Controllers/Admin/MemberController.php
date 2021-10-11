@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\MemberBatch;
 use Hash;
 use Str;
+use DB;
 use Carbon\Carbon;
 use App\DataTables\MemberDataTable;
 use App\Notifications\MemberResetPassword;
@@ -34,6 +35,13 @@ class MemberController extends Controller
     public function create()
     {
         $data['member'] = null;
+        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+
+        $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
+        $data['regencies'] = [];
+        $data['districts'] = [];
+        $data['villages'] = [];
+
         return view('admin.member-form', $data);
     }
 
@@ -70,6 +78,8 @@ class MemberController extends Controller
         $member->address = $request->address;
         $member->city = $request->city;
         $member->instagram = $request->instagram;
+        $member->village_id = $request->village_id;
+        $member->zipcode = $request->zipcode;
         $member->save();
 
         return redirect()->route('admin.members.index')->with('status','Member created successfully');
@@ -96,7 +106,38 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $data['member'] = Member::find($id);
+        $member = Member::find($id);
+        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+
+        $province_id = 0;
+        $regency_id = 0;
+        $district_id = 0;
+        $village_id = $member->village_id;
+        if($village_id>0){
+            $address = DB::table('villages')
+                ->select('province_id','regency_id','district_id')
+                ->join('districts','districts.id','villages.district_id')
+                ->join('regencies','regencies.id','districts.regency_id')
+                ->join('provinces','provinces.id','regencies.province_id')
+                ->where('villages.id',$village_id)
+                ->first();
+            if($address){
+                $province_id = $address->province_id;
+                $regency_id = $address->regency_id;
+                $district_id = $address->district_id;
+            }
+        }
+        $data['province_id'] = $province_id;
+        $data['regency_id'] = $regency_id;
+        $data['district_id'] = $district_id;
+        $data['village_id'] = $village_id;
+
+        $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
+        $data['regencies'] = DB::table('regencies')->where('province_id',$province_id)->orderBy('name')->get();
+        $data['districts'] = DB::table('districts')->where('regency_id',$regency_id)->orderBy('name')->get();
+        $data['villages'] = DB::table('villages')->where('district_id',$district_id)->orderBy('name')->get();
+        
+        $data['member'] = $member;
         return view('admin.member-form', $data);
     }
 
@@ -117,7 +158,7 @@ class MemberController extends Controller
             'email' => 'required|email|unique:users,email,'.$member->user_id,
             'phone' => 'required|numeric|unique:members,phone,'.$member->id.'|min:8',
             'gender' => 'required|in:pria,wanita',
-            'address' => '',
+            'village_id' => '',
             'city' => '',
             'instagram' => '',
         ]);
@@ -133,6 +174,8 @@ class MemberController extends Controller
         $member->address = $request->address;
         $member->city = $request->city;
         $member->instagram = $request->instagram;
+        $member->village_id = $request->village_id;
+        $member->zipcode = $request->zipcode;
         $member->save();
 
         return redirect()->route('admin.members.index')->with('status','Member updated successfully');

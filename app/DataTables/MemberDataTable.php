@@ -28,6 +28,10 @@ class MemberDataTable extends DataTable
                 $sql = "users.email like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->filterColumn('address', function($query, $keyword) {
+                $sql = "members.address like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-m-y');
             })
@@ -38,6 +42,9 @@ class MemberDataTable extends DataTable
                     $value .= "(verified)";
                 
                 return $value;
+            })
+            ->editColumn('address', function($row){
+                return $row->address_detail;
             })
             ->editColumn('login_at', function($row){
                 if($row->login_at){
@@ -104,7 +111,6 @@ class MemberDataTable extends DataTable
             Column::make('email'),
             Column::make('gender')->title('jenis kelamin'),
             Column::make('address')->title('alamat'),
-            Column::make('city')->title('kota'),
             Column::make('phone')->title('telp'),
             Column::make('login_at')->searchable(false)->title('terakhir login'),
             Column::computed('action')

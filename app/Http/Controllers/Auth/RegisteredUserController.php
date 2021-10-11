@@ -14,6 +14,7 @@ use App\Models\Member;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\Queue;
+use App\Models\City;
 use App\Notifications\BatchRegistration;
 use App\Notifications\MemberBatchRegistration;
 use App\Notifications\AdminWaitinglist;
@@ -30,6 +31,7 @@ class RegisteredUserController extends Controller
     {
         $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
         $data['batch'] = $data['course'] = $data['sessions'] = null;
+        $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
 
         if($request->has('batch_id')){
             $batch = Batch::with('course')->where('registration_start_at', '<=', date('Y-m-d'))
@@ -72,7 +74,8 @@ class RegisteredUserController extends Controller
             'gender' => 'required|in:pria,wanita',
             'session' => 'sometimes',
             'address' => 'required',
-            'city' => 'required',
+            'village_id' => 'required|exists:villages,id',
+            'zipcode' => 'required|min:5',
             'profesi' => 'required',
             'pendidikan' => 'required',
             'instagram' => '',
@@ -96,10 +99,11 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'gender' => $request->gender,
             'address' => $request->address,
-            'city' => $request->city,
             'profesi' => $request->profesi,
             'pendidikan' => $request->pendidikan,
             'instagram' => $request->instagram,
+            'village_id'=> $request->village_id,
+            'zipcode'=> $request->zipcode,
         ]);
 
         if($request->has('batch_id')){

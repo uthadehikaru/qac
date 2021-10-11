@@ -51,6 +51,15 @@
                 </div>
             </footer>
         </div>
+        
+        <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+        <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
         {{ $scripts??'' }}
     </body>
 </html>

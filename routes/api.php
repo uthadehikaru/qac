@@ -16,17 +16,17 @@ use App\Models\Batch;
 |
 */
 
-Route::get('/courses', function (Request $request) {
-    $courses = Course::pluck('name','id')->toJson(JSON_PRETTY_PRINT);
-    return response($courses, 200);
+Route::post('/regencies/{province_id}', function (Request $request, $province_id) {
+    $data = DB::table('regencies')->where('province_id',$province_id)->orderBy('name')->get()->toJson(JSON_PRETTY_PRINT);
+    return response($data, 200);
 });
 
-Route::get('/batches/{course_id}', function (Request $request, $course_id) {
-    $batches = Batch::where('course_id',$course_id)->pluck('name','id')->toJson(JSON_PRETTY_PRINT);
-    return response($batches, 200);
+Route::post('/districts/{regency_id}', function (Request $request, $regency_id) {
+    $data = DB::table('districts')->where('regency_id',$regency_id)->orderBy('name')->get()->toJson(JSON_PRETTY_PRINT);
+    return response($data, 200);
 });
 
-Route::get('/members/{batch_id}', function (Request $request, $batch_id) {
-    $members = Batch::find($batch_id)->members()->orderBy('full_name')->pluck('full_name','member_batch.id')->toJson(JSON_PRETTY_PRINT);
-    return response($members, 200);
+Route::post('/villages/{district_id}', function (Request $request, $district_id) {
+    $data = DB::table('villages')->where('district_id',$district_id)->orderBy('name')->get()->toJson(JSON_PRETTY_PRINT);
+    return response($data, 200);
 });

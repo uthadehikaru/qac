@@ -63,15 +63,45 @@
                     <div class="mt-4">
                         <x-label for="address" :value="__('Address')" />
 
-                        <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+                        <textarea id="address" class="block mt-1 w-full" type="text" name="address" required>{{ old('address') }}</textarea>
                         <p class="text-sm text-gray-500">* digunakan untuk pengiriman modul, mohon menulis alamat lengkap</p>
                     </div>
 
-                    <!-- City -->
                     <div class="mt-4">
-                        <x-label for="city" :value="__('Kota')" />
+                        <x-label for="province_id" :value="__('Provinsi')" />
 
-                        <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required />
+                        <select id="province_id" class="block mt-1 w-full" name="province_id" required>
+                            <option value="">-- pilih provinsi --</option>
+                            @foreach($provinces as $province)
+                            <option value="{{ $province->id }}">{{ $province->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="regency_id" id="regency_label" :value="__('Kota')" />
+
+                        <select id="regency_id" class="block mt-1 w-full" name="regency_id" required>
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="district_id" id="district_label" :value="__('Kecamatan')" />
+
+                        <select id="district_id" class="block mt-1 w-full" name="district_id" required>
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="village_id" id="village_label" :value="__('Kelurahan')" />
+
+                        <select id="village_id" class="block mt-1 w-full" name="village_id" required>
+                        </select>
+                    </div>
+                    <div class="mt-4">
+                        <x-label for="zipcode" :value="__('Kode Pos')" />
+
+                        <x-input id="zipcode" class="block mt-1 w-full" type="text" name="zipcode" :value="old('zipcode')" />
                     </div>
 
                     <div class="mt-4">
@@ -177,4 +207,77 @@
         </div>
     </div>
 </div>
+<x-slot name="scripts">
+    <script type="text/javascript">
+        $('#province_id').on('change', function() {
+            $("#regency_label").addClass('animate-bounce');
+            $("#regency_id").empty();
+            $("#district_id").empty();
+            $("#village_id").empty();
+            var province_id = $(this).val();
+            $.ajax({
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url:"{{ url('api/regencies') }}/"+province_id,
+                success: function(data) {
+                    $("#regency_id").html($("<option></option>").val(0).html('-- pilih kota --'));
+                    $.each(data, function (key, row)
+                    {
+                        $("#regency_id").append($("<option></option>").val(row.id).html(row.name));
+                    });
+                    $("#regency_label").removeClass('animate-bounce');
+                },
+                error: function(data) {                
+                    $("#regency_label").removeClass('animate-bounce');
+                }
+            });
+        });
+        $('#regency_id').on('change', function() {
+            $("#district_label").addClass('animate-bounce');
+            $("#district_id").empty();
+            $("#village_id").empty();
+            var regency_id = $(this).val();
+            $.ajax({
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url:"{{ url('api/districts') }}/"+regency_id,
+                success: function(data) {
+                    $("#district_id").html($("<option></option>").val(0).html('-- pilih kecamatan --'));
+                    $.each(data, function (key, row)
+                    {
+                        $("#district_id").append($("<option></option>").val(row.id).html(row.name));
+                    });
+                    $("#district_label").removeClass('animate-bounce');
+                },
+                error: function(data) {
+                    $("#district_label").removeClass('animate-bounce');
+                }
+            });
+        });
+        $('#district_id').on('change', function() {
+            $("#village_label").addClass('animate-bounce');
+            $("#village_id").empty();
+            var district_id = $(this).val();
+            $.ajax({
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url:"{{ url('api/villages') }}/"+district_id,
+                success: function(data) {
+                    $("#village_id").html($("<option></option>").val(0).html('-- pilih kelurahan --'));
+                    $.each(data, function (key, row)
+                    {
+                        $("#village_id").append($("<option></option>").val(row.id).html(row.name));
+                    });
+                    $("#village_label").removeClass('animate-bounce');
+                },
+                error: function(data) {
+                    $("#village_label").removeClass('animate-bounce');
+                }
+            });
+        });
+    </script>
+</x-slot>
 </x-web-layout>
