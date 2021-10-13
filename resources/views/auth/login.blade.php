@@ -17,7 +17,7 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" :value="__('Email/Telp')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="text" name="email_or_phone" :value="old('email_or_phone')" required autofocus />
             </div>
@@ -41,8 +41,11 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <a class="ml-2 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('auth.otp') }}">
+                    {{ __('Gunakan OTP') }}
+                </a>
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="ml-2 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif

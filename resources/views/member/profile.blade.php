@@ -47,7 +47,7 @@
                         Whatsapp
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                    id="grid-phone" name="phone" type="text" placeholder="Your Phone" value="{{ Auth::user()->member->phone }}" required>
+                    id="grid-phone" name="phone" type="number" placeholder="Your Phone" value="{{ Auth::user()->member->phone }}" required>
                 </div>
                 <div class="md:w-1/3 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-gender">
@@ -125,7 +125,7 @@
                         Kode Pos
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-zipcode" name="zipcode" type="text" placeholder="Your zipcode" value="{{ Auth::user()->member->zipcode }}">
+                    id="grid-zipcode" name="zipcode" type="text" placeholder="Your zipcode" value="{{ Auth::user()->member->zipcode }}" required>
                 </div>
                 <div class="md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
@@ -141,10 +141,10 @@
                         Profesi
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-profesi" name="profesi" type="text" placeholder="Your profesi" value="{{ Auth::user()->member->profesi }}">
+                    id="grid-profesi" name="profesi" type="text" placeholder="Your profesi" value="{{ Auth::user()->member->profesi }}" required>
                 </div>
                 <div class="md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-pendidikan">
                         Pendidikan
                     </label>
                     <div class="relative">

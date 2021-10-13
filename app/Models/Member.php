@@ -76,6 +76,19 @@ class Member extends Model
         return $address;
     }
 
+    public function setPhoneAttribute($value)
+    {
+        $phone = $value;
+        $prefix = substr($phone,0,1);
+        if ($prefix=='+')
+            $phone = str_replace("+","",$phone);
+            
+        $prefix = substr($phone,0,1);
+        if ($prefix=='0')
+            $phone = str_replace("0","62",$phone);
+        $this->attributes['phone'] = strtolower($phone);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

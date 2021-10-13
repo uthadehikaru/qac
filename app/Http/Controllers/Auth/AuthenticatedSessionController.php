@@ -57,4 +57,12 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    protected function credentials(Request $request)
+    {
+        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL))
+            return ['email' => $request->get('email'), 'password'=>$request->get('password')];
+
+        return ['phone'=>$request->get('email'),'password'=>$request->get('password')];
+    }
 }

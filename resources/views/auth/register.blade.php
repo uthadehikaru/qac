@@ -30,7 +30,7 @@
                         <x-label for="full_name" :value="__('Full Name')" />
 
                         <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required />
-                        <p class="text-sm text-gray-500">* digunakan untuk pembuatan e-sertifikat</p>
+                        <p class="text-sm text-gray-500">* pastikan nama lengkap sesuai kartu identitas. akan digunakan untuk pembuatan e-sertifikat</p>
                     </div>
 
                     <!-- Short Name -->
@@ -43,9 +43,9 @@
 
                     <!-- Phone -->
                     <div class="mt-4">
-                        <x-label for="phone" :value="__('Phone')" />
+                        <x-label for="phone" :value="__('Nomor Whatsapp')" />
 
-                        <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+                        <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" placeholder="Masukkan nomor telp dengan kode negara tanpa tanda +. con. 6281212341234" :value="old('phone')" required />
                         <p class="text-sm text-gray-500">* pastikan nomor whatsapp aktif</p>
                     </div>
 

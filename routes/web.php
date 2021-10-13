@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotificationController;
@@ -38,6 +39,9 @@ Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
 Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');
 Route::get('/sertifikat/{id}', [HomeController::class, 'certificate'])->name('certificate');
+Route::get('/login/otp', [OtpController::class, 'index'])->name('auth.otp');
+Route::post('/login/otp/send', [OtpController::class, 'request'])->name('auth.otp.request');
+Route::post('/login/otp', [OtpController::class, 'check']);
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
