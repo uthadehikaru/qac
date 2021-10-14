@@ -81,11 +81,11 @@ class Member extends Model
         $phone = $value;
         $prefix = substr($phone,0,1);
         if ($prefix=='+')
-            $phone = str_replace("+","",$phone);
+            $phone = substr($phone,1,strlen($phone));
             
         $prefix = substr($phone,0,1);
         if ($prefix=='0')
-            $phone = str_replace("0","62",$phone);
+            $phone = "62".substr($phone,1,strlen($phone));
         $this->attributes['phone'] = strtolower($phone);
     }
 
