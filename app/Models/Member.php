@@ -86,7 +86,7 @@ class Member extends Model
         $prefix = substr($phone,0,1);
         if ($prefix=='0')
             $phone = "62".substr($phone,1,strlen($phone));
-        $this->attributes['phone'] = strtolower($phone);
+        $this->attributes['phone'] = $phone;
     }
 
     public function user()
