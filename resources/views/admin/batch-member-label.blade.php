@@ -41,7 +41,7 @@
             @endif
             <td width="50%">
             <h4>{{ $member->full_name }}</h4>
-            <p>{{ $member->address }}</p>
+            <p>{{ $member->address_detail }}</p>
             <p>{{ $member->phone }}</p>
             </td>
             @endforeach

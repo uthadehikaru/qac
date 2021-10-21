@@ -129,14 +129,14 @@
                         Kode Pos
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-zipcode" name="zipcode" type="text" placeholder="Your zipcode" value="{{ $member->zipcode }}">
+                    id="grid-zipcode" name="zipcode" type="text" placeholder="Your zipcode" value="{{ old('zipcode', $member?$member->zipcode:'') }}">
                 </div>
                 <div class="md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
                         Instagram
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                    id="grid-instagram" name="instagram" type="text" placeholder="Your Instagram" value="{{ $member->instagram }}">
+                    id="grid-instagram" name="instagram" type="text" placeholder="Your Instagram" value="{{ old('instagram', $member?$member->instagram:'') }}">
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
@@ -155,7 +155,7 @@
                         <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
                         id="grid-pendidikan" name="pendidikan" required>
                         @foreach($educations as $education)
-                        <option value="{{ $education }}" {{ $member->pendidikan==$education?'selected':'' }}>{{ $education }}</option>
+                        <option value="{{ $education }}" {{ $member && $member->pendidikan==$education?'selected':'' }}>{{ $education }}</option>
                         @endforeach
                         </select>
                     </div>

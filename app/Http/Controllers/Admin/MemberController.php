@@ -42,6 +42,8 @@ class MemberController extends Controller
         $data['districts'] = [];
         $data['villages'] = [];
 
+        $data['province_id'] = 0;
+
         return view('admin.member-form', $data);
     }
 
