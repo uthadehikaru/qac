@@ -1,10 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Course Detail') }}
+            {{ __('Course Detail') }} {{ $batchMember->status==0?' | '.__('batch.status_0'):'' }}
         </h2>
     </x-slot>
 
+    @if($batchMember->status>0)
     <div class="w-full mt-4 py-6">
         <div class="flex">
             @foreach($statuses as $status)
@@ -23,9 +24,15 @@
 
                     <div class="w-10 h-10 mx-auto bg-{{ $batchMember->status>=$status?'green-300':'white border-2 border-gray-200' }} rounded-full text-lg text-white flex items-center">
                     <span class="text-center text-{{ $batchMember->status>=$status?'white':'gray-600' }} w-full">
+                        @if($batchMember->status>=$status)
                         <svg class="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path class="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"/>
+                            <path class="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"/>
                         </svg>
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 w-full" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                        </svg>
+                        @endif
                     </span>
                     </div>
                 </div>
@@ -34,12 +41,13 @@
             @endforeach
         </div>
     </div>
+    @endif
 
     @if(session('success'))
         <x-alert type="success">{!! session('success') !!}</x-alert>
     @endif
 
-    @if($batchMember->batch->course->level==1 && $batchMember->status<3)
+    @if($batchMember->batch->course->level==1 && $batchMember->status!=0 && $batchMember->status<3)
     <x-alert type="success" title="Berhasil">
     silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi. <a target="_blank" href="https://wa.me/{{ \App\Models\System::value('whatsapp') }}?text={{ urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$batchMember->batch->full_name.' atas nama '.$batchMember->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih') }}" class="text-blue-500 cursor-pointer">klik disini</a>
     </x-alert>
