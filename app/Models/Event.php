@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use QCod\ImageUp\HasImageUploads;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 
 class Event extends Model
 {
     use HasFactory;
     use HasImageUploads;
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
