@@ -44,10 +44,14 @@ class EventCreated extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        $message = (new MailMessage)
                     ->subject('Event QAC : '.$this->event->title)
                     ->line($this->getMessage())
                     ->action(__('Detail'), $this->getLink());
+        
+        $message->viewData['event'] = $this->event;
+        $message->viewData['user'] = $notifiable;
+        return $message;
     }
 
     private function getLink()

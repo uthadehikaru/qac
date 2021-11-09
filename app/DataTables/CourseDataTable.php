@@ -26,11 +26,15 @@ class CourseDataTable extends DataTable
                 return $btn;
             })
             ->addColumn('waitinglist', function($row){
-                $btn = '<a href="'.route('admin.courses.queues.index', $row->id).'" class="text-blue-500">'.$row->members->count().' Members</a>';
+                $btn = '<a href="'.route('admin.courses.queues.index', $row->id).'" class="text-blue-500">'.$row->members->count().' Waitinglist</a>';
                 return $btn;
             })
             ->addColumn('modules', function($row){
                 $btn = '<a href="'.route('admin.courses.modules.index', $row->id).'" class="text-blue-500">'.$row->modules->count().' Modul</a>';
+                return $btn;
+            })
+            ->editColumn('participants', function($row){
+                $btn = '<a href="'.route('admin.courses.members', $row->id).'" class="text-blue-500">'.$row->participants.' Peserta</a>';
                 return $btn;
             })
             ->addColumn('action', function($row){
@@ -38,7 +42,7 @@ class CourseDataTable extends DataTable
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['batch','waitinglist','modules','action']);
+            ->rawColumns(['batch','waitinglist','modules','action','participants']);
     }
 
     /**
@@ -49,7 +53,12 @@ class CourseDataTable extends DataTable
      */
     public function query(Course $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+        $query->selectRaw("courses.*, 
+        (select coalesce(count(1),0) FROM member_batch 
+        WHERE EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=courses.id)) 
+        as participants");
+        return $query;
     }
 
     /**
@@ -80,6 +89,7 @@ class CourseDataTable extends DataTable
         return [
             Column::make('name'),
             Column::make('batch'),
+            Column::make('participants')->title("Peserta"),
             Column::make('waitinglist'),
             Column::make('modules'),
             Column::computed('action')

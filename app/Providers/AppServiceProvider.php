@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Mail\Events\MessageSent;
+use Event;
+use Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen(function (MessageSent $message) {
+            $log = "Event ".$message->data['event']->title." : "." sent to ".$message->data['user']->email;
+            Log::info($log);
+        });
     }
 }

@@ -46,7 +46,9 @@ class EventDataTable extends DataTable
      */
     public function query(Event $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+        $query->selectRaw("events.*, case when course_id>0 then (select coalesce(count(1),0) from member_batch where member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=events.course_id)) else (select count(1) from users where role='member') end as recipients");
+        return $query;
     }
 
     /**
@@ -78,8 +80,14 @@ class EventDataTable extends DataTable
         return [
             Column::make('event_at'),
             Column::make('title'),
-            Column::make('course_id')->title('Event Course'),
-            Column::make('views'),
+            Column::make('course_id')
+                ->title('Umum/Alumni'),
+            Column::make('views')
+                ->searchable(false)
+                ->title('dilihat'),
+            Column::make('recipients')
+                ->searchable(false)
+                ->title('Target Peserta'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

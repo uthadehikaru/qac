@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('members', MemberController::class);
 
         // COURSES
+        Route::get('courses/members/{course_id}', [CourseController::class, 'members'])->name('courses.members');
         Route::resource('courses', CourseController::class);
 
         // BATCHES
