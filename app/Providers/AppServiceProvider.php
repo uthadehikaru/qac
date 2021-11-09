@@ -27,8 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Event::listen(function (MessageSent $message) {
-            $log = "Event ".$message->data['event']->title." : "." sent to ".$message->data['user']->email;
-            Log::info($log);
+            if(isset($message->data['event'])){
+                $log = "Event ".$message->data['event']->title." : "." sent to ".$message->data['user']->email;
+                Log::info($log);
+            }
         });
     }
 }
