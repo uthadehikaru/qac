@@ -71,9 +71,14 @@ class OtpController extends Controller
         if (filter_var($credential, FILTER_VALIDATE_EMAIL))
             return User::where('email',$credential)->first();
         else{
-            $phone = $this->parse($credential);
             $member = Member::where('phone',$phone)->first();
-            if($member->user)
+
+            if(!$member){
+                $phone = $this->parse($credential);
+                $member = Member::where('phone',$phone)->first();
+            }
+            
+            if($member)
                 return $member->user;
         }
 
