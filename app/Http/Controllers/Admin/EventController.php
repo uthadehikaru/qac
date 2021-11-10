@@ -20,9 +20,11 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(EventDataTable $dataTable)
+    public function index(Request $request, EventDataTable $dataTable)
     {
         $data['title'] = "Data Event";
+        if($request->has('deleted'))
+            $dataTable->deleted();
         return $dataTable->render('admin.datatable', $data);
     }
 

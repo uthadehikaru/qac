@@ -23,11 +23,16 @@ class EventDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
                     ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('event.detail', $row->slug).'" target="_BLANK" class="ml-3 text-blue-500">View</a>';
+                        $btn = "";
+                        if($row->trashed()){
+                            $btn .= '<a href="#" class="ml-3 text-red-500">Deleted</a>';
+                        }else{
+                            $btn .= '<a href="'.route('event.detail', $row->slug).'" target="_BLANK" class="ml-3 text-blue-500">View</a>';
                             $btn .= '<a href="'.route('admin.events.share', $row->id).'" class="ml-3 text-green-500">Share</a>';
                             $btn .= '<a href="'.route('admin.events.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                             $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
-                            return $btn;
+                        }
+                        return $btn;
                     })
                     ->editColumn('event_at', function ($row){
                         return $row->event_at->format('d M Y H:i');
@@ -36,6 +41,13 @@ class EventDataTable extends DataTable
                         return $row->course?$row->course->name:'Umum';
                     })
                     ->rawColumns(['action']);
+    }
+
+    private $withTrashed = false;
+
+    public function deleted()
+    {
+        $this->withTrashed = true;
     }
 
     /**
@@ -48,6 +60,8 @@ class EventDataTable extends DataTable
     {
         $query = $model->newQuery();
         $query->selectRaw("events.*, case when course_id>0 then (select coalesce(count(1),0) from member_batch where member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=events.course_id)) else (select count(1) from users where role='member') end as recipients");
+        if($this->withTrashed)
+            $query->withTrashed();
         return $query;
     }
 
