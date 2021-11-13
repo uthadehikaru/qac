@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Member;
+use App\Models\Course;
 use App\Exports\MembersExport;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -22,7 +23,7 @@ class MemberDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables()
+        $datatable = datatables()
             ->eloquent($query)
             ->filterColumn('email', function($query, $keyword) {
                 $sql = "users.email like ?";
@@ -61,6 +62,18 @@ class MemberDataTable extends DataTable
                     return $btn;
             })
             ->rawColumns(['email','action']);
+        
+        foreach(Course::all() as $course){
+            $datatable->editColumn('course_'.$course->id, function($row) use ($course){
+                $value = 'course_'.$course->id;
+                if($row->$value!=null)
+                    return __('batch.status_'.$row->$value);
+                
+                return "NA";
+            });
+        }
+
+        return $datatable;
     }
 
     /**
@@ -71,8 +84,14 @@ class MemberDataTable extends DataTable
      */
     public function query(Member $model)
     {
+        $select = "members.*,users.email,users.name,users.login_at,users.email_verified_at";
+        
+        foreach(Course::all() as $course){
+            $select .= ",(SELECT max(status) FROM member_batch mb JOIN batches b ON mb.batch_id=b.id"
+                    ." WHERE mb.member_id=members.id AND b.course_id=".$course->id.") AS course_".$course->id;
+        }
         $model = $model->newQuery();
-        $model->select('members.*','users.email','users.name','users.login_at', 'users.email_verified_at');
+        $model->selectRaw($select);
         $model->join('users','members.user_id','=','users.id');
         return $model;
     }
@@ -105,20 +124,26 @@ class MemberDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $columns = [
             Column::make('created_at')->title('tgl daftar'),
             Column::make('full_name')->title('Nama'),
             Column::make('email'),
             Column::make('gender')->title('jenis kelamin'),
             Column::make('address')->title('alamat'),
-            Column::make('phone')->title('telp'),
-            Column::make('login_at')->searchable(false)->title('terakhir login'),
-            Column::computed('action')
+            Column::make('phone')->title('telp')
+        ];
+        
+        foreach(Course::all() as $course)
+        $columns[] = Column::make('course_'.$course->id)->title($course->name)->searchable(false);
+
+        $columns[] = Column::make('login_at')->searchable(false)->title('terakhir login');
+        $columns[] = Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
-                  ->addClass('text-center'),
-        ];
+                  ->addClass('text-center');
+
+        return $columns;
     }
 
     /**

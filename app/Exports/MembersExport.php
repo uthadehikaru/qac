@@ -4,12 +4,13 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Yajra\DataTables\Exports\DataTablesCollectionExport;
+use App\Models\Course;
 
 class MembersExport extends DataTablesCollectionExport implements WithMapping
 {
     public function headings(): array
     {
-        return [
+        $headings = [
             'Tanggal daftar',
             'Email',
             'Nama Lengkap',
@@ -22,11 +23,17 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             'Pendidikan',
             'Instagram',
         ];
+
+        foreach(Course::all() as $course){
+            $headings[] = $course->name;
+        }
+
+        return $headings;
     }
 
     public function map($row): array
     {
-        return [
+        $rows = [
             $row['created_at'],
             $row['email'],
             $row['full_name'],
@@ -39,5 +46,11 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             $row['pendidikan'],
             $row['instagram'],
         ];
+        
+        foreach(Course::all() as $course){
+            $rows[] = $row['course_'.$course->id];
+        }
+
+        return $rows;
     }
 }
