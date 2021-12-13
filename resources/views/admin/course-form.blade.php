@@ -31,18 +31,21 @@
                     id="grid-name" name="name" type="text" placeholder="course name" value="{{ old('name',$course?$course->name:'') }}">
                 </div>
                 <div class="md:w-1/3 px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-fee">
-                        Fee
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                    id="grid-fee" name="fee" type="number" min=0 placeholder="Course Fee" value="{{ old('fee',$course?$course->fee:0) }}">
-                </div>
-                <div class="md:w-1/3 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-level">
                         Level
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
                     id="grid-level" name="level" type="number" min=0 placeholder="Course Level" value="{{ old('level',$course?$course->level:1) }}">
+                </div>
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-is_active">
+                        Is Active
+                    </label>
+                    <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                    id="grid-is_active" name="is_active">
+                        <option value="1" {{ $course && $course->is_active?'selected':'' }}>Yes</option>
+                        <option value="0" {{ $course && !$course->is_active?'selected':'' }}>No</option>
+                    </select>
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">

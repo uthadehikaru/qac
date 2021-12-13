@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $member = Member::with(['batches','courses'])->where('user_id',Auth::id())->first();
         $data['member'] = $member;
-        $data['courses'] = Course::orderBy('level')->get();
+        $data['courses'] = Course::orderBy('level')->active()->get();
         $data['incomingEvents'] = Event::incoming()->oldest('event_at')->get();
         return view('member.dashboard', $data);
     }

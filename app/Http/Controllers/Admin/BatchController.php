@@ -77,10 +77,10 @@ class BatchController extends Controller
             'name' => 'required|string',
             'description' => '',
             'sessions' => '',
-            'start_at' => 'date|after_or_equal:registration_end_at',
-            'end_at' => 'date|after_or_equal:start_at',
-            'registration_start_at' => 'date',
-            'registration_end_at' => 'date|after_or_equal:registration_start_at',
+            'start_at' => 'sometimes|date|after_or_equal:registration_end_at',
+            'end_at' => 'sometimes|date|after_or_equal:start_at',
+            'registration_start_at' => 'sometimes|date',
+            'registration_end_at' => 'sometimes|date|after_or_equal:registration_start_at',
         ]);
 
         $batch = Batch::create([
@@ -147,10 +147,10 @@ class BatchController extends Controller
             'name' => 'required|string',
             'description' => '',
             'sessions' => '',
-            'start_at' => 'date|after_or_equal:registration_end_at',
-            'end_at' => 'date|after_or_equal:start_at',
-            'registration_start_at' => 'date',
-            'registration_end_at' => 'date|after_or_equal:registration_start_at',
+            'start_at' => 'sometimes|date|after_or_equal:registration_end_at',
+            'end_at' => 'sometimes|date|after_or_equal:start_at',
+            'registration_start_at' => 'sometimes|date',
+            'registration_end_at' => 'sometimes|date|after_or_equal:registration_start_at',
         ]);
 
         $batch = Batch::find($id);

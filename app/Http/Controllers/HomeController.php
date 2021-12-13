@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['testimonials'] = MemberBatch::testimonial()->take(3)->get();
-        $data['courses'] = Course::with('batches')->get();
+        $data['courses'] = Course::with('batches')->active()->get();
         $data['latest_events'] = Event::latest('event_at')->take(3)->get();
         $data['about_1'] = System::value('about_1');
         $data['about_2'] = System::value('about_2');

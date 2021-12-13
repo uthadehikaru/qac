@@ -70,7 +70,7 @@
             <div class="flex flex-wrap flex-col-reverse sm:flex-row">
             <div class="w-full sm:w-1/2 p-6 mt-6">
                 <video width="400" height="400" controls>
-                <source src="{{ asset('kelas qac.mp4') }}" type="video/mp4">
+                <source src="{{ asset('kelas qac2.mp4') }}" type="video/mp4">
                 </video>
             </div>
             <div class="w-full sm:w-1/2 p-6 mt-6">

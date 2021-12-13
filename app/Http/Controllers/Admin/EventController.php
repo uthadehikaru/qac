@@ -36,7 +36,7 @@ class EventController extends Controller
     public function create()
     {
         $data['event'] = null;
-        $data['courses'] = Course::all();
+        $data['courses'] = Course::active()->get();
         return view('admin.event-form', $data);
     }
 
@@ -93,7 +93,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $data['event'] = Event::find($id);
-        $data['courses'] = Course::all();
+        $data['courses'] = Course::active()->get();
         return view('admin.event-form', $data);
     }
 

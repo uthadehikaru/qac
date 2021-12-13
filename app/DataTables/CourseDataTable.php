@@ -37,6 +37,9 @@ class CourseDataTable extends DataTable
                 $btn = '<a href="'.route('admin.courses.members', $row->id).'" class="text-blue-500">'.$row->participants.' Peserta</a>';
                 return $btn;
             })
+            ->editColumn('is_active', function($row){
+                return $row->is_active?'Yes':'No';
+            })
             ->addColumn('action', function($row){
                 $btn = '<a href="'.route('admin.courses.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
@@ -73,7 +76,7 @@ class CourseDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->buttons(
                         Button::make('create')
                     );
@@ -88,6 +91,8 @@ class CourseDataTable extends DataTable
     {
         return [
             Column::make('name'),
+            Column::make('level'),
+            Column::make('is_active'),
             Column::make('batch'),
             Column::make('participants')->title("Peserta"),
             Column::make('waitinglist'),

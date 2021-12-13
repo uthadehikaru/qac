@@ -14,7 +14,13 @@ class Course extends Model
         'description',
         'fee',
         'level',
+        'is_active',
     ];
+    
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
 
     public function getFeeFormatAttribute($value)
     {

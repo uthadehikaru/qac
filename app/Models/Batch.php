@@ -98,6 +98,11 @@ class Batch extends Model
         return $duration;
     }
 
+    public function getIsFinishedAttribute()
+    {
+        return Carbon::now()->gt($this->end_at);
+    }
+
     public function getIsOpenAttribute()
     {
         return Carbon::now()->betweenIncluded($this->registration_start_at,$this->registration_end_at);

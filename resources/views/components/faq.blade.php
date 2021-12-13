@@ -51,7 +51,7 @@
             </details>
             <details class="mb-4">
                 <summary class="font-semibold pointer  bg-gray-200 rounded-md py-2 px-4">
-                • Siapa saja peserta QAC ?
+                Siapa saja peserta QAC ?
                 </summary>
                 <span>            
                 <p class="py-1">1. Secara umum, pesertanya adalah semua orang yang ingin makin dekat dengan Al-Qur’an sebagai petunjuk hidupnya (Qur’an Seeker, Truth Seeker)</p>
@@ -68,8 +68,8 @@
                 <li>a. Program</li>
                 <li>b. Kapan pendaftaran </li>
                 <li>c. Apa itu QAC </li>
-                <li>d. Sharing dari beberapa orang alumni yang sudah melalui program QAC 1, QAC 2.1 dan QAC 2.2. </li>
-                <p class="py-1">Atau mau berinteraksi lebih lanjut bisa DM admin IG, atau admin WA 087877622174.</p>
+                <li>d. Sharing dari beberapa orang alumni yang sudah melalui program QAC 1.0, QAC 2.0 (QAC 2.1 dan QAC 2.2) serta QAC 3.0 </li>
+                <p class="py-1">Atau mau berinteraksi lebih lanjut bisa DM admin IG, atau admin WA, <a class="text-red-500 pointer" href="https://wa.me/{{ \App\Models\System::value('whatsapp') }}">{{ \App\Models\System::value('whatsapp') }}</a></a>.</p>
                 </span>
             </details>
             <p class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
@@ -99,8 +99,8 @@
                 <p class="py-1">Levelnya yang sudah ada di QAC  :</p>
                 <p class="py-1 pl-4">1. Level dasar : QAC 1 Online Fast Track (QAC 1.0), yaitu level pemula dari yang belum pernah belajar bahasa Arab Al-Qur’an sebelumnya. Di level ini mempelajari hubungan antar kata secara keseluruhan, merupakan dasar tata bahasa Arab Al-Qur’an.</p>
                 <p class="py-1 pl-4">2. Level lanjutan :</p>
-                    <p class="py-1 pl-8">a. QAC 2.1 yaitu merupakan rangkaian awal dari level lanjutan QAC 2 tapi bagian pertama. Di level ini mempelajari 1 kata secara mendalam dengan berbagai macam bentuknya menjadi puluhan jenis kata, merupakan bagian dari morfologi bahasa Arab Al-Qur’an.</p>
-                    <p class="py-1 pl-8">b. QAC 2.2 yaitu rangkaian terakhir dari level lanjutan QAC 2. Di level ini mempelajari 1 kata tetapi lebih dalam lagi dengan berbagai macam bentuknya menjadi ratusan jenis kata, dan merupakan kelengkapan dasar morfologi bahasa Arab Al-Qur’an.</p>
+                    <p class="py-1 pl-8">a. QAC 2.0 yaitu terdiri dari QAC 2.1 & QAC 2.2. Di level ini mempelajari 1 kata secara mendalam dengan berbagai macam bentuknya menjadi ratusan jenis kata, merupakan bagian dasar dan bentuk standar dari morfologi bahasa Arab Al-Qur’an.</p>
+                    <p class="py-1 pl-8">b. QAC 3.0 yaitu merupakan level advance, membahas berbagai macam bentuk tidak standar (abnormal) dari tata bahasa dan morfologi bahasa Arab Al-Qur’an.</p>
                 </span>
             </details>
             <details class="mb-4">
