@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Batch;
+use App\Models\Course;
 use App\Models\MemberBatch;
 use App\Exports\MemberBatchExport;
 use Yajra\DataTables\Html\Button;
