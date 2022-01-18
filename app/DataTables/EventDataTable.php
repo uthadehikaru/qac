@@ -37,10 +37,22 @@ class EventDataTable extends DataTable
                     ->editColumn('event_at', function ($row){
                         return $row->event_at->format('d M Y H:i');
                     })
+                    ->editColumn('thumbnail', function ($row){
+                        if($row->thumbnail)
+                            return "<a href='".$row->imageUrl('thumbnail')."' target='_blank'><img src='".$row->imageUrl('thumbnail')."' width='300' /></a>";
+                        
+                        return "no image";
+                    })
+                    ->editColumn('attachment', function ($row){
+                        if($row->thumbnail)
+                            return "<a href='".$row->fileUrl('attachment')."' target='_blank' class='text-blue-500 pointer'>attachment</a>";
+                        
+                        return "no attachment";
+                    })
                     ->editColumn('course_id', function ($row){
                         return $row->course?$row->course->name:'Umum';
                     })
-                    ->rawColumns(['action']);
+                    ->rawColumns(['action','thumbnail','attachment']);
     }
 
     private $withTrashed = false;
@@ -93,15 +105,14 @@ class EventDataTable extends DataTable
     {
         return [
             Column::make('event_at'),
+            Column::make('thumbnail'),
             Column::make('title'),
             Column::make('course_id')
                 ->title('Umum/Alumni'),
             Column::make('views')
                 ->searchable(false)
                 ->title('dilihat'),
-            Column::make('recipients')
-                ->searchable(false)
-                ->title('Target Peserta'),
+            Column::make('attachment'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

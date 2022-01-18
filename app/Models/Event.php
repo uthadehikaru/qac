@@ -23,6 +23,7 @@ class Event extends Model
         'event_at',
         'is_public',
         'course_id',
+        'attachment',
     ];
     
     protected $casts = [
@@ -40,6 +41,14 @@ class Event extends Model
             'path' => 'events',
             'placeholder' => '/event qac.jpg',
             'rules' => 'image|max:2000',
+        ],
+    ];
+
+    protected static $fileFields  = [
+        'attachment' => [
+            'disk' => 'public',
+            'path' => 'events',
+            'rules' => 'mimes:pdf|max:10000',
         ],
     ];
     
@@ -69,5 +78,9 @@ class Event extends Model
             ->exists();
 
         return false;
+    }
+
+    protected function attachmentUploadFilePath($file) {
+        return $this->slug .'.'. $file->getClientOriginalExtension();
     }
 }

@@ -46,6 +46,10 @@
                 </span>
                 @endif
                 <p class="leading-relaxed mt-2">{!! nl2br($event->content) !!}</p>
+
+                @if($event->attachment)
+                    <a href="{{ $event->fileUrl('attachment') }}" target="_blank" class="text-blue-500 pointer">Download Lampiran</a>
+                @endif
             </div>
             </div>
         </div>

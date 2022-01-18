@@ -49,6 +49,9 @@ class EventCreated extends Notification implements ShouldQueue
                     ->line($this->getMessage())
                     ->action(__('Detail'), $this->getLink());
         
+        if($this->event->attachment)
+            $message->attach(storage_path('app/public/'.$this->event->attachment));
+        
         $message->viewData['event'] = $this->event;
         $message->viewData['user'] = $notifiable;
         return $message;
