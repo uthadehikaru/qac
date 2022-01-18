@@ -44,7 +44,7 @@ class EventDataTable extends DataTable
                         return "no image";
                     })
                     ->editColumn('attachment', function ($row){
-                        if($row->thumbnail)
+                        if($row->attachment)
                             return "<a href='".$row->fileUrl('attachment')."' target='_blank' class='text-blue-500 pointer'>attachment</a>";
                         
                         return "no attachment";
