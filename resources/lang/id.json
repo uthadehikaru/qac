@@ -18,6 +18,7 @@
     "C":"C",
     "City":"Kota",
     "Confirm Password":"Konfirmasi Kata Sandi",
+    "Correct Answer":"Jawaban Tepat",
     "Course Detail":"Detail Kelas",
     "Course":"Kelas",
     "Courses":"Kelas",
@@ -54,10 +55,16 @@
     "New":"Buat",
     "Not Found":"Tidak ditemukan",
 
+    "O":"O",
+    "Option":"Pilihan",
+
     "P":"P",
     "Password":"Kata Sandi",
     "Phone":"Nomor Telepon",
     "Please click the button below to verify your email address.":"Mohon klik tombol dibawah untuk memverifikasi alamat email anda.",
+
+    "Q":"Q",
+    "Question" : "Pertanyaan",
 
     "R":"R",
     "Register":"Daftar",
