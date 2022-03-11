@@ -25,6 +25,7 @@
 
     "D":"D",
     "Dashboard":"Beranda",
+    "Duration" :"Durasi",
 
     "E":"E",
     "Edit":"Ubah",
@@ -50,6 +51,7 @@
     "member.waitinglist":"Selamat, :member telah masuk dalam waiting list :course. Kami akan menginformasikan ketika ada kelas yang tersedia.",
     "Member":"Anggota",
     "Members":"Anggota",
+    "Minutes":"Menit",
 
     "N":"N",
     "New":"Buat",

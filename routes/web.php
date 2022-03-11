@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\Member\DashboardController as MDashboardController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\PasswordController;
@@ -43,6 +44,11 @@ Route::get('/sertifikat/{id}', [HomeController::class, 'certificate'])->name('ce
 Route::get('/login/otp', [OtpController::class, 'index'])->name('auth.otp');
 Route::post('/login/otp/send', [OtpController::class, 'request'])->name('auth.otp.request');
 Route::post('/login/otp', [OtpController::class, 'check']);
+Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.list');
+Route::get('/quiz/{quiz:slug}', [QuizController::class, 'detail'])->name('quiz.detail');
+Route::post('/quiz/{quiz:slug}/finish', [QuizController::class, 'finish'])->name('quiz.finish');
+Route::post('/quiz/{quiz:slug}/apply', [QuizController::class, 'apply'])->name('quiz.apply');
+Route::get('/quiz/{session}/verify', [QuizController::class, 'verify'])->name('quiz.verify');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
