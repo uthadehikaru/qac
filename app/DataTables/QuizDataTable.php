@@ -22,8 +22,14 @@ class QuizDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
+            ->addColumn('schedule', function($row){
+                return $row->duration_date;
+            })
             ->addColumn('questions', function($row){
-                return '<a href="'.route('admin.quiz.questions', $row->id).'" class="ml-3 text-yellow-500">'.count($row->questions).' Questions</a>';
+                return '<a href="'.route('admin.quiz.questions', $row->id).'" class="ml-3 text-blue-500">'.count($row->questions).' Questions</a>';
+            })
+            ->addColumn('participants', function($row){
+                return '<a href="'.route('admin.quiz.participants.index', $row->id).'" class="ml-3 text-green-500">'.count($row->participants).' Participants</a>';
             })
             ->addColumn('action', function($row){
                 $btn = "";
@@ -34,7 +40,7 @@ class QuizDataTable extends DataTable
             ->editColumn('course_id', function ($row){
                 return $row->course?$row->course->name:'Umum';
             })
-            ->rawColumns(['action','questions']);
+            ->rawColumns(['action','questions','participants']);
     }
 
     /**
@@ -80,16 +86,18 @@ class QuizDataTable extends DataTable
                 ->title('Nama'),
             Column::make('course_id')
                 ->title('Umum/Alumni'),
-            Column::make('start_date')
-                ->title('Mulai'),
-            Column::make('end_date')
-                ->title('Akhir'),
+            Column::make('schedule')
+                ->title('Jadwal'),
             Column::make('duration')
                 ->title('Durasi (menit)'),
             Column::make('questions')
                 ->title('Questions')
                 ->searchable(false)
                 ->sortable(false),
+                Column::make('participants')
+                    ->title('Peserta')
+                    ->searchable(false)
+                    ->sortable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

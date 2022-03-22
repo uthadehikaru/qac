@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\MemberBatchController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
+use App\Http\Controllers\Admin\ParticipantController as AdminParticipantController;
 use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CertificateController;
@@ -93,6 +94,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('quiz/{quiz}/questions/{question}', [AdminQuizController::class, 'deleteQuestion'])->name('quiz.questions.delete');
         Route::post('quiz/{id}/questions', [AdminQuizController::class, 'storeQuestions']);
         Route::resource('quiz', AdminQuizController::class);
+
+        Route::delete('quiz/{quiz}/participants/{participant}', [AdminParticipantController::class, 'destroy'])->name('quiz.participants.delete');
+        Route::get('quiz/{quiz}/participants', [AdminParticipantController::class, 'index'])->name('quiz.participants.index');
 
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);

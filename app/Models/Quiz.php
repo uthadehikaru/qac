@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class Quiz extends Model
 {
@@ -28,8 +29,8 @@ class Quiz extends Model
     public static function boot() {
         parent::boot();
 
-        static::deleting(function($member) { 
-             $member->questions()->delete();
+        static::deleting(function($quiz) { 
+             $quiz->questions()->delete();
         });
     }
 
@@ -49,6 +50,11 @@ class Quiz extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
+
     public function getDurationDateAttribute($value)
     {
         $duration = "";
@@ -57,6 +63,16 @@ class Quiz extends Model
         if($this->end_date && $this->start_date<>$this->end_date)
             $duration .= " - ".$this->end_date->format('d M Y');
         return $duration;
+    }
+
+    public function getIsActiveAttribute($value)
+    {
+        return Carbon::now()->between($this->start_date, $this->end_date);
+    }
+
+    public function getIsFinishedAttribute($value)
+    {
+        return Carbon::now()->greaterThan($this->end_date);
     }
 
     public function isAllowed($user)

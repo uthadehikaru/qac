@@ -18,12 +18,15 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $data['latestQuizzes'] = Quiz::simplePaginate(5);
+        $data['latestQuizzes'] = Quiz::latest()->simplePaginate(5);
         return view('quiz-list', $data);
     }
 
     public function detail(Request $request, Quiz $quiz)
     {
+        if(!$quiz->is_active)
+        return back()->with('error','Mohon maaf, quiz ini belum dimulai/sudah selesai');
+
         if($quiz->course_id){
             if(!Auth::check()){
                 session(['url.intended' => url()->current()]);
@@ -115,7 +118,7 @@ class QuizController extends Controller
             else
                 return redirect()->route('quiz.list')->with('error','Anda sudah mengajukan diri, cek email anda untuk mendapatkan akses ke quiz '.$quiz->name);
         }
-        
+
         $participant = Participant::create([
             'quiz_id' => $quiz->id,
             'email' => $request->email,

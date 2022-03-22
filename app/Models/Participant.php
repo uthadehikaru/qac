@@ -21,10 +21,23 @@ class Participant extends Model
     ];
 
     protected $dates = ['start_at','end_at'];
+    
+    protected $casts = [
+        'start_at' => 'date:d M Y H:i:s',
+        'end_at' => 'date:d M Y H:i:s',
+    ];
 
-    public function member()
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($participant) { 
+             $participant->answers()->delete();
+        });
+    }
+
+    public function user()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(User::class);
     }
 
     public function quiz()

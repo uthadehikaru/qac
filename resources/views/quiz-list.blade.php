@@ -53,30 +53,43 @@
                     <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $quiz->name }}</h2>
                     
                     <p>{{ nl2br($quiz->description) }}</p>
-                    @guest
-                        @if($quiz->course_id)
-                        <a href="{{ route('quiz.detail', $quiz->slug) }}" class="text-indigo-500 inline-flex items-center mt-4">
-                            Masuk sebagai anggota
-                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
+                    @if($quiz->is_active)
+                        @guest
+                            @if($quiz->course_id)
+                            <a href="{{ route('quiz.detail', $quiz->slug) }}" class="text-indigo-500 inline-flex items-center mt-4">
+                                Masuk sebagai anggota
+                                <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            @else
+                            <form method="post" action="{{ route('quiz.apply', $quiz->slug) }}">
+                                @csrf
+                                <x-input type="email" name="email" placeholder="Masukkan email anda" />
+                                <x-button>Mulai Quiz</x-button>
+                            </form>
+                            @endif
                         @else
-                        <form method="post" action="{{ route('quiz.apply', $quiz->slug) }}">
-                            @csrf
-                            <x-input type="email" name="email" placeholder="Masukkan email anda" />
-                            <x-button>Mulai Quiz</x-button>
-                        </form>
+                            <a href="{{ route('quiz.detail', $quiz->slug) }}" class="text-indigo-500 inline-flex items-center mt-4">
+                                Mulai Quiz
+                                <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
                         @endif
+                    @elseif($quiz->is_finished)
+                        Terima kasih bagi para partisipan.
                     @else
-                        <a href="{{ route('quiz.detail', $quiz->slug) }}" class="text-indigo-500 inline-flex items-center mt-4">
-                            Mulai Quiz
-                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
+                    <span class="flex py-2 space-x-2s">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <a href="http://www.google.com/calendar/render?action=TEMPLATE&text={{ $quiz->name }}&dates={{ $quiz->start_date->format('Ymd\\THi00') }}/{{ $quiz->end_date->format('Ymd\\THi00') }}&details={{ $quiz->description }}&ctz=Asia/Jakarta&trp=false&sprop=&sprop=name:"
+                        target="_blank" rel="nofollow"
+                        class="pointer text-blue-500">Buat pengingat di google kalendar</a>
+                    </span>
                     @endif
                     </div>
                 </div>
