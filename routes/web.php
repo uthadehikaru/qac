@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\Member\DashboardController as MDashboardController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\PasswordController;
@@ -17,6 +18,8 @@ use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\MemberBatchController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\QuizController as AdminQuizController;
+use App\Http\Controllers\Admin\ParticipantController as AdminParticipantController;
 use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CertificateController;
@@ -42,6 +45,11 @@ Route::get('/sertifikat/{id}', [HomeController::class, 'certificate'])->name('ce
 Route::get('/login/otp', [OtpController::class, 'index'])->name('auth.otp');
 Route::post('/login/otp/send', [OtpController::class, 'request'])->name('auth.otp.request');
 Route::post('/login/otp', [OtpController::class, 'check']);
+Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.list');
+Route::get('/quiz/{quiz:slug}', [QuizController::class, 'detail'])->name('quiz.detail');
+Route::post('/quiz/{quiz:slug}/finish', [QuizController::class, 'finish'])->name('quiz.finish');
+Route::post('/quiz/{quiz:slug}/apply', [QuizController::class, 'apply'])->name('quiz.apply');
+Route::get('/quiz/{session}/verify', [QuizController::class, 'verify'])->name('quiz.verify');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -80,6 +88,16 @@ Route::middleware(['auth'])->group(function () {
         // EVENTS
         Route::get('events/{id}/share', [AdminEventController::class, 'share'])->name('events.share');
         Route::resource('events', AdminEventController::class);
+
+        // QUIZ
+        Route::get('quiz/{id}/questions', [AdminQuizController::class, 'questions'])->name('quiz.questions');
+        Route::get('quiz/{quiz}/questions/{question}', [AdminQuizController::class, 'deleteQuestion'])->name('quiz.questions.delete');
+        Route::post('quiz/{id}/questions', [AdminQuizController::class, 'storeQuestions']);
+        Route::resource('quiz', AdminQuizController::class);
+
+        Route::delete('quiz/{quiz}/participants/{participant}', [AdminParticipantController::class, 'destroy'])->name('quiz.participants.delete');
+        Route::get('quiz/{quiz}/participants', [AdminParticipantController::class, 'index'])->name('quiz.participants.index');
+
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);
 

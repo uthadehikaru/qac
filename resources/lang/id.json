@@ -18,12 +18,14 @@
     "C":"C",
     "City":"Kota",
     "Confirm Password":"Konfirmasi Kata Sandi",
+    "Correct Answer":"Jawaban Tepat",
     "Course Detail":"Detail Kelas",
     "Course":"Kelas",
     "Courses":"Kelas",
 
     "D":"D",
     "Dashboard":"Beranda",
+    "Duration" :"Durasi",
 
     "E":"E",
     "Edit":"Ubah",
@@ -49,15 +51,22 @@
     "member.waitinglist":"Selamat, :member telah masuk dalam waiting list :course. Kami akan menginformasikan ketika ada kelas yang tersedia.",
     "Member":"Anggota",
     "Members":"Anggota",
+    "Minutes":"Menit",
 
     "N":"N",
     "New":"Buat",
     "Not Found":"Tidak ditemukan",
 
+    "O":"O",
+    "Option":"Pilihan",
+
     "P":"P",
     "Password":"Kata Sandi",
     "Phone":"Nomor Telepon",
     "Please click the button below to verify your email address.":"Mohon klik tombol dibawah untuk memverifikasi alamat email anda.",
+
+    "Q":"Q",
+    "Question" : "Pertanyaan",
 
     "R":"R",
     "Register":"Daftar",

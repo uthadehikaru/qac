@@ -31,6 +31,9 @@
                     <x-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
                         {{ __('Events') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.quiz.index')" :active="request()->is('admin/quiz*')">
+                        {{ __('Quizzes') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
                         {{ __('Settings') }}
                     </x-nav-link>
@@ -114,6 +117,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
                 {{ __('Events') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.quiz.index')" :active="request()->is('admin/quiz*')">
+                {{ __('Quizzes') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
                 {{ __('Settings') }}
