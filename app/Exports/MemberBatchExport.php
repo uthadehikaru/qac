@@ -10,11 +10,11 @@ class MemberBatchExport extends DataTablesCollectionExport implements WithMappin
     public function headings(): array
     {
         return [
-            '#',
             'Email',
             'Nama Lengkap',
             'Jenis Kelamin',
             'Alamat',
+            'Propinsi',
             'Telp',
             'Sesi',
             'Status',
@@ -26,11 +26,11 @@ class MemberBatchExport extends DataTablesCollectionExport implements WithMappin
     public function map($row): array
     {
         return [
-            $row['id'],
             $row['email'],
             $row['full_name'],
             $row['gender'],
             $row['address'],
+            $row['province'],
             $row['phone'],
             $row['session'],
             $row['status'],
