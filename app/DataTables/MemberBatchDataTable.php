@@ -92,9 +92,14 @@ class MemberBatchDataTable extends DataTable
     public function query(MemberBatch $model)
     {
         $query = $model->newQuery();
-        $query->select('member_batch.*', 'members.full_name', 'members.phone', 'members.gender', 'members.address', 'users.email');
+        $query->select('member_batch.*', 'members.full_name', 'members.phone', 'members.gender', 'members.address', 'users.email','provinces.name as province');
         $query->join('members','member_batch.member_id','=','members.id');
         $query->join('users','members.user_id','=','users.id');
+        $query->leftJoin('villages','members.village_id','=','villages.id');
+        $query->leftJoin('districts','villages.district_id','=','districts.id');
+        $query->leftJoin('regencies','districts.regency_id','=','regencies.id');
+        $query->leftJoin('provinces','regencies.province_id','=','provinces.id');
+
         $query->where('batch_id',$this->batch_id);
         return $query;
     }
@@ -135,6 +140,7 @@ class MemberBatchDataTable extends DataTable
             Column::make('gender')->title('Jenis Kelamin'),
             Column::make('email')->title('Email'),
             Column::make('address')->title('alamat'),
+            Column::make('province')->title('Propinsi'),
             Column::make('phone')->title('Telp'),
             Column::make('session')->title('Sesi'),
             Column::make('status'),
