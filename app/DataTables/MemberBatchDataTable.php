@@ -48,6 +48,10 @@ class MemberBatchDataTable extends DataTable
                 $sql = "members.phone like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->filterColumn('province', function($query, $keyword) {
+                $sql = "provinces.name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->filterColumn('email', function($query, $keyword) {
                 $sql = "users.email like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
