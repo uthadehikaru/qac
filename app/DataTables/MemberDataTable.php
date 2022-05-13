@@ -33,6 +33,10 @@ class MemberDataTable extends DataTable
                 $sql = "members.address like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->filterColumn('province', function($query, $keyword) {
+                $sql = "provinces.name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-m-y');
             })
@@ -45,7 +49,18 @@ class MemberDataTable extends DataTable
                 return $value;
             })
             ->editColumn('address', function($row){
-                return $row->address_detail;
+                $address = $row->address;
+                if($row->village)
+                    $address .= ", ".$row->village;
+                if($row->district)
+                    $address .= ", ".$row->district;
+                if($row->regency)
+                    $address .= ", ".$row->regency;
+                if($row->province)
+                    $address .= ", ".$row->province;
+                if($row->zipcode)
+                    $address .= ", ".$row->zipcode;
+                return $address;
             })
             ->editColumn('login_at', function($row){
                 if($row->login_at){
@@ -84,15 +99,20 @@ class MemberDataTable extends DataTable
      */
     public function query(Member $model)
     {
-        $select = "members.*,users.email,users.name,users.login_at,users.email_verified_at";
+        $select = "members.*,users.email,users.name,users.login_at,users.email_verified_at"
+        .",villages.name as village,districts.name as district,regencies.name as regency,provinces.name as province";
         
         foreach(Course::all() as $course){
             $select .= ",(SELECT max(status) FROM member_batch mb JOIN batches b ON mb.batch_id=b.id"
                     ." WHERE mb.member_id=members.id AND b.course_id=".$course->id.") AS course_".$course->id;
         }
-        $model = $model->newQuery();
+        $model = $model->with('user')->newQuery();
         $model->selectRaw($select);
         $model->join('users','members.user_id','=','users.id');
+        $model->leftJoin('villages','members.village_id','=','villages.id');
+        $model->leftJoin('districts','villages.district_id','=','districts.id');
+        $model->leftJoin('regencies','districts.regency_id','=','regencies.id');
+        $model->leftJoin('provinces','regencies.province_id','=','provinces.id');
         return $model;
     }
 
@@ -130,6 +150,7 @@ class MemberDataTable extends DataTable
             Column::make('email'),
             Column::make('gender')->title('jenis kelamin'),
             Column::make('address')->title('alamat'),
+            Column::make('province')->title('Propinsi'),
             Column::make('phone')->title('telp')
         ];
         
