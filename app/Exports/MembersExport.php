@@ -5,6 +5,7 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Yajra\DataTables\Exports\DataTablesCollectionExport;
 use App\Models\Course;
+use App\Models\Member;
 
 class MembersExport extends DataTablesCollectionExport implements WithMapping
 {
@@ -17,9 +18,8 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             'Nama Panggilan',
             'Jenis Kelamin',
             'Alamat',
-            'Propinsi',
+            'Propinsi/Kota',
             'Telp',
-            'Kota',
             'Profesi',
             'Pendidikan',
             'Instagram',
@@ -34,16 +34,17 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
 
     public function map($row): array
     {
+        $member = Member::find($row['id']);
+
         $rows = [
             $row['created_at'],
             $row['email'],
             $row['full_name'],
             $row['name'],
             $row['gender'],
-            $row['address'],
-            $row['province'],
+            $member->address_detail,
+            $member->province,
             $row['phone'],
-            $row['city'],
             $row['profesi'],
             $row['pendidikan'],
             $row['instagram'],

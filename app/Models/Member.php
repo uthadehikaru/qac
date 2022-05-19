@@ -94,6 +94,23 @@ class Member extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getProvinceAttribute()
+    {
+        if($this->village_id){
+            $province = DB::table('villages')
+            ->join('districts', 'districts.id', '=', 'villages.district_id')
+            ->join('regencies', 'regencies.id', '=', 'districts.regency_id')
+            ->join('provinces', 'provinces.id', '=', 'regencies.province_id')
+            ->where('villages.id', $this->village_id)
+            ->selectRaw('provinces.*')
+            ->first();
+
+            return $province->name;
+        }
+        
+        return $this->city;
+    }
+
     public function batches()
     {
         return $this->belongsToMany(Batch::class,'member_batch')->withPivot('id','session', 'status')->using(MemberBatch::class);
