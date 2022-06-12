@@ -54,6 +54,9 @@ class EventCreated extends Notification implements ShouldQueue
         
         $message->viewData['event'] = $this->event;
         $message->viewData['user'] = $notifiable;
+
+        \Log::channel('email')->info('Event '.$this->event->title.' sent to '.$notifiable->email);
+        
         return $message;
     }
 
