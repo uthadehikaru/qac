@@ -51,10 +51,6 @@ Route::post('/quiz/{quiz:slug}/finish', [QuizController::class, 'finish'])->name
 Route::post('/quiz/{quiz:slug}/apply', [QuizController::class, 'apply'])->name('quiz.apply');
 Route::get('/quiz/{session}/verify', [QuizController::class, 'verify'])->name('quiz.verify');
 
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
