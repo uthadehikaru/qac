@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
         Route::get('/jobs/retry', [JobController::class, 'retry'])->name('jobs.retry');
+        Route::get('/jobs/empty', [JobController::class, 'empty'])->name('jobs.empty');
         Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class,'index'])->name('logs');
 
         // MEMBERS
