@@ -22,6 +22,8 @@ class DashboardController extends Controller
         $data['all_events'] = Event::count();
         $data['courses'] = Course::orderBy('level')->active()->get();
         $data['batchStatuses'] = MemberBatch::statuses;
+        if(Auth::user()->is_admin)
+            $data['queues'] = \DB::table('jobs')->count();
         return view('admin.dashboard', $data);
     }
 

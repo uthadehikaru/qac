@@ -13,6 +13,10 @@
         <x-alert type="info"><a href="{{ $notification->data['link'] }}" class="text-blue-500 pointer">{{ $notification->data['message']}}</a></x-alert>
     @endforeach
 
+    @if(isset($queues) && $queues)
+      <x-alert type="info">Sedang memproses pengiriman {{ $queues }} email. <a href="{{ route('admin.jobs.index') }}" class="text-yellow-500 pointer">(selengkapnya)</a></x-alert>
+    @endif
+
     @foreach($courses as $course)
       @if($course->lastBatch())
       @php
