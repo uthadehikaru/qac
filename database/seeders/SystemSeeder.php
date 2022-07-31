@@ -16,7 +16,7 @@ class SystemSeeder extends Seeder
     {
         System::create([
             'key'=>'about_1',
-            'value'=>'[{"title":"Apa itu QAC?","content":"QAC adalah singkatan dari Qur\'anic Arabic Course."}]',
+            'value'=>'{"title":"Apa itu QAC?","content":"QAC adalah singkatan dari Qur\'anic Arabic Course."}',
             'is_array'=>true,
         ]);
 
