@@ -14,7 +14,7 @@ class AddColumnCertificateOnBatchesTable extends Migration
     public function up()
     {
         Schema::table('batches', function (Blueprint $table) {
-            $table->foreignId('certificate_id')->constrained();
+            $table->foreignId('certificate_id')->nullable()->constrained();
         });
     }
 

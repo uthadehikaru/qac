@@ -146,18 +146,23 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         $count = 0;
-        if($event->is_public){
-            $users = User::where('role','member')->get();
-            foreach($users as $user){
-                $user->notify(new EventCreated($event));
-                $count++;
-            }
-        }else{
+        if($event->course){
             $memberBatches = MemberBatch::with('member.user')
             ->whereRaw("member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$event->course_id.")" )
+            ->orderBy('login_at','desc')
+            ->orderBy('updated_at','desc')
             ->get();
             foreach($memberBatches as $memberBatch){
                 $memberBatch->member->user->notify(new EventCreated($event));
+                $count++;
+            }
+        }else{
+            $users = User::where('role','member')
+            ->orderBy('login_at','desc')
+            ->orderBy('updated_at','desc')
+            ->get();
+            foreach($users as $user){
+                $user->notify(new EventCreated($event));
                 $count++;
             }
         }

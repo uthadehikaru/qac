@@ -23,11 +23,17 @@ class DatabaseSeeder extends Seeder
             'role'=>'admin',
         ]);
 
-        $this->call([
+        $seeders = [
             SystemSeeder::class,
             CourseSeeder::class,
             BatchSeeder::class,
             EventSeeder::class,
-        ]);
+        ];
+
+        if(config('app.env','local')){
+            $seeders[] = UserSeeder::class;
+        }
+
+        $this->call($seeders);
     }
 }
