@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Str;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,23 +14,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::create([
+        \App\Models\User::firstOrCreate([
+            'email' => 'admin@qacjakarta.id',
+            'role'=>'admin',
+        ],[
             'name' => 'Admin',
-            'email' => 'admin@qacjakarta.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'role'=>'admin',
         ]);
 
         $seeders = [
             SystemSeeder::class,
-            CourseSeeder::class,
-            BatchSeeder::class,
-            EventSeeder::class,
         ];
 
         if(config('app.env','local')){
+            $seeders[] = CourseSeeder::class;
+            $seeders[] = BatchSeeder::class;
+            $seeders[] = EventSeeder::class;
             $seeders[] = UserSeeder::class;
         }
 

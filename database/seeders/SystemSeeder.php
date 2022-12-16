@@ -14,26 +14,30 @@ class SystemSeeder extends Seeder
      */
     public function run()
     {
-        System::create([
+        System::firstOrCreate([
             'key'=>'about_1',
+        ],[
             'value'=>'{"title":"Apa itu QAC?","content":"QAC adalah singkatan dari Qur\'anic Arabic Course."}',
             'is_array'=>true,
         ]);
 
-        System::create([
+        System::firstOrCreate([
             'key'=>'about_2',
+        ],[
             'value'=>'{"title":"Apa saja kelas di QAC?","content":"terdiri dari 3 level: level 1 QAC 1.0, level 2 QAC 2.1, level 2 QAC 2.2"}',
             'is_array'=>true,
         ]);
 
-        System::create([
+        System::firstOrCreate([
             'key'=>'whatsapp',
+        ],[
             'value'=>'62895423485054',
             'is_array'=>false,
         ]);
 
-        System::create([
+        System::firstOrCreate([
             'key'=>'waitinglist',
+        ],[
             'value'=>0,
             'is_array'=>false,
         ]);
