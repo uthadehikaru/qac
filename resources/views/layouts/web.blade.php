@@ -118,15 +118,15 @@
 
                 <p class="mb-2">Assalamu'alaikum Warahmatullahi Wabarakatuh..</p>
 
-                <p class="mb-2">Untuk bisa login masuk ke dalam Website qacjakarta.id, Anda harus sudah menjadi  Alumni QAC.</p>
+                <p class="mb-2">Untuk bisa <a href="{{ route('login') }}" class="text-blue-500 font-bold pointer">masuk</a> ke dalam Website qacjakarta.id, Anda harus sudah menjadi  Alumni QAC.</p>
 
                 <p class="mb-2">Silahkan isi yang dimasukkan saat pendaftaran (yang terdaftar) :</p>
                 <ul class="list-disc ml-4 mb-2">
-                    <li>Kolom Email dengan EMAIL ANDA </li>
-                    <li>* Kolom Pasword* dengan NOMOR HP ANDA </li>
+                    <li><span class="font-bold">Kolom Email</span> dengan <span class="font-bold">EMAIL ANDA</span></li>
+                    <li><span class="font-bold">Kolom Pasword</span> dengan <span class="font-bold">NOMOR HP ANDA</span></li>
                 </ul>
 
-                <p class="mb-2">Bila password lupa, maka klik Reset Password</p>
+                <p class="mb-2">Bila password lupa, maka klik "Lupa kata sandi" atau anda bisa menggunakan OTP untuk login</p>
 
                 <p class="mb-2">Jika mengalami kesulitan, bisa DM instagram <a href="https://www.instagram.com/qacjakarta/" target="_blank">@qacjakarta</a></p>
                 </div>
