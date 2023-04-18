@@ -129,7 +129,7 @@ class RegisteredUserController extends Controller
                 $admin->notify(new AdminWaitinglist($queue));
         }
 
-        event(new Registered($user));
+        //event(new Registered($user));
 
         DB::commit();
 
