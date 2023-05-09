@@ -82,6 +82,7 @@ class MemberController extends Controller
         $member->instagram = $request->instagram;
         $member->village_id = $request->village_id;
         $member->zipcode = $request->zipcode;
+        $member->is_overseas = $request->is_overseas??0;
         $member->save();
 
         return redirect()->route('admin.members.index')->with('status','Member created successfully');
@@ -178,6 +179,7 @@ class MemberController extends Controller
         $member->instagram = $request->instagram;
         $member->village_id = $request->village_id;
         $member->zipcode = $request->zipcode;
+        $member->is_overseas = $request->is_overseas??0;
         $member->save();
 
         return redirect()->route('admin.members.index')->with('status','Member updated successfully');

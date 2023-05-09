@@ -104,6 +104,7 @@ class RegisteredUserController extends Controller
             'instagram' => $request->instagram,
             'village_id'=> $request->village_id,
             'zipcode'=> $request->zipcode,
+            'is_overseas'=> $request->is_overseas??0,
         ]);
 
         if($request->has('batch_id')){

@@ -71,6 +71,9 @@ class BatchRegistration extends Notification
 
     private function getMessage()
     {
-        return __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->full_name]);
+        $message = __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->full_name]);
+        if($this->memberBatch->member->is_overseas)
+            $message .= " [Luar Negeri]";
+        return $message;
     }
 }

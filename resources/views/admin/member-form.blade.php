@@ -160,6 +160,23 @@
                         </select>
                     </div>
                 </div>
+                <div class="md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
+                        Luar Negeri
+                    </label>
+                    <div class="relative">
+                    <div class="relative flex gap-x-3">
+                        <div class="flex h-6 items-center">
+                        <input id="is_overseas" name="is_overseas" type="checkbox" value="1"
+                        {{ $member && $member->is_overseas?'checked':'' }}
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        </div>
+                        <div class="text-sm leading-6">
+                        <label for="comments" class="font-medium text-gray-900">Saat ini berada di luar negeri</label>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
         </form>

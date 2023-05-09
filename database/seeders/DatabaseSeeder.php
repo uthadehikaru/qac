@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -26,13 +27,21 @@ class DatabaseSeeder extends Seeder
 
         $seeders = [
             SystemSeeder::class,
+            CourseSeeder::class,
+            BatchSeeder::class,
         ];
 
+        $sql = ['provinces','districts','regencies','villages'];
+        foreach($sql as $q){
+            $path = base_path('database/indonesia/'.$q.'.sql');
+            DB::unprepared(file_get_contents($path));
+            $this->command->info($q.' table seeded!');
+        }
+
         if(config('app.env','local')){
-            $seeders[] = CourseSeeder::class;
-            $seeders[] = BatchSeeder::class;
             $seeders[] = EventSeeder::class;
             $seeders[] = UserSeeder::class;
+            $seeders[] = CertificateSeeder::class;
         }
 
         $this->call($seeders);

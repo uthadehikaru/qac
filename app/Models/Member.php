@@ -22,11 +22,13 @@ class Member extends Model
         'pendidikan',
         'village_id',
         'zipcode',
+        'is_overseas',
     ];
 
     protected $casts = [
         'login_at' => 'datetime',
         'email_verified_at' => 'datetime',
+        'is_overseas' => 'boolean',
     ];
 
     public static function boot() {

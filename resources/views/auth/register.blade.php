@@ -59,12 +59,22 @@
                         </select>
                     </div>
 
+                    <div class="md:flex md:items-left my-6">
+                        <label class="md:w-full block text-gray-500 font-bold">
+                        <input class="mr-2 leading-tight" type="checkbox" name="is_overseas" value="1">
+                        <span class="text-sm">
+                            Saat ini berada di luar negeri
+                        </span>
+                        </label>
+                    </div>
+
                     <!-- Address -->
                     <div class="mt-4">
                         <x-label for="address" :value="__('Address')" />
 
                         <textarea id="address" class="block mt-1 w-full" type="text" name="address" required>{{ old('address') }}</textarea>
                         <p class="text-sm text-gray-500">* digunakan untuk pengiriman modul, mohon menulis alamat lengkap</p>
+                        <p class="text-sm text-gray-500">** gunakan alamat domisili di indonesia jika anda berada diluar negeri</p>
                     </div>
 
                     <div class="mt-4">

@@ -36,6 +36,9 @@ class MemberDataTable extends DataTable
             ->editColumn('created_at', function($row){
                 return $row->created_at->format('d-m-y');
             })
+            ->editColumn('is_overseas', function($row){
+                return $row->is_overseas?'Ya':'Tidak';
+            })
             ->editColumn('email', function($row){
                 $value = $row->email;
 
@@ -126,6 +129,7 @@ class MemberDataTable extends DataTable
             Column::make('full_name')->title('Nama'),
             Column::make('email'),
             Column::make('gender')->title('jenis kelamin'),
+            Column::make('is_overseas')->title('Luar Negeri'),
             Column::make('address')->title('alamat'),
             Column::make('phone')->title('telp')
         ];
