@@ -42,7 +42,7 @@
                 <a href="http://www.google.com/calendar/render?action=TEMPLATE&text={{ $event->title }}&dates={{ $event->event_at->format('Ymd\\THi00') }}/{{ $event->event_at->addHour()->format('Ymd\\THi00') }}&details={{ $event->content }}&ctz=Asia/Jakarta&trp=false&sprop=&sprop=name:"
                     target="_blank" rel="nofollow"
                     class="pointer text-blue-500 ml-2">
-                    Tambahkan ke kalender google saya</a>
+                    Buat Notifikasi di Google Calendar</a>
                 </span>
                 @endif
                 <p class="leading-relaxed mt-2">{!! nl2br($event->content) !!}</p>
