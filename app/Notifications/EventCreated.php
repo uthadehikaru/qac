@@ -69,7 +69,7 @@ class EventCreated extends Notification implements ShouldQueue
     {
         $message = __('event.created', ['event'=>$this->event->title,'date'=>$this->event->event_at->format('d M Y H:i')]);
         $message .= "<br /><br />".nl2br($this->event->content);
-        $message .= '<br /><br /><a href="http://www.google.com/calendar/render?action=TEMPLATE&text='.$this->event->title.'&dates='.$this->event->event_at->format('Ymd\\THi00').'/'.$this->event->event_at->addHour()->format('Ymd\\THi00').'&details='.$this->event->content.'&ctz=Asia/Jakarta&trp=false&sprop=&sprop=name:"
+        $message .= '<br /><br /><a href="http://www.google.com/calendar/render?action=TEMPLATE&text='.urlencode($this->event->title).'&dates='.$this->event->event_at->format('Ymd\\THi00').'/'.$this->event->event_at->addHour()->format('Ymd\\THi00').'&ctz=Asia/Jakarta&trp=false&sprop=&sprop=name:"
         target="_blank" rel="nofollow"
                     class="pointer text-blue-500 ml-2">
                     Buat Notifikasi di Google Calendar</a>';
