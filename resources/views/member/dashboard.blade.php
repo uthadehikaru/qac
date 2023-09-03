@@ -51,11 +51,11 @@
                         <td class="px-2 py-4 text-sm text-gray-500">
 
                             <div class="flex justify-start space-x-1">
-                                <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="border-2 border-indigo-200 rounded-md p-1">
+                                <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="border-2 bg-indigo-500 text-white rounded-md p-1">
                                     Detail
                                 </a>
                                 @if($batch->file)
-                                <a href="{{ $batch->file->fileUrl('filename') }}" target="_blank" class="border-2 border-indigo-200 rounded-md p-1">
+                                <a href="{{ $batch->file->fileUrl('filename') }}" target="_blank" class="border-2 bg-indigo-500 text-white rounded-md p-1">
                                     Sertifikat
                                 </a>
                                 @endif
@@ -101,11 +101,11 @@
                     <tr>
                         <td class="px-2 py-4">
                             @if($course->lastBatch() && $course->lastBatch()->isOpen)
-                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="text-green-500 border-2 border-indigo-200 rounded-md p-1">Daftar kelas</a>
+                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="bg-green-500 text-white rounded-md p-1">Daftar kelas</a>
                             @elseif($course->members()->where('member_id',$member->id)->exists())
-                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-red-500 border-2 border-indigo-200 rounded-md p-1">Batalkan waiting list</a>
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-red-500 text-white rounded-md p-1">Batalkan waiting list</a>
                             @else
-                            <a href="{{ route('member.waitinglist', $course->id) }}" class="text-blue-500 border-2 border-indigo-200 rounded-md p-1">Daftar Waiting List</a>
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-blue-500 text-white rounded-md p-1">Daftar Waiting List</a>
                             @endif
                         </td>
                         <td class="px-2 py-4">

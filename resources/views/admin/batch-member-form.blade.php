@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-session">
                         Session
                     </label>
@@ -58,7 +58,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-status">
                         Status
                     </label>
@@ -67,6 +67,16 @@
                         @foreach($statuses as $status)
                             <option value="{{ $status }}" {{ $batchMember && $batchMember->status==$status?'selected':'' }}>@lang('batch.status_'.$status)</option>
                         @endforeach
+                    </select>
+                </div>
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-status">
+                        Buku
+                    </label>
+                    <select id="grid-new_book" name="new_book"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
+                        <option value="1" {{ $batchMember && $batchMember->new_book==1?'selected':'' }}>Ya</option>
+                        <option value="0" {{ $batchMember && $batchMember->new_book==0?'selected':'' }}>Tidak</option>
                     </select>
                 </div>
             </div>

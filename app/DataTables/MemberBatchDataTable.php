@@ -84,6 +84,9 @@ class MemberBatchDataTable extends DataTable
             ->editColumn('id', function($row){
                 return "<input type='checkbox' id='row-".$row->id."' value='".$row->id."' name='ids' onClick='check(this)'  />";
             })
+            ->editColumn('new_book', function($row){
+                return $row->new_book? 'Ya':"Tidak";
+            })
             ->rawColumns(['action','phone','status','id']);
     }
 
@@ -147,6 +150,7 @@ class MemberBatchDataTable extends DataTable
             Column::make('province')->title('Propinsi'),
             Column::make('phone')->title('Telp'),
             Column::make('session')->title('Sesi'),
+            Column::make('new_book')->title('Buku'),
             Column::make('status'),
             Column::make('note')->title('Catatan'),
             Column::computed('action')

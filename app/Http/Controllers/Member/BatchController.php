@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Batch;
 use App\Models\Member;
-use App\Models\MemberBatch;
 use App\Notifications\BatchRegistration;
 use App\Notifications\MemberBatchRegistration;
+use Illuminate\Support\Facades\Auth;
 
 class BatchController extends Controller
 {
@@ -24,6 +23,12 @@ class BatchController extends Controller
 
         $data['batch'] = $batch;
         $member = Member::with(['batches','courses'])->where('user_id',Auth::id())->first();
+
+        // check if member already register for this course
+        $data['reseat'] = $member->batches->contains(function ($memberBatch, $key) use ($batch){
+            return $memberBatch->course_id==$batch->course_id;
+        });
+
         $data['member'] = $member;
         return view('member.batch-detail', $data);
     }
@@ -51,7 +56,10 @@ class BatchController extends Controller
 
         $additional = [];
         if($request->has('session'))
-            $additional = ['session'=>$request->session];
+            $additional['session'] = $request->session;
+            
+        if($request->has('new_book'))
+            $additional['new_book'] = $request->new_book;
         
         $member = Auth::user()->member;
         
