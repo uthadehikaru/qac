@@ -21,6 +21,7 @@ class MemberBatch extends Pivot
         'testimonial',
         'member_batch_uu',
         'new_book',
+        'reseat',
     ];
 
     public const statuses = [0,1,3,4,5,6];

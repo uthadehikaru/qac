@@ -101,7 +101,9 @@
                     <tr>
                         <td class="px-2 py-4">
                             @if($course->lastBatch() && $course->lastBatch()->isOpen)
-                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="bg-green-500 text-white rounded-md p-1">Daftar kelas</a>
+                            <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="bg-green-500 text-white rounded-md p-1">
+                                {{ $member->isReseat($course->lastBatch()) ? 'Reseat' : 'Daftar kelas' }}
+                            </a>
                             @elseif($course->members()->where('member_id',$member->id)->exists())
                             <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-red-500 text-white rounded-md p-1">Batalkan waiting list</a>
                             @else

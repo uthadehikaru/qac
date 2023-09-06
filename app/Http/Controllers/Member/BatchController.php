@@ -58,8 +58,13 @@ class BatchController extends Controller
         if($request->has('session'))
             $additional['session'] = $request->session;
             
-        if($request->has('new_book'))
+        if($request->has('new_book')){
             $additional['new_book'] = $request->new_book;
+        }
+
+        if($request->has('reseat')){
+            $additional['reseat'] = 1;
+        }
         
         $member = Auth::user()->member;
         

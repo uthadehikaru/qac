@@ -74,6 +74,8 @@ class BatchRegistration extends Notification
         $message = __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->full_name]);
         if($this->memberBatch->member->is_overseas)
             $message .= " [Luar Negeri]";
+        if($this->memberBatch->reseat)
+            $message .= " [Reseat]";
         return $message;
     }
 }

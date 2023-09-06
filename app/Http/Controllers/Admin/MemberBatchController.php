@@ -138,6 +138,7 @@ class MemberBatchController extends Controller
             'session' => '',
             'status' => 'required',
             'note'=>'',
+            'reseat'=>'',
             'new_book'=>'',
             'testimonial'=>'',
         ]);
@@ -154,6 +155,7 @@ class MemberBatchController extends Controller
             'status'=>$request->status,
             'note'=>$request->note,
             'new_book'=>$request->new_book,
+            'reseat'=>$request->reseat,
             'testimonial'=>$request->testimonial,
         ];
         if($request->status==6)

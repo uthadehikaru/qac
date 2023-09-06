@@ -49,6 +49,8 @@ class Course extends Model
 
     public function lastBatch()
     {
-        return $this->batches()->orderBy('end_at','DESC')->first();
+        return $this->batches->sortByDesc(function($batch, $key){
+            return $batch->end_at;
+        })->first();
     }
 }

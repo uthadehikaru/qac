@@ -115,7 +115,7 @@ class Member extends Model
 
     public function batches()
     {
-        return $this->belongsToMany(Batch::class,'member_batch')->withPivot('id','session', 'status')->using(MemberBatch::class);
+        return $this->belongsToMany(Batch::class,'member_batch')->withPivot('id','session', 'status','new_book','reseat')->using(MemberBatch::class);
     }
 
     public function courses()
@@ -131,5 +131,11 @@ class Member extends Model
         ->where('member_batch.member_id',$this->id)
         ->where('member_batch.status','6')
         ->max('courses.level');
+    }
+
+    public function isReseat($batch){
+        return $this->batches->contains(function ($memberBatch, $key) use ($batch){
+            return $memberBatch->course_id==$batch->course_id;
+        });
     }
 }

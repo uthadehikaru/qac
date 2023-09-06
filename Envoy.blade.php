@@ -7,13 +7,13 @@
 
 @task('deploy', ['on' => 'web'])
     cd /home/u1424128/app
-    git pull origin qac
+    git pull origin main
     php artisan optimize
 @endtask
 
 @task('deploy-full', ['on' => 'web'])
     cd /home/u1424128/app
-    git pull origin qac
+    git pull origin main
     composer install
     php artisan migrate --force
     php artisan optimize
