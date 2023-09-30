@@ -49,12 +49,11 @@ class BatchController extends Controller
         ->wherePivot('status', MemberBatch::STATUS_GRADUATED)
         ->orderBy('pivot_id','desc')->first();
         $lastLevel = $lastBatch?$lastBatch->course->level:0;
-        $lastDate = $lastBatch?$lastBatch->end_at:Carbon::now();
         $currentLevel = $batch?$batch->course->level:0;
         if($lastBatch && $lastBatch->id==$batch->id)
             return back()->with('error','Anda telah mendaftar kelas ini');
 
-        if(Carbon::now()->isBefore($lastDate) || $lastLevel<$currentLevel-1)
+        if($lastLevel<$currentLevel-1)
             return back()->with('error','Maaf, Anda belum menyelesaikan level sebelumnya');
 
         $additional = [];
