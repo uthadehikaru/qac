@@ -12,6 +12,7 @@
         @endif
         | {{ $member->phone }}
         | <a href="{{ route('admin.members.reset', $member->user_id) }}" class="text-red-500 cursor-pointer">Reset Kata Sandi</a>
+        | <a href="{{ route('admin.login.as', $member->user_id) }}" class="text-red-500 cursor-pointer">Login As</a>
         </div>
         <p class="">Pendidikan {{ $member->pendidikan }} | Profesi {{ $member->profesi }}</p>
         <p class="">Alamat : {{ $member->address }}</p>

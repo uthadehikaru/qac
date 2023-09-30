@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\LoginAsUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/jobs/retry', [JobController::class, 'retry'])->name('jobs.retry');
         Route::get('/jobs/empty', [JobController::class, 'empty'])->name('jobs.empty');
         Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class,'index'])->name('logs');
+        Route::get('/login-as/{user:id}', LoginAsUser::class)->name('login.as');
 
         // MEMBERS
         Route::get('members/verify/{id}', [MemberController::class, 'verify'])->name('members.verify');
