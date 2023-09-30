@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Batch;
 use App\Models\Member;
+use App\Models\MemberBatch;
 use App\Notifications\BatchRegistration;
 use App\Notifications\MemberBatchRegistration;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,9 @@ class BatchController extends Controller
             'session' => 'sometimes',
         ]);
 
-        $lastBatch = Auth::user()->member->batches()->orderBy('pivot_id','desc')->first();
+        $lastBatch = Auth::user()->member->batches()
+        ->wherePivot('status', MemberBatch::STATUS_GRADUATED)
+        ->orderBy('pivot_id','desc')->first();
         $lastLevel = $lastBatch?$lastBatch->course->level:0;
         $lastDate = $lastBatch?$lastBatch->end_at:Carbon::now();
         $currentLevel = $batch?$batch->course->level:0;
