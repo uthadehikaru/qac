@@ -12,14 +12,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table qac_db.villages
-CREATE TABLE IF NOT EXISTS `villages` (
-  `id` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `district_id` char(7) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `villages_district_id_index` (`district_id`),
-  CONSTRAINT `villages_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+-- CREATE TABLE IF NOT EXISTS `villages` (
+--   `id` char(10) COLLATE utf8_unicode_ci NOT NULL,
+--   `district_id` char(7) COLLATE utf8_unicode_ci NOT NULL,
+--   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `villages_district_id_index` (`district_id`),
+--   CONSTRAINT `villages_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table qac_db.villages: ~80.434 rows (approximately)
 /*!40000 ALTER TABLE `villages` DISABLE KEYS */;

@@ -12,14 +12,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table qac_db.regencies
-CREATE TABLE IF NOT EXISTS `regencies` (
-  `id` char(4) COLLATE utf8_unicode_ci NOT NULL,
-  `province_id` char(2) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `regencies_province_id_index` (`province_id`),
-  CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+-- CREATE TABLE IF NOT EXISTS `regencies` (
+--   `id` char(4) COLLATE utf8_unicode_ci NOT NULL,
+--   `province_id` char(2) COLLATE utf8_unicode_ci NOT NULL,
+--   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `regencies_province_id_index` (`province_id`),
+--   CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table qac_db.regencies: ~514 rows (approximately)
 /*!40000 ALTER TABLE `regencies` DISABLE KEYS */;

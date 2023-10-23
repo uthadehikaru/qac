@@ -12,11 +12,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table qac_db.provinces
-CREATE TABLE IF NOT EXISTS `provinces` (
-  `id` char(2) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+-- CREATE TABLE IF NOT EXISTS `provinces` (
+--   `id` char(2) COLLATE utf8_unicode_ci NOT NULL,
+--   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table qac_db.provinces: ~34 rows (approximately)
 /*!40000 ALTER TABLE `provinces` DISABLE KEYS */;
