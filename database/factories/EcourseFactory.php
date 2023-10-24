@@ -27,7 +27,16 @@ class EcourseFactory extends Factory
             'price' => $price,
             'price_sell' => $price-$this->faker->numberBetween(100000, $price),
             'views' => $this->faker->numberBetween(0, 1000),
-            'is_published' => $this->faker->boolean(70),
+            'published_at' => $this->faker->boolean(70)?$this->faker->dateTimeThisYear():null,
         ];
+    }
+
+    public function published(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published_at' => $this->faker->dateTimeThisYear(),
+            ];
+        });
     }
 }

@@ -13,6 +13,6 @@ class EcourseSeeder extends Seeder
      */
     public function run(): void
     {
-        Ecourse::factory(100)->create();
+        Ecourse::factory(20)->create();
     }
 }

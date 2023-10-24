@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('price')->default(0);
             $table->unsignedBigInteger('price_sell')->default(0);
             $table->unsignedBigInteger('views')->default(0);
-            $table->boolean('is_published')->default(false);
+            $table->timestamp('published_at')->nullable();
         });
     }
 
