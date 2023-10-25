@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Feature\\EcourseTest::test_user_can_see_ecourse_detail":8},"times":{"Tests\\Feature\\EcourseTest::test_table_ecourse":3.035,"Tests\\Feature\\EcourseTest::test_user_can_see_ecourses_on_homepage":11.09,"Tests\\Feature\\EcourseTest::test_user_can_see_ecourse_detail":10.786,"Tests\\Feature\\EcourseTest::test_user_cannot_see_unpublished_ecourse":1.66}}

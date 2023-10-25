@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             $seeders[] = EventSeeder::class;
             $seeders[] = UserSeeder::class;
             $seeders[] = CertificateSeeder::class;
+            $seeders[] = SectionSeeder::class;
             $seeders[] = EcourseSeeder::class;
         }
 

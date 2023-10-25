@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Ecourse;
+use App\Models\Lesson;
+use App\Models\Section;
 use App\Services\EcourseService;
 use Tests\TestCase;
 
@@ -31,11 +33,14 @@ class EcourseTest extends TestCase
 
     public function test_user_can_see_ecourse_detail(): void
     {
-        $ecourse = Ecourse::factory()->published()->create();
+        $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
+        $lessons = $ecourse->lessons->pluck('subject')->toArray();
 
         $this->get(route('ecourses.show', $ecourse->slug))
         ->assertSeeText($ecourse->title)
-        ->assertSeeText($ecourse->description);
+        ->assertSeeText($ecourse->description)
+        ->assertSeeText($ecourse->price)
+        ->assertSeeTextInOrder($lessons);
     }
 
     public function test_user_cannot_see_unpublished_ecourse(): void

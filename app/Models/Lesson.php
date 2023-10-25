@@ -4,42 +4,39 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use QCod\ImageUp\HasImageUploads;
 
-class Ecourse extends Model
+class Lesson extends Model
 {
     use HasFactory;
-    use HasImageUploads;
 
     protected $guarded = [];
 
-    protected $autoUploadImages = true;
-    
+    use HasImageUploads;
     protected static $imageFields = [
         'thumbnail' => [
             'width' => 400,
             'height' => 400,
             'crop' => true,
             'disk' => 'public',
-            'path' => 'ecourses',
+            'path' => 'lessons',
             'placeholder' => '/event qac.jpg',
             'rules' => 'image|max:2000',
         ],
     ];
 
-    public function scopePublished($query)
+    public function ecourse()
     {
-        return $query->whereNotNull('published_at');
+        return $this->belongsTo(Ecourse::class);
     }
 
-    public function getPublishedAttribute()
+    public function section()
     {
-        return $this->published_at;
+        return $this->belongsTo(Section::class);
     }
 
-    public function lessons(): HasMany
+    public function file()
     {
-        return $this->hasMany(Lesson::class);
+        return $this->hasOne(File::class,'record_id')->where('tablename','modules');
     }
 }
