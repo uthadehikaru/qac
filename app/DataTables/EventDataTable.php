@@ -126,7 +126,7 @@ class EventDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Event_' . date('YmdHis');
     }

@@ -13,7 +13,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class MemberBatchDataTable extends DataTable
 {
-    protected $exportClass = MemberBatchExport::class;
+    protected string $exportClass = MemberBatchExport::class;
 
     private $batch_id = 0;
 
@@ -170,7 +170,7 @@ class MemberBatchDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         $batch = Batch::find($this->batch_id);
         return 'Data Peserta Kelas ' . $batch->full_name . ' per ' . date('d M Y');

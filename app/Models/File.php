@@ -24,11 +24,7 @@ class File extends Model
         'filename' => [
             'disk' => 'public',
             'path' => 'files',
-            'rules' => 'mimes:jpg,jpeg,png,pdf|max:2000',
+            'rules' => 'mimes:jpg,jpeg,png,pdf,mp4',
         ],
     ];
-
-    protected function filenameUploadFilePath($file) {
-        return $this->name .'.'. $this->type;
-    }
 }

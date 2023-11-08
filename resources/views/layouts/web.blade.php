@@ -20,6 +20,11 @@
         .gradient {
             background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
         }
+        @auth
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        @endauth
         </style>
     </head>
     <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
@@ -61,13 +66,33 @@
                 <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ route('event.list') }}">Event</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4 bg-" 
-                @guest
-                    href="javascript:;" onclick="toggleModal()">Masuk
-                @else
-                    href="{{ route(Auth::user()->is_member?'member.dashboard':'admin.dashboard') }}">{{ Auth::user()->name }}
-                @endguest
-                </a>
+                    @guest
+                    <a id="navAction" class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4 bg-white rounded-full w-40 text-center" href="javascript:;" onclick="toggleModal()">Masuk/Daftar</a>
+                    @else
+                    <div class="dropdown inline-block relative">
+                    <a id="navAction" class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4 bg-white rounded-full w-40 text-center" href="#">@lang('Hi'), {{ Auth::user()->name }}</a>
+                        <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-full">
+                            <li class="">
+                                <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
+                                href="{{ route('member.profile') }}">
+                                Profil
+                                </a>
+                                <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
+                                href="{{ route('member.profile') }}">
+                                My Courses
+                                </a>
+                                <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
+                                href="{{ route('member.dashboard') }}">
+                                Kelas QAC
+                                </a>
+                                <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
+                                href="{{ route('logout') }}">
+                                Keluar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    @endguest
                 </li>
             </ul>
             </div>
@@ -130,7 +155,7 @@
 
                 <p class="mb-2">Jika mengalami kesulitan, bisa DM instagram <a href="https://www.instagram.com/qacjakarta/" target="_blank">@qacjakarta</a></p>
                 </div>
-                <div class="bg-gray-200 px-4 py-3 text-right">
+                <div class="bg-white px-4 py-3 text-right">
                     <button type="button" id="close-modal" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="toggleModal()"><i class="fas fa-times"></i> Tutup</button>
                     <a href="{{ route('login') }}" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i class="fas fa-plus"></i> Masuk</a>
                 </div>

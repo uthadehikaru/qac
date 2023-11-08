@@ -14,7 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class MemberCourseDataTable extends DataTable
 {
-    protected $exportClass = MemberBatchExport::class;
+    protected string $exportClass = MemberBatchExport::class;
 
     private $course_id = 0;
 
@@ -120,7 +120,7 @@ class MemberCourseDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         $course = Course::find($this->course_id);
         return 'Data Peserta Kelas ' . $course->name . ' per ' . date('d M Y');

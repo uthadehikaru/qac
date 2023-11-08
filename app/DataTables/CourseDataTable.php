@@ -110,7 +110,7 @@ class CourseDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Course_' . date('YmdHis');
     }

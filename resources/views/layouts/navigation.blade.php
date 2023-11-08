@@ -34,10 +34,16 @@
                     <x-nav-link :href="route('admin.quiz.index')" :active="request()->is('admin/quiz*')">
                         {{ __('Quizzes') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.ecourses.index')" :active="request()->is('admin/ecourses*')">
+                        {{ __('Online Courses') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
                         {{ __('Settings') }}
                     </x-nav-link>
                     @elsecan('is-member')
+                    <x-nav-link :href="route('member.ecourses.index')" :active="request()->is('member/ecourses')">
+                        {{ __('My Courses') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}
                     </x-nav-link>

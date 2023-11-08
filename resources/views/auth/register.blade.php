@@ -18,13 +18,14 @@
                 <p class="py-4">Waktu kursus : {{ $batch->duration }}</p>
                 @endif
 
-                @if($batch)
-                <form method="POST" action="{{ route('register', ['batch_id'=>request('batch_id')]) }}">
-                @elseif($course)
-                <form method="POST" action="{{ route('register', ['course_id'=>request('course_id')]) }}">
-                @endif
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
-
+                    @if($batch)
+                    <input type="hidden" name="batch_id" value="{{ $batch->id }}" />
+                    @endif
+                    @if($course)
+                    <input type="hidden" name="course_id" value="{{ $course->id }}" />
+                    @endif
                     <!-- Full Name -->
                     <div>
                         <x-label for="full_name" :value="__('Full Name')" />
@@ -59,6 +60,7 @@
                         </select>
                     </div>
 
+                    @if($batch || $course)
                     <div class="md:flex md:items-left my-6">
                         <label class="md:w-full block text-gray-500 font-bold">
                         <input class="mr-2 leading-tight" type="checkbox" name="is_overseas" value="1">
@@ -150,6 +152,7 @@
                         <p class="text-sm text-gray-500">mohon pastikan waktu yang sesuai dengan pilihan anda</p>
                     </div>
                     @endif
+                    @endif
 
                     <!-- Email Address -->
                     <div class="mt-4">
@@ -180,6 +183,7 @@
                                         name="password_confirmation" required />
                     </div>
 
+                    @if($batch || $course)
                     <div class="mt-4">
                         <x-label for="password_confirmation" :value="__('Syarat dan Ketentuan')" />
                         <p class="text-sm text-gray-700">Saya dengan senang hati akan melakukan hal berikut: *</p>
@@ -197,6 +201,7 @@
                         <p class="text-sm text-gray-700">3. Akan menjalin kerjasama baik antar peserta dan penyelenggara</p>
                         @endif
                     </div>
+                    @endif
 
                     <div class="md:flex md:items-left my-6">
                         <label class="md:w-full block text-gray-500 font-bold">
@@ -219,75 +224,81 @@
 </div>
 <x-slot name="scripts">
     <script type="text/javascript">
-        $('#province_id').on('change', function() {
-            $("#regency_label").addClass('animate-bounce');
-            $("#regency_id").empty();
-            $("#district_id").empty();
-            $("#village_id").empty();
-            var province_id = $(this).val();
-            $.ajax({
-                type:"POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                url:"{{ url('api/regencies') }}/"+province_id,
-                success: function(data) {
-                    $("#regency_id").html($("<option></option>").val(0).html('-- pilih kota --'));
-                    $.each(data, function (key, row)
-                    {
-                        $("#regency_id").append($("<option></option>").val(row.id).html(row.name));
-                    });
-                    $("#regency_label").removeClass('animate-bounce');
-                },
-                error: function(data) {                
-                    $("#regency_label").removeClass('animate-bounce');
-                }
+        if($('#province_id').length){
+            $('#province_id').on('change', function() {
+                $("#regency_label").addClass('animate-bounce');
+                $("#regency_id").empty();
+                $("#district_id").empty();
+                $("#village_id").empty();
+                var province_id = $(this).val();
+                $.ajax({
+                    type:"POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url:"{{ url('api/regencies') }}/"+province_id,
+                    success: function(data) {
+                        $("#regency_id").html($("<option></option>").val(0).html('-- pilih kota --'));
+                        $.each(data, function (key, row)
+                        {
+                            $("#regency_id").append($("<option></option>").val(row.id).html(row.name));
+                        });
+                        $("#regency_label").removeClass('animate-bounce');
+                    },
+                    error: function(data) {                
+                        $("#regency_label").removeClass('animate-bounce');
+                    }
+                });
             });
-        });
-        $('#regency_id').on('change', function() {
-            $("#district_label").addClass('animate-bounce');
-            $("#district_id").empty();
-            $("#village_id").empty();
-            var regency_id = $(this).val();
-            $.ajax({
-                type:"POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                url:"{{ url('api/districts') }}/"+regency_id,
-                success: function(data) {
-                    $("#district_id").html($("<option></option>").val(0).html('-- pilih kecamatan --'));
-                    $.each(data, function (key, row)
-                    {
-                        $("#district_id").append($("<option></option>").val(row.id).html(row.name));
-                    });
-                    $("#district_label").removeClass('animate-bounce');
-                },
-                error: function(data) {
-                    $("#district_label").removeClass('animate-bounce');
-                }
+        }
+        if($('#regency_id').length){
+            $('#regency_id').on('change', function() {
+                $("#district_label").addClass('animate-bounce');
+                $("#district_id").empty();
+                $("#village_id").empty();
+                var regency_id = $(this).val();
+                $.ajax({
+                    type:"POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url:"{{ url('api/districts') }}/"+regency_id,
+                    success: function(data) {
+                        $("#district_id").html($("<option></option>").val(0).html('-- pilih kecamatan --'));
+                        $.each(data, function (key, row)
+                        {
+                            $("#district_id").append($("<option></option>").val(row.id).html(row.name));
+                        });
+                        $("#district_label").removeClass('animate-bounce');
+                    },
+                    error: function(data) {
+                        $("#district_label").removeClass('animate-bounce');
+                    }
+                });
             });
-        });
-        $('#district_id').on('change', function() {
-            $("#village_label").addClass('animate-bounce');
-            $("#village_id").empty();
-            var district_id = $(this).val();
-            $.ajax({
-                type:"POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                url:"{{ url('api/villages') }}/"+district_id,
-                success: function(data) {
-                    $("#village_id").html($("<option></option>").val(0).html('-- pilih kelurahan --'));
-                    $.each(data, function (key, row)
-                    {
-                        $("#village_id").append($("<option></option>").val(row.id).html(row.name));
-                    });
-                    $("#village_label").removeClass('animate-bounce');
-                },
-                error: function(data) {
-                    $("#village_label").removeClass('animate-bounce');
-                }
+        }
+        if($('#district_id').length){
+            $('#district_id').on('change', function() {
+                $("#village_label").addClass('animate-bounce');
+                $("#village_id").empty();
+                var district_id = $(this).val();
+                $.ajax({
+                    type:"POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url:"{{ url('api/villages') }}/"+district_id,
+                    success: function(data) {
+                        $("#village_id").html($("<option></option>").val(0).html('-- pilih kelurahan --'));
+                        $.each(data, function (key, row)
+                        {
+                            $("#village_id").append($("<option></option>").val(row.id).html(row.name));
+                        });
+                        $("#village_label").removeClass('animate-bounce');
+                    },
+                    error: function(data) {
+                        $("#village_label").removeClass('animate-bounce');
+                    }
+                });
             });
-        });
+        } 
     </script>
 </x-slot>
 </x-web-layout>

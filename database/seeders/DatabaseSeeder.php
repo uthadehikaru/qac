@@ -44,6 +44,8 @@ class DatabaseSeeder extends Seeder
             $seeders[] = CertificateSeeder::class;
             $seeders[] = SectionSeeder::class;
             $seeders[] = EcourseSeeder::class;
+            $seeders[] = LessonSeeder::class;
+            $seeders[] = SubscriptionSeeder::class;
         }
 
         $this->call($seeders);

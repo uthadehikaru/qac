@@ -14,6 +14,10 @@ class Ecourse extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     protected $autoUploadImages = true;
     
     protected static $imageFields = [
@@ -38,8 +42,18 @@ class Ecourse extends Model
         return $this->published_at;
     }
 
+    public function getPriceFormatAttribute()
+    {
+        return 'Rp. '.number_format($this->price,0,",",".").",-";
+    }
+
     public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function subscribers(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
     }
 }

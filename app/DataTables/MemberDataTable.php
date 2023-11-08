@@ -13,7 +13,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class MemberDataTable extends DataTable
 {
-    protected $exportClass = MembersExport::class;
+    protected string $exportClass = MembersExport::class;
 
     /**
      * Build DataTable class.
@@ -152,7 +152,7 @@ class MemberDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Data Anggota per ' . date('j M Y');
     }

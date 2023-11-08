@@ -23,10 +23,15 @@ use App\Http\Controllers\Admin\ParticipantController as AdminParticipantControll
 use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\EcoursesController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\LoginAsUser;
+use App\Http\Controllers\Admin\SubscriptionsController;
 use App\Http\Controllers\EcourseController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Member\MemberEcoursesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +62,8 @@ Route::resource('ecourses', EcourseController::class)
     ->parameters([
         'ecourses' => 'ecourse:slug',
     ]);
+
+Route::get('checkout/{ecourse:slug}', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
@@ -106,6 +113,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);
 
+        // ECOURSES
+        Route::resource('ecourses', EcoursesController::class);
+        Route::resource('ecourses.lessons', LessonsController::class);
+        Route::resource('ecourses.subscriptions', SubscriptionsController::class);
+
         // TESTIMONIALS
         Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');
         Route::resource('testimonials', TestimonialController::class);
@@ -137,6 +149,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/courses/{course_id}/waitinglist', [MDashboardController::class, 'waitingList'])->name('waitinglist');
         Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');
         Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
+        Route::resource('ecourses', MemberEcoursesController::class)->only(['index','show']);
     });
 });
 

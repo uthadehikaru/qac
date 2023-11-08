@@ -21,6 +21,7 @@ class LessonFactory extends Factory
         $ecourses = Ecourse::all()->pluck('id');
         $sections = Section::all()->pluck('id');
         return [
+            'lesson_uu' => $this->faker->uuid(),
             'ecourse_id' => $this->faker->randomElement($ecourses),
             'section_id' => $this->faker->randomElement($sections),
             'subject' => $this->faker->sentence(),

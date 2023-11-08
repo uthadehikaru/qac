@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Ecourse;
+use App\Models\File;
 use App\Models\Lesson;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class LessonSeeder extends Seeder
@@ -14,7 +14,14 @@ class LessonSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach(Ecourse::all() as $ecourse)
-            Lesson::factory(10)->for($ecourse)->create();
+        foreach(Ecourse::all() as $ecourse){
+            $lessons = Lesson::factory(10)->for($ecourse)->create();
+            foreach($lessons as $lesson){
+                File::factory()->create([
+                    'tablename' => 'lessons',
+                    'record_id' => $lesson->id,
+                ]);
+            }
+        }
     }
 }

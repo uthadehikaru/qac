@@ -15,8 +15,8 @@ class Lesson extends Model
     use HasImageUploads;
     protected static $imageFields = [
         'thumbnail' => [
-            'width' => 400,
-            'height' => 400,
+            'width' => 800,
+            'height' => 600,
             'crop' => true,
             'disk' => 'public',
             'path' => 'lessons',
@@ -37,6 +37,6 @@ class Lesson extends Model
 
     public function file()
     {
-        return $this->hasOne(File::class,'record_id')->where('tablename','modules');
+        return $this->hasOne(File::class,'record_id')->where('tablename','lessons');
     }
 }

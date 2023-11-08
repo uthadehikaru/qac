@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->uuid('lesson_uu');
             $table->foreignIdFor(Ecourse::class);
             $table->foreignIdFor(Section::class);
             $table->string('subject');

@@ -15,6 +15,6 @@ class EcourseSeeder extends Seeder
      */
     public function run(): void
     {
-        Ecourse::factory(10)->has(Lesson::factory(rand(5,8))->for(Section::factory()))->create();
+        Ecourse::factory(10)->create();
     }
 }

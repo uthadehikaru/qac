@@ -103,7 +103,7 @@ class ParticipantDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Participant_' . date('YmdHis');
     }
