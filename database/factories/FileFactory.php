@@ -18,11 +18,11 @@ class FileFactory extends Factory
      */
     public function definition(): array
     {
-        $type = $this->faker->randomElement(['jpg','png','pdf','mp4']);
+        $file = $this->faker->file(storage_path('sample\video'), storage_path('app\public\files'), false);
         return [
             'name' => $this->faker->name(),
-            'type' => $type,
-            'filename' => $this->faker->word().'.'.$type,
+            'type' => 'mp4',
+            'filename' => $file,
             'size' => $this->faker->numberBetween(100,10000),
             'tablename' => 'table',
             'record_id' => 0,

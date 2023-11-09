@@ -31,6 +31,8 @@ use App\Http\Controllers\Admin\LoginAsUser;
 use App\Http\Controllers\Admin\SubscriptionsController;
 use App\Http\Controllers\EcourseController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Member\CompleteLesson;
+use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
 
 /*
@@ -150,6 +152,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');
         Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
         Route::resource('ecourses', MemberEcoursesController::class)->only(['index','show']);
+        Route::get('ecourses/{slug}/learn/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
+        Route::post('ecourses/{slug}/learn/{lesson}', CompleteLesson::class)->name('ecourses.lessons.complete');
     });
 });
 

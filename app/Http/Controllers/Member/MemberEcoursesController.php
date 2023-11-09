@@ -24,9 +24,11 @@ class MemberEcoursesController extends Controller
      */
     public function show(SubscriptionService $subscriptionService, string $slug)
     {
-        $ecourse = $subscriptionService->getEcourse($slug, Auth::user()->member->id);
+        $member_id = Auth::user()->member->id;
+        $ecourse = $subscriptionService->getEcourse($slug, $member_id);
         $data['ecourse'] = $ecourse;
-        $data['lessons'] = $subscriptionService->getSections($ecourse->id);
+        $data['sections'] = $subscriptionService->getSections($ecourse->id);
+        $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id);
         return view('member.ecourse', $data);
     }
 }

@@ -13,6 +13,8 @@ class SectionSeeder extends Seeder
      */
     public function run(): void
     {
-        Section::factory(5)->create();
+        $sections = ['Introduction','Textbooks & Resources','Homework & Course Planner','Week 1','Week 2'];
+        foreach($sections as $no=>$section)
+            Section::factory()->create(['order_no'=>$no,'name'=>$section]);
     }
 }

@@ -73,6 +73,7 @@
                     <a id="navAction" class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4 bg-white rounded-full w-40 text-center" href="#">@lang('Hi'), {{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-full">
                             <li class="">
+                                @can('is-member')
                                 <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
                                 href="{{ route('member.profile') }}">
                                 Profil
@@ -85,6 +86,13 @@
                                 href="{{ route('member.dashboard') }}">
                                 Kelas QAC
                                 </a>
+                                @endcan
+                                @can('is-admin')
+                                <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
+                                href="{{ route('admin.dashboard') }}">
+                                Dashboard
+                                </a>
+                                @endcan
                                 <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
                                 href="{{ route('logout') }}">
                                 Keluar

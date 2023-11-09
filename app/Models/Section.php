@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use QCod\ImageUp\HasImageUploads;
 
 class Section extends Model
@@ -24,4 +25,9 @@ class Section extends Model
             'rules' => 'image|max:2000',
         ],
     ];
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }
