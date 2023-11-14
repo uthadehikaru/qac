@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
+        <a href="{{ route('member.ecourses.index') }}" class=" text-blue-500 font-semibold text-xl text-gray-800 leading-tight inline">
+            My Courses
+        </a>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ $ecourse->title }}
+            - {{ $ecourse->title }}
         </h2>
     </x-slot>
 

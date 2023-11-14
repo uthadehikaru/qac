@@ -22,11 +22,13 @@ class UserFactory extends Factory
             if($user->role=='member')
                 Member::factory()->make([
                     'user_id'=>$user->id,
+                    'full_name' => $user->name,
                 ]);
         })->afterCreating(function (User $user) {
             if($user->role=='member')
                 Member::factory()->create([
                     'user_id'=>$user->id,
+                    'full_name' => $user->name,
                 ]);
         });
     }

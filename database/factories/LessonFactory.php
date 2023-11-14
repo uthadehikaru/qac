@@ -20,13 +20,14 @@ class LessonFactory extends Factory
     {
         $ecourses = Ecourse::all()->pluck('id');
         $sections = Section::all()->pluck('id');
+        $subject = $this->faker->sentence(3);
         return [
             'lesson_uu' => $this->faker->uuid(),
             'ecourse_id' => $this->faker->randomElement($ecourses),
             'section_id' => $this->faker->randomElement($sections),
-            'subject' => $this->faker->sentence(),
+            'subject' => $subject,
             'order_no' => $this->faker->numberBetween(0,10),
-            'thumbnail' => 'lessons/'.$this->faker->image(storage_path('app/public/lessons'), 200, 100, 'animals', false),
+            'thumbnail' => 'lessons/'.$this->faker->image(storage_path('app/public/lessons'), 500, 400, null, false, false, $subject, true),
         ];
     }
 }

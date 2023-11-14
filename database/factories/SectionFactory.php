@@ -16,10 +16,11 @@ class SectionFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->word();
         return [
-            'name' => $this->faker->word(),
+            'name' => $name,
             'order_no' => $this->faker->numberBetween(0,10),
-            'thumbnail' => 'sections/'.$this->faker->image(storage_path('app/public/sections'), 200, 100, 'animals', false),
+            'thumbnail' => 'sections/'.$this->faker->image(storage_path('app/public/sections'), 500, 400, null, false, false, $name, true),
         ];
     }
 }

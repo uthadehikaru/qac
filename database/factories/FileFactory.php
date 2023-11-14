@@ -22,7 +22,7 @@ class FileFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'type' => 'mp4',
-            'filename' => $file,
+            'filename' => 'files/'.$file,
             'size' => $this->faker->numberBetween(100,10000),
             'tablename' => 'table',
             'record_id' => 0,

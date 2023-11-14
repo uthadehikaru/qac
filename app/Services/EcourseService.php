@@ -48,6 +48,11 @@ class EcourseService {
         return Lesson::find($id);
     }
 
+    public function getLessonByUUID($lesson_uu): Lesson
+    {
+        return Lesson::where('lesson_uu',$lesson_uu)->first();
+    }
+
     public function updateOrCreateLesson($data): Lesson
     {
         $lesson = null;
@@ -92,5 +97,19 @@ class EcourseService {
     public function memberEcourses($member_id)
     {
         return Ecourse::whereRelation('subscribers','member_id',$member_id)->get();
+    }
+
+    public function getNext($videos, $lesson_uu=null): Lesson|null
+    {
+        $current = false;
+        foreach($videos as $video){
+            if($current)
+                return $video;
+            
+            if(!$lesson_uu || $video->lesson_uu==$lesson_uu)
+                $current = true;
+        }
+
+        return null;
     }
 }

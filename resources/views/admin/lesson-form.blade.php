@@ -59,7 +59,8 @@
                         type="file" name="thumbnail"
                         data-allowed-file-extensions="jpg png jpeg"
                         data-allowed-formats="landscape"
-                        data-max-file-size="2M" />
+                        data-max-file-size="2M"
+                        data-default-file="{{ $lesson? $lesson->imageUrl('thumbnail'): '' }}" />
                     </div>
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
@@ -69,7 +70,20 @@
                         type="file" name="filename"
                         data-allowed-file-extensions="mp4 pdf"
                         data-allowed-formats="landscape"
-                        data-max-file-size="128M" />
+                        data-max-file-size="128M"
+                        data-default-file="{{ $lesson && $lesson->file ? $lesson->file->fileUrl('filename'): '' }}" />
+                    </div>
+                </div>
+                <div class="-mx-3 md:flex mb-6">
+                    <div class="md:w-full px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
+                            @lang('Files')
+                        </label>
+                        <input class="dropify appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        type="file" name="files"
+                        data-allowed-file-extensions="jpg png jpeg"
+                        data-max-file-size="2M"
+                        multiple />
                     </div>
                 </div>
             </div>
