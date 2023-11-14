@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AddSubscriberFromBatch;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\HomeController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Member\CompleteLesson;
 use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,7 @@ Route::get('checkout/{ecourse:slug}', [CheckoutController::class, 'index'])->nam
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
+    Route::post('/upload/{table}/{id}', UploadController::class)->name('upload');
     
     Route::middleware(['roles:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -119,6 +122,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('ecourses', EcoursesController::class);
         Route::resource('ecourses.lessons', LessonsController::class);
         Route::resource('ecourses.subscriptions', SubscriptionsController::class);
+        Route::post('ecourses/{id}/batch', AddSubscriberFromBatch::class)->name('ecourses.batch');
 
         // TESTIMONIALS
         Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');

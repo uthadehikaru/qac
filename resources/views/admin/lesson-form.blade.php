@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
+        <a href="{{ route('admin.ecourses.show', $ecourse->id) }}" class="font-semibold text-xl text-blue-500 leading-tight inline">
+            {{ $ecourse->title }}
+        </a>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __($lesson?'Edit':'New') }} {{ __('Lesson') }}
+            - {{ __($lesson?'Edit':'New') }} {{ __('Lesson') }}
         </h2>
         <div class="float-right">
             <x-link-button  href="javascript:void(0)" onclick="document.getElementById('form').submit();" id="save" class=" ml-3">Simpan</x-button>
@@ -64,36 +67,44 @@
                     </div>
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
-                            @lang('Video/Pdf')
+                            @lang('Video')
                         </label>
                         <input class="dropify appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                         type="file" name="filename"
-                        data-allowed-file-extensions="mp4 pdf"
+                        data-allowed-file-extensions="mp4"
                         data-allowed-formats="landscape"
                         data-max-file-size="128M"
                         data-default-file="{{ $lesson && $lesson->file ? $lesson->file->fileUrl('filename'): '' }}" />
                     </div>
                 </div>
-                <div class="-mx-3 md:flex mb-6">
-                    <div class="md:w-full px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
-                            @lang('Files')
-                        </label>
-                        <input class="dropify appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        type="file" name="files"
-                        data-allowed-file-extensions="jpg png jpeg"
-                        data-max-file-size="2M"
-                        multiple />
-                    </div>
-                </div>
             </div>
         </form>
+        @if($lesson)
+        <h2 class="text-xl mb-4">Download Files</h2>
+        <div class="flex gap-x-2">
+            <div class="w-1/3">
+            <form action="{{ route('upload', ['lesson',$lesson->id]) }}"
+                class="dropzone"
+                id="my-awesome-dropzone">
+            </form>
+            </div>
+            <div class="w-2/3 ml-4">
+                <ul class="list-decimal">
+                @foreach ($lesson->getMedia('downloads') as $media)
+                    <li><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
+        @endif
     </x-panel>
     <x-slot name="styles">        
         <link href="{{ asset('fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('dropzone-5.9.3/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     </x-slot>
     <x-slot name="scripts">        
         <script src="{{ asset('fileuploads/js/fileupload.js') }}"></script>
+        <script src="{{ asset('dropzone-5.9.3/dropzone.min.js') }}"></script>
         <script>
             $('.dropify').dropify({
                 messages: {

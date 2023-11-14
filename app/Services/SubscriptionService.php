@@ -7,8 +7,20 @@ use App\Models\CompletedLesson;
 use App\Models\Ecourse;
 use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\Subscription;
 
 class SubscriptionService {
+
+    public function addMember($data)
+    {
+        return Subscription::firstOrCreate([
+            'ecourse_id' => $data['ecourse_id'],
+            'member_id' => $data['member_id'],
+        ],[
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
+        ]);
+    }
 
     public function getEcourse($slug, $member_id)
     {

@@ -27,7 +27,7 @@ class LessonFactory extends Factory
             'section_id' => $this->faker->randomElement($sections),
             'subject' => $subject,
             'order_no' => $this->faker->numberBetween(0,10),
-            'thumbnail' => 'lessons/'.$this->faker->image(storage_path('app/public/lessons'), 500, 400, null, false, false, $subject, true),
+            'thumbnail' => 'lessons/'.$this->faker->image(storage_path('app/public/lessons'), 600, 400, null, false, false, $subject, true),
         ];
     }
 }

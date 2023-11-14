@@ -26,19 +26,18 @@ class EcoursesDataTable extends DataTable
                 return $row->price_format;
             })
             ->editColumn('lessons_count', function($row){
-                return $row->lessons_count.' lessons';
+                return '<a class="text-blue-500" href="'.route('admin.ecourses.show', $row->id).'">'.$row->lessons_count.' lessons</a>';
             })
             ->editColumn('subscribers_count', function($row){
                 return '<a class="text-blue-500" href="'.route('admin.ecourses.subscriptions.index', $row->id).'">'.$row->subscribers_count.' members</a>';
             })
             ->addColumn('action', function($row){
                 $btn = "";
-                $btn .= '<a href="'.route('admin.ecourses.show', $row->id).'" class="ml-3 text-blue-500">Detail</a>';
                 $btn .= '<a href="'.route('admin.ecourses.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['template','action','subscribers_count']);
+            ->rawColumns(['template','action','subscribers_count','lessons_count']);
     }
 
     /**

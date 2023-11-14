@@ -10,7 +10,7 @@
 
     <x-panel>
         <div class="container mx-auto">
-            <img alt="{{ $ecourse->title }}" class="w-full lg:h-auto h-64 object-contain object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
+            <img alt="{{ $ecourse->title }}" class="w-full lg:h-auto object-contain object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
             <div class="w-full flex p-6">
                 <div class="lg:w-2/3 flex flex-col gap-y-8 mt-4">
                     <h2 class="font-bold text-2xl">Sections ({{ $sections->count() }})</h2>

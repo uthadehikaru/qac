@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\SubscriptionsDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscriptionRequest;
+use App\Models\Batch;
 use App\Models\Ecourse;
 use App\Models\Member;
 use App\Models\Subscription;
@@ -34,6 +35,7 @@ class SubscriptionsController extends Controller
     {
         $data['ecourse'] = Ecourse::find($ecourse_id);
         $data['members'] = Member::select('id','full_name')->get();
+        $data['batches'] = Batch::with('course')->select('id','name','course_id')->get();
         $data['subscription'] = null;
         return view('admin.subscription-form', $data);
     }
@@ -86,6 +88,7 @@ class SubscriptionsController extends Controller
      */
     public function destroy(string $ecourse_id, string $id)
     {
-        //
+        Subscription::where('id',$id)->delete();
+        return response()->json(['status'=>'Deleted successfully']);
     }
 }

@@ -66,7 +66,7 @@ class SubscriptionsDataTable extends DataTable
                     ->orderBy(0)
                     ->buttons(
                         Button::make('create'),
-                        Button::make('reload')
+                        Button::make('reload'),
                     );
     }
 
@@ -97,5 +97,10 @@ class SubscriptionsDataTable extends DataTable
     protected function filename(): String
     {
         return 'Subscription_' . date('YmdHis');
+    }
+ 
+    public function batch()
+    {
+        //...your code here.
     }
 }

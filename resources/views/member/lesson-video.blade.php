@@ -42,8 +42,12 @@
                 </div>
                 <div class="lg:w-1/3 flex flex-col mt-4">
                     <div class="">
-                        <p class="text-lg font-bold">Downloads</p>
-                        <p>untuk bantuan lebih lengkap, silahkan hubungi whatsapp kami</p>
+                        <p class="text-lg font-bold ">Downloads</p>
+                        <ul class="list-decimal pl-4 mt-2">
+                        @foreach ($video->getMedia('downloads') as $media)
+                            <li class="p-2"><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                        @endforeach
+                        </ul>
                     </div>
 
                 </div>

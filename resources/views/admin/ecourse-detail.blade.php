@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
+        <a href="{{ route('admin.ecourses.index') }}" class="font-semibold text-xl text-blue-500 leading-tight inline">
+            Online Courses
+        </a>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ $ecourse->title }}
+            - {{ $ecourse->title }}
         </h2>
         <div class="float-right">
             <x-link-button  href="{{ route('admin.ecourses.index') }}" class=" ml-3" type="warning">Back</x-button>
@@ -18,7 +21,14 @@
                     <div class="flex flex-col gap-y-4">
                         <span class="font-bold text-xl">{{ $loop->iteration }}. {{ $lesson->subject }}</span>
                         <span class="">Section : {{ $lesson->section->name }}</span>
-                        <span class="">File : {{ $lesson->file?->type }}</span>
+                        <span class="">Downloads : </span>
+                        <ul class="list-decimal pl-4">
+                            @forelse ($lesson->getMedia('downloads') as $media)
+                                <li><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                            @empty
+                                No Files
+                            @endforelse
+                        </ul>
                         <div>
                             <a href="{{ route('admin.ecourses.lessons.edit', [$ecourse->id, $lesson->id]) }}" class="text-white bg-yellow-500 p-2 rounded">Edit</a>
                             <a href="#" data-id="{{ $lesson->id }}" class="text-white delete bg-red-500 p-2 rounded">Delete</a>
