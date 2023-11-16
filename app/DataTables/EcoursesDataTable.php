@@ -33,6 +33,7 @@ class EcoursesDataTable extends DataTable
             })
             ->addColumn('action', function($row){
                 $btn = "";
+                $btn .= '<a href="'.route('admin.ecourses.publish', $row->id).'" class="ml-3 '.($row->published_at?'text-green-500':'text-blue-500').'">'.($row->published_at?'Unpublish':'Publish').'</a>';
                 $btn .= '<a href="'.route('admin.ecourses.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                 return $btn;

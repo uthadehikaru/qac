@@ -41,7 +41,7 @@ class LessonsController extends Controller
         $data['ecourse_id'] = $ecourse_id;
         $lesson = $ecourseService->updateOrCreateLesson($data);
         $ecourseService->uploadFile($lesson, $request->file('filename'));
-        return redirect()->route('admin.ecourses.show', $ecourse_id)->with('message','Lesson Added');
+        return redirect()->route('admin.ecourses.lessons.edit', [$ecourse_id, $lesson->id])->with('message','Lesson Added');
     }
 
     /**

@@ -8,6 +8,7 @@
         </h2>
         <div class="float-right">
             <x-link-button  href="{{ route('admin.ecourses.index') }}" class=" ml-3" type="warning">Back</x-button>
+            <x-link-button  href="{{ route('admin.ecourses.subscriptions.index', $ecourse->id) }}" type="success" class=" ml-3">@lang('Subscribers')</x-button>
             <x-link-button  href="{{ route('admin.ecourses.lessons.create', $ecourse->id) }}" class=" ml-3">@lang('New Lesson')</x-button>
         </div>
     </x-slot>

@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\LoginAsUser;
+use App\Http\Controllers\Admin\PublishEcourse;
 use App\Http\Controllers\Admin\SubscriptionsController;
 use App\Http\Controllers\EcourseController;
 use App\Http\Controllers\CheckoutController;
@@ -123,6 +124,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('ecourses.lessons', LessonsController::class);
         Route::resource('ecourses.subscriptions', SubscriptionsController::class);
         Route::post('ecourses/{id}/batch', AddSubscriberFromBatch::class)->name('ecourses.batch');
+        Route::get('ecourses/{id}/publish', PublishEcourse::class)->name('ecourses.publish');
 
         // TESTIMONIALS
         Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');

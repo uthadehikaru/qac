@@ -7,6 +7,7 @@ use App\Models\File;
 use App\Models\Lesson;
 use App\Models\Section;
 use App\Models\Subscription;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -111,5 +112,16 @@ class EcourseService {
         }
 
         return null;
+    }
+
+    public function publish($ecourse_id)
+    {
+        $ecourse = Ecourse::find($ecourse_id);
+        if($ecourse->published_at)
+            $ecourse->published_at = null;
+        else
+            $ecourse->published_at = Carbon::now();
+
+        $ecourse->save();
     }
 }

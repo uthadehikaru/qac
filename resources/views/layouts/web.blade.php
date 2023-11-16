@@ -79,7 +79,7 @@
                                 Profil
                                 </a>
                                 <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
-                                href="{{ route('member.profile') }}">
+                                href="{{ route('member.ecourses.index') }}">
                                 My Courses
                                 </a>
                                 <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
