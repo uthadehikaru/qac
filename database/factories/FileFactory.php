@@ -18,7 +18,7 @@ class FileFactory extends Factory
      */
     public function definition(): array
     {
-        $file = $this->faker->file(storage_path('sample\video'), storage_path('app\public\files'), false);
+        $file = $this->faker->file(storage_path('sample/video'), storage_path('app/public/files'), false);
         return [
             'name' => $this->faker->name(),
             'type' => 'mp4',

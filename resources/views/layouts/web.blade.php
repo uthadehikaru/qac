@@ -93,10 +93,6 @@
                                 Dashboard
                                 </a>
                                 @endcan
-                                <a class="rounded-t bg-white hover:bg-primary py-2 px-4 block whitespace-no-wrap"
-                                href="{{ route('logout') }}">
-                                Keluar
-                                </a>
                             </li>
                         </ul>
                     </div>
