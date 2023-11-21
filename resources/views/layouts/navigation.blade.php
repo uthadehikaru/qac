@@ -37,6 +37,9 @@
                     <x-nav-link :href="route('admin.ecourses.index')" :active="request()->is('admin/ecourses*')">
                         {{ __('Online Courses') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.banners.index')" :active="request()->is('admin/banners*')">
+                        {{ __('Banners') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
                         {{ __('Settings') }}
                     </x-nav-link>

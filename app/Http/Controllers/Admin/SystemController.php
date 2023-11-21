@@ -14,10 +14,16 @@ class SystemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SystemDataTable $dataTable)
+    public function index()
     {
         $data['title'] = "Data Setting";
-        return $dataTable->render('admin.datatable', $data);
+        $data['about_1'] = System::value('about_1');
+        $data['about_2'] = System::value('about_2');
+        $data['whatsapp'] = System::value('whatsapp');
+        $data['waitinglist'] = System::value('waitinglist');
+        $data['popup_image'] = System::value('popup_image');
+        $data['popup_active'] = System::value('popup_active');
+        return view('admin.setting', $data);
     }
 
     /**
@@ -39,14 +45,12 @@ class SystemController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'key' => 'required|string|max:255',
-            'value' => 'required|string',
-            'is_array' => 'required|boolean',
-        ]);
-
-        $data = $request->all();
-        $system = System::create($data);
+        foreach($request->only(['about_1','about_2','whatsapp','waitinglist','popup_image','popup_active']) as $key=>$data){
+            if($key=='popup_image'){
+                $data = $request->file('popup_image')->store('files','public');
+            }
+            System::where('key',$key)->update(['value'=>$data]);
+        }
 
         return redirect()->route('admin.systems.index')->with('status','System created successfully');
     }

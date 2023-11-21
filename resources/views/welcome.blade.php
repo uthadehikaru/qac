@@ -1,24 +1,15 @@
 <x-web-layout>
     <!--Hero-->
-    <div class="pt-24">
-        <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-            <!--Left Col-->
-            <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-            <h1 class="my-4 text-5xl font-bold leading-tight">
-                @lang('LET QUR\'AN EMBRACES YOUR HEART')
-            </h1>
-            <p class="leading-normal text-2xl mb-8">
-                @lang('Because Every Muslim has right to learn it and get one step closer')
-            </p>
-            <a href="#about" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                @lang('Tentang QAC')
-            </a>
+        <div class="pt-20 pb-8">
+            <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+                <div class="owl-carousel">
+                    @forelse ($banners as $banner)
+                    <a href="{{ $banner->url }}" class="w-full text-center"><img src="{{ $banner->imageUrl('image') }}" /></a>
+                    @empty
+                    <div class="w-full text-center"><img src="{{ asset('images/banner.jpg') }}" /></div>
+                    @endforelse
+                </div>
             </div>
-            <!--Right Col-->
-            <div class="w-full md:w-3/5 py-6 text-center">
-            <img class="w-full md:w-3/5 z-50" src="qac banner.png" />
-            </div>
-        </div>
         </div>
         <div class="relative -mt-12 lg:-mt-24">
         <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -225,4 +216,49 @@
             @lang('Daftar')
         </a>
         </section>
+        @if($popup_image)
+        <!-- begin : modal -->
+        <div class="absolute z-10 top-0 w-full left-0" id="popup">
+            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity">
+                    <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                </div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl 
+                transform transition-all mt-12 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <div class="text-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <img src="{{ asset('storage/'.$popup_image) }}" class="w-full" />
+                        
+                        <div class="bg-white px-4 py-3 text-center">
+                            <button type="button" id="close-popup" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="togglePopup()">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+<x-slot name="styles">
+<link rel="stylesheet" href="{{ asset('owlcarousel/assets/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ asset('owlcarousel/assets/owl.theme.default.min.css') }}">
+</x-slot>
+<x-slot name="scripts">
+    <script src="owlcarousel/owl.carousel.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $(".owl-carousel").owlCarousel({
+                items:1,
+                loop:true,
+                autoplay: true,
+                autoplayTimeout:2000,
+                autoplayHoverPause:true
+            });
+            
+    @if($popup_image)
+            $('#close-popup').click(function(){
+                $('#popup').addClass('hidden')
+            })
+    @endif
+        });
+    </script>
+</x-slot>
 </x-web-layout>

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Banner;
 use App\Models\Course;
-use App\Models\Ecourse;
 use App\Models\System;
 use App\Models\Event;
 use App\Models\MemberBatch;
@@ -21,6 +20,11 @@ class HomeController extends Controller
         $data['about_1'] = System::value('about_1');
         $data['about_2'] = System::value('about_2');
         $data['waitinglist'] = System::value('waitinglist');
+        $popup_active= System::value('popup_active');
+        $data['popup_image'] = null;
+        if($popup_active)
+            $data['popup_image'] = System::value('popup_image');
+        $data['banners'] = Banner::where('is_active',1)->get();
         return view('welcome', $data);
     }
 

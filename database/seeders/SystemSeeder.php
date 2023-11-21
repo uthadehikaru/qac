@@ -41,5 +41,19 @@ class SystemSeeder extends Seeder
             'value'=>0,
             'is_array'=>false,
         ]);
+
+        System::firstOrCreate([
+            'key'=>'popup_image',
+        ],[
+            'value'=>'',
+            'is_array'=>false,
+        ]);
+
+        System::firstOrCreate([
+            'key'=>'popup_active',
+        ],[
+            'value'=>0,
+            'is_array'=>false,
+        ]);
     }
 }

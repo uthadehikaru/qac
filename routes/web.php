@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AddSubscriberFromBatch;
+use App\Http\Controllers\Admin\BannersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\HomeController;
@@ -119,6 +120,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);
+        Route::resource('banners', BannersController::class);
 
         // ECOURSES
         Route::resource('ecourses', EcoursesController::class);
