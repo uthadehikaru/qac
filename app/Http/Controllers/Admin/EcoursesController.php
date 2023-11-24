@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\EcoursesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EcourseRequest;
+use App\Models\Ecourse;
 use App\Services\EcourseService;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,8 @@ class EcoursesController extends Controller
     {
         $data = $request->validated();
         $ecourse = $ecourseService->updateOrCreate($data);
-        return redirect()->route('admin.ecourses.show', $ecourse->id);
+        return redirect()->route('admin.ecourses.show', $ecourse->id)
+        ->with('message','data created');
     }
 
     /**
@@ -53,15 +55,19 @@ class EcoursesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['ecourse'] = Ecourse::find($id);
+        return view('admin.ecourse-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EcourseRequest $request, EcourseService $ecourseService, string $id)
     {
-        //
+        $data = $request->validated();
+        $ecourse = $ecourseService->updateOrCreate($data, $id);
+        return redirect()->route('admin.ecourses.show', $ecourse->id)
+        ->with('message','data updated');
     }
 
     /**

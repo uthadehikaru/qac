@@ -23,8 +23,14 @@ class EcourseService {
         return Ecourse::published()->latest()->paginate(6);
     }
 
-    public function updateOrCreate($data): Ecourse
+    public function updateOrCreate($data, $id=null): Ecourse
     {
+        if($id){
+            $ecourse = Ecourse::find($id);
+            $ecourse->update($data);
+            return $ecourse;
+        }
+
         $data['slug'] = Str::slug($data['title']);
         return Ecourse::create($data);
     }

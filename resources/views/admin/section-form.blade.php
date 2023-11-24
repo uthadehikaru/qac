@@ -51,7 +51,7 @@
                 <div class="-mx-3 md:flex mb-6">
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
-                            @lang('Thumbnail')
+                            @lang('Thumbnail') (1024 x 683 px)
                         </label>
                         <input class="dropify appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                         type="file" name="thumbnail"

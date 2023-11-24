@@ -16,9 +16,9 @@ class Section extends Model
     use HasImageUploads;
     protected static $imageFields = [
         'thumbnail' => [
-            'width' => 800,
-            'height' => 600,
-            'crop' => true,
+            'width' => 1024,
+            'height' => 683,
+            'crop' => false,
             'disk' => 'public',
             'path' => 'lessons',
             'placeholder' => '/event qac.jpg',

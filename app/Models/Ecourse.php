@@ -22,9 +22,9 @@ class Ecourse extends Model
     
     protected static $imageFields = [
         'thumbnail' => [
-            'width' => 400,
-            'height' => 400,
-            'crop' => true,
+            'width' => 1024,
+            'height' => 683,
+            'crop' => false,
             'disk' => 'public',
             'path' => 'ecourses',
             'placeholder' => '/event qac.jpg',
