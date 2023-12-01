@@ -62,10 +62,12 @@ class ProfileController extends Controller
             'zipcode'=>'required',
             'profesi' => 'required|string|max:255',
             'pendidikan' => 'required|string|max:255',
+            'is_notify' => '',
         ]);
 
         $user = Auth::user();
         $user->name = $request->name;
+        $user->is_notify = $request->is_notify;
         $user->save();
 
         $member = $user->member;

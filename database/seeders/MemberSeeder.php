@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class MemberSeeder extends Seeder
@@ -13,8 +14,10 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Member::factory()->count(100)
-        ->for(\App\Models\User::factory())
+        User::factory()->count(100)
+        ->has(\App\Models\Member::factory()->state(function (array $attributes, User $user) {
+            return ['full_name' => $user->name];
+        }))
         ->create();
     }
 }

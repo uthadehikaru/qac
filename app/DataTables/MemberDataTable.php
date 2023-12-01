@@ -54,6 +54,9 @@ class MemberDataTable extends DataTable
                 
                 return "-";
             })
+            ->editColumn('is_notify', function($row){
+                return $row->is_notify?'Ya':'Tidak';
+            })
             ->addColumn('action', function($row){
                     $btn = '<a href="'.route('admin.members.show', $row->id).'" class="text-blue-500">Detail</a>';
                     $btn .= '<a href="'.route('admin.members.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
@@ -84,7 +87,7 @@ class MemberDataTable extends DataTable
      */
     public function query(Member $model)
     {
-        $select = "members.*,users.email,users.name,users.login_at,users.email_verified_at";
+        $select = "members.*,users.email,users.name,users.login_at,users.email_verified_at,users.is_notify";
         
         foreach(Course::all() as $course){
             $select .= ",(SELECT max(status) FROM member_batch mb JOIN batches b ON mb.batch_id=b.id"
@@ -138,6 +141,7 @@ class MemberDataTable extends DataTable
         $columns[] = Column::make('course_'.$course->id)->title($course->name)->searchable(false);
 
         $columns[] = Column::make('login_at')->searchable(false)->title('terakhir login');
+        $columns[] = Column::make('is_notify')->searchable(false)->title('Notifikasi');
         $columns[] = Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

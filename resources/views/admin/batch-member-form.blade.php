@@ -39,7 +39,7 @@
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
                         <option value="">-- choose member --</option>
                         @foreach($members as $member)
-                            <option value="{{ $member->id }}">{{ $member->name }}</option>
+                            <option value="{{ $member->id }}">{{ $member->full_name }}</option>
                         @endforeach
                     </select>
                     @endif

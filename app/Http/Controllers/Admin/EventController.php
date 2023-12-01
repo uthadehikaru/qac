@@ -150,7 +150,7 @@ class EventController extends Controller
             $memberBatches = MemberBatch::with('member.user')
             ->join('members','member_batch.member_id','members.id')
             ->join('users','members.user_id','users.id')
-            ->whereRaw("member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$event->course_id.")" )
+            ->whereRaw("users.is_notify is true AND member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$event->course_id.")" )
             ->orderBy('users.login_at','desc')
             ->orderBy('users.updated_at','desc')
             ->get();
