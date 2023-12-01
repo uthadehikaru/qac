@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\LoginAsUser;
+use App\Http\Controllers\Unsubscribe;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Route::get('/quiz/{quiz:slug}', [QuizController::class, 'detail'])->name('quiz.d
 Route::post('/quiz/{quiz:slug}/finish', [QuizController::class, 'finish'])->name('quiz.finish');
 Route::post('/quiz/{quiz:slug}/apply', [QuizController::class, 'apply'])->name('quiz.apply');
 Route::get('/quiz/{session}/verify', [QuizController::class, 'verify'])->name('quiz.verify');
+Route::get('/unsubscribe/{token}', Unsubscribe::class)->name('unsubscribe');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');

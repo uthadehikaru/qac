@@ -155,7 +155,7 @@ class EventController extends Controller
             ->orderBy('users.updated_at','desc')
             ->get();
             foreach($memberBatches as $memberBatch){
-                $memberBatch->member->user->notify(new EventCreated($event));
+                $memberBatch->member->user->notify(new EventCreated($event, $memberBatch->member->user));
                 $count++;
             }
         }else{
@@ -164,7 +164,7 @@ class EventController extends Controller
             ->orderBy('updated_at','desc')
             ->get();
             foreach($users as $user){
-                $user->notify(new EventCreated($event));
+                $user->notify(new EventCreated($event, $user));
                 $count++;
             }
         }

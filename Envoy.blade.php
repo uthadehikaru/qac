@@ -7,7 +7,8 @@
 
 @task('deploy', ['on' => 'web'])
     cd /home/u1424128/app
-    git pull origin main
+    git pull origin v1
+    php artisan migrate --force
     php artisan optimize
 @endtask
 
