@@ -17,6 +17,7 @@ class Banner extends Model
             'disk' => 'public',
             'path' => 'banners',
             'rules' => 'mimes:jpg,jpeg,png|max:2000',
+            'height' => 500,
         ],
     ];
 }

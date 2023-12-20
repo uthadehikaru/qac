@@ -1,7 +1,7 @@
 <x-web-layout>
     <!--Hero-->
-        <div class="pt-20 pb-8">
-            <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        <div class="pt-16 pb-8">
+            <div class="container-full mx-auto flex flex-wrap flex-col md:flex-row items-center">
                 <div class="owl-carousel">
                     @forelse ($banners as $banner)
                     <a href="{{ $banner->url }}" class="w-full text-center"><img src="{{ $banner->imageUrl('image') }}" /></a>
@@ -223,9 +223,9 @@
                 <div class="fixed inset-0 transition-opacity">
                     <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
                 </div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+                <span class="hidden sm:inline-block sm:h-screen">&#8203;</span>
                 <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl 
-                transform transition-all mt-12 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                transform transition-all max-w-4xl sm:my-12 w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <div class="text-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <img src="{{ asset('storage/'.$popup_image) }}" class="w-full" />
                         
@@ -249,7 +249,8 @@
                 items:1,
                 loop:true,
                 autoplay: true,
-                autoplayTimeout:2000,
+                autoplayTimeout:5000,
+                animateOut: 'fadeOut',
                 autoplayHoverPause:true
             });
             
