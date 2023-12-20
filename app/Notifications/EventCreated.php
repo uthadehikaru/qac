@@ -8,21 +8,25 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 use App\Models\Event;
+use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 
 class EventCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    var $event;
+    var $event, $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(Event $event, User $user)
     {
         $this->event = $event;
+        $this->user = $user;
     }
 
     /**
@@ -47,7 +51,9 @@ class EventCreated extends Notification implements ShouldQueue
         $message = (new MailMessage)
                     ->subject('Event QAC : '.$this->event->title)
                     ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink());
+                    ->action(__('Detail'), $this->getLink())
+                    ->markdown('vendor\notifications\email', ['token' => Crypt::encryptString($this->user->id)])
+                    ;
         
         if($this->event->attachment)
             $message->attach(storage_path('app/public/'.$this->event->attachment));
@@ -55,7 +61,7 @@ class EventCreated extends Notification implements ShouldQueue
         $message->viewData['event'] = $this->event;
         $message->viewData['user'] = $notifiable;
 
-        \Log::channel('email')->info('Event '.$this->event->title.' sent to '.$notifiable->email);
+        Log::channel('email')->info('Event '.$this->event->title.' sent to '.$notifiable->email);
         
         return $message;
     }

@@ -20,7 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'is_notify',
     ];
 
     /**
@@ -42,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'login_at' => 'datetime',
     ];
+
+    public function scopeNotify($query)
+    {
+        return $query->where('is_notify',true);
+    }
 
     public function getIsMemberAttribute($value)
     {

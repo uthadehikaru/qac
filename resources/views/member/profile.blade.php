@@ -157,6 +157,20 @@
                     </div>
                 </div>
             </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-is_notify">
+                        Notifikasi Email
+                    </label>
+                    <div class="relative">
+                        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
+                        id="grid-is_notify" name="is_notify" required>
+                        <option value="1" {{ Auth::user()->is_notify?'selected':'' }}>Ya</option>
+                        <option value="0" {{ Auth::user()->is_notify==false?'selected':'' }}>Tidak</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
         </form>
     </x-panel>

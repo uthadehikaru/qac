@@ -39,6 +39,7 @@ use App\Http\Controllers\Member\CompleteLesson;
 use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\Unsubscribe;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,7 @@ Route::resource('ecourses', EcourseController::class)
     ]);
 
 Route::get('checkout/{ecourse:slug}', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/unsubscribe/{token}', Unsubscribe::class)->name('unsubscribe');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
