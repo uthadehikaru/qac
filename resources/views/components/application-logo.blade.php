@@ -1,1 +1,1 @@
-<img class="w-12" src="{{ asset('qacjakarta.png') }}" />
+<img class="h-12" src="{{ asset('qacnew.png') }}" />

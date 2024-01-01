@@ -2,7 +2,7 @@
     <x-slot name="title"> - Event Terbaru QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
     <div class="pt-20">
-        <div class="text-center mb-20 mx-auto text-white">
+        <div class="text-center mb-20 mx-auto">
             <h1 class="sm:text-3xl text-2xl font-medium text-center title-font mb-4">
             Event Terbaru
             </h1>
