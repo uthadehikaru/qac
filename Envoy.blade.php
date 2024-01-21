@@ -24,7 +24,6 @@
 @task('update-testing', ['on' => 'web'])
     cd /home/u1424128/testing
     git pull origin main
-    php artisan migrate --force
     php artisan optimize
 @endtask
 

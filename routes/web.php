@@ -53,6 +53,7 @@ use App\Http\Controllers\Unsubscribe;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/faq', 'faq')->name('faq');
 Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
 Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');

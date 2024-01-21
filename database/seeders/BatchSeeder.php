@@ -29,7 +29,7 @@ class BatchSeeder extends Seeder
             }
         
             if(config('app.env','local')){
-                Batch::create([
+                Batch::factory()->create([
                     'course_id'=>$course_id,
                     'name'=>'Testing',
                     'description'=>'testing',

@@ -1,4 +1,5 @@
-<section id="faq" class="bg-white text-gray-700">
+<x-web-layout>
+<section id="faq" class="bg-white pt-24 text-gray-700">
     <div class="container px-5 py-6 mx-auto">
         <div class="text-center mb-20">
             <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
@@ -175,3 +176,4 @@
         </div>
     </div>
 </section>
+</x-web-layout>

@@ -5,8 +5,11 @@
             <div class="p-6 bg-white border-b border-gray-200">
                 <h2 class="text-4xl text-center w-full">
                 @lang('Pendaftaran')
-                {{ $batch?$batch->full_name:'' }}
-                {{ $course?'Waiting List '.$course->name:'' }}
+                @if($batch)
+                    {{ $batch->full_name }}
+                @else
+                    {{ 'Waiting List '.$course->name }}
+                @endif
                 </h2>
 
                 <!-- Validation Errors -->

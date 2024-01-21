@@ -30,15 +30,38 @@
             </g>
         </svg>
         </div>
+
+        <x-latest-courses :courses="$courses" :waitinglist="$waitinglist" />
         
         <x-latest-event :events="$latest_events" />
 
-        <x-latest-ecourses :ecourses="$latest_ecourses" />
+        <section id="why" class="bg-white border-b pt-12 py-8">
+        <div class="container max-w-5xl mx-auto m-8">
+            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+            @lang('Kenapa perlu belajar bahasa arab?')
+            </h1>
+            <div class="w-full mb-4">
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
+            <div class="flex flex-wrap">
+                <div class="w-full sm:w-1/3 p-6">
+                    <video width="400" height="400" controls>
+                    <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+                <div class="w-full sm:w-1/3 p-6">
+                    <video width="400" height="400" controls>
+                    <source src="{{ asset('apa itu qac2.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        </section>
 
         <section id="about" class="bg-white border-b pt-12 py-8">
         <div class="container max-w-5xl mx-auto m-8">
             <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            @lang('Tentang Kami')
+            @lang('Kenapa belajar bahasa arab di QAC?')
             </h1>
             <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -82,9 +105,10 @@
             </div>
         </div>
         </section>
+
         <section id="testimonial" class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto">
-                <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
+                <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-600">
                     @lang('Testimoni Alumni')
                 </h1>
                 <div class="flex flex-wrap -m-4">
@@ -92,11 +116,11 @@
                     <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
                         <div class="h-full text-center">
                         <p class="text-gray-800 text-xl font-bold my-3">{{ $testimonial->batch->full_name }}</p>
-                        <p class="leading-relaxed text-white text-left">
+                        <p class="leading-relaxed text-gray-600 text-left">
                             {!! nl2br(substr($testimonial->testimonial,0,500)) !!} ...
                         </p>
                         <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
-                        <p class="text-white text-xl">{{ $testimonial->member->full_name }}</p>
+                        <p class="text-gray-600 text-xl">{{ $testimonial->member->full_name }}</p>
                         <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">{{ $testimonial->member->profesi }}</h2>
                         </div>
                     </div>
@@ -109,77 +133,6 @@
                 </div>
             </div>
         </section>
-        <section id="courses" class="bg-gray-100 pt-2 py-8">
-        <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
-            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            @lang('PILIHAN KELAS')
-            </h1>
-            <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-            <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-                @foreach($courses as $course)
-                    @if($course->id==1)
-                    <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
-                    @else
-                    <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-                    @endif
-                        <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                            <div class="p-8 text-3xl font-bold text-center">
-                                {{ $course->name }}
-                            </div>
-                            <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
-                            <p class="p-3">{!! nl2br($course->description) !!}</p>
-                        </div>
-                        <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                        @forelse($course->batches()->open()->get() as $batch)
-                            <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                                Batch {{ $batch->name }}
-                                <p class="text-base">{{ $batch->duration }}</p>
-                                
-                                @if($batch->file)
-                                <a href="{{ $batch->file->fileUrl('filename') }}" 
-                                class="pointer text-sm text-blue-500">
-                                @lang('Unduh') {{ $batch->file->name }} ({{ $batch->file->type }})
-                                </a>
-                                @endif
-                            </div>
-                            <div class="flex flex-col items-center justify-center">
-                                @if($course->level==1)
-                                <a href="{{ route('register', ['batch_id'=>$batch->id]) }}" 
-                                class="hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                @else
-                                <a href="{{ route('member.batch.detail', $batch->id) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                @endif
-                                @lang('Daftar')
-                                </a>
-                                <p class="text-sm font-italic text-yellow-600">pendaftaran sampai {{ $batch->registration_end_at->format('d F Y')}}</p>
-                            </div>
-                        @empty
-                            @if($waitinglist)
-                            <div class="flex flex-col items-center justify-center">
-                                <p class="text-sm font-italic text-yellow-600">Maaf, saat ini tidak ada pendaftaran yang dibuka. silahkan masuk daftar tunggu untuk mengikut kelas selanjutnya.</p>
-                                @if($course->level==1)
-                                <a href="{{ route('register', ['course_id'=>$course->id]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                @else
-                                <a href="{{ route('member.waitinglist', $course->id) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                @endif
-                                @lang('Waiting List') {{ $course->name }}
-                                </a>
-                            </div>
-                            @else
-                            <div class="flex flex-col items-center justify-center">
-                                <p class="text-sm font-italic text-yellow-600">Maaf, saat ini tidak ada pendaftaran yang dibuka. silahkan menunggu informasi untuk mengikut kelas selanjutnya.</p>
-                            </div>
-                            @endif
-                        @endforelse
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        </section>
-        <x-faq />
         <!-- Change the colour #f8fafc to match the previous section colour -->
         <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -210,7 +163,7 @@
             <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <h3 class="my-4 text-3xl leading-tight">
-            @lang('Jadilah bagian dari ratusan alumni')
+            @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <a href="#courses" class="mt-2 mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
             @lang('Daftar')

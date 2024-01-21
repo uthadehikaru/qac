@@ -14,13 +14,11 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        $courses = [1=>'QAC 1.0',2=>'QAC 2.1', 3=>'QAC 2.2'];
+        $courses = [1=>'QAC 1.0',2=>'QAC 2.0', 3=>'QAC 3.0'];
         foreach($courses as $level=>$course){
-            Course::create([
+            Course::factory()->create([
                 'id'=>$level,
                 'name'=>$course,
-                'description'=>'',
-                'fee'=>0,
                 'level'=>$level,
             ]);
         }

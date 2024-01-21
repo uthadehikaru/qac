@@ -1,16 +1,16 @@
-<section id="events" class="bg-white text-gray-600 body-font">
+<section id="events" class="bg-white text-gray-600 body-font pt-12">
     <div class="container px-5 py-2 mx-auto">
         <div class="text-center mb-20">
             <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-            Event Terbaru
+            Event Alumni
             </h1>
             <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-            ikuti kegiatan khusus para anggota QAC
+            ikuti kegiatan khusus para alumni QAC
             </p>
         </div>
         <div class="flex flex-wrap -m-4">
             @foreach($events as $event)
-            <div class="p-4 md:w-1/3">
+            <div class="p-8 md:w-1/3">
                 <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                 <a href="{{ route('event.detail', $event->slug) }}" class=""><img class="w-full object-cover object-center" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}"></a>
                     <div class="p-6">
@@ -39,7 +39,7 @@
             @endforeach
         </div>
         <div class="flex flex-wrap px-6 justify-center">
-            <a href="{{ route('event.list') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            <a href="{{ route('event.list') }}" class="mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 Lihat Semua
             </a>
         </div>

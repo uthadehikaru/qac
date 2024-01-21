@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name') }} {{ $title??'' }}</title>
         
-        <link rel="icon" href="{{ asset('qacjakarta.png') }}" type="image/png" sizes="16x16">
+        <link rel="icon" href="{{ asset('qacnew.png') }}" type="image/png" sizes="16x16">
 
         <!-- Styles -->
         <style>
@@ -60,7 +60,7 @@
                 <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#courses">Kelas</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#faq">FAQ</a>
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ route('faq') }}">FAQ</a>
                 </li>
                 <li class="mr-3">
                 <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ route('event.list') }}">Event</a>

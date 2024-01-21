@@ -30,21 +30,20 @@ class RegisteredUserController extends Controller
         $data['batch'] = $data['course'] = $data['sessions'] = null;
         $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
 
-        if($request->has('batch_id')){
-            $batch = Batch::with('course')->where('registration_start_at', '<=', date('Y-m-d'))
-            ->where('registration_end_at', '>=', date('Y-m-d'))
-            ->where('id',$request->batch_id)
-            ->first();
+        $course = Course::find($request->course_id);
+        $data['course'] = $course;
+        $batch = $course->batches()->open()->first();
 
-            if($batch && $batch->is_open && $batch->course->level==1){
-                $data['batch'] = $batch;
-                $data['sessions'] = $batch->sessions?explode(',', $batch->sessions):false;
-            }
-        }elseif($request->has('course_id')){
-            $course = Course::find($request->course_id);
-            if($course){
-                $data['course'] = $course;
-            }
+        if($course->level>1){
+            if($batch)
+                return redirect()->route('member.batch.detail', $batch->id);
+            else
+                return redirect()->route('member.waitinglist', $course->id);
+        }
+
+        if($batch && $batch->is_open){
+            $data['batch'] = $batch;
+            $data['sessions'] = $batch->sessions?explode(',', $batch->sessions):false;
         }
 
         return view('auth.register', $data);

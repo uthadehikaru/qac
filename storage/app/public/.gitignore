@@ -1,5 +1,5 @@
 *
 !.gitignore
-!/ecourses/.gitignore
-!/lessons/.gitignore
+!ecourses/.gitignore
+!lessons/.gitignore
 !/sections/.gitignore
