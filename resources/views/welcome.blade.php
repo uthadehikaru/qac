@@ -107,7 +107,7 @@
         </section>
 
         <section id="testimonial" class="text-gray-600 body-font">
-            <div class="container px-5 py-24 mx-auto">
+            <div class="container px-5 py-8 mx-auto">
                 <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-600">
                     @lang('Testimoni Alumni')
                 </h1>
@@ -127,7 +127,7 @@
                     @endforeach
                 </div>
                 <div class="flex flex-wrap px-6 justify-center">
-                    <a href="{{ route('testimonials') }}" class="mx-auto lg:mx-0 hover:underline text-black bg-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <a href="{{ route('testimonials') }}" class="mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                         Lihat Semua
                     </a>
                 </div>
@@ -155,17 +155,17 @@
             </g>
         </g>
         </svg>
-        <section id="register" class="container mx-auto text-center pt-12 pt-12 py-6 mb-12">
-        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
+        <section id="register" class="container mx-auto text-center py-6 mb-12">
+        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-600">
             @lang('Bergabung Bersama Para Pejuang')
         </h1>
         <div class="w-full mb-4">
-            <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
+            <div class="h-1 mx-auto bg-red-800 w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <h3 class="my-4 text-3xl leading-tight">
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
-        <a href="#courses" class="mt-2 mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+        <a href="#courses" class="mt-2 mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
             @lang('Daftar')
         </a>
         </section>

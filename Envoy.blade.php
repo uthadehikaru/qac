@@ -15,6 +15,9 @@
     cd /home/u1424128/testing
     git checkout .
     git pull origin main
+    composer install
+    php artisan migrate --force
+    php artisan db:seed SystemSeeder --force
     php artisan optimize
 @endtask
 
