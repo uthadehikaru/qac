@@ -22,6 +22,7 @@
                     <div class="flex flex-col gap-y-4">
                         <span class="font-bold text-xl">{{ $loop->iteration }}. {{ $lesson->subject }}</span>
                         <span class="">Section : {{ $lesson->section->name }}</span>
+                        <span class="">Video : {{ $lesson->getMedia('videos')->first()?->name ?? 'no video' }}</span>
                         <span class="">Downloads : </span>
                         <ul class="list-decimal pl-4">
                             @forelse ($lesson->getMedia('downloads') as $media)
