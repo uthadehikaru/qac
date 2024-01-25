@@ -1,4 +1,4 @@
-<section id="courses" class="bg-gray-100 pt-6 py-8" style="background: url(images/bg.jpg);background-repeat: no-repeat;background-size: cover;">
+<section id="courses" class="bg-gray-100 pt-6 py-8" style="background: url(images/bg2.jpg);background-repeat: no-repeat;background-size: cover;">
         <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
         <div class="flex flex-wrap -m-4">
             @foreach($courses as $course)
