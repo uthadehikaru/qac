@@ -89,18 +89,6 @@ class EcourseService {
         return $subscription;
     }
 
-    public function uploadFile($lesson, $file)
-    {
-        return File::create([
-            'name'=>$lesson->subject,
-            'filename'=>$file->getClientOriginalName(),
-            'tablename'=>'lessons',
-            'record_id'=>$lesson->id,
-            'type'=>$file->getClientOriginalExtension(),
-            'size'=>$file->getSize(),
-        ]);
-    }
-
     public function memberEcourses($member_id)
     {
         return Ecourse::whereRelation('subscribers','member_id',$member_id)->get();

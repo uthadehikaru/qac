@@ -65,25 +65,30 @@
                         data-max-file-size="2M"
                         data-default-file="{{ $lesson? $lesson->imageUrl('thumbnail'): '' }}" />
                     </div>
-                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
-                            @lang('Video') (.mp4)
-                        </label>
-                        <input class="dropify appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        type="file" name="filename"
-                        data-allowed-file-extensions="mp4"
-                        data-allowed-formats="landscape"
-                        data-max-file-size="128M"
-                        data-default-file="{{ $lesson && $lesson->file ? $lesson->file->fileUrl('filename'): '' }}" />
-                    </div>
                 </div>
             </div>
         </form>
         @if($lesson)
-        <h2 class="text-xl mb-4">Download Files</h2>
+        <h2 class="text-xl mb-4">Video</h2>
         <div class="flex gap-x-2">
             <div class="w-1/3">
-            <form action="{{ route('upload', ['lesson',$lesson->id]) }}"
+            <form action="{{ route('upload.lesson.files', ['videos',$lesson->id]) }}"
+                class="dropzone"
+                id="my-awesome-dropzone">
+            </form>
+            </div>
+            <div class="w-2/3 ml-4">
+                <ul class="list-decimal">
+                @foreach ($lesson->getMedia('videos') as $media)
+                    <li><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
+        <h2 class="text-xl my-4">Download Files</h2>
+        <div class="flex gap-x-2">
+            <div class="w-1/3">
+            <form action="{{ route('upload.lesson.files', ['downloads',$lesson->id]) }}"
                 class="dropzone"
                 id="my-awesome-dropzone">
             </form>

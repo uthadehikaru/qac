@@ -38,8 +38,9 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Member\CompleteLesson;
 use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
-use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UploadLessonController;
 use App\Http\Controllers\Unsubscribe;
+use App\Http\Controllers\UploadVideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +79,7 @@ Route::get('/unsubscribe/{token}', Unsubscribe::class)->name('unsubscribe');
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
-    Route::post('/upload/{table}/{id}', UploadController::class)->name('upload');
+    Route::post('/upload/lesson/{collection}/{id}', UploadLessonController::class)->name('upload.lesson.files');
     
     Route::middleware(['roles:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

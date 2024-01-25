@@ -13,7 +13,7 @@
             <div class="w-full flex gap-x-2">
                 <div class="lg:w-2/3">
                     <video width="100%" height="240" controls autoplay controlsList="nodownload">
-                    <source src="{{ asset('storage/'.$video->file->filename) }}" type="video/mp4">
+                    <source src="{{ $video->getMedia('videos')->first()?->getFullUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
                 </div>

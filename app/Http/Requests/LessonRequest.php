@@ -25,14 +25,6 @@ class LessonRequest extends FormRequest
             'subject' => 'required|max:255',
             'section_id' => 'required|exists:sections,id',
             'thumbnail' => 'nullable|image',
-            'filename' => 'nullable|file',
         ];
-    }
-
-    public function validated($key = null, $default = null)
-    {
-        $data = parent::validated();
-        unset($data['filename']);
-        return $data;
     }
 }
