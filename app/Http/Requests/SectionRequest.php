@@ -23,6 +23,7 @@ class SectionRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'description' => 'nullable',
             'order_no' => 'required|min:0',
             'thumbnail' => 'nullable|image',
         ];

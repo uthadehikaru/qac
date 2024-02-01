@@ -68,6 +68,7 @@ class SectionsDataTable extends DataTable
         return [
             Column::make('order_no'),
             Column::make('name'),
+            Column::make('description'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
