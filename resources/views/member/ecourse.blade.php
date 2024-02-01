@@ -4,7 +4,7 @@
             My Courses
         </a>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            - {{ $ecourse->title }}
+            / {{ $ecourse->title }}
         </h2>
     </x-slot>
 
@@ -17,7 +17,10 @@
                     @foreach ($sections as $section)
                         <div class="w-full flex gap-x-4">
                             <img class="w-1/4" src="{{ $section->imageUrl('thumbnail') }}" alt="{{ $section->name }}" />
-                            <a href="{{ route('member.ecourses.lessons', $ecourse->slug) }}" class="font-bold text-xl text-blue-500">{{ $section->name }}</a>
+                            <div>
+                                <a href="{{ route('member.ecourses.lessons', [$ecourse->slug, $section->id]) }}" class="font-bold text-xl text-blue-500">{{ $section->name }}</a>
+                                <p class="text-gray-600">{{ $section->description }}</p>
+                            </div>
                         </div>
                     @endforeach
                 </div>

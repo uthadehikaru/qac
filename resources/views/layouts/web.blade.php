@@ -20,6 +20,10 @@
         .gradient {
             background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
         }
+        .background {
+            background: url(images/bg2.jpg);
+            background-position:center;background-attachment:fixed;
+        }
         @auth
         .dropdown:hover .dropdown-menu {
             display: block;

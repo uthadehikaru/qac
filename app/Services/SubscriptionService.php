@@ -37,6 +37,11 @@ class SubscriptionService {
         ->get();
     }
 
+    public function getSection($section_id)
+    {
+        return Section::find($section_id);
+    }
+
     public function getCompletedLessons($ecourse_id, $member_id)
     {
         return CompletedLesson::whereRelation('lesson', 'ecourse_id', $ecourse_id)
@@ -44,10 +49,12 @@ class SubscriptionService {
         ->get();
     }
 
-    public function getVideos($ecourse_id)
+    public function getVideos($ecourse_id, $section_id=0)
     {
-        return Lesson::where('ecourse_id',$ecourse_id)
-        ->get();
+        $lessons = Lesson::where('ecourse_id',$ecourse_id);
+        if($section_id>0)
+            $lessons->where('section_id',$section_id);
+        return $lessons->get();
     }
 
     public function getLesson($lesson_uu)

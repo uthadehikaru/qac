@@ -22,11 +22,12 @@ class CompleteLesson extends Controller
         $videos = $subscriptionService->getVideos($lesson->ecourse_id);
         $next = $ecourseService->getNext($videos, $lesson_uu);
         $params = [$slug];
-        if($next)
+        if($next){
+            $params[] = $next->section_id;
             $params[] = $next->lesson_uu;
-        else
-            $params[] = $lesson_uu;
-
-        return redirect()->route('member.ecourses.lessons', $params);
+            return redirect()->route('member.ecourses.lessons', $params);
+        }
+        
+        return redirect()->route('member.ecourses.show', $slug);
     }
 }

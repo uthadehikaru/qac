@@ -1,10 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <a href="{{ route('member.ecourses.show', $ecourse->slug) }}" class="text-blue-500 font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ $ecourse->title }}
+        <a href="{{ route('member.ecourses.index') }}" class="text-blue-500 font-semibold text-gray-800 leading-tight inline">
+            My Courses
         </a>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            - {{ $video->subject }}
+        <a href="{{ route('member.ecourses.show', $ecourse->slug) }}" class="text-blue-500 font-semibold text-gray-800 leading-tight inline">
+            / {{ $ecourse->title }}
+        </a>
+        <h2 class="font-semibold text-gray-800 leading-tight inline">
+            / sections / {{ $section->name }}
+        </h2>
+        <h2 class="font-semibold text-gray-800 leading-tight inline">
+            / {{ $video->subject }}
         </h2>
     </x-slot>
 
@@ -18,6 +24,10 @@
                     </video>
                 </div>
                 <div class="lg:w-1/3 flex flex-col gap-y-2">
+                    <div class="flex justify-between border-b py-4 bg-gray-200 px-2">
+                        <p class="font-bold text-gray-800">{{ $section->name }}</p>
+                        <p class="text-gray-600">{{ $videos->count() }} Lessons</p>
+                    </div>
                     @foreach ($videos as $lesson)
                         <x-lesson-card :video="$lesson" :ecourse="$ecourse" :completed="$completed" />
                     @endforeach

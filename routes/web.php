@@ -166,7 +166,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');
         Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
         Route::resource('ecourses', MemberEcoursesController::class)->only(['index','show']);
-        Route::get('ecourses/{slug}/learn/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
+        Route::get('ecourses/{slug}/learn/{section}/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
         Route::post('ecourses/{slug}/learn/{lesson}', CompleteLesson::class)->name('ecourses.lessons.complete');
     });
 });

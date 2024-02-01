@@ -1,12 +1,15 @@
-<section id="events" class="bg-white text-gray-600 body-font pt-12">
+<section id="events" class="bg-white text-gray-600 body-font pt-12 background">
     <div class="container px-5 py-2 mx-auto">
         <div class="text-center mb-20">
-            <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
+            <h1 class="text-3xl md:text-5xl font-bold text-center title-font text-gray-900 mb-4">
             Event Alumni
             </h1>
-            <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+            <p class="text-base md:text-3xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
             ikuti kegiatan khusus para alumni QAC
             </p>
+            <div class="w-full mb-4">
+            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
         </div>
         <div class="flex flex-wrap -m-4">
             @foreach($events as $event)
