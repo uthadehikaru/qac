@@ -38,6 +38,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Member\CompleteLesson;
 use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
+use App\Http\Controllers\Member\SecureVideo;
 use App\Http\Controllers\UploadLessonController;
 use App\Http\Controllers\Unsubscribe;
 use App\Http\Controllers\UploadVideoController;
@@ -167,6 +168,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
         Route::resource('ecourses', MemberEcoursesController::class)->only(['index','show']);
         Route::get('ecourses/{slug}/learn/{section}/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
+        Route::get('ecourses/{slug}/video/{lesson}', SecureVideo::class)->name('ecourses.lessons.video');
         Route::post('ecourses/{slug}/learn/{lesson}', CompleteLesson::class)->name('ecourses.lessons.complete');
     });
 });

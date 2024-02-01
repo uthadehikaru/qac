@@ -17,9 +17,9 @@
     <x-panel>
         <div class="container mx-auto">
             <div class="w-full flex gap-x-2">
-                <div class="lg:w-2/3">
+                <div class="content lg:w-2/3">
                     <video width="100%" height="240" controls autoplay controlsList="nodownload">
-                    <source src="{{ $video->getMedia('videos')->first()?->getFullUrl() }}" type="video/mp4">
+                    <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
                 </div>
@@ -29,7 +29,8 @@
                         <p class="text-gray-600">{{ $videos->count() }} Lessons</p>
                     </div>
                     @foreach ($videos as $lesson)
-                        <x-lesson-card :video="$lesson" :ecourse="$ecourse" :completed="$completed" />
+                        <x-lesson-card :video="$lesson" :ecourse="$ecourse" :completed="$completed"
+                        :current="$video" />
                     @endforeach
                 </div>
             </div>
@@ -64,9 +65,33 @@
             </div>
         </div>
 </x-panel>
+<x-slot name="styles">
+    <style>
+        .content {
+        position: relative;
+        margin: 0 auto;
+        }
+        .content video {
+        width: 100%;
+        display: block;
+        }
+        /* .content:before {
+        content: '';
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        z-index : 2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        } */
+    </style>
+</x-slot>
 <x-slot name="scripts">
 <script>/*<![CDATA[*/
   $(document).ready(function(){
+    document.addEventListener('contextmenu', event => event.preventDefault());
     $('video').on('ended',function(){
         @if($completed->contains($video->id))
             $('#next')[0].click();
