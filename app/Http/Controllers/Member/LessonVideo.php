@@ -29,7 +29,8 @@ class LessonVideo extends Controller
         else
             $data['video'] = $videos->first();
         $data['videos'] = $videos;
-        $data['next'] = $ecourseService->getNext($videos, $lesson_uu);
+        $allVideos = $subscriptionService->getVideos($ecourse->id);
+        $data['next'] = $ecourseService->getNext($allVideos, $lesson_uu);
         return view('member.lesson-video', $data);
     }
 }
