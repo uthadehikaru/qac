@@ -145,7 +145,7 @@
                 </div>
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
                 <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl 
-                transform transition-all mt-12 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                transform transition-all mt-20 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <div class="text-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <h1 class="text-2xl mb-2">PANDUAN LOGIN UNTUK MASUK WEBSITE</h1>
 

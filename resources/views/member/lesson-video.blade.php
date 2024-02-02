@@ -16,14 +16,14 @@
 
     <x-panel>
         <div class="container mx-auto">
-            <div class="w-full flex gap-x-2">
-                <div class="content lg:w-2/3">
+            <div class="w-full flex flex-col md:flex-row gap-x-2">
+                <div class="content md:w-2/3">
                     <video width="100%" height="240" controls autoplay controlsList="nodownload">
                     <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="lg:w-1/3 flex flex-col gap-y-2">
+                <div class="md:w-1/3 flex flex-col gap-y-2">
                     <div class="flex justify-between border-b py-4 bg-gray-200 px-2">
                         <p class="font-bold text-gray-800">{{ $section->name }}</p>
                         <p class="text-gray-600">{{ $videos->count() }} Lessons</p>
@@ -34,8 +34,8 @@
                     @endforeach
                 </div>
             </div>
-            <div class="w-full flex gap-x-2 p-6">
-                <div class="lg:w-2/3 flex flex-col gap-y-8 mt-4 p-4">
+            <div class="w-full flex flex-col md:flex-row gap-x-2 p-6">
+                <div class="md:w-2/3 flex flex-col gap-y-8 mt-4 p-4">
                     @if($completed->contains($video->id))
                         <button type="button" class="w-full rounded border border-blue-500 font-bold text-blue-500 text-center p-4" disabled>Completed</button>
                     @else
@@ -51,7 +51,7 @@
                     <h3 class="font-bold text-xl">End of Lesson</h3>
                     @endif
                 </div>
-                <div class="lg:w-1/3 flex flex-col mt-4">
+                <div class="md:w-1/3 flex flex-col mt-4">
                     <div class="">
                         <p class="text-lg font-bold ">Downloads</p>
                         <ul class="list-decimal pl-4 mt-2">

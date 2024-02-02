@@ -45,12 +45,12 @@
             </div>
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-1/2 p-6">
-                    <video width="100%" controls>
+                    <video width="100%" controls controlsList="nodownload">
                         <source src="{{ asset('media/why1.mp4') }}" type="video/mp4">
                     </video>
                 </div>
                 <div class="w-full sm:w-1/2 p-6">
-                    <video width="100%" controls>
+                    <video width="100%" controls controlsList="nodownload">
                         <source src="{{ asset('media/why2.mp4') }}" type="video/mp4">
                     </video>
                 </div>
@@ -76,12 +76,12 @@
                 </p>
             </div>
             <div class="w-full sm:w-1/3 p-6">
-            <video width="400" height="400" controls>
+            <video width="400" height="400" controls controlsList="nodownload">
             <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
             </video>
             </div>
             <div class="w-full sm:w-1/3 p-6">
-            <video width="400" height="400" controls>
+            <video width="400" height="400" controls controlsList="nodownload">
             <source src="{{ asset('apa itu qac2.mp4') }}" type="video/mp4">
             </video>
             </div>

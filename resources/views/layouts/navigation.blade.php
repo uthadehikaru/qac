@@ -134,6 +134,9 @@
                 {{ __('Settings') }}
             </x-responsive-nav-link>
             @elsecan('is-member')
+            <x-responsive-nav-link :href="route('member.ecourses.index')" :active="request()->is('member/ecourses')">
+                {{ __('My Courses') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                 {{ __('Profile') }}
             </x-responsive-nav-link>
