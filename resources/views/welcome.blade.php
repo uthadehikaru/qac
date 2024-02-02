@@ -152,7 +152,7 @@
         </section>
         @if($popup_image)
         <!-- begin : modal -->
-        <div class="absolute z-10 top-0 w-full left-0" id="popup">
+        <div class="fixed z-10 overflow-y-auto top-20 w-full left-0" id="popup">
             <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity">
                     <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
