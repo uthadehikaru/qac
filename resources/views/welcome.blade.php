@@ -46,12 +46,12 @@
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-1/3 p-6">
                     <video width="400" height="800" controls controlsList="nodownload">
-                        <source src="{{ asset('media/why1.mp4') }}?v=20240205" type="video/mp4">
+                        <source src="{{ asset('media/why1.1.mp4') }}?v=20240205" type="video/mp4">
                     </video>
                 </div>
                 <div class="w-full sm:w-1/3 p-6">
                     <video width="400" height="800" controls controlsList="nodownload">
-                        <source src="{{ asset('media/why2.mp4') }}?v=20240205" type="video/mp4">
+                        <source src="{{ asset('media/why2.1.mp4') }}?v=20240205" type="video/mp4">
                     </video>
                 </div>
                 <div class="w-full sm:w-1/3 p-6">
