@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
         if(Auth::user()->is_admin)
             return redirect()->route('admin.dashboard');
 
-        return redirect()->route('member.dashboard');
+        return redirect()->route('member.ecourses.index');
     }
 
     /**

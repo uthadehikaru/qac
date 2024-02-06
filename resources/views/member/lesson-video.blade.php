@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <a href="{{ route('member.ecourses.index') }}" class="text-blue-500 font-semibold text-gray-800 leading-tight inline">
+        <a href="{{ route('member.ecourses.index') }}" class="text-red-800 font-semibold text-gray-800 leading-tight inline">
             My Courses
         </a>
-        <a href="{{ route('member.ecourses.show', $ecourse->slug) }}" class="text-blue-500 font-semibold text-gray-800 leading-tight inline">
+        <a href="{{ route('member.ecourses.show', $ecourse->slug) }}" class="text-red-800 font-semibold text-gray-800 leading-tight inline">
             / {{ $ecourse->title }}
         </a>
         <h2 class="font-semibold text-gray-800 leading-tight inline">
@@ -37,11 +37,11 @@
             <div class="w-full flex flex-col md:flex-row gap-x-2 p-6">
                 <div class="md:w-2/3 flex flex-col gap-y-8 mt-4 p-4">
                     @if($completed->contains($video->id))
-                        <button type="button" class="w-full rounded border border-blue-500 font-bold text-blue-500 text-center p-4" disabled>Completed</button>
+                        <button type="button" class="w-full rounded border border-red-800 font-bold text-red-800 text-center p-4" disabled>Completed</button>
                     @else
                     <form method="POST" id="complete-form" action="{{ route('member.ecourses.lessons.complete', [$ecourse->slug, $video->lesson_uu]) }}">
                         @csrf
-                        <button type="submit" class="w-full rounded bg-blue-500 font-bold text-white text-center p-4 hover:bg-blue-400">Complete</button>
+                        <button type="submit" class="w-full rounded bg-red-800 font-bold text-white text-center p-4 hover:opacity-75">Complete</button>
                     </form>
                     @endif
                     @if($next)
@@ -56,7 +56,7 @@
                         <p class="text-lg font-bold ">Downloads</p>
                         <ul class="list-decimal pl-4 mt-2">
                         @foreach ($video->getMedia('downloads') as $media)
-                            <li class="p-2"><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                            <li class="p-2"><a href="{{ $media->getFullUrl() }}" class="text-red-800">{{ $media->file_name }}</a></li>
                         @endforeach
                         </ul>
                     </div>

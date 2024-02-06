@@ -12,10 +12,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route(Auth::user()->is_member?'member.dashboard':'admin.dashboard')" :active="request()->is('*dashboard')">
+                    @can('is-admin')
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->is('*dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @can('is-admin')
                     <x-nav-link :href="route('admin.members.index')" :active="request()->is('admin/members*')">
                         {{ __('Members') }}
                     </x-nav-link>
@@ -46,6 +46,9 @@
                     @elsecan('is-member')
                     <x-nav-link :href="route('member.ecourses.index')" :active="request()->is('member/ecourses')">
                         {{ __('My Courses') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('member.dashboard')" :active="request()->is('*dashboard')">
+                        {{ __('Kelas QAC') }}
                     </x-nav-link>
                     <x-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                         {{ __('Profile') }}
@@ -108,10 +111,10 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route(Auth::user()->is_member?'member.dashboard':'admin.dashboard')" :active="request()->is('*dashboard')">
+            @can('is-admin')
+            <x-responsive-nav-link :href="'admin.dashboard'" :active="request()->is('*dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @can('is-admin')
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->is('admin/members*')">
                 {{ __('Members') }}
             </x-responsive-nav-link>
@@ -136,6 +139,9 @@
             @elsecan('is-member')
             <x-responsive-nav-link :href="route('member.ecourses.index')" :active="request()->is('member/ecourses')">
                 {{ __('My Courses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('member.dashboard')" :active="request()->is('*dashboard')">
+                {{ __('Kelas QAC') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                 {{ __('Profile') }}

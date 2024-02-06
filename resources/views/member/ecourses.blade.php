@@ -1,10 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('My Courses') }}
-        </h2>
-    </x-slot>
-
+    <div class="flex flex-wrap place-content-center min-h-48 md:min-h-80 bg-no-repeat bg-contain bg-center" style="background-image: url('{{ asset('images/title-bg.jpg') }}');">
+    <span class="text-2xl font-bold">My Courses</span>
+    </div>
     <x-panel>
         <div class="flex flex-wrap -m-4">
             @foreach ($ecourses as $ecourse)
