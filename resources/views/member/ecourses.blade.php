@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="flex flex-wrap place-content-center min-h-48 md:min-h-80 bg-no-repeat bg-contain bg-center" style="background-image: url('{{ asset('images/title-bg.jpg') }}');">
-    <span class="text-2xl font-bold">My Courses</span>
+    <div class="flex flex-wrap place-content-center min-h-48 md:min-h-screen bg-no-repeat bg-cover bg-center" 
+    style="background-image: url('{{ asset('images/ecourse-banner.jpg') }}');">
     </div>
     <x-panel>
         <div class="flex flex-wrap -m-4">
