@@ -2,7 +2,7 @@
     <img class="w-1/4" src="{{ $video->imageUrl('thumbnail') }}" alt="{{ $video->subject }}" />
     <a id="{{ $id ?? $video->lesson_uu }}" href="{{ route('member.ecourses.lessons', [$ecourse->slug, $video->section_id, $video->lesson_uu]) }}" 
     class="font-bold flex items-center
-    {{ isset($completed) && $completed->contains($video->id)?'text-gray-800':'text-blue-500' }}
+    {{ isset($completed) && $completed->contains($video->id)?'text-gray-800':'text-red-800' }}
     ">
     @if(isset($current) && $current->lesson_uu==$video->lesson_uu)
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
