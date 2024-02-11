@@ -7,7 +7,7 @@
             / {{ $ecourse->title }}
         </a>
         <h2 class="font-semibold text-gray-800 leading-tight inline">
-            / sections / {{ $section->name }}
+            / Sesi / {{ $section->name }}
         </h2>
         <h2 class="font-semibold text-gray-800 leading-tight inline">
             / {{ $video->subject }}

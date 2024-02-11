@@ -13,10 +13,10 @@
             <img alt="{{ $ecourse->title }}" class="w-full h-80 object-contain md:object-cover object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
             <div class="w-full flex flex-col md:flex-row p-6">
                 <div class="w-full md:w-2/3 flex flex-col gap-y-8 mt-4">
-                    <h2 class="font-bold text-2xl">Sections ({{ $sections->count() }})</h2>
+                    <h2 class="font-bold text-2xl">Sesi ({{ $sections->count() }})</h2>
                     @foreach ($sections as $section)
-                        <div class="w-full flex gap-x-4">
-                            <img class="w-1/4" src="{{ $section->imageUrl('thumbnail') }}" alt="{{ $section->name }}" />
+                        <div class="w-full flex flex-col md:flex-row gap-x-4">
+                            <img class="w-full md:w-1/4" src="{{ $section->imageUrl('thumbnail') }}" alt="{{ $section->name }}" />
                             <div>
                                 <a href="{{ route('member.ecourses.lessons', [$ecourse->slug, $section->id]) }}" class="font-bold text-xl text-red-800">{{ $section->name }}</a>
                                 <p class="text-gray-600">{{ $section->description }}</p>
