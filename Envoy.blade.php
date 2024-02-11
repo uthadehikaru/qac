@@ -23,7 +23,6 @@
 @task('update-testing', ['on' => 'web'])
     cd /home/u1424128/testing
     git pull origin main
-    php artisan optimize
 @endtask
 
 @task('deploy-full', ['on' => 'web'])

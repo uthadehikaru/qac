@@ -18,7 +18,7 @@
         <div class="container mx-auto">
             <div class="w-full flex flex-col md:flex-row gap-x-2">
                 <div class="content md:w-2/3">
-                    <video width="100%" height="240" controls autoplay controlsList="nodownload">
+                    <video width="100%" height="240" controls controlsList="nodownload">
                     <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
