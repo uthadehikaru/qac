@@ -96,7 +96,14 @@
             <div class="w-2/3 ml-4">
                 <ul class="list-decimal">
                 @foreach ($lesson->getMedia('downloads') as $media)
-                    <li><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                    <li>
+                        <a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a>
+                        <form action="{{ route('admin.media.destroy', $media->id) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" class="text-red-500">delete</button>
+                        </form>
+                    </li>
                 @endforeach
                 </ul>
             </div>
