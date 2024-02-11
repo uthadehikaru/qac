@@ -1,5 +1,5 @@
 @extends('errors::illustrated-layout')
 
-@section('title', __('Service Unavailable'))
-@section('code', '503')
-@section('message', __('Service Unavailable'))
+@section('title', __('System under Maintenance'))
+@section('code', 'Maintenance')
+@section('message', __('Mohon maaf, saat ini website sedang dalam proses pembaharuan. silahkan kembali lain waktu'))
