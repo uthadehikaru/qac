@@ -6,19 +6,21 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
             - {{ $ecourse->title }}
         </h2>
-        <div class="float-right">
+        <div class="float-right flex flex-row">
             <x-link-button  href="{{ route('admin.ecourses.index') }}" class=" ml-3" type="warning">Back</x-button>
             <x-link-button  href="{{ route('admin.ecourses.subscriptions.index', $ecourse->id) }}" type="success" class=" ml-3">@lang('Subscribers')</x-button>
             <x-link-button  href="{{ route('admin.ecourses.lessons.create', $ecourse->id) }}" class=" ml-3">@lang('New Lesson')</x-button>
         </div>
     </x-slot>
 
-    <x-panel>
-        <div class="mx-auto flex flex-col gap-y-8 mt-4">
+    
+        <div class="bg-white p-2 w-full mx-auto flex flex-col gap-y-8 mt-4">
             <h2 class="font-bold text-2xl">Lessons</h2>
             @forelse ($ecourse->lessons as $lesson)
-                <div class="w-full flex gap-x-4" id="lesson-{{ $lesson->id }}">
-                    <img class="w-1/4" src="{{ $lesson->imageUrl('thumbnail') }}" alt="{{ $lesson->subject }}" />
+                <div class="w-full flex flex-col md:flex-row gap-x-4" id="lesson-{{ $lesson->id }}">
+                    <div  class="w-full mb-2 md:w-1/4">
+                        <img src="{{ $lesson->imageUrl('thumbnail') }}" alt="{{ $lesson->subject }}" />
+                    </div>
                     <div class="flex flex-col gap-y-4">
                         <span class="font-bold text-xl">{{ $loop->iteration }}. {{ $lesson->subject }}</span>
                         <span class="">Section : {{ $lesson->section->name }}</span>
@@ -41,7 +43,7 @@
                 <span class="italic text-blue-500">No lessons found, <a href="{{ route('admin.ecourses.lessons.create', $ecourse->id) }}">Create One</a></span>
             @endforelse
         </div>
-    </x-panel>
+    
     <x-slot name="scripts">
         <script type="text/javascript">
             $(document).on('click', '.delete', function (e) {

@@ -122,16 +122,19 @@
                 {{ __('Courses') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.testimonials.index')" :active="request()->is('admin/testimonials*')">
-                        {{ __('Testimonials') }}
+                {{ __('Testimonials') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.certificates.index')" :active="request()->is('admin/certificates*')">
-                        {{ __('Certificates') }}
+                {{ __('Certificates') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
                 {{ __('Events') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.quiz.index')" :active="request()->is('admin/quiz*')">
                 {{ __('Quizzes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.ecourses.index')" :active="request()->is('admin/ecourses*')">
+                {{ __('Online Courses') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.systems.index')" :active="request()->is('admin/systems*')">
                 {{ __('Settings') }}
