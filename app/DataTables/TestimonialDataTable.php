@@ -46,7 +46,6 @@ class TestimonialDataTable extends DataTable
         $query->join('members','member_batch.member_id','=','members.id');
         $query->join('batches','member_batch.batch_id','=','batches.id');
         $query->join('courses','batches.course_id','=','courses.id');
-        $query->where('member_batch.status',6);
         $query->whereNotNull('member_batch.testimonial');
         return $query;
     }

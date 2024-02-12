@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Models\Course;
 use App\Models\Batch;
+use App\Models\Member;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,15 @@ Route::post('/districts/{regency_id}', function (Request $request, $regency_id) 
 
 Route::post('/villages/{district_id}', function (Request $request, $district_id) {
     $data = DB::table('villages')->where('district_id',$district_id)->orderBy('name')->get()->toJson(JSON_PRETTY_PRINT);
+    return response($data, 200);
+});
+
+Route::get('/batches/{course_id}', function (Request $request, $course_id) {
+    $data = Batch::where('course_id',$course_id)->pluck('name','id');
+    return response($data, 200);
+});
+
+Route::get('/members/{batch_id}', function (Request $request, $batch_id) {
+    $data = Member::whereRelation('batches','batches.id',$batch_id)->pluck('full_name','id');
     return response($data, 200);
 });

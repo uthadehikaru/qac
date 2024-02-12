@@ -48,7 +48,9 @@ class TestimonialController extends Controller
         ]);
 
         $data = $request->all();
-        $batch = MemberBatch::find($request->member_id)->update(['testimonial'=>$request->testimonial]);
+        $batch = MemberBatch::where('member_id',$request->member_id)
+        ->where('batch_id',$request->batch_id)
+        ->update(['testimonial'=>$request->testimonial]);
         
         return redirect()->route('admin.testimonials.index')->with('status','Testimonial created successfully');
     }
