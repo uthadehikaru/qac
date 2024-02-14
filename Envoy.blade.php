@@ -7,7 +7,7 @@
 
 @task('deploy', ['on' => 'web'])
     cd /home/u1424128/app
-    git pull origin v1
+    git pull origin main
     php artisan optimize
 @endtask
 
