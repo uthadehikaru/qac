@@ -16,13 +16,13 @@
     
         <div class="bg-white p-2 w-full mx-auto flex flex-col gap-y-8 mt-4">
             <h2 class="font-bold text-2xl">Lessons</h2>
-            @forelse ($ecourse->lessons as $lesson)
+            @forelse ($ecourse->lessons->sortBy('order_no') as $lesson)
                 <div class="w-full flex flex-col md:flex-row gap-x-4" id="lesson-{{ $lesson->id }}">
                     <div  class="w-full mb-2 md:w-1/4">
                         <img src="{{ $lesson->imageUrl('thumbnail') }}" alt="{{ $lesson->subject }}" />
                     </div>
                     <div class="flex flex-col gap-y-4">
-                        <span class="font-bold text-xl">{{ $loop->iteration }}. {{ $lesson->subject }}</span>
+                        <span class="font-bold text-xl">{{ $lesson->order_no }}. {{ $lesson->subject }}</span>
                         <span class="">Section : {{ $lesson->section->name }}</span>
                         <span class="">Video : {{ $lesson->getMedia('videos')->first()?->name ?? 'no video' }}</span>
                         <span class="">Downloads : </span>

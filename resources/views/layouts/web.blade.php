@@ -112,10 +112,11 @@
         <footer class="text-gray-600 body-font bg-white">
             <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
                 <a href="https://qacjakarta.id" target="_blank" class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                <img class="w-10 inline" src="{{ asset('qacjakarta.png') }}" />
+                <img class="w-10 inline" src="{{ asset('qacnew.png') }}" />
                 <span class="ml-3 text-xl">{{ config('app.name') }}</span>
                 </a>
-                <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020 {{ config('app.name') }}
+                <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
+                >Copyright © {{ date('Y') }} All right reserved
                 </p>
                 <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                 <a href="https://www.facebook.com/QACJakarta" target="_blank" class="text-gray-500">

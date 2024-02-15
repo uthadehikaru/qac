@@ -65,6 +65,13 @@
                         data-max-file-size="2M"
                         data-default-file="{{ $lesson? $lesson->imageUrl('thumbnail'): '' }}" />
                     </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-section_id">
+                            Order No
+                        </label>
+                        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-order_no" name="order_no" type="number" placeholder="lesson order no" value="{{ old('order_no', $lesson?$lesson->order_no:0) }}">
+                    </div>
                 </div>
             </div>
         </form>
@@ -80,7 +87,14 @@
             <div class="w-2/3 ml-4">
                 <ul class="list-decimal">
                 @foreach ($lesson->getMedia('videos') as $media)
-                    <li><a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a></li>
+                    <li>
+                        <a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a>
+                        <form action="{{ route('admin.media.destroy', $media->id) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" class="text-red-500">delete</button>
+                        </form>
+                    </li>
                 @endforeach
                 </ul>
             </div>

@@ -37,7 +37,7 @@ class EcourseService {
 
     public function find($id): Ecourse
     {
-        return Ecourse::find($id);
+        return Ecourse::with('lessons')->find($id);
     }
 
     public function findBySlug($slug): Ecourse

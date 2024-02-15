@@ -23,6 +23,7 @@ class LessonRequest extends FormRequest
     {
         return [
             'subject' => 'required|max:255',
+            'order_no' => 'required|numeric',
             'section_id' => 'required|exists:sections,id',
             'thumbnail' => 'nullable|image',
         ];

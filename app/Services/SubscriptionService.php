@@ -51,9 +51,11 @@ class SubscriptionService {
 
     public function getVideos($ecourse_id, $section_id=0)
     {
-        $lessons = Lesson::where('ecourse_id',$ecourse_id);
+        $lessons = Lesson::where('ecourse_id',$ecourse_id)
+        ->orderBy('order_no');
         if($section_id>0)
             $lessons->where('section_id',$section_id);
+        
         return $lessons->get();
     }
 

@@ -16,8 +16,10 @@
                     <h2 class="font-bold text-2xl">Sesi ({{ $sections->count() }})</h2>
                     @foreach ($sections as $section)
                         <div class="w-full flex flex-col md:flex-row gap-x-4">
-                            <img class="w-full md:w-1/4" src="{{ $section->imageUrl('thumbnail') }}" alt="{{ $section->name }}" />
-                            <div>
+                            <div class="w-full md:w-1/4">
+                                <img class="w-full" src="{{ $section->imageUrl('thumbnail') }}" alt="{{ $section->name }}" />
+                            </div>
+                            <div class="w-full md:w-3/4">
                                 <a href="{{ route('member.ecourses.lessons', [$ecourse->slug, $section->id]) }}" class="font-bold text-xl text-red-800">{{ $section->name }}</a>
                                 <p class="text-gray-600">{{ $section->description }}</p>
                             </div>
@@ -26,7 +28,7 @@
                 </div>
                 <div class="w-full md:w-1/3 flex flex-col mt-4">
                     <h2 class="font-bold text-lg">{{ $completed->count() }} of {{ $ecourse->lessons->count() }} Lessons Completed</h2>                    
-                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
+                    <div class="w-full rounded-full h-2.5 bg-gray-300 mt-2">
                         <div class="bg-red-800 h-2.5 rounded-full" style="width: {{ round(($completed->count()/$ecourse->lessons->count())*100) }}%"></div>
                     </div>
                     <div class="mt-12">
