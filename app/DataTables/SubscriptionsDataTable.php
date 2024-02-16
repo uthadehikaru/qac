@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\CompletedLesson;
 use App\Models\Subscription;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -28,6 +30,17 @@ class SubscriptionsDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('member_id', function($row){
                 return $row->member->full_name;
+            })
+            ->addColumn('completed_lessons', function($row){
+                $completes = CompletedLesson::whereRelation('lesson','ecourse_id',$row->ecourse_id)
+                ->where('member_id',$row->member_id)
+                ->with('lesson')
+                ->get();
+                $data = [];
+                foreach($completes as $complete){
+                    $data[] = $complete->lesson->subject;
+                }
+                return collect($data)->join(',');
             })
             ->addColumn('action', function($row){
                 $btn = "";
@@ -79,6 +92,7 @@ class SubscriptionsDataTable extends DataTable
     {
         return [
             Column::make('member_id')->title('Member'),
+            Column::make('completed_lessons'),
             Column::make('start_date'),
             Column::make('end_date'),
             Column::computed('action')
