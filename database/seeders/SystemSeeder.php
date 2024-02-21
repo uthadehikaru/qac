@@ -55,5 +55,12 @@ class SystemSeeder extends Seeder
             'value'=>0,
             'is_array'=>false,
         ]);
+
+        System::firstOrCreate([
+            'key'=>'why1',
+        ],[
+            'value'=>'Kenapa perlu belajar Bahasa Arab?',
+            'is_array'=>false,
+        ]);
     }
 }

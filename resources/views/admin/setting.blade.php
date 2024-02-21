@@ -60,25 +60,57 @@
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-popup_image">
                             Popup Image
+                            @if($popup_image)
+                            <a href="{{ asset('storage/'.$popup_image) }}" target="_blank" class="text-blue-500 underline">image popup</a>
+                            @endif
                         </label>
                         <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                         id="grid-popup_image" type="file" name="popup_image" accept="image" />
-                        @if($popup_image)
-                        <img src="{{ asset('storage/'.$popup_image) }}" />
-                        @endif
                     </div>
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-popup_active">
                             Popup Active
                         </label>
                         <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        id="grid-popup_active" name="popup_active" >
-                        <option value="1" {{ $popup_active?'selected':'' }}>Yes</option>
-                        <option value="0" {{ !$popup_active?'selected':'' }}>No</option>
-                    </select>
+                            id="grid-popup_active" name="popup_active" >
+                            <option value="1" {{ $popup_active?'selected':'' }}>Yes</option>
+                            <option value="0" {{ !$popup_active?'selected':'' }}>No</option>
+                        </select>
                     </div>
                 </div>
             </div>
         </form>
+        
+        <h1 class="font-bold text-xl mb-2">Video Homepage</h1>
+        <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2">
+                <form action="{{ route('upload.media', ['system',$why1->id, 'videos']) }}"
+                class="dropzone"
+                id="why1-files"></form>
+            </div>
+            <div class="w-full md:w-1/2">
+                
+            <ul class="list-decimal">
+                @foreach ($why1->getMedia('videos') as $media)
+                    <li>
+                        <a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a>
+                        <form action="{{ route('admin.media.destroy', $media->id) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" class="text-red-500">delete</button>
+                        </form>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
     </x-panel>
+    <x-slot name="styles">        
+        <link href="{{ asset('fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('dropzone-5.9.3/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    </x-slot>
+    <x-slot name="scripts">        
+        <script src="{{ asset('fileuploads/js/fileupload.js') }}"></script>
+        <script src="{{ asset('dropzone-5.9.3/dropzone.min.js') }}"></script>
+    </x-slot>
 </x-app-layout>

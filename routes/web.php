@@ -42,6 +42,7 @@ use App\Http\Controllers\Member\MemberEcoursesController;
 use App\Http\Controllers\Member\SecureVideo;
 use App\Http\Controllers\UploadLessonController;
 use App\Http\Controllers\Unsubscribe;
+use App\Http\Controllers\UploadMediaController;
 use App\Http\Controllers\UploadVideoController;
 
 /*
@@ -82,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
     Route::post('/upload/lesson/{collection}/{id}', UploadLessonController::class)->name('upload.lesson.files');
+    Route::post('/upload/media/{model}/{id}/{collection?}', UploadMediaController::class)->name('upload.media');
     
     Route::middleware(['roles:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -137,7 +139,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ecourses/{id}/publish', PublishEcourse::class)->name('ecourses.publish');
 
         // MEDIA
-        Route::resource('media', MediaController::class);
+        Route::resource('media', MediaController::class)->only(['destroy']);
 
         // TESTIMONIALS
         Route::get('testimonials/{id}/delete', [TestimonialController::class, 'delete'])->name('testimonials.delete');

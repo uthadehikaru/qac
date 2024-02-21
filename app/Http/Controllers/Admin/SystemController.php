@@ -23,6 +23,7 @@ class SystemController extends Controller
         $data['waitinglist'] = System::value('waitinglist');
         $data['popup_image'] = System::value('popup_image');
         $data['popup_active'] = System::value('popup_active');
+        $data['why1'] = System::where('key','why1')->first();
         return view('admin.setting', $data);
     }
 
