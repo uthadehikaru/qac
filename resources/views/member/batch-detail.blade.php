@@ -13,7 +13,7 @@
         <x-alert type="success">{!! session('success') !!}</x-alert>
 
         
-        <x-alert type="error" title="Perhatian">Kami akan mengirimkan modul pembelajaran ke alamat anda, pastikan telah sesuai dengan alamat tempat tinggal anda saat ini!<br/>
+        <x-alert type="error" title="Perhatian">
         {{ $member->full_name }} ({{ $member->phone }}) - {{ $member->address }}<br/>
         <a href="{{ route('member.profile') }}" class="underline text-blue-500"> (klik disini untuk memperbaharui alamat)</a>
         </x-alert>
@@ -59,11 +59,11 @@
                     @endif
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                        Alamat Pengiriman
+                        Alamat
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
                         {{ $member->address_detail }}
-                        <p class="mt-2 italic">* pastikan alamat pengiriman sesuai. <a href="{{ route('member.profile') }}" class="pointer text-blue-500">klik disini</a> untuk memperbaharui alamat</p>
+                        <p class="mt-2 italic">* pastikan alamat domisili sesuai. <a href="{{ route('member.profile') }}" class="pointer text-blue-500">klik disini</a> untuk memperbaharui alamat</p>
                         </dd>
                     </div>
                     @if($batch->file)

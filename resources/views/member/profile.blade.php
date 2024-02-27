@@ -69,7 +69,6 @@
                     </label>
                     <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
                     id="grid-address" name="address" placeholder="your address">{{ Auth::user()->member->address }}</textarea>
-                    <p class="text-red text-xs italic">@lang('Digunakan untuk pengiriman')</p>
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">

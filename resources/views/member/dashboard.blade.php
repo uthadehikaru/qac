@@ -21,8 +21,6 @@
         <x-alert type="error">{{ session('error') }}</x-alert>
     @endif
 
-    <a href="{{ route('member.profile') }}"><x-alert type="success" title="Alamat Pengiriman">{{ $member->full_name }} ({{ $member->phone }}) - {{ $member->address_detail }}. <span class="underline text-blue-500"> (perbaharui alamat)</span></x-alert></a>
-
     @if($member->batches->count()>0)
     <div class="m-6">
         <p class="block text-lg font-bold text-gray-700">Kelas yang diikuti</p>

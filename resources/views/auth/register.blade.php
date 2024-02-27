@@ -78,7 +78,6 @@
                         <x-label for="address" :value="__('Address')" />
 
                         <textarea id="address" class="block mt-1 w-full" type="text" name="address" required>{{ old('address') }}</textarea>
-                        <p class="text-sm text-gray-500">* digunakan untuk pengiriman modul, mohon menulis alamat lengkap</p>
                         <p class="text-sm text-gray-500">** gunakan alamat domisili di indonesia jika anda berada diluar negeri</p>
                     </div>
 
