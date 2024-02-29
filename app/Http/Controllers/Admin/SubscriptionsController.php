@@ -17,14 +17,16 @@ class SubscriptionsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SubscriptionsDataTable $dataTable, string $ecourse_id)
+    public function index(Request $request, SubscriptionsDataTable $dataTable, $ecourse_id)
     {
-        $data['title'] = "Subscribers";
+        $lesson_id = $request->get('lesson');
+        $data['title'] = $lesson_id?"Completed Members":"Subscribers";
         $data['buttons'][] = [
             'name' => 'Back',
             'href' => route('admin.ecourses.index'),
         ];
         $dataTable->setEcourse($ecourse_id);
+        $dataTable->setLesson($lesson_id);
         return $dataTable->render('admin.datatable', $data);
     }
 

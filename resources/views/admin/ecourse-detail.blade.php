@@ -24,7 +24,7 @@
                     <div class="flex flex-col gap-y-4">
                         <span class="font-bold text-xl">{{ $lesson->order_no }}. {{ $lesson->subject }}</span>
                         <span class="">Section : {{ $lesson->section->name }}</span>
-                        <a href="{{ route('admin.ecourses.subscriptions.index', $ecourse->id) }}" class="text-red-800"
+                        <a href="{{ route('admin.ecourses.subscriptions.index', ['ecourse'=>$ecourse->id, 'lesson'=>$lesson->id]) }}" class="text-red-800"
                         >Completed : {{ $lesson->completed->count() }} Members</a>
                         <span class="">Video : {{ $lesson->getMedia('videos')->first()?->name ?? 'no video' }}</span>
                         <span class="">Downloads : </span>

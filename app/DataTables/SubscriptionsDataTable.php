@@ -13,10 +13,16 @@ class SubscriptionsDataTable extends DataTable
 {
 
     private $ecourse_id = 0;
+    private $lesson_id = 0;
 
     public function setEcourse($ecourse_id)
     {
         $this->ecourse_id = $ecourse_id;
+    }
+
+    public function setLesson($lesson_id)
+    {
+        $this->lesson_id = $lesson_id;
     }
     /**
      * Build DataTable class.
@@ -34,10 +40,12 @@ class SubscriptionsDataTable extends DataTable
             ->addColumn('completed_lessons', function($row){
                 $completes = CompletedLesson::whereRelation('lesson','ecourse_id',$row->ecourse_id)
                 ->where('member_id',$row->member_id)
-                ->with('lesson')
-                ->get();
+                ->with('lesson');
+                if($this->lesson_id>0)
+                    $completes = $completes->where('lesson_id', $this->lesson_id);
+
                 $data = [];
-                foreach($completes as $complete){
+                foreach($completes->get() as $complete){
                     $data[] = $complete->lesson->subject;
                 }
                 return collect($data)->join(',');
@@ -59,9 +67,16 @@ class SubscriptionsDataTable extends DataTable
      */
     public function query(Subscription $model)
     {
-        return $model->newQuery()
+        $model = $model->newQuery()
         ->with('member')
         ->where('ecourse_id',$this->ecourse_id);
+
+        if($this->lesson_id){
+            $model = $model->whereRaw(DB::raw("exists(select 1 from completed_lessons cl
+            join lessons l on cl.lesson_id= l.id where l.ecourse_id=subscriptions.ecourse_id and subscriptions.member_id = cl.member_id and cl.lesson_id=".$this->lesson_id.")"));
+        }
+
+        return $model;
     }
 
     /**
