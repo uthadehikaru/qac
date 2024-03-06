@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Batch;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 
 class BatchSeeder extends Seeder
@@ -29,7 +30,7 @@ class BatchSeeder extends Seeder
             }
         
             if(config('app.env','local')){
-                Batch::factory()->create([
+                $batch = Batch::factory()->create([
                     'course_id'=>$course_id,
                     'name'=>'Testing',
                     'description'=>'testing',
@@ -39,6 +40,7 @@ class BatchSeeder extends Seeder
                     'start_at'=>CarbonImmutable::now()->addMonth()->startOfMonth(),
                     'end_at'=>CarbonImmutable::now()->addMonth()->endOfMonth(),
                 ]);
+                $batch->members()->attach(User::all()->pluck('id'));
             }
         }
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AddSubscriberFromBatch;
+use App\Http\Controllers\Admin\AddSubscriberFromCourse;
 use App\Http\Controllers\Admin\BannersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\OtpController;
@@ -135,6 +136,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('sections', SectionsController::class);
         Route::resource('ecourses.lessons', LessonsController::class);
         Route::resource('ecourses.subscriptions', SubscriptionsController::class);
+        Route::post('ecourses/{id}/course', AddSubscriberFromCourse::class)->name('ecourses.course');
         Route::post('ecourses/{id}/batch', AddSubscriberFromBatch::class)->name('ecourses.batch');
         Route::get('ecourses/{id}/publish', PublishEcourse::class)->name('ecourses.publish');
 
