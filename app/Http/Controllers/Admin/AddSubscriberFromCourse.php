@@ -24,7 +24,7 @@ class AddSubscriberFromCourse extends Controller
         $count = 0;
         foreach($course->batches as $batch){
             foreach($batch->members as $member){
-                if($member->pivot->status!=MemberBatch::STATUS_PAID)
+                if($member->pivot->status<MemberBatch::STATUS_PAID)
                     continue;
 
                 $data['ecourse_id'] = $ecourse_id;

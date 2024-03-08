@@ -22,7 +22,7 @@ class AddSubscriberFromBatch extends Controller
         $batch = Batch::find($request->batch_id);
         $count = 0;
         foreach($batch->members as $member){
-            if($member->pivot->status!=MemberBatch::STATUS_PAID)
+            if($member->pivot->status<MemberBatch::STATUS_PAID)
                 continue;
 
             $data['ecourse_id'] = $ecourse_id;
