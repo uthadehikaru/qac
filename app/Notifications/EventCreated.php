@@ -52,7 +52,7 @@ class EventCreated extends Notification implements ShouldQueue
                     ->subject('Event QAC : '.$this->event->title)
                     ->line($this->getMessage())
                     ->action(__('Detail'), $this->getLink())
-                    ->markdown('vendor\notifications\email', ['token' => Crypt::encryptString($this->user->id)])
+                    ->markdown('vendor.notifications.email', ['token' => Crypt::encryptString($this->user->id)])
                     ;
         
         if($this->event->attachment)
