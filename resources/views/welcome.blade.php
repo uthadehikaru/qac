@@ -38,7 +38,7 @@
         <section id="why" class="bg-white pt-12 py-8 background">
         <div class="container max-w-5xl mx-auto m-8">
             <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            @lang('Kenapa perlu belajar Bahasa Arab?')
+            {{ $why1->value }}
             </h1>
             <div class="w-full mb-4">
                 <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -55,52 +55,24 @@
         </div>
         </section>
 
-        <section id="about" class="bg-white pt-12 py-8 background">
-        <div class="container max-w-5xl mx-auto m-8">
-            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            @lang('Kenapa belajar Bahasa Arab di QAC?')
-            </h1>
-            <div class="w-full mb-4">
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-            <div class="flex flex-wrap">
-            <div class="w-5/6 sm:w-1/3 p-6">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                {{ $about_1->title }}
-                </h3>
-                <p class="text-gray-600 mb-8">
-                {{ $about_1->content }}
-                </p>
-            </div>
-            <div class="w-full sm:w-1/3 p-6">
-            <video width="400" height="400" controls controlsList="nodownload">
-            <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
-            </video>
-            </div>
-            <div class="w-full sm:w-1/3 p-6">
-            <video width="400" height="400" controls controlsList="nodownload">
-            <source src="{{ asset('apa itu qac2.mp4') }}" type="video/mp4">
-            </video>
-            </div>
-            </div>
-            <div class="flex flex-wrap flex-col-reverse sm:flex-row">
-            <div class="w-full sm:w-1/2 p-6 mt-6">
-                <video width="400" height="400" controls>
-                <source src="{{ asset('kelas qac2.mp4') }}" type="video/mp4">
-                </video>
-            </div>
-            <div class="w-full sm:w-1/2 p-6 mt-6">
-                <div class="align-middle">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                    {{ $about_2->title }}
-                </h3>
-                <p class="text-gray-600 mb-8">
-                    {{ $about_2->content }}
-                </p>
+        <section id="why2" class="bg-white pt-12 py-8 background">
+            <div class="container max-w-5xl mx-auto m-8">
+                <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+                {{ $why2->value }}
+                </h1>
+                <div class="w-full mb-4">
+                    <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                </div>
+                <div class="flex flex-wrap">
+                    @foreach ($why2->getMedia('videos') as $media)
+                    <div class="w-full sm:w-1/4 p-6">
+                        <video width="400" height="800" controls controlsList="nodownload">
+                            <source src="{{ $media->getFullUrl() }}" type="video/mp4">
+                        </video>
+                    </div>
+                    @endforeach
                 </div>
             </div>
-            </div>
-        </div>
         </section>
 
         <section id="testimonial" class="text-gray-600 body-font background">

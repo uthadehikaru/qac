@@ -62,5 +62,12 @@ class SystemSeeder extends Seeder
             'value'=>'Kenapa perlu belajar Bahasa Arab?',
             'is_array'=>false,
         ]);
+
+        System::firstOrCreate([
+            'key'=>'why2',
+        ],[
+            'value'=>'Kenapa belajar Bahasa Arab di QAC?',
+            'is_array'=>false,
+        ]);
     }
 }

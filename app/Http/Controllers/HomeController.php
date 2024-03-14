@@ -21,6 +21,7 @@ class HomeController extends Controller
         $data['about_2'] = System::value('about_2');
         $data['waitinglist'] = System::value('waitinglist');
         $data['why1'] = System::where('key','why1')->first();
+        $data['why2'] = System::where('key','why2')->first();
         $popup_active= System::value('popup_active');
         $data['popup_image'] = null;
         if($popup_active)

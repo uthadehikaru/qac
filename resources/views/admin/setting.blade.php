@@ -81,7 +81,7 @@
             </div>
         </form>
         
-        <h1 class="font-bold text-xl mb-2">Video Homepage</h1>
+        <h1 class="font-bold text-xl mb-2">Video {{ $why1->value }}</h1>
         <div class="flex flex-col md:flex-row">
             <div class="w-full md:w-1/2">
                 <form action="{{ route('upload.media', ['system',$why1->id, 'videos']) }}"
@@ -90,15 +90,43 @@
             </div>
             <div class="w-full md:w-1/2">
                 
-            <ul class="list-decimal">
+            <ul class="ml-8 list-decimal">
                 @foreach ($why1->getMedia('videos') as $media)
                     <li>
+                        <div class="flex gap-2">
                         <a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a>
                         <form action="{{ route('admin.media.destroy', $media->id) }}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE" />
                             <button type="submit" class="text-red-500">delete</button>
                         </form>
+                        </div>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <h1 class="font-bold text-xl my-2">Video {{ $why2->value }}</h1>
+        <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2">
+                <form action="{{ route('upload.media', ['system',$why2->id, 'videos']) }}"
+                class="dropzone"
+                id="why1-files"></form>
+            </div>
+            <div class="w-full md:w-1/2">
+                
+            <ul class="ml-8 list-decimal">
+                @foreach ($why2->getMedia('videos') as $media)
+                    <li>
+                        <div class="flex gap-2">
+                        <a href="{{ $media->getFullUrl() }}" class="text-blue-500">{{ $media->file_name }}</a>
+                        <form action="{{ route('admin.media.destroy', $media->id) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" class="text-red-500">delete</button>
+                        </form>
+                        </div>
                     </li>
                 @endforeach
                 </ul>

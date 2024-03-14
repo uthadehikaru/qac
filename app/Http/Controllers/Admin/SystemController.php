@@ -24,6 +24,7 @@ class SystemController extends Controller
         $data['popup_image'] = System::value('popup_image');
         $data['popup_active'] = System::value('popup_active');
         $data['why1'] = System::where('key','why1')->first();
+        $data['why2'] = System::where('key','why2')->first();
         return view('admin.setting', $data);
     }
 
