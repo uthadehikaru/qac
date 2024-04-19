@@ -29,7 +29,7 @@ class EcoursesDataTable extends DataTable
                 return '<a class="text-blue-500" href="'.route('admin.ecourses.show', $row->id).'">'.$row->lessons_count.' lessons</a>';
             })
             ->editColumn('subscribers_count', function($row){
-                return '<a class="text-blue-500" href="'.route('admin.ecourses.subscriptions.index', $row->id).'">'.$row->subscribers_count.' members</a>';
+                return '<a class="text-blue-500" href="'.route('admin.ecourses.subscriptions.index', $row->id).'">'.$row->active_subscribers_count.' aktif / '.$row->subscribers_count.' langganan</a>';
             })
             ->addColumn('action', function($row){
                 $btn = "";
@@ -50,7 +50,10 @@ class EcoursesDataTable extends DataTable
     public function query(Ecourse $model)
     {
         return $model->newQuery()
-        ->withCount(['lessons','subscribers']);
+        ->withCount(['lessons','subscribers', 'subscribers as active_subscribers_count' => function ($query) {
+            $query->where('start_date', '<=', date('Y-m-d'));
+            $query->where('end_date', '>=', date('Y-m-d'));
+        }]);
     }
 
     /**

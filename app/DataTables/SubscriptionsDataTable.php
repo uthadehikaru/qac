@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\CompletedLesson;
 use App\Models\Subscription;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -37,6 +38,13 @@ class SubscriptionsDataTable extends DataTable
             ->editColumn('member_id', function($row){
                 return $row->member->full_name;
             })
+            ->editColumn('status', function($row){
+                $active = Carbon::now()->betweenIncluded($row->start_date,$row->end_date);
+                if($active)
+                    return "<span class='text-sm p-2 border rounded bg-blue-500 text-white'>Aktif</span>";
+                
+                return "<span class='text-sm p-2 border rounded bg-red-500 text-white'>Inaktif</span>";
+            })
             ->addColumn('completed_lessons', function($row){
                 $completes = CompletedLesson::whereRelation('lesson','ecourse_id',$row->ecourse_id)
                 ->where('member_id',$row->member_id)
@@ -56,7 +64,7 @@ class SubscriptionsDataTable extends DataTable
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['template','action']);
+            ->rawColumns(['template','action','status']);
     }
 
     /**
@@ -110,6 +118,8 @@ class SubscriptionsDataTable extends DataTable
             Column::make('completed_lessons'),
             Column::make('start_date'),
             Column::make('end_date'),
+            Column::make('status')->searchable(false)
+            ->orderable(false),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

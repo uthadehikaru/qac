@@ -29,7 +29,7 @@
     cd /home/u1424128/app
     php artisan down
     git pull origin main
-    php artisan db:seed SystemSeeder --force
+    php artisan migrate --force
     php artisan optimize
     php artisan up
 @endtask
