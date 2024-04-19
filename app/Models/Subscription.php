@@ -22,6 +22,12 @@ class Subscription extends Model
         'end_date' => 'date:d-M-Y',
     ];
 
+    public function scopeActive($query)
+    {
+        $query->where('start_date','<=',date('Y-m-d'));
+        $query->where('end_date','>=',date('Y-m-d'));
+    }
+
     public function ecourse():BelongsTo
     {
         return $this->belongsTo(Ecourse::class);

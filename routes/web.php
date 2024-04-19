@@ -26,12 +26,14 @@ use App\Http\Controllers\Admin\ParticipantController as AdminParticipantControll
 use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\ConfirmOrder;
 use App\Http\Controllers\Admin\EcoursesController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\LoginAsUser;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PublishEcourse;
 use App\Http\Controllers\Admin\SectionsController;
 use App\Http\Controllers\Admin\SubscriptionsController;
@@ -40,6 +42,8 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Member\CompleteLesson;
 use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
+use App\Http\Controllers\Member\MemberOrdersController;
+use App\Http\Controllers\Member\MemberSubscriptionController;
 use App\Http\Controllers\Member\SecureVideo;
 use App\Http\Controllers\UploadLessonController;
 use App\Http\Controllers\Unsubscribe;
@@ -77,10 +81,11 @@ Route::resource('ecourses', EcourseController::class)
         'ecourses' => 'ecourse:slug',
     ]);
 
-Route::get('checkout/{ecourse:slug}', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/unsubscribe/{token}', Unsubscribe::class)->name('unsubscribe');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('checkout/{ecourse:slug}', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('checkout/{ecourse:slug}', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
     Route::post('/upload/lesson/{collection}/{id}', UploadLessonController::class)->name('upload.lesson.files');
@@ -134,6 +139,8 @@ Route::middleware(['auth'])->group(function () {
         // ECOURSES
         Route::resource('ecourses', EcoursesController::class);
         Route::resource('sections', SectionsController::class);
+        Route::get('orders/{order_id}/verify', ConfirmOrder::class)->name('orders.verify');
+        Route::resource('orders', OrdersController::class);
         Route::resource('ecourses.lessons', LessonsController::class);
         Route::resource('ecourses.subscriptions', SubscriptionsController::class);
         Route::post('ecourses/{id}/course', AddSubscriberFromCourse::class)->name('ecourses.course');
@@ -178,6 +185,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ecourses/{slug}/learn/{section}/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
         Route::get('ecourses/{slug}/video/{lesson}', SecureVideo::class)->name('ecourses.lessons.video');
         Route::post('ecourses/{slug}/learn/{lesson}', CompleteLesson::class)->name('ecourses.lessons.complete');
+        Route::resource('subscriptions', MemberSubscriptionController::class)->only(['index','show']);
+        Route::resource('orders', MemberOrdersController::class)->only(['index','show']);
     });
 });
 

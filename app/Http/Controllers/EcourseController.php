@@ -20,6 +20,7 @@ class EcourseController extends Controller
             return abort(404);
         
         $data['ecourse'] = $ecourse;
+        $data['order'] = $ecourseService->memberOrder($ecourse->id);
         $data['ecourses'] = $ecourseService->latestEcourses(3);
         return view('ecourse-detail', $data);
     }

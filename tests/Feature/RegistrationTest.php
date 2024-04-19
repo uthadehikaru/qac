@@ -31,7 +31,7 @@ class RegistrationTest extends TestCase
             'end_at' => $current->addWeeks(3),
         ]);
 
-        $response = $this->get(route('register', ['batch_id'=>$batch->id]));
+        $response = $this->get(route('register', ['course_id'=>$batch->course_id]));
 
         $response->assertStatus(200);
     }

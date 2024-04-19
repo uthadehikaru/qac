@@ -6,6 +6,7 @@ use App\Http\Controllers\Member\CompleteLesson;
 use App\Models\CompletedLesson;
 use App\Models\Ecourse;
 use App\Models\Lesson;
+use App\Models\Order;
 use App\Models\Section;
 use App\Models\Subscription;
 
@@ -72,5 +73,15 @@ class SubscriptionService {
             'lesson_id' => $lesson->id,
             'member_id' => $member_id,
         ]);
+    }
+
+    public function ofMember($member_id)
+    {
+        return Subscription::where('member_id',$member_id)->latest('start_date')->paginate();
+    }
+
+    public function orders($member_id)
+    {
+        return Order::where('member_id',$member_id)->latest()->paginate();
     }
 }

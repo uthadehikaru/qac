@@ -44,6 +44,11 @@ class User extends Authenticatable
         'login_at' => 'datetime',
     ];
 
+    public static function admin()
+    {
+        return self::where('role','admin')->get();
+    }
+
     public function scopeNotify($query)
     {
         return $query->where('is_notify',true);

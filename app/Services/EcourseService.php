@@ -5,9 +5,11 @@ namespace App\Services;
 use App\Models\Ecourse;
 use App\Models\File;
 use App\Models\Lesson;
+use App\Models\Order;
 use App\Models\Section;
 use App\Models\Subscription;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -91,7 +93,15 @@ class EcourseService {
 
     public function memberEcourses($member_id)
     {
-        return Ecourse::whereRelation('subscribers','member_id',$member_id)->get();
+        return Ecourse::whereHas('subscribers', function($query) use ($member_id){
+            $query->active();
+            $query->where('member_id',$member_id);
+        })
+        ->with(['subscribers'=>function($query) use ($member_id){
+            $query->active();
+            $query->where('member_id',$member_id);
+        }])
+        ->get();
     }
 
     public function getNext($videos, $lesson_uu=null): Lesson|null
@@ -117,5 +127,16 @@ class EcourseService {
             $ecourse->published_at = Carbon::now();
 
         $ecourse->save();
+    }
+
+    public function memberOrder($ecourse_id)
+    {
+        if(!Auth::check())
+            return null;
+        return Order::where('ecourse_id',$ecourse_id)
+        ->where('member_id',Auth::user()->member?->id)
+        ->whereNull('verified_at')
+        ->first();
+
     }
 }

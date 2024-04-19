@@ -4,12 +4,22 @@
     </div>
     <x-panel>
         <div class="flex flex-wrap -m-4">
-            @foreach ($ecourses as $ecourse)
+            @forelse ($ecourses as $ecourse)
             <div class="md:w-1/2 p-4">
                 <x-ecourse-card :ecourse="$ecourse" />
             </div>
-            @endforeach
+            @empty
+            <div class="text-center">
+                Anda belum memiliki akses ke Online Course QAC, <a href="{{ route('ecourses.index') }}" class="text-blue-500 underline font-bold">Daftar Disini</a>
+            </div>
+            @endforelse
         </div>
+    </x-panel>
+    
+    <x-panel>
+    <a href="{{ route('member.subscriptions.index') }}" class="text-blue-500">Riwayat Langganan</a> |
+    <a href="{{ route('member.orders.index') }}" class="text-blue-500">Riwayat Pesanan</a> |
+    <a href="{{ route('ecourses.index') }}" class="text-blue-500">Daftar Online Course</a> |
     </x-panel>
     
 </x-app-layout>

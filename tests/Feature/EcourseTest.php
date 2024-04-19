@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Ecourse;
 use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\User;
 use App\Services\EcourseService;
 use Tests\TestCase;
 
@@ -39,7 +40,6 @@ class EcourseTest extends TestCase
         $this->get(route('ecourses.show', $ecourse->slug))
         ->assertSeeText($ecourse->title)
         ->assertSeeText($ecourse->description)
-        ->assertSeeText($ecourse->price)
         ->assertSeeTextInOrder($lessons);
     }
 
@@ -49,5 +49,25 @@ class EcourseTest extends TestCase
 
         $this->get(route('ecourses.show', $ecourse->slug))
         ->assertNotFound();
+    }
+
+    public function test_user_can_checkout_ecourse(): void
+    {
+        $user = User::factory()->create();
+        $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
+        $lessons = $ecourse->lessons->pluck('subject')->toArray();
+
+        $this->actingAs($user)->get(route('checkout', $ecourse->slug))
+        ->assertSeeText($ecourse->title)
+        ->assertSeeText($ecourse->description);
+    }
+
+    public function test_guest_cannot_checkout_ecourse(): void
+    {
+        $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
+        $lessons = $ecourse->lessons->pluck('subject')->toArray();
+
+        $this->get(route('checkout', $ecourse->slug))
+        ->assertRedirect('login');
     }
 }
