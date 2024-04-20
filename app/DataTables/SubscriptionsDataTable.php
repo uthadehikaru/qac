@@ -35,6 +35,11 @@ class SubscriptionsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->filterColumn('member_id', function($query, $keyword) {
+                $query->whereHas('member', function($query) use($keyword){
+                    $query->where('full_name','like','%'.$keyword.'%');
+                });
+            })
             ->editColumn('member_id', function($row){
                 return $row->member->full_name;
             })
