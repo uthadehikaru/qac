@@ -8,10 +8,12 @@ use App\Models\System;
 use App\Models\Event;
 use App\Models\MemberBatch;
 use App\Services\EcourseService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
-    public function index(EcourseService $ecourseService)
+    public function index(EcourseService $ecourseService, Request $request)
     {
         $data['testimonials'] = MemberBatch::testimonial()->take(3)->get();
         $data['courses'] = Course::with('batches')->active()->get();
@@ -24,8 +26,11 @@ class HomeController extends Controller
         $data['why2'] = System::where('key','why2')->first();
         $popup_active= System::value('popup_active');
         $data['popup_image'] = null;
-        if($popup_active)
+        $displayedBanner = $request->cookie('displayed_banner', false);
+        if($popup_active && !$displayedBanner){
             $data['popup_image'] = System::value('popup_image');
+            Cookie::queue("displayed_banner",true, 60);
+        }
         $data['banners'] = Banner::where('is_active',1)->get();
         return view('welcome', $data);
     }
