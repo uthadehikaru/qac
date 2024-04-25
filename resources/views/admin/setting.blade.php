@@ -46,14 +46,11 @@
                         id="grid-whatsapp" type="text" name="whatsapp" value="{{ $whatsapp }}" />
                     </div>
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-waitinglist">
-                            Open Waiting List
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-whatsapp_ecourse">
+                            Whatsapp Ecourse
                         </label>
-                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        id="grid-waitinglist" name="waitinglist" >
-                        <option value="1" {{ $waitinglist?'selected':'' }}>Yes</option>
-                        <option value="0" {{ !$waitinglist?'selected':'' }}>No</option>
-                    </select>
+                        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-whatsapp_ecourse" type="text" name="whatsapp_ecourse" value="{{ $whatsapp_ecourse }}" />
                     </div>
                 </div>
                 <div class="-mx-3 md:flex mb-6">
@@ -76,6 +73,16 @@
                             <option value="1" {{ $popup_active?'selected':'' }}>Yes</option>
                             <option value="0" {{ !$popup_active?'selected':'' }}>No</option>
                         </select>
+                    </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-waitinglist">
+                            Open Waiting List
+                        </label>
+                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-waitinglist" name="waitinglist" >
+                        <option value="1" {{ $waitinglist?'selected':'' }}>Yes</option>
+                        <option value="0" {{ !$waitinglist?'selected':'' }}>No</option>
+                    </select>
                     </div>
                 </div>
             </div>

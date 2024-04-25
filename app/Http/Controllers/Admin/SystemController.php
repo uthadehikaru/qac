@@ -20,6 +20,7 @@ class SystemController extends Controller
         $data['about_1'] = System::value('about_1');
         $data['about_2'] = System::value('about_2');
         $data['whatsapp'] = System::value('whatsapp');
+        $data['whatsapp_ecourse'] = System::value('whatsapp_ecourse');
         $data['waitinglist'] = System::value('waitinglist');
         $data['popup_image'] = System::value('popup_image');
         $data['popup_active'] = System::value('popup_active');
@@ -47,7 +48,7 @@ class SystemController extends Controller
      */
     public function store(Request $request)
     {
-        foreach($request->only(['about_1','about_2','whatsapp','waitinglist','popup_image','popup_active']) as $key=>$data){
+        foreach($request->only(['about_1','about_2','whatsapp','waitinglist','popup_image','popup_active','whatsapp_ecourse']) as $key=>$data){
             if($key=='popup_image'){
                 $data = $request->file('popup_image')->store('files','public');
             }

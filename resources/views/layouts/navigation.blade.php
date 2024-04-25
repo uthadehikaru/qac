@@ -56,6 +56,9 @@
                     <x-nav-link :href="route('member.password')" :active="request()->is('member/password')">
                         {{ __('Ubah Password') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('ecourses.index')" :active="request()->is('ecoures/*')">
+                        {{ __('Subscribe Now') }}
+                    </x-nav-link>
                     @endcan
                 </div>
             </div>

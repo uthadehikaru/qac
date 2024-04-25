@@ -69,5 +69,12 @@ class SystemSeeder extends Seeder
             'value'=>'Kenapa belajar Bahasa Arab di QAC?',
             'is_array'=>false,
         ]);
+
+        System::firstOrCreate([
+            'key'=>'whatsapp_ecourse',
+        ],[
+            'value'=>'62811111111',
+            'is_array'=>false,
+        ]);
     }
 }

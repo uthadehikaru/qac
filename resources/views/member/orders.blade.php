@@ -5,7 +5,7 @@
         </div>  
     </div>
     <x-alert type="info">
-        Hubungi <a href="https://wa.me/{{ \App\Models\System::value('whatsapp') }}?text={{ urlencode('Halo QAC, saya ingin konfirmasi pesanan.') }}" 
+        Hubungi <a href="https://wa.me/{{ \App\Models\System::value('whatsapp_ecourse') }}?text={{ urlencode('Halo QAC, saya ingin konfirmasi pesanan.') }}" 
         class="underline font-bold px-2" target="_blank"
         >whatsapp admin QAC</a> untuk informasi tata cara pembayaran dan pengiriman bukti transfer
     </x-alert>

@@ -19,7 +19,6 @@
     <x-panel>
     <a href="{{ route('member.subscriptions.index') }}" class="text-blue-500">Riwayat Langganan</a> |
     <a href="{{ route('member.orders.index') }}" class="text-blue-500">Riwayat Pesanan</a> |
-    <a href="{{ route('ecourses.index') }}" class="text-blue-500">Daftar Online Course</a> |
     </x-panel>
     
 </x-app-layout>
