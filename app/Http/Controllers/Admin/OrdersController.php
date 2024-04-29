@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\OrdersDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Section;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -48,14 +49,14 @@ class OrdersController extends Controller
      */
     public function destroy(string $id)
     {
-        $order = Section::find($id);
+        $order = Order::find($id);
 
         if ($order) {
             $order->delete();
 
             return response()->json(['status' => 'Deleted successfully']);
         } else {
-            return response()->json(['status' => 'No Section Found for id '.$id], 404);
+            return response()->json(['status' => 'No Order Found for id '.$id], 404);
         }
     }
 }
