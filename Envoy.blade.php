@@ -14,7 +14,7 @@
 @task('update-testing-full', ['on' => 'web'])
     cd /home/u1424128/testing
     git checkout .
-    git pull origin ecourse
+    git pull origin dev
     composer install
     php artisan migrate --force
     php artisan db:seed SystemSeeder
@@ -23,7 +23,8 @@
 
 @task('update-testing', ['on' => 'web'])
     cd /home/u1424128/testing
-    git pull origin main
+    git pull origin dev
+    php artisan optimize
 @endtask
 
 @task('deploy-full', ['on' => 'web'])

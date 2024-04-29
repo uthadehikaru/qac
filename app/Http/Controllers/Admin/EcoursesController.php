@@ -76,7 +76,7 @@ class EcoursesController extends Controller
         $data = $request->validated();
         $ecourse = $ecourseService->updateOrCreate($data, $id);
 
-        return redirect()->route('admin.ecourses.show', $ecourse->id)
+        return redirect()->route('admin.ecourses.index', $ecourse->id)
             ->with('message', 'data updated');
     }
 

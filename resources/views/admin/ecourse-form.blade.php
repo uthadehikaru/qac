@@ -62,10 +62,10 @@
                             Course
                         </label>
                         <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        id="grid-is_bundle" name="is_bundle">
+                        id="grid-course_id" name="course_id">
                             <option value="">Langganan</option>
                             @foreach ($courses as $course)
-                            <option value="0" {{ $ecourse && !$ecourse->course_id==$course->id?'selected':'' }}>{{ $course->name }}</option>
+                            <option value="{{ $course->id }}" {{ $ecourse && $ecourse->course_id==$course->id?'selected':'' }}>{{ $course->name }}</option>
                             @endforeach
                         </select>
                     </div>

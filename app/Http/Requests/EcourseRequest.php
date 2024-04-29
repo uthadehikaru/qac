@@ -26,7 +26,7 @@ class EcourseRequest extends FormRequest
             'slug' => 'nullable',
             'description' => 'nullable',
             'thumbnail' => 'nullable|image',
-            'is_bundle' => 'nullable',
+            'course_id' => 'nullable',
         ];
     }
 }
