@@ -19,7 +19,7 @@ class LocationSeeder extends Seeder
     {
         Province::create([
             'id' => '11',
-            'name' => 'ACEH'
+            'name' => 'ACEH',
         ]);
 
         Regency::create([

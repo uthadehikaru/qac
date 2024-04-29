@@ -17,19 +17,21 @@ class System extends Model implements HasMedia
         'is_array',
     ];
 
-    static function value($key)
+    public static function value($key, $default = null)
     {
-        $system = System::where('key',$key)->first();
-        if($system)
+        $system = System::where('key', $key)->first();
+        if ($system) {
             return $system->value;
+        }
 
-        return null;
+        return $default;
     }
 
     public function getValueAttribute($value)
     {
-        if($this->is_array)
+        if ($this->is_array) {
             return json_decode($value);
+        }
 
         return $value;
     }

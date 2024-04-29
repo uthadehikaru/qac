@@ -2,11 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Models\MemberBatch;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\MemberBatch;
 
 class BatchApproval extends Notification
 {
@@ -32,7 +31,7 @@ class BatchApproval extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,8 +43,8 @@ class BatchApproval extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line(__('batch.approval', ['batch'=>$this->memberBatch->batch->full_name]))
-                    ->action(__('Detail'), route('member.batches.detail', $this->memberBatch->id));
+            ->line(__('batch.approval', ['batch' => $this->memberBatch->batch->full_name]))
+            ->action(__('Detail'), route('member.batches.detail', $this->memberBatch->id));
     }
 
     /**
@@ -57,9 +56,9 @@ class BatchApproval extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'batch_approval',
-            'link'=>route('member.batches.detail', $this->memberBatch->id),
-            'message'=>__('batch.approval', ['batch'=>$this->memberBatch->batch->full_name])
+            'type' => 'batch_approval',
+            'link' => route('member.batches.detail', $this->memberBatch->id),
+            'message' => __('batch.approval', ['batch' => $this->memberBatch->batch->full_name]),
         ];
     }
 }

@@ -15,9 +15,9 @@ class MemberSeeder extends Seeder
     public function run()
     {
         User::factory()->count(100)
-        ->has(\App\Models\Member::factory()->state(function (array $attributes, User $user) {
-            return ['full_name' => $user->name];
-        }))
-        ->create();
+            ->has(\App\Models\Member::factory()->state(function (array $attributes, User $user) {
+                return ['full_name' => $user->name];
+            }))
+            ->create();
     }
 }

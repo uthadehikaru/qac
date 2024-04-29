@@ -22,6 +22,7 @@ class CertificateFactory extends Factory
     public function definition()
     {
         $title = $this->faker->sentence;
+
         return [
             'name' => $title,
             'template' => '',

@@ -24,16 +24,16 @@ class Subscription extends Model
 
     public function scopeActive($query)
     {
-        $query->where('start_date','<=',date('Y-m-d'));
-        $query->where('end_date','>=',date('Y-m-d'));
+        $query->where('start_date', '<=', date('Y-m-d'));
+        $query->where('end_date', '>=', date('Y-m-d'));
     }
 
-    public function ecourse():BelongsTo
+    public function ecourse(): BelongsTo
     {
         return $this->belongsTo(Ecourse::class);
     }
 
-    public function member():BelongsTo
+    public function member(): BelongsTo
     {
         return $this->belongsTo(Member::class);
     }

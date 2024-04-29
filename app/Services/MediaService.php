@@ -1,5 +1,5 @@
 <?php
 
-class MediaService {
-
+class MediaService
+{
 }

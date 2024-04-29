@@ -30,9 +30,9 @@ class AlterTableMembers extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn(['profesi','pendidikan']);
+            $table->dropColumn(['profesi', 'pendidikan']);
         });
-        
+
         Schema::table('member_batch', function (Blueprint $table) {
             $table->dropColumn(['note']);
         });

@@ -16,7 +16,7 @@ class Course extends Model
         'level',
         'is_active',
     ];
-    
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -24,7 +24,7 @@ class Course extends Model
 
     public function getFeeFormatAttribute($value)
     {
-        return "Rp. ".($this->fee/1000).'rb';
+        return 'Rp. '.($this->fee / 1000).'rb';
     }
 
     public function batches()
@@ -34,7 +34,7 @@ class Course extends Model
 
     public function members()
     {
-        return $this->belongsToMany(Member::class,'queues')->withTimestamps()->using(Queue::class);
+        return $this->belongsToMany(Member::class, 'queues')->withTimestamps()->using(Queue::class);
     }
 
     public function modules()
@@ -49,7 +49,7 @@ class Course extends Model
 
     public function lastBatch()
     {
-        return $this->batches->sortByDesc(function($batch, $key){
+        return $this->batches->sortByDesc(function ($batch, $key) {
             return $batch->end_at;
         })->first();
     }

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Member;
-use App\Models\MemberBatch;
-use Hash;
-use Str;
-use DB;
-use Carbon\Carbon;
 use App\DataTables\MemberDataTable;
+use App\Http\Controllers\Controller;
+use App\Models\Member;
+use App\Models\User;
 use App\Notifications\MemberResetPassword;
+use Carbon\Carbon;
+use DB;
+use Hash;
+use Illuminate\Http\Request;
+use Str;
 
 class MemberController extends Controller
 {
@@ -23,7 +22,8 @@ class MemberController extends Controller
      */
     public function index(MemberDataTable $dataTable)
     {
-        $data['title'] = "Data Anggota";
+        $data['title'] = 'Data Anggota';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -35,7 +35,7 @@ class MemberController extends Controller
     public function create()
     {
         $data['member'] = null;
-        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+        $data['educations'] = ['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2', 'S3'];
 
         $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
         $data['regencies'] = [];
@@ -50,7 +50,6 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -82,10 +81,10 @@ class MemberController extends Controller
         $member->instagram = $request->instagram;
         $member->village_id = $request->village_id;
         $member->zipcode = $request->zipcode;
-        $member->is_overseas = $request->is_overseas??0;
+        $member->is_overseas = $request->is_overseas ?? 0;
         $member->save();
 
-        return redirect()->route('admin.members.index')->with('status','Member created successfully');
+        return redirect()->route('admin.members.index')->with('status', 'Member created successfully');
     }
 
     /**
@@ -98,6 +97,7 @@ class MemberController extends Controller
     {
         $member = Member::with('batches')->find($id);
         $data['member'] = $member;
+
         return view('admin.member-detail', $data);
     }
 
@@ -110,21 +110,21 @@ class MemberController extends Controller
     public function edit($id)
     {
         $member = Member::find($id);
-        $data['educations'] = ['SD','SMP', 'SMA', "D3", "S1", "S2", "S3"];
+        $data['educations'] = ['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2', 'S3'];
 
         $province_id = 0;
         $regency_id = 0;
         $district_id = 0;
         $village_id = $member->village_id;
-        if($village_id>0){
+        if ($village_id > 0) {
             $address = DB::table('villages')
-                ->select('province_id','regency_id','district_id')
-                ->join('districts','districts.id','villages.district_id')
-                ->join('regencies','regencies.id','districts.regency_id')
-                ->join('provinces','provinces.id','regencies.province_id')
-                ->where('villages.id',$village_id)
+                ->select('province_id', 'regency_id', 'district_id')
+                ->join('districts', 'districts.id', 'villages.district_id')
+                ->join('regencies', 'regencies.id', 'districts.regency_id')
+                ->join('provinces', 'provinces.id', 'regencies.province_id')
+                ->where('villages.id', $village_id)
                 ->first();
-            if($address){
+            if ($address) {
                 $province_id = $address->province_id;
                 $regency_id = $address->regency_id;
                 $district_id = $address->district_id;
@@ -136,18 +136,18 @@ class MemberController extends Controller
         $data['village_id'] = $village_id;
 
         $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
-        $data['regencies'] = DB::table('regencies')->where('province_id',$province_id)->orderBy('name')->get();
-        $data['districts'] = DB::table('districts')->where('regency_id',$regency_id)->orderBy('name')->get();
-        $data['villages'] = DB::table('villages')->where('district_id',$district_id)->orderBy('name')->get();
-        
+        $data['regencies'] = DB::table('regencies')->where('province_id', $province_id)->orderBy('name')->get();
+        $data['districts'] = DB::table('districts')->where('regency_id', $regency_id)->orderBy('name')->get();
+        $data['villages'] = DB::table('villages')->where('district_id', $district_id)->orderBy('name')->get();
+
         $data['member'] = $member;
+
         return view('admin.member-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -179,10 +179,10 @@ class MemberController extends Controller
         $member->instagram = $request->instagram;
         $member->village_id = $request->village_id;
         $member->zipcode = $request->zipcode;
-        $member->is_overseas = $request->is_overseas??0;
+        $member->is_overseas = $request->is_overseas ?? 0;
         $member->save();
 
-        return redirect()->route('admin.members.index')->with('status','Member updated successfully');
+        return redirect()->route('admin.members.index')->with('status', 'Member updated successfully');
     }
 
     /**
@@ -197,7 +197,8 @@ class MemberController extends Controller
         $user = $member->user;
         $member->delete();
         $user->delete();
-        return response()->json(['status'=>'Deleted Successfully']);
+
+        return response()->json(['status' => 'Deleted Successfully']);
     }
 
     public function verify($user_id)
@@ -205,7 +206,8 @@ class MemberController extends Controller
         $user = User::find($user_id);
         $user->email_verified_at = Carbon::now();
         $user->save();
-        return back()->with('message','Berhasil diverifikasi');
+
+        return back()->with('message', 'Berhasil diverifikasi');
     }
 
     public function reset($user_id)
@@ -216,6 +218,7 @@ class MemberController extends Controller
         $user->save();
         $user->notify(new MemberResetPassword($pass));
         $message = 'Berhasil mereset kata sandi menjadi '.$pass;
-        return back()->with('message',$message);
+
+        return back()->with('message', $message);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\DataTables\QuizDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Course;
-use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\Quiz;
+use Illuminate\Http\Request;
 use Str;
 
 class QuizController extends Controller
@@ -19,7 +19,8 @@ class QuizController extends Controller
      */
     public function index(Request $request, QuizDataTable $dataTable)
     {
-        $data['title'] = "Data Quiz";
+        $data['title'] = 'Data Quiz';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -32,13 +33,13 @@ class QuizController extends Controller
     {
         $data['quiz'] = null;
         $data['courses'] = Course::active()->get();
+
         return view('admin.quiz-form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,24 +52,25 @@ class QuizController extends Controller
             'duration' => 'required|min:1',
         ]);
 
-        $is_public = $request->course_id==null;
+        $is_public = $request->course_id == null;
 
         $slug = Str::slug($request->name.' '.Str::random(5));
         $data = [
-            'name'=>$request->name,
-            'slug'=>$slug,
-            'start_date'=>$request->start_date,
-            'end_date'=>$request->end_date,
-            'description'=>$request->description,
-            'duration'=>$request->duration,
+            'name' => $request->name,
+            'slug' => $slug,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'description' => $request->description,
+            'duration' => $request->duration,
         ];
 
-        if(!$is_public)
+        if (! $is_public) {
             $data['course_id'] = $request->course_id;
-        
+        }
+
         $quiz = Quiz::create($data);
 
-        return redirect()->route('admin.quiz.questions', $quiz->id)->with('status','Quiz created');
+        return redirect()->route('admin.quiz.questions', $quiz->id)->with('status', 'Quiz created');
     }
 
     /**
@@ -92,13 +94,13 @@ class QuizController extends Controller
     {
         $data['quiz'] = Quiz::find($id);
         $data['courses'] = Course::active()->get();
+
         return view('admin.quiz-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -112,23 +114,24 @@ class QuizController extends Controller
             'duration' => 'required|min:1',
         ]);
 
-        $is_public = $request->course_id==null;
+        $is_public = $request->course_id == null;
 
         $quiz = Quiz::find($id);
         $data = [
-            'name'=>$request->name,
-            'start_date'=>$request->start_date,
-            'end_date'=>$request->end_date,
-            'description'=>$request->description,
-            'duration'=>$request->duration,
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'description' => $request->description,
+            'duration' => $request->duration,
         ];
 
-        if(!$is_public)
+        if (! $is_public) {
             $data['course_id'] = $request->course_id;
+        }
 
         $quiz->update($data);
 
-        return redirect()->route('admin.quiz.index')->with('status','Quiz updated');
+        return redirect()->route('admin.quiz.index')->with('status', 'Quiz updated');
     }
 
     /**
@@ -140,15 +143,17 @@ class QuizController extends Controller
     public function destroy($id)
     {
         Quiz::find($id)->delete();
-        return response()->json(['status'=>'Deleted successfully']);
+
+        return response()->json(['status' => 'Deleted successfully']);
     }
 
     public function questions($id)
     {
         $quiz = Quiz::find($id);
         $data['quiz'] = $quiz;
-        $data['options'] = ['a','b','c','d'];
+        $data['options'] = ['a', 'b', 'c', 'd'];
         $data['i'] = 1;
+
         return view('admin.quiz-questions', $data);
     }
 
@@ -158,10 +163,11 @@ class QuizController extends Controller
 
         $data = $request->all();
 
-        for($i=0;$i<count($data['question']);$i++){
-            if($data['question'][$i]=='')
+        for ($i = 0; $i < count($data['question']); $i++) {
+            if ($data['question'][$i] == '') {
                 continue;
-            
+            }
+
             $questionData = [
                 'quiz_id' => $quiz->id,
                 'content' => $data['question'][$i],
@@ -173,20 +179,21 @@ class QuizController extends Controller
             ];
             $question_id = $data['question_id'][$i];
 
-            if($question_id>0){
+            if ($question_id > 0) {
                 $question = Question::find($question_id);
                 $question->update($questionData);
-            }else{
+            } else {
                 $question = Question::create($questionData);
             }
         }
 
-        return redirect()->route('admin.quiz.questions', $quiz->id)->with('status','Quiz Questions Updated');
+        return redirect()->route('admin.quiz.questions', $quiz->id)->with('status', 'Quiz Questions Updated');
     }
 
     public function deleteQuestion(Quiz $quiz, Question $question)
     {
         $question->delete();
-        return redirect()->route('admin.quiz.questions', $quiz->id)->with('status','Quiz Questions Deleted');
+
+        return redirect()->route('admin.quiz.questions', $quiz->id)->with('status', 'Quiz Questions Deleted');
     }
 }

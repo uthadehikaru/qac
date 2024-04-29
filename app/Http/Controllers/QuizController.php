@@ -2,58 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Event;
-use App\Models\Quiz;
-use App\Models\User;
+use App\Mail\ApplyQuiz;
 use App\Models\Participant;
 use App\Models\ParticipantAnswer;
-use App\Mail\ApplyQuiz;
-use Carbon\Carbon;
+use App\Models\Quiz;
+use App\Models\User;
 use Auth;
-use Str;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Mail;
+use Str;
 
 class QuizController extends Controller
 {
     public function index()
     {
         $data['latestQuizzes'] = Quiz::latest()->simplePaginate(5);
+
         return view('quiz-list', $data);
     }
 
     public function detail(Request $request, Quiz $quiz)
     {
-        if(!$quiz->is_active)
-        return back()->with('error','Mohon maaf, quiz ini belum dimulai/sudah selesai');
+        if (! $quiz->is_active) {
+            return back()->with('error', 'Mohon maaf, quiz ini belum dimulai/sudah selesai');
+        }
 
-        if($quiz->course_id){
-            if(!Auth::check()){
+        if ($quiz->course_id) {
+            if (! Auth::check()) {
                 session(['url.intended' => url()->current()]);
+
                 return redirect()->route('login')->withError('Silahkan login terlebih dahulu');
-            }elseif($quiz->course && !$quiz->isAllowed(Auth::user())){
-                return redirect()->route('quiz.list')->with('error','Anda tidak memiliki akses ke quiz '.$quiz->name);
+            } elseif ($quiz->course && ! $quiz->isAllowed(Auth::user())) {
+                return redirect()->route('quiz.list')->with('error', 'Anda tidak memiliki akses ke quiz '.$quiz->name);
             }
         }
 
-        $email = "";
+        $email = '';
         $user_id = 0;
-        if(Auth::check()){
+        if (Auth::check()) {
             $email = Auth::user()->email;
             $user_id = Auth::id();
         }
 
         $data['quiz'] = $quiz;
         $data['i'] = 1;
-        $data['options'] = ['a','b','c','d'];
-        
-        if($request->session()->has('session')){
-            $data['end_at'] = $request->session()->get('end_at');
-        }else{
-            $participant = Participant::where(['email'=>$email,'user_id'=>$user_id])->first();
+        $data['options'] = ['a', 'b', 'c', 'd'];
 
-            if($participant->finish)
-                return redirect()->route('quiz.list')->with('error','Anda sudah mengerjakan, kesempatan anda hanya sekali');
+        if ($request->session()->has('session')) {
+            $data['end_at'] = $request->session()->get('end_at');
+        } else {
+            $participant = Participant::where(['email' => $email, 'user_id' => $user_id])->first();
+
+            if ($participant->finish) {
+                return redirect()->route('quiz.list')->with('error', 'Anda sudah mengerjakan, kesempatan anda hanya sekali');
+            }
 
             $participant = Participant::create([
                 'session' => \Str::uuid(),
@@ -63,36 +66,37 @@ class QuizController extends Controller
                 'quiz_id' => $quiz->id,
             ]);
             $request->session()->put('session', $participant->session);
-            $end_at = date("Y-m-d H:i:s", strtotime('+'.$quiz->duration.' minutes'));
+            $end_at = date('Y-m-d H:i:s', strtotime('+'.$quiz->duration.' minutes'));
             $request->session()->put('end_at', $end_at);
             $data['end_at'] = $end_at;
         }
-        
+
         return view('quiz-detail', $data);
     }
 
     public function finish(Request $request, Quiz $quiz)
     {
-        if($request->session()->has('session')){
-            $participant = Participant::where('session',$request->session()->get('session'))->first();
+        if ($request->session()->has('session')) {
+            $participant = Participant::where('session', $request->session()->get('session'))->first();
 
             $data = $request->all();
             $total = 0;
-            foreach($quiz->questions as $question){
-                $is_correct = $request->has('question_'.$question->id) && $question->answer==$data['question_'.$question->id];
+            foreach ($quiz->questions as $question) {
+                $is_correct = $request->has('question_'.$question->id) && $question->answer == $data['question_'.$question->id];
 
                 $answer = ParticipantAnswer::create([
                     'participant_id' => $participant->id,
                     'question_id' => $question->id,
                     'question' => $question->content,
-                    'answer' => $request->has('question_'.$question->id)?$question->getOriginal('option_'.$data['question_'.$question->id]):'',
+                    'answer' => $request->has('question_'.$question->id) ? $question->getOriginal('option_'.$data['question_'.$question->id]) : '',
                     'is_correct' => $is_correct,
                 ]);
 
-                if($is_correct)
+                if ($is_correct) {
                     $total++;
+                }
             }
-            
+
             $interval = $participant->start_at->diffInSeconds($participant->end_at);
             $participant->end_at = date('Y-m-d H:i:s');
             $participant->duration = $interval;
@@ -100,9 +104,11 @@ class QuizController extends Controller
             $participant->save();
 
             $request->session()->forget('session');
-            return redirect()->route('quiz.list')->with('message','Anda telah menyelesaikan quiz '.$quiz->name);
+
+            return redirect()->route('quiz.list')->with('message', 'Anda telah menyelesaikan quiz '.$quiz->name);
         }
-        return redirect()->route('quiz.list')->with('error','Anda tidak memiliki sesi untuk quiz '.$quiz->name);
+
+        return redirect()->route('quiz.list')->with('error', 'Anda tidak memiliki sesi untuk quiz '.$quiz->name);
     }
 
     public function apply(Request $request, Quiz $quiz)
@@ -111,12 +117,13 @@ class QuizController extends Controller
             'email' => 'required|email',
         ]);
 
-        $participant = Participant::where(['email'=>$request->email,'quiz_id'=>$quiz->id])->first();
-        if($participant){
-            if($participant->finish)
-                return redirect()->route('quiz.list')->with('error','Anda sudah mengerjakan, kesempatan anda hanya sekali');
-            else
-                return redirect()->route('quiz.list')->with('error','Anda sudah mengajukan diri, cek email anda untuk mendapatkan akses ke quiz '.$quiz->name);
+        $participant = Participant::where(['email' => $request->email, 'quiz_id' => $quiz->id])->first();
+        if ($participant) {
+            if ($participant->finish) {
+                return redirect()->route('quiz.list')->with('error', 'Anda sudah mengerjakan, kesempatan anda hanya sekali');
+            } else {
+                return redirect()->route('quiz.list')->with('error', 'Anda sudah mengajukan diri, cek email anda untuk mendapatkan akses ke quiz '.$quiz->name);
+            }
         }
 
         $participant = Participant::create([
@@ -126,31 +133,36 @@ class QuizController extends Controller
             'session' => Str::uuid(),
         ]);
         Mail::to($request->email)->send(new ApplyQuiz($participant));
-        return redirect()->route('quiz.list')->with('message','Cek email anda untuk memulai Quiz '.$quiz->name);
+
+        return redirect()->route('quiz.list')->with('message', 'Cek email anda untuk memulai Quiz '.$quiz->name);
     }
 
     public function verify(Request $request, $session)
     {
-        $participant = Participant::where('session',$session)->first();
-        if(!$participant)
-            return redirect()->route('quiz.list')->with('message','Kode verifikasi tidak sesuai, mohon pastikan kembali');
-
-        if($participant->start_at && $participant->end_at)
-            return redirect()->route('quiz.list')->with('message','Sesi anda telah selesai');
-
-        $durationInSeconds = $participant->quiz->duration*60;
-        if($participant->start_at && $participant->start_at->diffInSeconds(Carbon::now())>$durationInSeconds){
-            $participant->end_at = $participant->start_at;
-            $participant->save();
-            return redirect()->route('quiz.list')->with('message','Sesi anda telah selesai');
+        $participant = Participant::where('session', $session)->first();
+        if (! $participant) {
+            return redirect()->route('quiz.list')->with('message', 'Kode verifikasi tidak sesuai, mohon pastikan kembali');
         }
 
-        if(!$request->session()->has('session')){
+        if ($participant->start_at && $participant->end_at) {
+            return redirect()->route('quiz.list')->with('message', 'Sesi anda telah selesai');
+        }
+
+        $durationInSeconds = $participant->quiz->duration * 60;
+        if ($participant->start_at && $participant->start_at->diffInSeconds(Carbon::now()) > $durationInSeconds) {
+            $participant->end_at = $participant->start_at;
+            $participant->save();
+
+            return redirect()->route('quiz.list')->with('message', 'Sesi anda telah selesai');
+        }
+
+        if (! $request->session()->has('session')) {
             $user = User::where('email', $participant->email)->first();
-            if($user)
+            if ($user) {
                 $participant->user_id = $user->id;
-            
-            if(!$participant->start_at){
+            }
+
+            if (! $participant->start_at) {
                 $participant->start_at = date('Y-m-d H:i:s');
                 $participant->save();
             }
@@ -160,7 +172,7 @@ class QuizController extends Controller
             $request->session()->put('end_at', $end_at);
             $data['end_at'] = $end_at;
         }
-        
+
         return redirect()->route('quiz.detail', $participant->quiz->slug);
     }
 }

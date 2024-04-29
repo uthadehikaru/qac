@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Imports\ImportAlumni;
+use Illuminate\Console\Command;
 
 class Import extends Command
 {

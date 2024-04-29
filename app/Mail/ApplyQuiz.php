@@ -2,11 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\Participant;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Participant;
 
 class ApplyQuiz extends Mailable
 {
@@ -31,7 +30,7 @@ class ApplyQuiz extends Mailable
      */
     public function build()
     {
-        return $this->subject("Quiz QAC : Yuk segera jawab Quiz ".$this->participant->quiz->name)
-        ->view('emails.quiz-apply');
+        return $this->subject('Quiz QAC : Yuk segera jawab Quiz '.$this->participant->quiz->name)
+            ->view('emails.quiz-apply');
     }
 }

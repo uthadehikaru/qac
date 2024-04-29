@@ -22,10 +22,11 @@ class CourseFactory extends Factory
     public function definition()
     {
         $title = $this->faker->sentence;
+
         return [
             'name' => $title,
             'description' => $this->faker->text(),
-            'fee' => $this->faker->numberBetween(100000,200000),
+            'fee' => $this->faker->numberBetween(100000, 200000),
             'level' => 1,
             'is_active' => 1,
         ];

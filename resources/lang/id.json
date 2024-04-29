@@ -1,7 +1,7 @@
 {
     "A":"A",
     "admin.waitinglist":":member mendaftar waitinglist :course.",
-    "admin.order":":member memesan langganan :course.",
+    "admin.order":":member memesan langganan.",
     "Address":"Alamat",
 
     "B":"B",
@@ -50,8 +50,8 @@
     "M":"M",
     "member.registration":"Selamat, :member telah mendaftar :batch. Silahkan menghubungi Admin QAC via whatsapp untuk proses administrasi.",
     "member.waitinglist":"Selamat, :member telah masuk dalam waiting list :course. Kami akan menginformasikan ketika ada kelas yang tersedia.",
-    "member.order":"Terima kasih, :member. anda telah memesan langganan :course. Admin QAC akan mengkonfirmasi via whatsapp untuk pesanan anda.",
-    "member.order.confirm":"Terima kasih, :member. pensanan :course telah dikonfirmasi. Selamat menikmati online course kami.",
+    "member.order":"Terima kasih, :member. anda telah mendaftar berlangganan online courses QAC. Admin QAC akan mengkonfirmasi via whatsapp untuk pesanan anda.",
+    "member.order.confirm":"Terima kasih, :member. pesanan langganan telah dikonfirmasi. Selamat menikmati online course kami.",
     "Member":"Anggota",
     "Members":"Anggota",
     "Minutes":"Menit",

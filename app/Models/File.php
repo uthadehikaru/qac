@@ -20,7 +20,7 @@ class File extends Model
         'record_id',
     ];
 
-    protected static $fileFields  = [
+    protected static $fileFields = [
         'filename' => [
             'disk' => 'public',
             'path' => 'files',

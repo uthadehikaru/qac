@@ -17,7 +17,7 @@ class Certificate extends Model
         'config',
     ];
 
-    protected static $fileFields  = [
+    protected static $fileFields = [
         'template' => [
             'disk' => 'public',
             'path' => 'templates',

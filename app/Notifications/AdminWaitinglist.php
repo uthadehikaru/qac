@@ -2,11 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Models\Queue;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\Queue;
 
 class AdminWaitinglist extends Notification
 {
@@ -32,7 +31,7 @@ class AdminWaitinglist extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,9 +43,9 @@ class AdminWaitinglist extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->waitinglist->member->full_name.' mendaftar Waiting list '.$this->waitinglist->course->name)
-                    ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink());
+            ->subject($this->waitinglist->member->full_name.' mendaftar Waiting list '.$this->waitinglist->course->name)
+            ->line($this->getMessage())
+            ->action(__('Detail'), $this->getLink());
     }
 
     /**
@@ -58,9 +57,9 @@ class AdminWaitinglist extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'waitinglist',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage(),
+            'type' => 'waitinglist',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 
@@ -71,6 +70,6 @@ class AdminWaitinglist extends Notification
 
     private function getMessage()
     {
-        return __('admin.waitinglist', ['member'=>$this->waitinglist->member->full_name,'course'=>$this->waitinglist->course->name]);
+        return __('admin.waitinglist', ['member' => $this->waitinglist->member->full_name, 'course' => $this->waitinglist->course->name]);
     }
 }

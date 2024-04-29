@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Quiz extends Model
@@ -20,17 +20,18 @@ class Quiz extends Model
         'end_date',
         'duration',
     ];
-    
+
     protected $casts = [
         'start_date' => 'date:Y-m-d',
         'end_date' => 'date:Y-m-d',
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($quiz) { 
-             $quiz->questions()->delete();
+        static::deleting(function ($quiz) {
+            $quiz->questions()->delete();
         });
     }
 
@@ -57,11 +58,14 @@ class Quiz extends Model
 
     public function getDurationDateAttribute($value)
     {
-        $duration = "";
-        if($this->start_date)
+        $duration = '';
+        if ($this->start_date) {
             $duration .= $this->start_date->format('d M Y');
-        if($this->end_date && $this->start_date<>$this->end_date)
-            $duration .= " - ".$this->end_date->format('d M Y');
+        }
+        if ($this->end_date && $this->start_date != $this->end_date) {
+            $duration .= ' - '.$this->end_date->format('d M Y');
+        }
+
         return $duration;
     }
 
@@ -77,13 +81,15 @@ class Quiz extends Model
 
     public function isAllowed($user)
     {
-        if($user->role=='admin')
+        if ($user->role == 'admin') {
             return true;
-        
-        if($user->member && $this->course_id>0)
+        }
+
+        if ($user->member && $this->course_id > 0) {
             return DB::table('member_batch')
-            ->whereRaw("member_batch.member_id=".$user->member->id." AND member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$this->course_id.")" )
-            ->exists();
+                ->whereRaw('member_batch.member_id='.$user->member->id." AND member_batch.status='6' AND EXISTS(SELECT 1 from batches b WHERE b.id=member_batch.batch_id AND b.course_id=".$this->course_id.')')
+                ->exists();
+        }
 
         return false;
     }

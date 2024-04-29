@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\DataTables\SystemDataTable;
 use App\Models\System;
+use Illuminate\Http\Request;
 
 class SystemController extends Controller
 {
@@ -16,7 +15,7 @@ class SystemController extends Controller
      */
     public function index()
     {
-        $data['title'] = "Data Setting";
+        $data['title'] = 'Data Setting';
         $data['about_1'] = System::value('about_1');
         $data['about_2'] = System::value('about_2');
         $data['whatsapp'] = System::value('whatsapp');
@@ -24,8 +23,10 @@ class SystemController extends Controller
         $data['waitinglist'] = System::value('waitinglist');
         $data['popup_image'] = System::value('popup_image');
         $data['popup_active'] = System::value('popup_active');
-        $data['why1'] = System::where('key','why1')->first();
-        $data['why2'] = System::where('key','why2')->first();
+        $data['ecource_access_month'] = System::value('ecource_access_month');
+        $data['why1'] = System::where('key', 'why1')->first();
+        $data['why2'] = System::where('key', 'why2')->first();
+
         return view('admin.setting', $data);
     }
 
@@ -37,25 +38,25 @@ class SystemController extends Controller
     public function create()
     {
         $data['system'] = null;
-        return view('admin.system-form',$data);
+
+        return view('admin.system-form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        foreach($request->only(['about_1','about_2','whatsapp','waitinglist','popup_image','popup_active','whatsapp_ecourse']) as $key=>$data){
-            if($key=='popup_image'){
-                $data = $request->file('popup_image')->store('files','public');
+        foreach ($request->only(['about_1', 'about_2', 'whatsapp', 'waitinglist', 'popup_image', 'popup_active', 'whatsapp_ecourse', 'ecource_access_month']) as $key => $data) {
+            if ($key == 'popup_image') {
+                $data = $request->file('popup_image')->store('files', 'public');
             }
-            System::where('key',$key)->update(['value'=>$data]);
+            System::where('key', $key)->update(['value' => $data]);
         }
 
-        return redirect()->route('admin.systems.index')->with('status','System created successfully');
+        return redirect()->route('admin.systems.index')->with('status', 'System created successfully');
     }
 
     /**
@@ -78,21 +79,21 @@ class SystemController extends Controller
     public function edit($id)
     {
         $system = System::find($id);
-        $data['value'] = $system->is_array?json_encode($system->value):$system->value;
+        $data['value'] = $system->is_array ? json_encode($system->value) : $system->value;
         $data['system'] = $system;
-        return view('admin.system-form',$data);
+
+        return view('admin.system-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'key' => 'required|string|max:255',
             'value' => 'required|string',
@@ -102,7 +103,7 @@ class SystemController extends Controller
         $data = $request->all();
         $system = System::find($id)->update($data);
 
-        return redirect()->route('admin.systems.index')->with('status','System updated successfully');
+        return redirect()->route('admin.systems.index')->with('status', 'System updated successfully');
     }
 
     /**
@@ -112,9 +113,10 @@ class SystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         $system = System::find($id);
         $system->delete();
-        return response()->json(['status'=>'Deleted Successfully']);
+
+        return response()->json(['status' => 'Deleted Successfully']);
     }
 }

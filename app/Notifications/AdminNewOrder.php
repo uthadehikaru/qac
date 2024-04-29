@@ -2,11 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\Order;
 
 class AdminNewOrder extends Notification
 {
@@ -32,7 +31,7 @@ class AdminNewOrder extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,9 +43,9 @@ class AdminNewOrder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->order->member->full_name.' melakukan pesanan '.$this->order->ecourse->title)
-                    ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink());
+            ->subject($this->order->member->full_name.' melakukan pesanan langganan')
+            ->line($this->getMessage())
+            ->action(__('Detail'), $this->getLink());
     }
 
     /**
@@ -58,9 +57,9 @@ class AdminNewOrder extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'order',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage(),
+            'type' => 'order',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 
@@ -71,6 +70,6 @@ class AdminNewOrder extends Notification
 
     private function getMessage()
     {
-        return __('admin.order', ['member'=>$this->order->member->full_name,'course'=>$this->order->ecourse->title]);
+        return __('admin.order', ['member' => $this->order->member->full_name]);
     }
 }

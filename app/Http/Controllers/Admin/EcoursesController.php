@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\EcoursesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EcourseRequest;
+use App\Models\Course;
 use App\Models\Ecourse;
 use App\Services\EcourseService;
-use Illuminate\Http\Request;
 
 class EcoursesController extends Controller
 {
@@ -16,9 +16,10 @@ class EcoursesController extends Controller
      */
     public function index(EcoursesDataTable $dataTable)
     {
-        $data['title'] = "Online Courses";
+        $data['title'] = 'Online Courses';
         $data['button'] = '<a class="ml-3 inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.sections.index').'">Sections</a>';
         $data['button'] .= '<a class="ml-3 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.orders.index').'">Orders</a>';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -28,6 +29,8 @@ class EcoursesController extends Controller
     public function create()
     {
         $data['ecourse'] = null;
+        $data['courses'] = Course::all();
+
         return view('admin.ecourse-form', $data);
     }
 
@@ -38,8 +41,9 @@ class EcoursesController extends Controller
     {
         $data = $request->validated();
         $ecourse = $ecourseService->updateOrCreate($data);
+
         return redirect()->route('admin.ecourses.show', $ecourse->id)
-        ->with('message','data created');
+            ->with('message', 'data created');
     }
 
     /**
@@ -49,6 +53,7 @@ class EcoursesController extends Controller
     {
         $ecourse = $ecourseService->find($id);
         $data['ecourse'] = $ecourse;
+
         return view('admin.ecourse-detail', $data);
     }
 
@@ -58,6 +63,8 @@ class EcoursesController extends Controller
     public function edit(string $id)
     {
         $data['ecourse'] = Ecourse::find($id);
+        $data['courses'] = Course::all();
+
         return view('admin.ecourse-form', $data);
     }
 
@@ -68,8 +75,9 @@ class EcoursesController extends Controller
     {
         $data = $request->validated();
         $ecourse = $ecourseService->updateOrCreate($data, $id);
+
         return redirect()->route('admin.ecourses.show', $ecourse->id)
-        ->with('message','data updated');
+            ->with('message', 'data updated');
     }
 
     /**

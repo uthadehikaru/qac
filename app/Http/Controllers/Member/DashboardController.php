@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
 use App\Models\Course;
-use App\Models\Batch;
 use App\Models\Event;
 use App\Models\Member;
-use App\Models\MemberBatch;
+use Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $member = Member::with(['batches','courses'])->where('user_id',Auth::id())->first();
+        $member = Member::with(['batches', 'courses'])->where('user_id', Auth::id())->first();
         $data['member'] = $member;
         $data['courses'] = Course::orderBy('level')->active()->get();
         $data['incomingEvents'] = Event::incoming()->oldest('event_at')->get();
+
         return view('member.dashboard', $data);
     }
 
@@ -26,11 +24,12 @@ class DashboardController extends Controller
     {
         $member = Auth::user()->member;
         $course = Course::find($course_id);
-        if($member->level()<$course->level-1){
-            return redirect()->route('member.dashboard')->with('error','Anda belum selesai mengikuti kelas dibawah '.$course->name);
-        }else{
+        if ($member->level() < $course->level - 1) {
+            return redirect()->route('member.dashboard')->with('error', 'Anda belum selesai mengikuti kelas dibawah '.$course->name);
+        } else {
             $member->courses()->toggle($course_id);
-            return redirect()->route('member.dashboard')->with('message','Berhasil memperbaharui waiting list '.$course->name);
+
+            return redirect()->route('member.dashboard')->with('message', 'Berhasil memperbaharui waiting list '.$course->name);
         }
     }
 }

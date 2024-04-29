@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use DB;
 
 class Member extends Model
 {
@@ -31,12 +31,13 @@ class Member extends Model
         'is_overseas' => 'boolean',
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($member) { 
-             $member->batches()->detach();
-             $member->queues()->delete();
+        static::deleting(function ($member) {
+            $member->batches()->detach();
+            $member->queues()->delete();
         });
     }
 
@@ -47,33 +48,34 @@ class Member extends Model
 
     public function getNameAttribute($value)
     {
-        return $this->user?$this->user->name:'';
+        return $this->user ? $this->user->name : '';
     }
 
     public function getEmailAttribute($value)
     {
-        return $this->user?$this->user->email:'';
+        return $this->user ? $this->user->email : '';
     }
 
     public function getAddressDetailAttribute($value)
     {
         $address = $this->address;
 
-        if($this->village_id>0){
+        if ($this->village_id > 0) {
             $data = DB::table('villages')
-                ->select('provinces.name as province','regencies.name as regency','districts.name as district','villages.name as village')
-                ->join('districts','districts.id','villages.district_id')
-                ->join('regencies','regencies.id','districts.regency_id')
-                ->join('provinces','provinces.id','regencies.province_id')
-                ->where('villages.id',$this->village_id)
+                ->select('provinces.name as province', 'regencies.name as regency', 'districts.name as district', 'villages.name as village')
+                ->join('districts', 'districts.id', 'villages.district_id')
+                ->join('regencies', 'regencies.id', 'districts.regency_id')
+                ->join('provinces', 'provinces.id', 'regencies.province_id')
+                ->where('villages.id', $this->village_id)
                 ->first();
-            if($data){
-                $address .= ". ".$data->province.', '.$data->regency.', '.$data->district.', '.$data->village;
+            if ($data) {
+                $address .= '. '.$data->province.', '.$data->regency.', '.$data->district.', '.$data->village;
             }
         }
 
-        if($this->zipcode!='')
-            $address .= " ".$this->zipcode;
+        if ($this->zipcode != '') {
+            $address .= ' '.$this->zipcode;
+        }
 
         return $address;
     }
@@ -81,13 +83,15 @@ class Member extends Model
     public function setPhoneAttribute($value)
     {
         $phone = $value;
-        $prefix = substr($phone,0,1);
-        if ($prefix=='+')
-            $phone = substr($phone,1,strlen($phone));
-            
-        $prefix = substr($phone,0,1);
-        if ($prefix=='0')
-            $phone = "62".substr($phone,1,strlen($phone));
+        $prefix = substr($phone, 0, 1);
+        if ($prefix == '+') {
+            $phone = substr($phone, 1, strlen($phone));
+        }
+
+        $prefix = substr($phone, 0, 1);
+        if ($prefix == '0') {
+            $phone = '62'.substr($phone, 1, strlen($phone));
+        }
         $this->attributes['phone'] = $phone;
     }
 
@@ -98,44 +102,52 @@ class Member extends Model
 
     public function getProvinceAttribute()
     {
-        if($this->village_id){
+        if ($this->village_id) {
             $province = DB::table('villages')
-            ->join('districts', 'districts.id', '=', 'villages.district_id')
-            ->join('regencies', 'regencies.id', '=', 'districts.regency_id')
-            ->join('provinces', 'provinces.id', '=', 'regencies.province_id')
-            ->where('villages.id', $this->village_id)
-            ->selectRaw('provinces.*')
-            ->first();
+                ->join('districts', 'districts.id', '=', 'villages.district_id')
+                ->join('regencies', 'regencies.id', '=', 'districts.regency_id')
+                ->join('provinces', 'provinces.id', '=', 'regencies.province_id')
+                ->where('villages.id', $this->village_id)
+                ->selectRaw('provinces.*')
+                ->first();
 
             return $province->name;
         }
-        
+
         return $this->city;
     }
 
     public function batches()
     {
-        return $this->belongsToMany(Batch::class,'member_batch')->withPivot('id','session', 'status','new_book','reseat')->using(MemberBatch::class);
+        return $this->belongsToMany(Batch::class, 'member_batch')->withPivot('id', 'session', 'status', 'new_book', 'reseat')->using(MemberBatch::class);
+    }
+
+    public function paidBatches()
+    {
+        return $this->belongsToMany(Batch::class, 'member_batch')
+            ->wherePivot('status', '>=', MemberBatch::STATUS_PAID)
+            ->withPivot('id', 'session', 'status', 'new_book', 'reseat')->using(MemberBatch::class);
     }
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class,'queues')->withTimestamps()->using(Queue::class);
+        return $this->belongsToMany(Course::class, 'queues')->withTimestamps()->using(Queue::class);
     }
 
     public function level()
     {
         return DB::table('member_batch')
-        ->join('batches', 'batches.id', '=', 'member_batch.batch_id')
-        ->join('courses', 'courses.id', '=', 'batches.course_id')
-        ->where('member_batch.member_id',$this->id)
-        ->where('member_batch.status','6')
-        ->max('courses.level');
+            ->join('batches', 'batches.id', '=', 'member_batch.batch_id')
+            ->join('courses', 'courses.id', '=', 'batches.course_id')
+            ->where('member_batch.member_id', $this->id)
+            ->where('member_batch.status', '6')
+            ->max('courses.level');
     }
 
-    public function isReseat($batch){
-        return $this->batches->contains(function ($memberBatch, $key) use ($batch){
-            return $memberBatch->course_id==$batch->course_id;
+    public function isReseat($batch)
+    {
+        return $this->batches->contains(function ($memberBatch, $key) use ($batch) {
+            return $memberBatch->course_id == $batch->course_id;
         });
     }
 }

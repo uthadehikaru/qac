@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Ecourse;
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,11 +21,12 @@ class SubscriptionFactory extends Factory
     {
         $ecourse = Ecourse::inRandomOrder()->take(1)->first();
         $member = Member::inRandomOrder()->take(1)->first();
+
         return [
             'ecourse_id' => $ecourse->id,
             'member_id' => $member->id,
-            'start_date' => $this->faker->dateTimeThisMonth(),
-            'end_date' => $this->faker->dateTimeThisMonth(),
+            'start_date' => Carbon::now()->startOfDay(),
+            'end_date' => Carbon::now()->addMonth()->startOfDay(),
         ];
     }
 }

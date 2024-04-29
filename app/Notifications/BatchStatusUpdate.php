@@ -2,11 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Models\MemberBatch;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\MemberBatch;
 
 class BatchStatusUpdate extends Notification implements ShouldQueue
 {
@@ -32,7 +32,7 @@ class BatchStatusUpdate extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,9 +44,9 @@ class BatchStatusUpdate extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->memberBatch->batch->full_name. ' : Status diperbaharui')
-                    ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink());
+            ->subject($this->memberBatch->batch->full_name.' : Status diperbaharui')
+            ->line($this->getMessage())
+            ->action(__('Detail'), $this->getLink());
     }
 
     /**
@@ -58,9 +58,9 @@ class BatchStatusUpdate extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'type'=>'batch_status',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage()
+            'type' => 'batch_status',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 
@@ -71,6 +71,6 @@ class BatchStatusUpdate extends Notification implements ShouldQueue
 
     private function getMessage()
     {
-        return __('batch.status', ['batch'=>$this->memberBatch->batch->full_name,'status'=>__('batch.status_'.$this->memberBatch->status)]);
+        return __('batch.status', ['batch' => $this->memberBatch->batch->full_name, 'status' => __('batch.status_'.$this->memberBatch->status)]);
     }
 }

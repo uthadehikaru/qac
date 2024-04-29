@@ -8,7 +8,7 @@
         </h2>
         <div class="float-right flex flex-row">
             <x-link-button  href="{{ route('admin.ecourses.index') }}" class=" ml-3" type="warning">Back</x-button>
-            <x-link-button  href="{{ route('admin.ecourses.subscriptions.index', $ecourse->id) }}" type="success" class=" ml-3">@lang('Subscribers')</x-button>
+            <x-link-button  href="{{ route('admin.ecourses.completed.index', $ecourse->id) }}" type="success" class=" ml-3">@lang('Completed Lessons')</x-button>
             <x-link-button  href="{{ route('admin.ecourses.lessons.create', $ecourse->id) }}" class=" ml-3">@lang('New Lesson')</x-button>
         </div>
     </x-slot>
@@ -24,7 +24,7 @@
                     <div class="flex flex-col gap-y-4">
                         <span class="font-bold text-xl">{{ $lesson->order_no }}. {{ $lesson->subject }}</span>
                         <span class="">Section : {{ $lesson->section->name }}</span>
-                        <a href="{{ route('admin.ecourses.subscriptions.index', ['ecourse'=>$ecourse->id, 'lesson'=>$lesson->id]) }}" class="text-red-800"
+                        <a href="{{ route('admin.ecourses.completed.index', ['ecourse'=>$ecourse->id, 'lesson'=>$lesson->id]) }}" class="text-red-800"
                         >Completed : {{ $lesson->completed->count() }} Members</a>
                         <span class="">Video : {{ $lesson->getMedia('videos')->first()?->name ?? 'no video' }}</span>
                         <span class="">Downloads : </span>

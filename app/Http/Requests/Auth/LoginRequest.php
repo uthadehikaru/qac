@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Member;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use App\Models\Member;
 
 class LoginRequest extends FormRequest
 {
@@ -47,13 +47,14 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $email = $this->get('email_or_phone');
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $member = Member::where('phone',$email)->first();
-            if($member)
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $member = Member::where('phone', $email)->first();
+            if ($member) {
                 $email = $member->user->email;
+            }
         }
 
-        if (! Auth::attempt(['email'=>$email,'password'=>$this->get('password')], $this->filled('remember'))) {
+        if (! Auth::attempt(['email' => $email, 'password' => $this->get('password')], $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

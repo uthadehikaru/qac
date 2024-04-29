@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\DataTables\CertificateDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
@@ -16,7 +16,8 @@ class CertificateController extends Controller
      */
     public function index(CertificateDataTable $dataTable)
     {
-        $data['title'] = "Data Certificates";
+        $data['title'] = 'Data Certificates';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -28,13 +29,13 @@ class CertificateController extends Controller
     public function create()
     {
         $data['certificate'] = null;
-        return view('admin.certificate-form',$data);
+
+        return view('admin.certificate-form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -48,7 +49,7 @@ class CertificateController extends Controller
         $data = $request->all();
         $certificate = Certificate::create($data);
 
-        return redirect()->route('admin.certificates.index')->with('status','Certificate created successfully');
+        return redirect()->route('admin.certificates.index')->with('status', 'Certificate created successfully');
     }
 
     /**
@@ -71,21 +72,21 @@ class CertificateController extends Controller
     public function edit($id)
     {
         $certificate = Certificate::find($id);
-        $data['value'] = $certificate->is_array?json_encode($certificate->value):$certificate->value;
+        $data['value'] = $certificate->is_array ? json_encode($certificate->value) : $certificate->value;
         $data['certificate'] = $certificate;
-        return view('admin.certificate-form',$data);
+
+        return view('admin.certificate-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'name' => 'required|string|max:255',
             'config' => 'required|string',
@@ -95,7 +96,7 @@ class CertificateController extends Controller
         $data = $request->all();
         $certificate = Certificate::find($id)->update($data);
 
-        return redirect()->route('admin.certificates.index')->with('status','Certificate updated successfully');
+        return redirect()->route('admin.certificates.index')->with('status', 'Certificate updated successfully');
     }
 
     /**
@@ -105,9 +106,10 @@ class CertificateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         $certificate = Certificate::find($id);
         $certificate->delete();
-        return response()->json(['status'=>'Deleted Successfully']);
+
+        return response()->json(['status' => 'Deleted Successfully']);
     }
 }

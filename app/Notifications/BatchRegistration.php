@@ -2,11 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Models\MemberBatch;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\MemberBatch;
 
 class BatchRegistration extends Notification
 {
@@ -32,7 +31,7 @@ class BatchRegistration extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,9 +43,9 @@ class BatchRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
-                    ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink());
+            ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
+            ->line($this->getMessage())
+            ->action(__('Detail'), $this->getLink());
     }
 
     /**
@@ -58,24 +57,27 @@ class BatchRegistration extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'batch_registration',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage(),
+            'type' => 'batch_registration',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 
     private function getLink()
     {
-        return route('admin.courses.batches.members.edit', [$this->memberBatch->batch->course_id,$this->memberBatch->batch_id, $this->memberBatch->id]);
+        return route('admin.courses.batches.members.edit', [$this->memberBatch->batch->course_id, $this->memberBatch->batch_id, $this->memberBatch->id]);
     }
 
     private function getMessage()
     {
-        $message = __('user.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->full_name]);
-        if($this->memberBatch->member->is_overseas)
-            $message .= " [Luar Negeri]";
-        if($this->memberBatch->reseat)
-            $message .= " [Reseat]";
+        $message = __('user.registration', ['member' => $this->memberBatch->member->full_name, 'batch' => $this->memberBatch->batch->full_name]);
+        if ($this->memberBatch->member->is_overseas) {
+            $message .= ' [Luar Negeri]';
+        }
+        if ($this->memberBatch->reseat) {
+            $message .= ' [Reseat]';
+        }
+
         return $message;
     }
 }

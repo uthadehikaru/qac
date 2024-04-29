@@ -15,10 +15,10 @@ class CertificateSeeder extends Seeder
     public function run()
     {
         Certificate::create([
-            'id'=>1,
-            'name'=>'Sertifikat',
-            'template'=>'',
-            'config'=>'',
+            'id' => 1,
+            'name' => 'Sertifikat',
+            'template' => '',
+            'config' => '',
         ]);
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\DataTables\TestimonialDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Course;
-use App\Models\Batch;
 use App\Models\MemberBatch;
+use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
 {
@@ -18,7 +17,8 @@ class TestimonialController extends Controller
      */
     public function index(TestimonialDataTable $dataTable)
     {
-        $data['title'] = "Data Testimonial";
+        $data['title'] = 'Data Testimonial';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -31,13 +31,13 @@ class TestimonialController extends Controller
     {
         $data['testimonial'] = null;
         $data['courses'] = Course::orderBy('level')->get();
-        return view('admin.testimonial-form',$data);
+
+        return view('admin.testimonial-form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -48,11 +48,11 @@ class TestimonialController extends Controller
         ]);
 
         $data = $request->all();
-        $batch = MemberBatch::where('member_id',$request->member_id)
-        ->where('batch_id',$request->batch_id)
-        ->update(['testimonial'=>$request->testimonial]);
-        
-        return redirect()->route('admin.testimonials.index')->with('status','Testimonial created successfully');
+        $batch = MemberBatch::where('member_id', $request->member_id)
+            ->where('batch_id', $request->batch_id)
+            ->update(['testimonial' => $request->testimonial]);
+
+        return redirect()->route('admin.testimonials.index')->with('status', 'Testimonial created successfully');
     }
 
     /**
@@ -75,21 +75,21 @@ class TestimonialController extends Controller
     public function edit($id)
     {
         $testimonial = System::find($id);
-        $data['value'] = $testimonial->is_array?json_encode($testimonial->value):$testimonial->value;
+        $data['value'] = $testimonial->is_array ? json_encode($testimonial->value) : $testimonial->value;
         $data['testimonial'] = $testimonial;
-        return view('admin.testimonial-form',$data);
+
+        return view('admin.testimonial-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'key' => 'required|string|max:255',
             'value' => 'required|string',
@@ -99,7 +99,7 @@ class TestimonialController extends Controller
         $data = $request->all();
         $testimonial = System::find($id)->update($data);
 
-        return redirect()->route('admin.testimonials.index')->with('status','System updated successfully');
+        return redirect()->route('admin.testimonials.index')->with('status', 'System updated successfully');
     }
 
     /**
@@ -109,10 +109,11 @@ class TestimonialController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
-    {   
+    {
         $batch = MemberBatch::find($id);
         $batch->testimonial = null;
         $batch->save();
-        return redirect()->route('admin.testimonials.index')->with('status','Deleted successfully');
+
+        return redirect()->route('admin.testimonials.index')->with('status', 'Deleted successfully');
     }
 }

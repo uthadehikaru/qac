@@ -10,7 +10,9 @@ class Province extends Model
     use HasFactory;
 
     public $timestamps = false;
+
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $guarded = [];

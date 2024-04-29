@@ -2,11 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Models\MemberBatch;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\MemberBatch;
 
 class CertificateCreated extends Notification implements ShouldQueue
 {
@@ -32,7 +32,7 @@ class CertificateCreated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,10 +44,10 @@ class CertificateCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->memberBatch->batch->full_name. ' : Sertifikat Kelulusan')
-                    ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink())
-                    ->attach(storage_path('app/public/'.$this->memberBatch->file->filename));
+            ->subject($this->memberBatch->batch->full_name.' : Sertifikat Kelulusan')
+            ->line($this->getMessage())
+            ->action(__('Detail'), $this->getLink())
+            ->attach(storage_path('app/public/'.$this->memberBatch->file->filename));
     }
 
     /**
@@ -59,9 +59,9 @@ class CertificateCreated extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'type'=>'batch_status',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage()
+            'type' => 'batch_status',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 
@@ -72,6 +72,6 @@ class CertificateCreated extends Notification implements ShouldQueue
 
     private function getMessage()
     {
-        return "Selamat, anda telah menyelesaikan kelas ".$this->memberBatch->batch->full_name.". berikut terlampir sertifikat kelulusan anda. semoga bermanfaat";
+        return 'Selamat, anda telah menyelesaikan kelas '.$this->memberBatch->batch->full_name.'. berikut terlampir sertifikat kelulusan anda. semoga bermanfaat';
     }
 }

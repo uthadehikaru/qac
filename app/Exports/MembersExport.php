@@ -2,10 +2,10 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Yajra\DataTables\Exports\DataTablesCollectionExport;
 use App\Models\Course;
 use App\Models\Member;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Yajra\DataTables\Exports\DataTablesCollectionExport;
 
 class MembersExport extends DataTablesCollectionExport implements WithMapping
 {
@@ -25,7 +25,7 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             'Instagram',
         ];
 
-        foreach(Course::all() as $course){
+        foreach (Course::all() as $course) {
             $headings[] = $course->name;
         }
 
@@ -49,8 +49,8 @@ class MembersExport extends DataTablesCollectionExport implements WithMapping
             $row['pendidikan'],
             $row['instagram'],
         ];
-        
-        foreach(Course::all() as $course){
+
+        foreach (Course::all() as $course) {
             $rows[] = $row['course_'.$course->id];
         }
 

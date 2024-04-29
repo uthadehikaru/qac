@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,22 +45,22 @@ class User extends Authenticatable
 
     public static function admin()
     {
-        return self::where('role','admin')->get();
+        return self::where('role', 'admin')->get();
     }
 
     public function scopeNotify($query)
     {
-        return $query->where('is_notify',true);
+        return $query->where('is_notify', true);
     }
 
     public function getIsMemberAttribute($value)
     {
-        return $this->role=='member';
+        return $this->role == 'member';
     }
 
     public function getIsAdminAttribute($value)
     {
-        return $this->role=='admin';
+        return $this->role == 'admin';
     }
 
     public function member()

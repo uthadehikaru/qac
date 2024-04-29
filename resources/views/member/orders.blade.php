@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="pt-8">
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('member.ecourses.index') }}" class="text-blue-500">My Courses</a> / <span class="">Riwayat Pesanan</span>
+            <a href="{{ route('member.ecourses.index') }}" class="text-blue-500">My Courses</a> / <span class="">Riwayat Langganan</span>
         </div>  
     </div>
     <x-alert type="info">
@@ -10,24 +10,28 @@
         >whatsapp admin QAC</a> untuk informasi tata cara pembayaran dan pengiriman bukti transfer
     </x-alert>
     <x-panel>
-        <h1 class="font-bold text-xl text-center mb-4">Riwayat Pesanan</h1>
-            <table class="w-full">
+        <h1 class="font-bold text-xl text-center mb-4">Riwayat Langganan</h1>
+            <table class="w-full text-sm md:text-md">
                 <tr>
                     <th>Tanggal</th>
-                    <th>Course</th>
                     <th>Harga</th>
                     <th>Jumlah Bulan</th>
                     <th>Total</th>
-                    <th>Tgl Konfirmasi</th>
+                    <th>Status</th>
                 </tr>
             @forelse ($orders as $order)
                 <tr class="my-2">
                     <td class="text-center">{{ $order->created_at->format('d M Y') }}</td>
-                    <td class="text-center"><a href="{{ route('ecourses.show', $order->ecourse->slug) }}" class="underline font-bold">{{ $order->ecourse->title }}</a></td>
                     <td class="text-center">@money($order->price)</td>
                     <td class="text-center">{{ $order->months }}</td>
                     <td class="text-center">@money($order->total)</td>
-                    <td class="text-center">{{ $order->verified_at?->format('d M Y H:i') ?? 'Belum Dikonfirmasi' }}</td>
+                    <td class="text-center">
+                        @if($order->verified_at)
+                        {{ $order->is_active?"Aktif":"Inaktif" }} : {{ $order->start_date?->format('d M Y') }} - {{ $order->end_date?->format('d M Y') }}
+                        @else
+                        Belum dikonfirmasi
+                        @endif
+                    </td>
                 </tr>
             @empty
             <tr class="text-center" colspan="4"><td>

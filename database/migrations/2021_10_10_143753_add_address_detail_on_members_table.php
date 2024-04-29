@@ -15,7 +15,7 @@ class AddAddressDetailOnMembersTable extends Migration
     {
         Schema::table('members', function (Blueprint $table) {
             $table->unsignedBigInteger('village_id')->nullable();
-            $table->string('zipcode',10)->nullable();
+            $table->string('zipcode', 10)->nullable();
         });
     }
 
@@ -27,7 +27,7 @@ class AddAddressDetailOnMembersTable extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn(['village_id','zipcode']);
+            $table->dropColumn(['village_id', 'zipcode']);
         });
     }
 }

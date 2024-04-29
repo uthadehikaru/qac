@@ -17,9 +17,10 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->word();
+
         return [
             'name' => $name,
-            'order_no' => $this->faker->numberBetween(0,10),
+            'order_no' => $this->faker->numberBetween(0, 10),
             'description' => fake()->sentence(),
             'thumbnail' => 'sections/qac 1.jpg',
         ];

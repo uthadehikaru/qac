@@ -19,15 +19,17 @@ class EcourseFactory extends Factory
     {
         $title = $this->faker->sentence(2);
         $price = $this->faker->numberBetween(100000, 500000);
+
         return [
             'title' => $title,
             'slug' => Str::slug($title.' '.Str::random(5)),
-            'description'=> $this->faker->text,
+            'description' => $this->faker->text,
             'thumbnail' => 'ecourses/qac 1.jpg',
             'price' => $price,
-            'price_sell' => $price-$this->faker->numberBetween(100000, $price),
+            'price_sell' => $price - $this->faker->numberBetween(100000, $price),
             'views' => $this->faker->numberBetween(0, 1000),
-            'published_at' => $this->faker->boolean(70)?$this->faker->dateTimeThisYear():null,
+            'published_at' => $this->faker->boolean(70) ? $this->faker->dateTimeThisYear() : null,
+            'course_id' => null,
         ];
     }
 
@@ -36,6 +38,15 @@ class EcourseFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'published_at' => $this->faker->dateTimeThisYear(),
+            ];
+        });
+    }
+
+    public function unpublished(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published_at' => null,
             ];
         });
     }

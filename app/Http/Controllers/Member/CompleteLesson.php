@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ecourse;
-use App\Models\Lesson;
 use App\Services\EcourseService;
 use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
@@ -22,12 +20,13 @@ class CompleteLesson extends Controller
         $videos = $subscriptionService->getVideos($lesson->ecourse_id);
         $next = $ecourseService->getNext($videos, $lesson_uu);
         $params = [$slug];
-        if($next){
+        if ($next) {
             $params[] = $next->section_id;
             $params[] = $next->lesson_uu;
+
             return redirect()->route('member.ecourses.lessons', $params);
         }
-        
+
         return redirect()->route('member.ecourses.show', $slug);
     }
 }

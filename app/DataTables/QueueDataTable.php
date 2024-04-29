@@ -2,17 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Queue;
 use App\Models\Batch;
+use App\Models\Queue;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class QueueDataTable extends DataTable
 {
-    
     private $course_id = 0;
 
     public function setCourse($course_id)
@@ -23,42 +20,45 @@ class QueueDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-        $openBatch = Batch::open()->where('course_id',$this->course_id)->first();
+        $openBatch = Batch::open()->where('course_id', $this->course_id)->first();
+
         return datatables()
             ->eloquent($query)
-            ->filterColumn('full_name', function($query, $keyword) {
-                $sql = "members.full_name like ?";
+            ->filterColumn('full_name', function ($query, $keyword) {
+                $sql = 'members.full_name like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->filterColumn('gender', function($query, $keyword) {
-                $sql = "members.gender like ?";
+            ->filterColumn('gender', function ($query, $keyword) {
+                $sql = 'members.gender like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->filterColumn('address', function($query, $keyword) {
-                $sql = "members.address like ?";
+            ->filterColumn('address', function ($query, $keyword) {
+                $sql = 'members.address like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->filterColumn('phone', function($query, $keyword) {
-                $sql = "members.phone like ?";
+            ->filterColumn('phone', function ($query, $keyword) {
+                $sql = 'members.phone like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->filterColumn('email', function($query, $keyword) {
-                $sql = "users.email like ?";
+            ->filterColumn('email', function ($query, $keyword) {
+                $sql = 'users.email like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->editColumn('created_at', function($row){
+            ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-M-Y H:i:s');
             })
-            ->addColumn('action', function($row) use($openBatch){
-                $btn = "";
-                if($openBatch)
+            ->addColumn('action', function ($row) use ($openBatch) {
+                $btn = '';
+                if ($openBatch) {
                     $btn .= ' <a href="'.route('admin.courses.queues.register', [$row->course_id, $row->id]).'" class="ml-3 text-blue-500">Register</a>';
+                }
                 $btn .= ' <a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
+
                 return $btn;
             });
     }
@@ -66,16 +66,16 @@ class QueueDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Queue $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Queue $model)
     {
         $query = $model->newQuery();
         $query->select('queues.*', 'members.full_name', 'members.phone', 'members.gender', 'members.address', 'users.email');
-        $query->join('members','queues.member_id','=','members.id');
-        $query->join('users','members.user_id','=','users.id');
-        $query->where('course_id',$this->course_id);
+        $query->join('members', 'queues.member_id', '=', 'members.id');
+        $query->join('users', 'members.user_id', '=', 'users.id');
+        $query->where('course_id', $this->course_id);
+
         return $query;
     }
 
@@ -87,15 +87,15 @@ class QueueDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('queue-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(0,'desc')
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export')
-                    );
+            ->setTableId('queue-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0, 'desc')
+            ->buttons(
+                Button::make('create'),
+                Button::make('export')
+            );
     }
 
     /**
@@ -120,11 +120,9 @@ class QueueDataTable extends DataTable
 
     /**
      * Get filename for export.
-     *
-     * @return string
      */
     protected function filename(): string
     {
-        return 'Waitinglist per ' . date('d M Y');
+        return 'Waitinglist per '.date('d M Y');
     }
 }

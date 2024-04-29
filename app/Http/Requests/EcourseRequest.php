@@ -25,9 +25,8 @@ class EcourseRequest extends FormRequest
             'title' => 'required|max:255',
             'slug' => 'nullable',
             'description' => 'nullable',
-            'price' => 'numeric|min:0',
-            'price_sell' => 'numeric|min:0',
             'thumbnail' => 'nullable|image',
+            'is_bundle' => 'nullable',
         ];
     }
 }

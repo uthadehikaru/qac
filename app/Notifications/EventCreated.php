@@ -2,21 +2,23 @@
 
 namespace App\Notifications;
 
+use App\Models\Event;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\HtmlString;
-use App\Models\Event;
-use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\HtmlString;
 
 class EventCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    var $event, $user;
+    public $event;
+
+    public $user;
 
     /**
      * Create a new notification instance.
@@ -49,20 +51,20 @@ class EventCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $message = (new MailMessage)
-                    ->subject('Event QAC : '.$this->event->title)
-                    ->line($this->getMessage())
-                    ->action(__('Detail'), $this->getLink())
-                    ->markdown('vendor.notifications.email', ['token' => Crypt::encryptString($this->user->id)])
-                    ;
-        
-        if($this->event->attachment)
+            ->subject('Event QAC : '.$this->event->title)
+            ->line($this->getMessage())
+            ->action(__('Detail'), $this->getLink())
+            ->markdown('vendor.notifications.email', ['token' => Crypt::encryptString($this->user->id)]);
+
+        if ($this->event->attachment) {
             $message->attach(storage_path('app/public/'.$this->event->attachment));
-        
+        }
+
         $message->viewData['event'] = $this->event;
         $message->viewData['user'] = $notifiable;
 
         Log::channel('email')->info('Event '.$this->event->title.' sent to '.$notifiable->email);
-        
+
         return $message;
     }
 
@@ -73,12 +75,13 @@ class EventCreated extends Notification implements ShouldQueue
 
     private function getMessage()
     {
-        $message = __('event.created', ['event'=>$this->event->title,'date'=>$this->event->event_at->format('d M Y H:i')]);
-        $message .= "<br /><br />".nl2br($this->event->content);
+        $message = __('event.created', ['event' => $this->event->title, 'date' => $this->event->event_at->format('d M Y H:i')]);
+        $message .= '<br /><br />'.nl2br($this->event->content);
         $message .= '<br /><br /><a href="http://www.google.com/calendar/render?action=TEMPLATE&text='.urlencode($this->event->title).'&dates='.$this->event->event_at->format('Ymd\\THi00').'/'.$this->event->event_at->addHour()->format('Ymd\\THi00').'&ctz=Asia/Jakarta&trp=false&sprop=&sprop=name:"
         target="_blank" rel="nofollow"
                     class="pointer text-blue-500 ml-2">
                     Buat Notifikasi di Google Calendar</a>';
+
         return new HtmlString($message);
     }
 }

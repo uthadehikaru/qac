@@ -6,9 +6,4 @@
     <div class="flex justify-center">
         <a href="{{ route('member.ecourses.show', $ecourse->slug) }}" class="bg-red-800 rounded rounded-full p-2 text-white hover:opacity-75">Start Course</a>
     </div>
-    <div class="flex flex-col justify-center ">
-    @foreach ($ecourse->subscribers as $subscription)
-        <p class="text-center p-2">masa aktif sampai {{ $subscription->end_date?->format('d M Y') }}</p>
-    @endforeach
-    </div>
 </div>

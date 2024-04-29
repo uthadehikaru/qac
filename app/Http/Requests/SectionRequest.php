@@ -33,6 +33,7 @@ class SectionRequest extends FormRequest
     {
         $data = parent::validated();
         unset($data['filename']);
+
         return $data;
     }
 }

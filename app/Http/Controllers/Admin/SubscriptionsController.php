@@ -21,13 +21,14 @@ class SubscriptionsController extends Controller
     public function index(Request $request, SubscriptionsDataTable $dataTable, $ecourse_id)
     {
         $lesson_id = $request->get('lesson');
-        $data['title'] = $lesson_id?"Completed Members":"Subscribers";
+        $data['title'] = $lesson_id ? 'Completed Members' : 'Subscribers';
         $data['buttons'][] = [
             'name' => 'Back',
             'href' => route('admin.ecourses.index'),
         ];
         $dataTable->setEcourse($ecourse_id);
         $dataTable->setLesson($lesson_id);
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -37,10 +38,11 @@ class SubscriptionsController extends Controller
     public function create(string $ecourse_id)
     {
         $data['ecourse'] = Ecourse::find($ecourse_id);
-        $data['members'] = Member::select('id','full_name')->get();
-        $data['batches'] = Batch::with('course')->select('id','name','course_id')->get();
-        $data['courses'] = Course::select('id','name')->get();
+        $data['members'] = Member::select('id', 'full_name')->get();
+        $data['batches'] = Batch::with('course')->select('id', 'name', 'course_id')->get();
+        $data['courses'] = Course::select('id', 'name')->get();
         $data['subscription'] = null;
+
         return view('admin.subscription-form', $data);
     }
 
@@ -53,7 +55,8 @@ class SubscriptionsController extends Controller
         $data['id'] = null;
         $data['ecourse_id'] = $ecourse_id;
         $ecourseService->updateOrCreateSubscription($data);
-        return redirect()->route('admin.ecourses.subscriptions.index', $ecourse_id)->with('message','Data created');
+
+        return redirect()->route('admin.ecourses.subscriptions.index', $ecourse_id)->with('message', 'Data created');
     }
 
     /**
@@ -70,8 +73,9 @@ class SubscriptionsController extends Controller
     public function edit(string $ecourse_id, string $id)
     {
         $data['ecourse'] = Ecourse::find($ecourse_id);
-        $data['members'] = Member::select('id','full_name')->get();
+        $data['members'] = Member::select('id', 'full_name')->get();
         $data['subscription'] = Subscription::find($id);
+
         return view('admin.subscription-form', $data);
     }
 
@@ -84,7 +88,8 @@ class SubscriptionsController extends Controller
         $data['id'] = $id;
         $data['ecourse_id'] = $ecourse_id;
         $ecourseService->updateOrCreateSubscription($data);
-        return redirect()->route('admin.ecourses.subscriptions.index', $ecourse_id)->with('message','Data updated');
+
+        return redirect()->route('admin.ecourses.subscriptions.index', $ecourse_id)->with('message', 'Data updated');
     }
 
     /**
@@ -92,7 +97,8 @@ class SubscriptionsController extends Controller
      */
     public function destroy(string $ecourse_id, string $id)
     {
-        Subscription::where('id',$id)->delete();
-        return response()->json(['status'=>'Deleted successfully']);
+        Subscription::where('id', $id)->delete();
+
+        return response()->json(['status' => 'Deleted successfully']);
     }
 }

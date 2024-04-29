@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use App\Models\User;
-use App\Models\Member;
-use App\Models\Course;
 use App\Models\Batch;
+use App\Models\Course;
 use App\Models\Event;
+use App\Models\Member;
 use App\Models\MemberBatch;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -22,14 +20,17 @@ class DashboardController extends Controller
         $data['all_events'] = Event::count();
         $data['courses'] = Course::orderBy('level')->active()->get();
         $data['batchStatuses'] = MemberBatch::statuses;
-        if(Auth::user()->is_admin)
+        if (Auth::user()->is_admin) {
             $data['queues'] = \DB::table('jobs')->count();
+        }
+
         return view('admin.dashboard', $data);
     }
 
     public function notifications()
     {
         $data['notifications'] = Auth::user()->notifications;
+
         return view('admin.notifications', $data);
     }
 }

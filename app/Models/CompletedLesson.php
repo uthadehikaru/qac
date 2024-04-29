@@ -15,12 +15,12 @@ class CompletedLesson extends Model
         'member_id',
     ];
 
-    public function lesson():BelongsTo
+    public function lesson(): BelongsTo
     {
         return $this->belongsTo(Lesson::class);
     }
 
-    public function member():BelongsTo
+    public function member(): BelongsTo
     {
         return $this->belongsTo(Member::class);
     }

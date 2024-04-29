@@ -14,6 +14,7 @@ class Section extends Model
     protected $guarded = [];
 
     use HasImageUploads;
+
     protected static $imageFields = [
         'thumbnail' => [
             'width' => 1024,

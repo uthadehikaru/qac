@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Models\Section;
 
-class SectionService {
-
+class SectionService
+{
     public function updateOrCreate($data): Section
     {
-        if($data['id']){
+        if ($data['id']) {
             $section = Section::find($data['id']);
             $section->update($data);
+
             return $section;
         }
 
@@ -24,6 +25,6 @@ class SectionService {
 
     public function findBySlug($slug): Section
     {
-        return Section::where('slug',$slug)->first();
+        return Section::where('slug', $slug)->first();
     }
 }

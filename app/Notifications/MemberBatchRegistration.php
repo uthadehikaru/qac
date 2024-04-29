@@ -2,11 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Models\MemberBatch;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\MemberBatch;
 
 class MemberBatchRegistration extends Notification
 {
@@ -32,7 +31,7 @@ class MemberBatchRegistration extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,9 +43,9 @@ class MemberBatchRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
-                    ->line($this->getMessage())
-                    ->action(__('Whatsapp Admin QAC'), $this->getLink());
+            ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
+            ->line($this->getMessage())
+            ->action(__('Whatsapp Admin QAC'), $this->getLink());
     }
 
     /**
@@ -58,9 +57,9 @@ class MemberBatchRegistration extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'member_batch_registration',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage(),
+            'type' => 'member_batch_registration',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 
@@ -71,6 +70,6 @@ class MemberBatchRegistration extends Notification
 
     private function getMessage()
     {
-        return __('member.registration', ['member'=>$this->memberBatch->member->full_name,'batch'=>$this->memberBatch->batch->full_name]);
+        return __('member.registration', ['member' => $this->memberBatch->member->full_name, 'batch' => $this->memberBatch->batch->full_name]);
     }
 }

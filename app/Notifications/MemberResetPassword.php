@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -43,9 +42,9 @@ class MemberResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Perubahan kata sandi')
-                    ->line($this->getMessage())
-                    ->action(__('Masuk'), $this->getLink());
+            ->subject('Perubahan kata sandi')
+            ->line($this->getMessage())
+            ->action(__('Masuk'), $this->getLink());
     }
 
     /**
@@ -57,9 +56,9 @@ class MemberResetPassword extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type'=>'resetpassword',
-            'link'=>$this->getLink(),
-            'message'=>$this->getMessage(),
+            'type' => 'resetpassword',
+            'link' => $this->getLink(),
+            'message' => $this->getMessage(),
         ];
     }
 

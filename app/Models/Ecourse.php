@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use QCod\ImageUp\HasImageUploads;
 
@@ -19,7 +20,7 @@ class Ecourse extends Model
     ];
 
     protected $autoUploadImages = true;
-    
+
     protected static $imageFields = [
         'thumbnail' => [
             'width' => 1024,
@@ -37,6 +38,11 @@ class Ecourse extends Model
         return $query->whereNotNull('published_at');
     }
 
+    public function scopeBundle($query)
+    {
+        return $query->whereNull('course_id');
+    }
+
     public function getPublishedAttribute()
     {
         return $this->published_at;
@@ -44,12 +50,17 @@ class Ecourse extends Model
 
     public function getPriceFormatAttribute()
     {
-        return 'Rp. '.number_format($this->price,0,",",".").",-";
+        return 'Rp. '.number_format($this->price, 0, ',', '.').',-';
     }
 
     public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 
     public function subscribers(): HasMany

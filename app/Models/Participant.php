@@ -20,18 +20,19 @@ class Participant extends Model
         'email',
     ];
 
-    protected $dates = ['start_at','end_at'];
-    
+    protected $dates = ['start_at', 'end_at'];
+
     protected $casts = [
         'start_at' => 'date:d M Y H:i:s',
         'end_at' => 'date:d M Y H:i:s',
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($participant) { 
-             $participant->answers()->delete();
+        static::deleting(function ($participant) {
+            $participant->answers()->delete();
         });
     }
 

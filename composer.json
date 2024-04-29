@@ -60,6 +60,9 @@
         ],
         "deploy": [
             "./vendor/bin/envoy run deploy"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
         ]
     },
     "extra": {

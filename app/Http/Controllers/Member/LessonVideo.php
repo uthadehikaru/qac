@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lesson;
 use App\Services\EcourseService;
 use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
@@ -23,14 +22,16 @@ class LessonVideo extends Controller
         $data['section'] = $section;
         $data['ecourse'] = $ecourse;
         $videos = $subscriptionService->getVideos($ecourse->id, $section_id);
-        $data['completed']  = $subscriptionService->getCompletedLessons($ecourse->id, $member_id)->pluck('lesson_id');
-        if($lesson_uu)
+        $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id)->pluck('lesson_id');
+        if ($lesson_uu) {
             $data['video'] = $subscriptionService->getLesson($lesson_uu);
-        else
+        } else {
             $data['video'] = $videos->first();
+        }
         $data['videos'] = $videos;
         $allVideos = $subscriptionService->getVideos($ecourse->id);
         $data['next'] = $ecourseService->getNext($allVideos, $lesson_uu);
+
         return view('member.lesson-video', $data);
     }
 }

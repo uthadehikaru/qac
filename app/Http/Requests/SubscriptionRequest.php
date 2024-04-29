@@ -32,6 +32,7 @@ class SubscriptionRequest extends FormRequest
     {
         $data = parent::validated();
         unset($data['filename']);
+
         return $data;
     }
 }

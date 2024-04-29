@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Ecourse;
-use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,11 +17,12 @@ class FileFactory extends Factory
     public function definition(): array
     {
         $file = $this->faker->file(storage_path('sample/video'), storage_path('app/public/files'), false);
+
         return [
             'name' => $this->faker->name(),
             'type' => 'mp4',
             'filename' => 'files/'.$file,
-            'size' => $this->faker->numberBetween(100,10000),
+            'size' => $this->faker->numberBetween(100, 10000),
             'tablename' => 'table',
             'record_id' => 0,
         ];

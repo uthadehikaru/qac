@@ -22,7 +22,7 @@ class CreateQuestionsTable extends Migration
             $table->text('option_b');
             $table->text('option_c');
             $table->text('option_d');
-            $table->enum('answer',['a','b','c','d']);
+            $table->enum('answer', ['a', 'b', 'c', 'd']);
         });
     }
 

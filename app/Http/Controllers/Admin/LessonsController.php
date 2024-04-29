@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LessonRequest;
 use App\Models\Lesson;
 use App\Services\EcourseService;
-use Illuminate\Http\Request;
 
 class LessonsController extends Controller
 {
@@ -16,7 +15,8 @@ class LessonsController extends Controller
      */
     public function index(LessonsDataTable $dataTable)
     {
-        $data['title'] = "Online Courses";
+        $data['title'] = 'Online Courses';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -28,6 +28,7 @@ class LessonsController extends Controller
         $data['lesson'] = null;
         $data['ecourse'] = $ecourseService->find($ecourse_id);
         $data['sections'] = $ecourseService->getSections();
+
         return view('admin.lesson-form', $data);
     }
 
@@ -40,7 +41,8 @@ class LessonsController extends Controller
         $data['id'] = null;
         $data['ecourse_id'] = $ecourse_id;
         $lesson = $ecourseService->updateOrCreateLesson($data);
-        return redirect()->route('admin.ecourses.lessons.edit', [$ecourse_id, $lesson->id])->with('message','Lesson Added');
+
+        return redirect()->route('admin.ecourses.lessons.edit', [$ecourse_id, $lesson->id])->with('message', 'Lesson Added');
     }
 
     /**
@@ -59,6 +61,7 @@ class LessonsController extends Controller
         $data['lesson'] = $ecourseService->getLesson($id);
         $data['ecourse'] = $ecourseService->find($ecourse_id);
         $data['sections'] = $ecourseService->getSections();
+
         return view('admin.lesson-form', $data);
     }
 
@@ -71,7 +74,8 @@ class LessonsController extends Controller
         $data['id'] = $id;
         $data['ecourse_id'] = $ecourse_id;
         $ecourseService->updateOrCreateLesson($data);
-        return redirect()->route('admin.ecourses.show', $ecourse_id)->with('message','Lesson Updated');
+
+        return redirect()->route('admin.ecourses.show', $ecourse_id)->with('message', 'Lesson Updated');
     }
 
     /**
@@ -80,11 +84,13 @@ class LessonsController extends Controller
     public function destroy(string $ecourse_id, string $id)
     {
         $lesson = Lesson::find($id);
-        
-        if($lesson){
+
+        if ($lesson) {
             $lesson->delete();
-            return response()->json(['status'=>'Deleted successfully']);
-        }else
-            return response()->json(['status'=>'No Lesson Found for id '.$id], 404);
+
+            return response()->json(['status' => 'Deleted successfully']);
+        } else {
+            return response()->json(['status' => 'No Lesson Found for id '.$id], 404);
+        }
     }
 }

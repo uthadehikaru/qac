@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\DataTables\QueueDataTable;
+use App\Http\Controllers\Controller;
+use App\Models\Batch;
 use App\Models\Course;
-use App\Models\Queue;
 use App\Models\Member;
 use App\Models\MemberBatch;
-use App\Models\Batch;
-use DB;
+use App\Models\Queue;
 use App\Notifications\MemberBatchRegistration;
+use DB;
+use Illuminate\Http\Request;
 
 class QueueController extends Controller
 {
@@ -27,14 +27,15 @@ class QueueController extends Controller
 
         $data['buttons'] = [];
         $batch = $course->batches()->open()->first();
-        if($batch){
+        if ($batch) {
             $data['buttons'][] = [
-                'name'=>'Send Invitation Batch '.$batch->name,
-                'href'=>route('admin.courses.batches.invite.waitinglist',[$course_id, $batch->id]),
+                'name' => 'Send Invitation Batch '.$batch->name,
+                'href' => route('admin.courses.batches.invite.waitinglist', [$course_id, $batch->id]),
             ];
         }
-        
+
         $dataTable->setCourse($course_id);
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -46,29 +47,28 @@ class QueueController extends Controller
     public function create($course_id)
     {
         $data['course'] = Course::find($course_id);
-        $data['members'] = Member::whereNotExists(function($query)use($course_id)
-            {
-                $query->select(DB::raw(1))
-                    ->from('queues')
-                    ->whereRaw('queues.member_id=members.id and queues.course_id='.$course_id);
-            })->orderBy('full_name')->get();
+        $data['members'] = Member::whereNotExists(function ($query) use ($course_id) {
+            $query->select(DB::raw(1))
+                ->from('queues')
+                ->whereRaw('queues.member_id=members.id and queues.course_id='.$course_id);
+        })->orderBy('full_name')->get();
+
         return view('admin.queue-form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $course_id)
     {
         Queue::create([
-            'course_id'=>$course_id,
-            'member_id'=>$request->member_id,
+            'course_id' => $course_id,
+            'member_id' => $request->member_id,
         ]);
 
-        return redirect()->route('admin.courses.queues.index', $course_id)->with('message','Added successfully');
+        return redirect()->route('admin.courses.queues.index', $course_id)->with('message', 'Added successfully');
     }
 
     /**
@@ -96,7 +96,6 @@ class QueueController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -114,29 +113,32 @@ class QueueController extends Controller
     public function destroy($course_id, $id)
     {
         Queue::find($id)->delete();
-        return response()->json(['status'=>'Deleted successfully']);
+
+        return response()->json(['status' => 'Deleted successfully']);
     }
 
     public function register($course_id, $id)
     {
         $queue = Queue::find($id);
 
-        $openBatch = Batch::open()->where('course_id',$course_id)->first();
-        if(!$openBatch)
-            return back()->with('error','No open batch available');
-        
+        $openBatch = Batch::open()->where('course_id', $course_id)->first();
+        if (! $openBatch) {
+            return back()->with('error', 'No open batch available');
+        }
+
         $data = [
-            'batch_id'=>$openBatch->id,
-            'status'=>1,
-            'member_id'=>$queue->member_id,
+            'batch_id' => $openBatch->id,
+            'status' => 1,
+            'member_id' => $queue->member_id,
         ];
-        
+
         $memberBatch = MemberBatch::create($data);
-        if($memberBatch)
+        if ($memberBatch) {
             $queue->member->user->notify(new MemberBatchRegistration($memberBatch));
+        }
 
         $queue->delete();
-        
-        return back()->with('message',$queue->member->full_name.' registered to '.$openBatch->full_name);
+
+        return back()->with('message', $queue->member->full_name.' registered to '.$openBatch->full_name);
     }
 }

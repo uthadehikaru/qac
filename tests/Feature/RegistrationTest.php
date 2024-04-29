@@ -4,8 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Batch;
 use App\Models\Course;
-use App\Providers\RouteServiceProvider;
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Database\Seeders\LocationSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,7 +29,7 @@ class RegistrationTest extends TestCase
             'end_at' => $current->addWeeks(3),
         ]);
 
-        $response = $this->get(route('register', ['course_id'=>$batch->course_id]));
+        $response = $this->get(route('register', ['course_id' => $batch->course_id]));
 
         $response->assertStatus(200);
     }
@@ -46,7 +44,7 @@ class RegistrationTest extends TestCase
             'end_at' => $current->addWeeks(3),
         ]);
 
-        $response = $this->post(route('register', ['batch_id'=>$batch->id]), [
+        $response = $this->post(route('register', ['batch_id' => $batch->id]), [
             'name' => 'Test User',
             'full_name' => 'Test User',
             'email' => 'test@example.com',
@@ -63,7 +61,7 @@ class RegistrationTest extends TestCase
             'instagram' => '',
             'batch_id' => $batch->id,
             'course_id' => $batch->course_id,
-            'term_condition'=>1,
+            'term_condition' => 1,
         ]);
 
         $this->assertAuthenticated();

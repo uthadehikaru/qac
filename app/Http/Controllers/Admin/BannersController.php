@@ -14,7 +14,8 @@ class BannersController extends Controller
      */
     public function index(BannerDataTable $dataTable)
     {
-        $data['title'] = "Banners";
+        $data['title'] = 'Banners';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -24,6 +25,7 @@ class BannersController extends Controller
     public function create()
     {
         $data['banner'] = null;
+
         return view('admin.banner-form', $data);
     }
 
@@ -41,7 +43,7 @@ class BannersController extends Controller
         $data = $request->all();
         Banner::create($data);
 
-        return redirect()->route('admin.banners.index')->with('status','Banner created successfully');
+        return redirect()->route('admin.banners.index')->with('status', 'Banner created successfully');
     }
 
     /**
@@ -58,6 +60,7 @@ class BannersController extends Controller
     public function edit(string $id)
     {
         $data['banner'] = Banner::find($id);
+
         return view('admin.banner-form', $data);
     }
 
@@ -77,7 +80,7 @@ class BannersController extends Controller
         $data = $request->all();
         $banner->update($data);
 
-        return redirect()->route('admin.banners.index')->with('status','Banner updated successfully');
+        return redirect()->route('admin.banners.index')->with('status', 'Banner updated successfully');
     }
 
     /**
@@ -87,6 +90,7 @@ class BannersController extends Controller
     {
         $banner = Banner::find($id);
         $banner->delete();
-        return response()->json(['status'=>'Deleted Successfully']);
+
+        return response()->json(['status' => 'Deleted Successfully']);
     }
 }

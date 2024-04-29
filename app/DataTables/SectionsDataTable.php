@@ -12,17 +12,18 @@ class SectionsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function($row){
-                $btn = "";
+            ->addColumn('action', function ($row) {
+                $btn = '';
                 $btn .= '<a href="'.route('admin.sections.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
+
                 return $btn;
             })
             ->rawColumns(['action']);
@@ -31,7 +32,6 @@ class SectionsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Section $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Section $model)
@@ -47,15 +47,15 @@ class SectionsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('section-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(0, 'asc')
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('reload')
-                    );
+            ->setTableId('section-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0, 'asc')
+            ->buttons(
+                Button::make('create'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -70,20 +70,18 @@ class SectionsDataTable extends DataTable
             Column::make('name'),
             Column::make('description'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
     /**
      * Get filename for export.
-     *
-     * @return string
      */
-    protected function filename(): String
+    protected function filename(): string
     {
-        return 'Section_' . date('YmdHis');
+        return 'Section_'.date('YmdHis');
     }
 }

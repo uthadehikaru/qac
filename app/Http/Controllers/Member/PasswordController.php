@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use Illuminate\Http\Request;
 
 class PasswordController extends Controller
 {
@@ -26,9 +26,10 @@ class PasswordController extends Controller
         if (Hash::check($request->old_password, $user->password)) {
             $user->password = Hash::make($request->new_password);
             $user->save();
-            return back()->with('status','Password berhasil diperbaharui');
-        }else{
-            return back()->with('error','Password Lama tidak cocok');
+
+            return back()->with('status', 'Password berhasil diperbaharui');
+        } else {
+            return back()->with('error', 'Password Lama tidak cocok');
         }
 
     }

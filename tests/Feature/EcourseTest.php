@@ -5,8 +5,10 @@ namespace Tests\Feature;
 use App\Models\Ecourse;
 use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\System;
 use App\Models\User;
 use App\Services\EcourseService;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class EcourseTest extends TestCase
@@ -28,46 +30,56 @@ class EcourseTest extends TestCase
         $courses = (new EcourseService)->latestEcourses()->pluck('title')->toArray();
 
         $this->get(route('home'))
-        ->assertSeeText('Online Courses')
-        ->assertSeeInOrder($courses);
+            ->assertSeeText('Online Courses')
+            ->assertSeeInOrder($courses);
     }
 
-    public function test_user_can_see_ecourse_detail(): void
+    public function test_guest_can_see_ecourse_detail(): void
     {
         $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
         $lessons = $ecourse->lessons->pluck('subject')->toArray();
 
         $this->get(route('ecourses.show', $ecourse->slug))
-        ->assertSeeText($ecourse->title)
-        ->assertSeeText($ecourse->description)
-        ->assertSeeTextInOrder($lessons);
+            ->assertSeeText($ecourse->title)
+            ->assertSeeText($ecourse->description)
+            ->assertSeeTextInOrder($lessons);
     }
 
     public function test_user_cannot_see_unpublished_ecourse(): void
     {
-        $ecourse = Ecourse::factory()->create(['published_at'=>null]);
+        $ecourse = Ecourse::factory()->create(['published_at' => null]);
 
         $this->get(route('ecourses.show', $ecourse->slug))
-        ->assertNotFound();
+            ->assertNotFound();
     }
 
     public function test_user_can_checkout_ecourse(): void
     {
-        $user = User::factory()->create();
-        $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
-        $lessons = $ecourse->lessons->pluck('subject')->toArray();
+        Mail::fake();
 
-        $this->actingAs($user)->get(route('checkout', $ecourse->slug))
-        ->assertSeeText($ecourse->title)
-        ->assertSeeText($ecourse->description);
+        $user = User::factory()->create();
+        System::create([
+            'key' => 'subscription_fee',
+            'value' => '30000',
+            'is_array' => false,
+        ]);
+
+        $this->actingAs($user)->get(route('checkout'))
+            ->assertSuccessful();
+
+        $this->actingAs($user)->post(route('checkout'), ['months' => 2])
+            ->assertRedirect(route('member.orders.index'));
+
+        $this->assertDatabaseCount('orders', 1);
+
+        $this->actingAs($user)->get(route('member.orders.index'))
+            ->assertSeeInOrder(['30.000', '2', '60.000'])
+            ->assertSuccessful();
     }
 
     public function test_guest_cannot_checkout_ecourse(): void
     {
-        $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
-        $lessons = $ecourse->lessons->pluck('subject')->toArray();
-
-        $this->get(route('checkout', $ecourse->slug))
-        ->assertRedirect('login');
+        $this->get(route('checkout'))
+            ->assertRedirect('login');
     }
 }

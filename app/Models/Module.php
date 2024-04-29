@@ -23,6 +23,6 @@ class Module extends Model
 
     public function file()
     {
-        return $this->hasOne(File::class,'record_id')->where('tablename','modules');
+        return $this->hasOne(File::class, 'record_id')->where('tablename', 'modules');
     }
 }

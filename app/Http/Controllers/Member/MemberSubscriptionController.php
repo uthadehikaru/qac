@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Services\EcourseService;
 use App\Services\SubscriptionService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MemberSubscriptionController extends Controller
@@ -16,6 +14,7 @@ class MemberSubscriptionController extends Controller
     public function index(SubscriptionService $subscriptionService)
     {
         $data['subscriptions'] = $subscriptionService->ofMember(Auth::user()->member->id);
+
         return view('member.subscriptions', $data);
     }
 
@@ -29,6 +28,7 @@ class MemberSubscriptionController extends Controller
         $data['ecourse'] = $ecourse;
         $data['sections'] = $subscriptionService->getSections($ecourse->id);
         $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id);
+
         return view('member.ecourse', $data);
     }
 }

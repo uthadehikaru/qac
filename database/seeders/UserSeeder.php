@@ -14,11 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        
+
         \App\Models\User::firstOrCreate([
             'email' => 'admin@qacjakarta.id',
-            'role'=>'admin',
-        ],[
+            'role' => 'admin',
+        ], [
             'name' => 'Admin',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -26,17 +26,17 @@ class UserSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()
-        ->create([
-            'name' => 'Member',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'email' => 'member@qacjakarta.id',
-            'role'=>'member',
-        ]);
+            ->create([
+                'name' => 'Member',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'email' => 'member@qacjakarta.id',
+                'role' => 'member',
+            ]);
 
         \App\Models\User::factory()->count(10)
-        ->create([
-            'role'=>'member',
-        ]);
+            ->create([
+                'role' => 'member',
+            ]);
     }
 }

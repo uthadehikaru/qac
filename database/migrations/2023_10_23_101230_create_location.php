@@ -13,33 +13,33 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('provinces')){
+        if (! Schema::hasTable('provinces')) {
             Schema::create('provinces', function (Blueprint $table) {
-                $table->string('id',2)->primary();
+                $table->string('id', 2)->primary();
                 $table->string('name');
             });
         }
-        
-        if(!Schema::hasTable('regencies')){
+
+        if (! Schema::hasTable('regencies')) {
             Schema::create('regencies', function (Blueprint $table) {
-                $table->string('id',4)->primary();
-                $table->string('province_id',2)->index();
+                $table->string('id', 4)->primary();
+                $table->string('province_id', 2)->index();
                 $table->string('name');
             });
         }
-        
-        if(!Schema::hasTable('districts')){
+
+        if (! Schema::hasTable('districts')) {
             Schema::create('districts', function (Blueprint $table) {
-                $table->string('id',7)->primary();
-                $table->string('regency_id',4)->index();
+                $table->string('id', 7)->primary();
+                $table->string('regency_id', 4)->index();
                 $table->string('name');
             });
         }
-        
-        if(!Schema::hasTable('villages')){
+
+        if (! Schema::hasTable('villages')) {
             Schema::create('villages', function (Blueprint $table) {
-                $table->string('id',10)->primary();
-                $table->string('district_id',7)->index();
+                $table->string('id', 10)->primary();
+                $table->string('district_id', 7)->index();
                 $table->string('name');
             });
         }

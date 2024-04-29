@@ -2,15 +2,15 @@
 
 namespace App\Imports;
 
+use App\Models\Batch;
+use App\Models\Member;
+use App\Models\User;
+use Hash;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithProgressBar;
-use App\Models\User;
-use App\Models\Member;
-use App\Models\Batch;
 use Str;
-use Hash;
 
 class ImportAlumni implements ToCollection, WithProgressBar
 {
@@ -18,14 +18,15 @@ class ImportAlumni implements ToCollection, WithProgressBar
 
     public function collection(Collection $rows)
     {
-        foreach ($rows as $row) 
-        {
-            if($row[2]=='' || $row[5]=='')
+        foreach ($rows as $row) {
+            if ($row[2] == '' || $row[5] == '') {
                 continue;
-            
-            if(User::where('email',$row[2])->exists())
-                $row[2] = $row[5].".".$row[2];
-            
+            }
+
+            if (User::where('email', $row[2])->exists()) {
+                $row[2] = $row[5].'.'.$row[2];
+            }
+
             $user = User::create([
                 'name' => $row[1],
                 'email' => $row[2],
@@ -37,25 +38,25 @@ class ImportAlumni implements ToCollection, WithProgressBar
                 'full_name' => $row[1],
                 'phone' => $row[5],
                 'address' => $row[4],
-                'gender'=>$row[3],
+                'gender' => $row[3],
             ]);
 
-            $batch = Batch::where('name',$row[8])
-            ->where('course_id',1)->first();
-            if($batch){
-                $member->batches()->attach($batch->id,['status'=>6]);
+            $batch = Batch::where('name', $row[8])
+                ->where('course_id', 1)->first();
+            if ($batch) {
+                $member->batches()->attach($batch->id, ['status' => 6]);
             }
 
-            $batch = Batch::where('name',$row[7])
-            ->where('course_id',2)->first();
-            if($batch){
-                $member->batches()->attach($batch->id,['status'=>6]);
+            $batch = Batch::where('name', $row[7])
+                ->where('course_id', 2)->first();
+            if ($batch) {
+                $member->batches()->attach($batch->id, ['status' => 6]);
             }
 
-            $batch = Batch::where('name',$row[6])
-            ->where('course_id',3)->first();
-            if($batch){
-                $member->batches()->attach($batch->id,['status'=>6]);
+            $batch = Batch::where('name', $row[6])
+                ->where('course_id', 3)->first();
+            if ($batch) {
+                $member->batches()->attach($batch->id, ['status' => 6]);
             }
         }
     }

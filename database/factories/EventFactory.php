@@ -23,10 +23,11 @@ class EventFactory extends Factory
     public function definition()
     {
         $title = $this->faker->sentence;
+
         return [
             'title' => $title,
             'slug' => Str::slug($title.' '.Str::random(5)),
-            'event_at'=> $this->faker->dateTime,
+            'event_at' => $this->faker->dateTime,
             'content' => $this->faker->text,
             'is_public' => $this->faker->boolean,
             'views' => $this->faker->numberBetween(100, 500),

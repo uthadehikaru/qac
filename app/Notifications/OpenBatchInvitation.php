@@ -43,9 +43,9 @@ class OpenBatchInvitation extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Pendaftaran '.$this->batch->full_name.' Telah dibuka')
-                    ->line($this->getMessage())
-                    ->action(__('Daftar Sekarang'), $this->getLink());
+            ->subject('Pendaftaran '.$this->batch->full_name.' Telah dibuka')
+            ->line($this->getMessage())
+            ->action(__('Daftar Sekarang'), $this->getLink());
     }
 
     /**
@@ -57,7 +57,7 @@ class OpenBatchInvitation extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            
+
         ];
     }
 
@@ -68,14 +68,14 @@ class OpenBatchInvitation extends Notification implements ShouldQueue
 
     private function getMessage()
     {
-        return "Apakabarnya, semoga dalam keadaan sehat.
+        return 'Apakabarnya, semoga dalam keadaan sehat.
 
-        Bapak/Ibu sudah terdaftar di waiting list ".$this->batch->course->name.", karena sudah pernah mendaftar di batch sebelumnya.
+        Bapak/Ibu sudah terdaftar di waiting list '.$this->batch->course->name.', karena sudah pernah mendaftar di batch sebelumnya.
 
-        Alhamdulillah, sekarang sudah mulai dibuka pendaftaran untuk batch selanjutnya : ".$this->batch->full_name.".
+        Alhamdulillah, sekarang sudah mulai dibuka pendaftaran untuk batch selanjutnya : '.$this->batch->full_name.'.
 
         Apakah masih minat untuk ikut belajar bahasa Arab Al-Qur’an ? Jika YA, maka bapak/ibu tinggal klik dibawah ini untuk mengikuti prosedur selanjutnya.
 
-        Jazakumullah khoiron.";
+        Jazakumullah khoiron.';
     }
 }

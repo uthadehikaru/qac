@@ -52,6 +52,13 @@
                         <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                         id="grid-whatsapp_ecourse" type="text" name="whatsapp_ecourse" value="{{ $whatsapp_ecourse }}" />
                     </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-ecource_access_month">
+                            Ecourse Class Access (month)
+                        </label>
+                        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-ecource_access_month" type="text" name="ecource_access_month" value="{{ $ecource_access_month }}" />
+                    </div>
                 </div>
                 <div class="-mx-3 md:flex mb-6">
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">

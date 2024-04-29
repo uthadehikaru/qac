@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class MemberBatch extends Pivot
 {
     use HasFactory;
-    
+
     protected $table = 'member_batch';
 
     protected $fillable = [
@@ -24,18 +24,24 @@ class MemberBatch extends Pivot
         'reseat',
     ];
 
-    public const statuses = [0,1,3,4,5,6];
+    public const statuses = [0, 1, 3, 4, 5, 6];
 
-    public const STATUS_CANCELED= 0;
+    public const STATUS_CANCELED = 0;
+
     public const STATUS_REGISTERED = 1;
+
     public const STATUS_CHECKED = 2;
+
     public const STATUS_PAID = 3;
+
     public const STATUS_SHIPPED = 4;
+
     public const STATUS_COMPLETED = 5;
+
     public const STATUS_GRADUATED = 6;
 
     public $timestamps = false;
-    
+
     protected $dates = ['approved_at'];
 
     public function member()
@@ -50,13 +56,13 @@ class MemberBatch extends Pivot
 
     public function file()
     {
-        return $this->hasOne(File::class,'record_id')->where('tablename','member_batch');
+        return $this->hasOne(File::class, 'record_id')->where('tablename', 'member_batch');
     }
-    
+
     public function scopeTestimonial($query)
     {
         return $query->where('status', 6)
             ->whereNotNull('testimonial')
-            ->orderBy('id','desc');
+            ->orderBy('id', 'desc');
     }
 }

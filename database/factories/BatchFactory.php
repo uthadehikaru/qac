@@ -24,8 +24,9 @@ class BatchFactory extends Factory
     {
         $title = $this->faker->sentence;
         $start = Carbon::createFromDate($this->faker->dateTimeThisYear());
+
         return [
-            'course_id'=> 0,
+            'course_id' => 0,
             'name' => $title,
             'description' => $title,
             'sessions' => '',

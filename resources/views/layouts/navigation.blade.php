@@ -56,8 +56,11 @@
                     <x-nav-link :href="route('member.password')" :active="request()->is('member/password')">
                         {{ __('Ubah Password') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('ecourses.index')" :active="request()->is('ecoures/*')">
-                        {{ __('Subscribe Now') }}
+                    <x-nav-link :href="route('checkout')" :active="request()->is('checkout/*')">
+                        {{ __('Daftar Langganan') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('member.orders.index')" :active="request()->is('member/orders/*')">
+                        {{ __('Riwayat Langganan') }}
                     </x-nav-link>
                     @endcan
                 </div>
@@ -151,6 +154,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('member.profile')" :active="request()->is('member/profile')">
                 {{ __('Profile') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('checkout')" :active="request()->is('checkout')">
+                {{ __('Daftar Langganan') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('member.orders.index')" :active="request()->is('member/orders*')">
+                {{ __('Riwayat Langganan') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('member.password')" :active="request()->is('member/password')">
                 {{ __('Ubah Password') }}

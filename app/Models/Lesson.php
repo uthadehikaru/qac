@@ -17,6 +17,7 @@ class Lesson extends Model implements HasMedia
     protected $guarded = [];
 
     use HasImageUploads;
+
     protected static $imageFields = [
         'thumbnail' => [
             'width' => 1024,
@@ -29,28 +30,28 @@ class Lesson extends Model implements HasMedia
         ],
     ];
 
-    public function ecourse():BelongsTo
+    public function ecourse(): BelongsTo
     {
         return $this->belongsTo(Ecourse::class);
     }
 
-    public function section():BelongsTo
+    public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
     }
 
-    public function completed():HasMany
+    public function completed(): HasMany
     {
         return $this->hasMany(CompletedLesson::class);
     }
 
     public function file()
     {
-        return $this->hasOne(File::class,'record_id')->where('tablename','lessons');
+        return $this->hasOne(File::class, 'record_id')->where('tablename', 'lessons');
     }
 
     public function isCompleted($member_id)
     {
-        return $this->completed()->where('member_id',$member_id)->exists();
+        return $this->completed()->where('member_id', $member_id)->exists();
     }
 }

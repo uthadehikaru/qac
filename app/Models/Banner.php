@@ -12,7 +12,7 @@ class Banner extends Model
 
     protected $guarded = [];
 
-    protected static $fileFields  = [
+    protected static $fileFields = [
         'image' => [
             'disk' => 'public',
             'path' => 'banners',

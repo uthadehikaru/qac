@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Course;
 use App\DataTables\CourseDataTable;
 use App\DataTables\MemberCourseDataTable;
+use App\Http\Controllers\Controller;
+use App\Models\Course;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -17,16 +17,18 @@ class CourseController extends Controller
      */
     public function index(CourseDataTable $dataTable)
     {
-        $data['title'] = "Data Kelas";
+        $data['title'] = 'Data Kelas';
+
         return $dataTable->render('admin.datatable', $data);
     }
 
     public function members(MemberCourseDataTable $dataTable, $course_id)
     {
         $course = Course::find($course_id);
-        $data['title'] = "Data Peserta Kelas ".$course->name;
+        $data['title'] = 'Data Peserta Kelas '.$course->name;
         $data['button'] = '<a class="ml-3 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 float-right" href="'.route('admin.courses.index').'">Kembali</a>';
         $dataTable->setCourse($course_id);
+
         return $dataTable->render('admin.datatable', $data);
     }
 
@@ -38,13 +40,13 @@ class CourseController extends Controller
     public function create()
     {
         $data['course'] = null;
+
         return view('admin.course-form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,14 +58,14 @@ class CourseController extends Controller
         ]);
 
         Course::create([
-            'name'=>$request->name,
-            'fee'=>0,
-            'level'=>$request->level,
-            'description'=>$request->description,
-            'is_active'=>$request->is_active,
+            'name' => $request->name,
+            'fee' => 0,
+            'level' => $request->level,
+            'description' => $request->description,
+            'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('admin.courses.index')->with('status','Course created');
+        return redirect()->route('admin.courses.index')->with('status', 'Course created');
     }
 
     /**
@@ -86,13 +88,13 @@ class CourseController extends Controller
     public function edit($id)
     {
         $data['course'] = Course::find($id);
+
         return view('admin.course-form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -104,15 +106,15 @@ class CourseController extends Controller
             'description' => 'required',
         ]);
 
-        Course::where('id',$id)->update([
-            'name'=>$request->name,
-            'fee'=>0,
-            'level'=>$request->level,
-            'description'=>$request->description,
-            'is_active'=>$request->is_active,
+        Course::where('id', $id)->update([
+            'name' => $request->name,
+            'fee' => 0,
+            'level' => $request->level,
+            'description' => $request->description,
+            'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('admin.courses.index')->with('status','Course updated');
+        return redirect()->route('admin.courses.index')->with('status', 'Course updated');
     }
 
     /**
@@ -125,6 +127,6 @@ class CourseController extends Controller
     {
         Course::find($id)->delete();
 
-        return response()->json(['status'=>'Deleted successfully']);
+        return response()->json(['status' => 'Deleted successfully']);
     }
 }

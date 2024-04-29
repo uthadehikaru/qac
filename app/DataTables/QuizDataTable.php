@@ -5,8 +5,6 @@ namespace App\DataTables;
 use App\Models\Quiz;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class QuizDataTable extends DataTable
@@ -14,7 +12,7 @@ class QuizDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
@@ -22,36 +20,37 @@ class QuizDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->addColumn('schedule', function($row){
+            ->addColumn('schedule', function ($row) {
                 return $row->duration_date;
             })
-            ->addColumn('questions', function($row){
+            ->addColumn('questions', function ($row) {
                 return '<a href="'.route('admin.quiz.questions', $row->id).'" class="ml-3 text-blue-500">'.count($row->questions).' Questions</a>';
             })
-            ->addColumn('participants', function($row){
+            ->addColumn('participants', function ($row) {
                 return '<a href="'.route('admin.quiz.participants.index', $row->id).'" class="ml-3 text-green-500">'.count($row->participants).' Participants</a>';
             })
-            ->addColumn('action', function($row){
-                $btn = "";
+            ->addColumn('action', function ($row) {
+                $btn = '';
                 $btn .= '<a href="'.route('admin.quiz.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
+
                 return $btn;
             })
-            ->editColumn('course_id', function ($row){
-                return $row->course?$row->course->name:'Umum';
+            ->editColumn('course_id', function ($row) {
+                return $row->course ? $row->course->name : 'Umum';
             })
-            ->rawColumns(['action','questions','participants']);
+            ->rawColumns(['action', 'questions', 'participants']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Quiz $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Quiz $model)
     {
         $query = $model->newQuery();
+
         return $query;
     }
 
@@ -63,15 +62,15 @@ class QuizDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('quiz-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('reload')
-                    );
+            ->setTableId('quiz-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0)
+            ->buttons(
+                Button::make('create'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -94,10 +93,10 @@ class QuizDataTable extends DataTable
                 ->title('Questions')
                 ->searchable(false)
                 ->sortable(false),
-                Column::make('participants')
-                    ->title('Peserta')
-                    ->searchable(false)
-                    ->sortable(false),
+            Column::make('participants')
+                ->title('Peserta')
+                ->searchable(false)
+                ->sortable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -108,11 +107,9 @@ class QuizDataTable extends DataTable
 
     /**
      * Get filename for export.
-     *
-     * @return string
      */
     protected function filename(): string
     {
-        return 'Quiz_' . date('YmdHis');
+        return 'Quiz_'.date('YmdHis');
     }
 }
