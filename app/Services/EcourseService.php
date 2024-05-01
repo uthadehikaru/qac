@@ -109,7 +109,7 @@ class EcourseService
             ->whereNotNull('verified_at')
             ->where('member_id', $member_id)
             ->first();
-        if (! $activeOrder) {
+        if (! $activeOrder && $ecourses->count() == 0) {
             return $ecourses;
         }
 

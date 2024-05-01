@@ -32,6 +32,7 @@
     php artisan down
     git pull origin main
     php artisan migrate --force
+    php artisan db:seed SystemSeeder --force
     php artisan optimize
     php artisan up
 @endtask
