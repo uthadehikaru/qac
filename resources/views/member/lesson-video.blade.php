@@ -56,7 +56,7 @@
                         <p class="text-lg font-bold ">Downloads</p>
                         <ul class="list-decimal pl-4 mt-2">
                         @foreach ($video->getMedia('downloads') as $media)
-                            <li class="p-2"><a href="{{ $media->getFullUrl() }}" class="text-red-800">{{ $media->file_name }}</a></li>
+                            <li class="p-2"><a href="{{ $media->getFullUrl() }}" target="_blank" class="text-red-800">{{ $media->file_name }}</a></li>
                         @endforeach
                         </ul>
                     </div>
