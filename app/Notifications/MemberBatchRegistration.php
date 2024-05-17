@@ -4,10 +4,11 @@ namespace App\Notifications;
 
 use App\Models\MemberBatch;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MemberBatchRegistration extends Notification
+class MemberBatchRegistration extends Notification implements ShouldQueue
 {
     use Queueable;
 
