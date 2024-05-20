@@ -29,7 +29,7 @@
                 <div class="w-full md:w-1/3 flex flex-col mt-4">
                     <h2 class="font-bold text-lg">{{ $completed->count() }} of {{ $ecourse->lessons->count() }} Lessons Completed</h2>                    
                     <div class="w-full rounded-full h-2.5 bg-gray-300 mt-2">
-                        <div class="bg-red-800 h-2.5 rounded-full" style="width: {{ round(($completed->count()/$ecourse->lessons->count())*100) }}%"></div>
+                        <div class="bg-red-800 h-2.5 rounded-full" style="width: {{ $ecourse->lessons->count() ? round(($completed->count()/$ecourse->lessons->count())*100):0 }}%"></div>
                     </div>
                     <div class="mt-12">
                         <p class="text-lg font-bold">Hubungi Kami</p>
