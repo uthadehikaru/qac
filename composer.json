@@ -63,6 +63,10 @@
         ],
         "pint": [
             "./vendor/bin/pint"
+        ],
+        "test": [
+            "./vendor/bin/pint",
+            "@php artisan test"
         ]
     },
     "extra": {

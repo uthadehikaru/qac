@@ -71,7 +71,7 @@
                 </li>
                 <li class="mr-3">
                     @guest
-                    <a id="navAction" class="inline-block text-white no-underline hover:opacity-75 hover:text-underline py-2 px-4 bg-red-800 rounded-full w-40 text-center" href="javascript:;" onclick="toggleModal()">Masuk/Daftar</a>
+                    <a id="navAction" class="inline-block text-white no-underline hover:opacity-75 hover:text-underline py-2 px-4 bg-red-800 rounded-full w-40 text-center" href="javascript:;" onclick="toggleModal()">Masuk</a>
                     @else
                     <div class="dropdown inline-block relative">
                     <a id="navAction" class="inline-block text-white no-underline hover:opacity-75 hover:text-underline py-2 px-4 bg-red-800 rounded-full w-40 text-center" href="#">@lang('Hi'), {{ Auth::user()->name }}</a>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Member;
 use App\Models\Queue;
+use App\Models\Regency;
 use App\Models\User;
 use App\Notifications\AdminWaitinglist;
 use App\Notifications\BatchRegistration;
@@ -66,9 +67,6 @@ class RegisteredUserController extends Controller
             'phone' => 'required|numeric|unique:members|min:8',
             'gender' => 'required|in:pria,wanita',
             'session' => 'sometimes',
-            'address' => 'nullable',
-            'village_id' => 'nullable|exists:villages,id',
-            'zipcode' => 'nullable|min:5',
             'profesi' => 'nullable',
             'pendidikan' => 'nullable',
             'instagram' => '',
@@ -86,18 +84,19 @@ class RegisteredUserController extends Controller
             'role' => 'member',
         ]));
 
+        $regency = Regency::find($request->regency_id);
+
         $member = Member::create([
             'user_id' => $user->id,
             'full_name' => $request->full_name,
             'phone' => $request->phone,
             'gender' => $request->gender,
-            'address' => $request->address,
+            'is_overseas' => $request->is_overseas ?? 0,
+            'city' => $regency->name,
+            'address' => $regency->name.' '.$regency->province->name,
             'profesi' => $request->profesi,
             'pendidikan' => $request->pendidikan,
             'instagram' => $request->instagram,
-            'village_id' => $request->village_id,
-            'zipcode' => $request->zipcode,
-            'is_overseas' => $request->is_overseas ?? 0,
         ]);
 
         if ($request->has('batch_id')) {

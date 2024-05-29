@@ -44,7 +44,6 @@
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required />
                     </div>
 
-
                     <!-- Phone -->
                     <div class="mt-4">
                         <x-label for="phone" :value="__('Nomor Whatsapp')" />
@@ -72,14 +71,7 @@
                         </span>
                         </label>
                     </div>
-
-                    <!-- Address -->
-                    <div class="mt-4">
-                        <x-label for="address" :value="__('Address')" />
-
-                        <textarea id="address" class="block mt-1 w-full" type="text" name="address" required>{{ old('address') }}</textarea>
-                        <p class="text-sm text-gray-500">** gunakan alamat domisili di indonesia jika anda berada diluar negeri</p>
-                    </div>
+                        <p class="text-sm text-gray-500">** pilih provinsi dan kota di indonesia sesuai asal domisili jika anda berada diluar negeri</p>
 
                     <div class="mt-4">
                         <x-label for="province_id" :value="__('Provinsi')" />
@@ -97,25 +89,6 @@
 
                         <select id="regency_id" class="block mt-1 w-full" name="regency_id" required>
                         </select>
-                    </div>
-
-                    <div class="mt-4">
-                        <x-label for="district_id" id="district_label" :value="__('Kecamatan')" />
-
-                        <select id="district_id" class="block mt-1 w-full" name="district_id" required>
-                        </select>
-                    </div>
-
-                    <div class="mt-4">
-                        <x-label for="village_id" id="village_label" :value="__('Kelurahan')" />
-
-                        <select id="village_id" class="block mt-1 w-full" name="village_id" required>
-                        </select>
-                    </div>
-                    <div class="mt-4">
-                        <x-label for="zipcode" :value="__('Kode Pos')" />
-
-                        <x-input id="zipcode" class="block mt-1 w-full" type="text" name="zipcode" :value="old('zipcode')" />
                     </div>
 
                     <div class="mt-4">
@@ -141,19 +114,19 @@
                         <x-input id="instagram" class="block mt-1 w-full" type="text" name="instagram" :value="old('instagram')" />
                     </div>
 
-                    @if(is_array($sessions))
-                    <!-- Session -->
-                    <div class="mt-4">
-                        <x-label for="session" :value="__('Pilihan Waktu Kursus')" />
+                        @if(is_array($sessions))
+                        <!-- Session -->
+                        <div class="mt-4">
+                            <x-label for="session" :value="__('Pilihan Waktu Kursus')" />
 
-                        <select id="session" class="block mt-1 w-full" name="session" required>
-                            @foreach($sessions as $session)
-                            <option value="{{ $session }}">{{ $session }}</option>
-                            @endforeach
-                        </select>
-                        <p class="text-sm text-gray-500">mohon pastikan waktu yang sesuai dengan pilihan anda</p>
-                    </div>
-                    @endif
+                            <select id="session" class="block mt-1 w-full" name="session" required>
+                                @foreach($sessions as $session)
+                                <option value="{{ $session }}">{{ $session }}</option>
+                                @endforeach
+                            </select>
+                            <p class="text-sm text-gray-500">mohon pastikan waktu yang sesuai dengan pilihan anda</p>
+                        </div>
+                        @endif
                     @endif
 
                     <!-- Email Address -->
@@ -252,55 +225,6 @@
                 });
             });
         }
-        if($('#regency_id').length){
-            $('#regency_id').on('change', function() {
-                $("#district_label").addClass('animate-bounce');
-                $("#district_id").empty();
-                $("#village_id").empty();
-                var regency_id = $(this).val();
-                $.ajax({
-                    type:"POST",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    url:"{{ url('api/districts') }}/"+regency_id,
-                    success: function(data) {
-                        $("#district_id").html($("<option></option>").val(0).html('-- pilih kecamatan --'));
-                        $.each(data, function (key, row)
-                        {
-                            $("#district_id").append($("<option></option>").val(row.id).html(row.name));
-                        });
-                        $("#district_label").removeClass('animate-bounce');
-                    },
-                    error: function(data) {
-                        $("#district_label").removeClass('animate-bounce');
-                    }
-                });
-            });
-        }
-        if($('#district_id').length){
-            $('#district_id').on('change', function() {
-                $("#village_label").addClass('animate-bounce');
-                $("#village_id").empty();
-                var district_id = $(this).val();
-                $.ajax({
-                    type:"POST",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    url:"{{ url('api/villages') }}/"+district_id,
-                    success: function(data) {
-                        $("#village_id").html($("<option></option>").val(0).html('-- pilih kelurahan --'));
-                        $.each(data, function (key, row)
-                        {
-                            $("#village_id").append($("<option></option>").val(row.id).html(row.name));
-                        });
-                        $("#village_label").removeClass('animate-bounce');
-                    },
-                    error: function(data) {
-                        $("#village_label").removeClass('animate-bounce');
-                    }
-                });
-            });
-        } 
     </script>
 </x-slot>
 </x-web-layout>
