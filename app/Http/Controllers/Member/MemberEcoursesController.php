@@ -15,7 +15,12 @@ class MemberEcoursesController extends Controller
      */
     public function index(EcourseService $ecourseService, OrderService $orderService)
     {
-        $data['ecourses'] = $ecourseService->memberEcourses(Auth::user()->member->id);
+        $member_id = Auth::user()->member->id;
+        $data['ecourses'] = $ecourseService->memberEcourses($member_id)
+        ->transform(function($ecourse) use ($member_id){
+            $ecourse->completed = (new SubscriptionService)->getCompletedLessons($ecourse->id, $member_id)->count();
+            return $ecourse;
+        });
         $data['order'] = $orderService->activeOrder();
 
         return view('member.ecourses', $data);
