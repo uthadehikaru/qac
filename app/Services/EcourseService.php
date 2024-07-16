@@ -102,7 +102,7 @@ class EcourseService
             ->where('start_at', '<=', date('Y-m-d'))
             ->whereRaw('DATE_ADD(end_at, INTERVAL '.$ecource_access_month." MONTH) >= '".date('Y-m-d')."'")
             ->pluck('course_id');
-        $ecourses = Ecourse::whereIn('course_id', $courses)->get();
+        $ecourses = Ecourse::batch()->whereIn('course_id', $courses)->get();
 
         $activeOrder = Order::latest()
             ->active()
@@ -113,7 +113,7 @@ class EcourseService
             return $ecourses;
         }
 
-        $published = Ecourse::published()->bundle()->get();
+        $published = Ecourse::subscriber()->published()->whereIn('course_id', $courses)->get();
 
         return $ecourses->merge($published);
     }

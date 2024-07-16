@@ -20,20 +20,22 @@ class EcoursesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('course_id', function ($row) {
-                if ($row->course) {
+            ->editColumn('is_only_active_batch', function ($row) {
+                if ($row->is_only_active_batch) {
                     $batch = $row->course->batches()->running()->first();
-                    $name = $batch->name ?? '';
-
-                    return 'batch '.$name.' aktif';
+                    if($batch)
+                        return 'batch '.$batch->name;
+                    return "no active batch";
                 } else {
                     $activeOrders = Order::active()->count();
-
-                    return $activeOrders.' langganan aktif';
+                    return 'langganan ('.$activeOrders.' aktif)';
                 }
             })
             ->editColumn('published_at', function ($row) {
-                return $row->published_at ? 'Yes' : 'No';
+                return $row->published_at ? '<span class="p-1 text-white bg-green-500">Yes</span>' : '<span class="p-1 text-white bg-red-500">No</span>';
+            })
+            ->editColumn('course_id', function ($row) {
+                return $row->course?->name ?? 'All Level';
             })
             ->editColumn('price', function ($row) {
                 return $row->price_format;
@@ -49,7 +51,7 @@ class EcoursesDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['template', 'action', 'subscribers_count', 'lessons_count']);
+            ->rawColumns(['template', 'action', 'subscribers_count', 'lessons_count','published_at']);
     }
 
     /**
@@ -96,6 +98,7 @@ class EcoursesDataTable extends DataTable
             Column::make('title'),
             Column::make('lessons_count')->title('Lessons'),
             Column::make('course_id')->title('Kelas'),
+            Column::make('is_only_active_batch')->title('Type'),
             Column::make('published_at')->title('Is Published'),
             Column::computed('action')
                 ->exportable(false)
