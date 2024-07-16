@@ -113,6 +113,11 @@ class EcourseService
             return $ecourses;
         }
 
+        $courses = Batch::whereHas('paidMembers', function ($query) use ($member_id) {
+            $query->where('member_id', $member_id);
+        })
+        ->pluck('course_id');
+
         $published = Ecourse::subscriber()->published()->whereIn('course_id', $courses)->get();
 
         return $ecourses->merge($published);
