@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -34,22 +34,22 @@ class Ecourse extends Model
         ],
     ];
 
-    public function scopePublished(Builder $query):void
+    public function scopePublished(Builder $query): void
     {
         $query->whereNotNull('published_at');
     }
 
-    public function scopeSubscriber(Builder $query):void
+    public function scopeSubscriber(Builder $query): void
     {
-        $query->where('is_only_active_batch',0);
+        $query->where('is_only_active_batch', 0);
     }
 
-    public function scopeBatch(Builder $query):void
+    public function scopeBatch(Builder $query): void
     {
-        $query->where('is_only_active_batch',1);
+        $query->where('is_only_active_batch', 1);
     }
 
-    public function scopeBundle(Builder $query):void
+    public function scopeBundle(Builder $query): void
     {
         $query->whereNull('course_id');
     }

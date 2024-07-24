@@ -17,10 +17,11 @@ class MemberEcoursesController extends Controller
     {
         $member_id = Auth::user()->member->id;
         $data['ecourses'] = $ecourseService->memberEcourses($member_id)
-        ->transform(function($ecourse) use ($member_id){
-            $ecourse->completed = (new SubscriptionService)->getCompletedLessons($ecourse->id, $member_id)->count();
-            return $ecourse;
-        });
+            ->transform(function ($ecourse) use ($member_id) {
+                $ecourse->completed = (new SubscriptionService)->getCompletedLessons($ecourse->id, $member_id)->count();
+
+                return $ecourse;
+            });
         $data['order'] = $orderService->activeOrder();
 
         return view('member.ecourses', $data);

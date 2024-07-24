@@ -23,11 +23,14 @@ class EcoursesDataTable extends DataTable
             ->editColumn('is_only_active_batch', function ($row) {
                 if ($row->is_only_active_batch) {
                     $batch = $row->course->batches()->running()->first();
-                    if($batch)
+                    if ($batch) {
                         return 'batch '.$batch->name;
-                    return "no active batch";
+                    }
+
+                    return 'no active batch';
                 } else {
                     $activeOrders = Order::active()->count();
+
                     return 'langganan ('.$activeOrders.' aktif)';
                 }
             })
@@ -51,7 +54,7 @@ class EcoursesDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['template', 'action', 'subscribers_count', 'lessons_count','published_at']);
+            ->rawColumns(['template', 'action', 'subscribers_count', 'lessons_count', 'published_at']);
     }
 
     /**
