@@ -26,6 +26,7 @@ class LessonRequest extends FormRequest
             'order_no' => 'required|numeric',
             'section_id' => 'required|exists:sections,id',
             'thumbnail' => 'nullable|image',
+            'description' => 'nullable',
         ];
     }
 }

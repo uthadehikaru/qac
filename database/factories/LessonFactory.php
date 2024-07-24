@@ -29,6 +29,7 @@ class LessonFactory extends Factory
             'subject' => $subject,
             'order_no' => $this->faker->numberBetween(0, 10),
             'thumbnail' => 'lessons/qac 1.jpg',
+            'description' => $this->faker->sentence(),
         ];
     }
 }

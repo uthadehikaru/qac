@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Ecourse;
 use App\Models\Lesson;
+use App\Models\Member;
+use App\Models\Order;
 use App\Models\Section;
 use App\Models\System;
 use App\Models\User;
 use App\Services\EcourseService;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -22,7 +25,7 @@ class EcourseTest extends TestCase
         $this->assertDatabaseCount('ecourses', 0);
     }
 
-    public function test_user_can_see_ecourses_on_homepage(): void
+    public function test_guest_can_see_ecourses_on_homepage(): void
     {
         Ecourse::factory(4)->published()->create();
         $this->assertDatabaseCount('ecourses', 4);
@@ -43,6 +46,21 @@ class EcourseTest extends TestCase
             ->assertSeeText($ecourse->title)
             ->assertSeeText($ecourse->description)
             ->assertSeeTextInOrder($lessons);
+    }
+
+    public function test_user_can_see_ecourse_video(): void
+    {
+        $member = Member::factory()->for(User::factory()->create(['role'=>'member']))->create();
+        Order::factory()->for($member)->create([
+            'start_date' => CarbonImmutable::now()->subMonth(),
+            'end_date' => CarbonImmutable::now()->addMonth(),
+            'verified_at' => CarbonImmutable::now(),
+        ]);
+        $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
+        $lesson = $ecourse->lessons->first();
+
+        $this->actingAs($member->user)->get(route('member.ecourses.lessons', [$ecourse->slug, $lesson->section->id]))
+        ->assertSee($lesson->subject);
     }
 
     public function test_user_cannot_see_unpublished_ecourse(): void

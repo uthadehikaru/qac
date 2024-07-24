@@ -24,7 +24,7 @@ class EcourseFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title.' '.Str::random(5)),
             'description' => $this->faker->text,
-            'thumbnail' => 'ecourses/qac 1.jpg',
+            'thumbnail' => null,
             'price' => $price,
             'price_sell' => $price - $this->faker->numberBetween(100000, $price),
             'views' => $this->faker->numberBetween(0, 1000),

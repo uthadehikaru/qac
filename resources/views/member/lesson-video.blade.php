@@ -36,6 +36,7 @@
             </div>
             <div class="w-full flex flex-col md:flex-row gap-x-2 p-6">
                 <div class="md:w-2/3 flex flex-col gap-y-8 mt-4 p-4">
+                    <p>{{ $video->description }}</p>
                     @if($completed->contains($video->id))
                         <button type="button" class="w-full rounded border border-red-800 font-bold text-red-800 text-center p-4" disabled>Completed</button>
                     @else
