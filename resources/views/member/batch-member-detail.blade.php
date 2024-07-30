@@ -55,8 +55,7 @@
 
     
     @if($batchMember->status>0 && $batchMember->status<4)
-    <x-alert type="error" title="Perhatian"><p>Kami akan mengirimkan modul pembelajaran ke alamat anda, pastikan telah sesuai dengan alamat tempat tinggal anda saat ini!
-        <br/><br/>
+    <x-alert type="error" title="Perhatian">
         <span class="text-black">{{ $member->full_name }} ({{ $member->phone }}) - {{ $member->address }}</span></p>
         <p><a href="{{ route('member.profile') }}" class="pointer text-blue-500"> (klik disini untuk memperbaharui alamat)</a>
         </x-alert>
