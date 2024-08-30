@@ -23,8 +23,8 @@ class EcourseRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'slug' => 'nullable',
-            'description' => 'nullable',
+            'slug' => 'nullable|max:255',
+            'description' => 'nullable|max:255',
             'thumbnail' => 'nullable|image',
             'course_id' => 'required',
             'is_only_active_batch' => 'nullable',
