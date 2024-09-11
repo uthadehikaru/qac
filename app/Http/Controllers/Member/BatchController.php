@@ -27,7 +27,7 @@ class BatchController extends Controller
 
         // check if member already register for this course
         $data['reseat'] = $member->batches->contains(function ($memberBatch, $key) use ($batch) {
-            return $memberBatch->course_id == $batch->course_id;
+            return $memberBatch->course_id == $batch->course_id && $memberBatch->status>=MemberBatch::STATUS_PAID;
         });
 
         $data['member'] = $member;
