@@ -25,7 +25,7 @@
                                     >whatsapp admin QAC</a> untuk informasi tata cara pembayaran dan pengiriman bukti transfer
                                 </p>
                             </div>
-                    @else
+                    @elseif($alumni)
                         <form method="POST" action="{{ route('checkout') }}">
                             @csrf
                             <div class="flex flex-col text-center w-full mb-12">
@@ -59,6 +59,13 @@
                                 </div>
                             </div>
                         </form>
+                    @else
+                        <div class="flex flex-col text-center w-full mb-12">
+                            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Anda belum menyelesaikan kelas QAC 1.0</h1>
+                            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                                Bagi peserta Kelas QAC 1.0 yang sedang berjalan, anda dapat mengakses langganan selama kelas berlangsung hingga  1 bulan setelah kelas selesai
+                            </p>
+                        </div>
                     @endif
                 </div>
             </div>

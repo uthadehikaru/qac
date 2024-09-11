@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ecourse;
+use App\Models\Member;
+use App\Models\MemberBatch;
 use App\Models\Order;
 use App\Models\System;
 use App\Services\OrderService;
@@ -16,6 +18,11 @@ class CheckoutController extends Controller
         $data['ecourses'] = Ecourse::published()->get();
         $data['order'] = Order::where('member_id', Auth::user()->member->id)->whereNull('verified_at')->first();
         session()->put('url.intended', url()->current());
+        
+        $member = Member::with(['batches', 'courses'])->where('user_id', Auth::id())->first();
+        $data['alumni'] = $member->batches->contains(function ($memberBatch, $key) {
+            return $memberBatch->status>=MemberBatch::STATUS_PAID;
+        });
 
         return view('checkout.form', $data);
     }
