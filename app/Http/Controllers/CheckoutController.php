@@ -21,7 +21,7 @@ class CheckoutController extends Controller
         
         $member = Member::with(['batches', 'courses'])->where('user_id', Auth::id())->first();
         $data['alumni'] = $member->batches->contains(function ($memberBatch, $key) {
-            return $memberBatch->status>=MemberBatch::STATUS_PAID;
+            return $memberBatch->pivot->status>=MemberBatch::STATUS_PAID;
         });
 
         return view('checkout.form', $data);
