@@ -52,10 +52,10 @@ class OrdersDataTable extends DataTable
                 return $row->start_date?->format('d M Y').' - '.$row->end_date?->format('d M Y');
             })
             ->editColumn('price', function ($row) {
-                return number_format($row->price, 0, ',', '.');
+                return number_format($row->price, 0);
             })
             ->editColumn('total', function ($row) {
-                return number_format($row->total, 0, ',', '.');
+                return number_format($row->total, 0);
             })
             ->addColumn('action', function ($row) {
                 $btn = '';
@@ -94,7 +94,8 @@ class OrdersDataTable extends DataTable
             ->orderBy(0, 'asc')
             ->buttons(
                 Button::make('create'),
-                Button::make('reload')
+                Button::make('reload'),
+                Button::make('export'),
             );
     }
 

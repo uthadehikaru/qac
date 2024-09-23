@@ -1,4 +1,4 @@
-@servers(['web' => ['u1424128@qacjakarta.id -p 65002']])
+@servers(['web' => ['u827705294@153.92.9.215 -p 65002']])
  
 @task('optimize', ['on' => 'web'])
     cd /home/u1424128/app
