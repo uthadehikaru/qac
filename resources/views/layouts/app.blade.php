@@ -46,7 +46,7 @@
                     @if(Auth::user()->is_admin)
                     <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                         <a class="text-gray-500 pointer text-sm" href="{{ route('admin.jobs.index') }}" target="_blank">Email Processor</a>
-                        <a class="text-gray-500 pointer text-sm ml-2" href="{{ route('admin.logs') }}" target="_blank">Logs</a>
+                        <a class="text-gray-500 pointer text-sm ml-2" href="{{ url('lara-logs') }}" target="_blank">Logs</a>
                     </span>
                     @endif
                     </div>

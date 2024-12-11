@@ -1,18 +1,18 @@
 @servers(['web' => ['u827705294@153.92.9.215 -p 65002']])
  
 @task('optimize', ['on' => 'web'])
-    cd /home/u1424128/app
+cd domains/qacjakarta.com/qac
     php artisan optimize
 @endtask
 
 @task('deploy', ['on' => 'web'])
-    cd /home/u1424128/app
+    cd domains/qacjakarta.com/qac
     git pull origin main
     php artisan optimize
 @endtask
 
 @task('update', ['on' => 'web'])
-    cd /home/u1424128/app
+    cd domains/qacjakarta.com/qac
     git checkout .
     git pull origin main
     composer install
