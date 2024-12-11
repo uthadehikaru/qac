@@ -1,7 +1,7 @@
 @servers(['web' => ['u827705294@153.92.9.215 -p 65002']])
  
 @task('optimize', ['on' => 'web'])
-cd domains/qacjakarta.com/qac
+    cd domains/qacjakarta.com/qac
     php artisan optimize
 @endtask
 
@@ -13,9 +13,10 @@ cd domains/qacjakarta.com/qac
 
 @task('update', ['on' => 'web'])
     cd domains/qacjakarta.com/qac
-    git checkout .
+    php artisan down
     git pull origin main
-    composer install
+    composer install --no-dev
     php artisan migrate --force
     php artisan optimize
+    php artisan up
 @endtask

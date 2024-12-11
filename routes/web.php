@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['roles:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/clear-cache', [DashboardController::class, 'clearCache'])->name('clear-cache');
         Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
         Route::get('/jobs/retry', [JobController::class, 'retry'])->name('jobs.retry');
         Route::get('/jobs/empty', [JobController::class, 'empty'])->name('jobs.empty');

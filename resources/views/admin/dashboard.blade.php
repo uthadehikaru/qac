@@ -5,6 +5,10 @@
         </h2>
     </x-slot>
 
+    @if(session('success'))
+        <x-alert type="success">{{ session('success') }}</x-alert>
+    @endif
+
     @if(Auth::user()->is_member && !Auth::user()->member->isCompleted())
         <x-alert type="warning">Mohon lengkapi data pribadi anda, <a href="{{ route('member.profile') }}" class="text-blue-500 pointer">klik disini</a></x-alert>
     @endif
@@ -17,6 +21,7 @@
       <x-alert type="info">Sedang memproses pengiriman {{ $queues }} email. <a href="{{ route('admin.jobs.index') }}" class="text-yellow-500 pointer">(selengkapnya)</a></x-alert>
     @endif
 
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
     @foreach($courses as $course)
       @if($course->lastBatch())
       @php
@@ -35,7 +40,8 @@
             @else
             <p class="w-full pt-2 block text-l font-bold text-grey-500 mx-1">[ Kelas Belum dibuka ]</p>
             @endif
-            <p class="w-full pt-2 block text-sm text-gray-700">Pendaftaran : {{ $openBatch->registration_duration }} | Kelas : {{ $openBatch->duration }} </p>
+            <p class="w-full pt-2 block text-sm text-gray-700">Pendaftaran : {{ $openBatch->registration_duration }}</p>
+            <p class="w-full pt-2 block text-sm text-gray-700">Kelas : {{ $openBatch->duration }}</p>
             <p class="w-full pt-2 block text-sm text-gray-700">Total Peserta : {{ $openBatch->members()->count() }} orang</p>
             @foreach($batchStatuses as $status)
             <div class="p-4 sm:w-1/3 w-1/2">
@@ -53,6 +59,7 @@
       </section>
       @endif
     @endforeach
+    </div>
 
     <section class="text-gray-600 body-font">
       <div class="container px-5 py-8 mx-auto">
