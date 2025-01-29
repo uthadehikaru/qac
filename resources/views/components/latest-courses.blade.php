@@ -13,7 +13,11 @@
                 <div class="p-8 md:w-1/3">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
+                            @if(auth()->check())
+                            <a href="{{ route('member.dashboard') }}#courses" class="">
+                            @else
                             <a href="{{ route('register', ['course_id'=>$course->id]) }}" class="">
+                            @endif
                                 <img class="w-full object-cover object-center" 
                                 src="{{ asset('images/'.$course->name.'.jpg') }}" alt="{{ $course->name }}" />
                             </a>

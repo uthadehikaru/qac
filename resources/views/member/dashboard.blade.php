@@ -76,7 +76,7 @@
     </div>
     @endif
 
-    <div class="m-6">
+    <div class="m-6" id="courses">
         <p class="block text-lg font-bold text-gray-700">Kelas yang tersedia</p>
         <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
 

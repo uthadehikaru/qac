@@ -15,7 +15,7 @@
     cd domains/qacjakarta.com/qac
     php artisan down
     git pull origin main
-    composer install --no-dev
+    composer2 install --no-dev
     php artisan migrate --force
     php artisan optimize
     php artisan up
