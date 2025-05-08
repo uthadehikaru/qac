@@ -15,7 +15,7 @@ class LessonVideo extends Controller
      */
     public function __invoke(EcourseService $ecourseService, SubscriptionService $subscriptionService, string $slug, string $section_id = null, string $lesson_uu = null)
     {
-        $member_id = Auth::user()->member->id;
+        $member_id = Auth::user()->member?->id;
         $data['member_id'] = $member_id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
         $section = $subscriptionService->getSection($section_id);

@@ -37,13 +37,15 @@
             <div class="w-full flex flex-col md:flex-row gap-x-2 p-6">
                 <div class="md:w-2/3 flex flex-col gap-y-8 mt-4 p-4">
                     <p>{{ $video->description }}</p>
-                    @if($completed->contains($video->id))
-                        <button type="button" class="w-full rounded border border-red-800 font-bold text-red-800 text-center p-4" disabled>Completed</button>
-                    @else
-                    <form method="POST" id="complete-form" action="{{ route('member.ecourses.lessons.complete', [$ecourse->slug, $video->lesson_uu]) }}">
-                        @csrf
-                        <button type="submit" class="w-full rounded bg-red-800 font-bold text-white text-center p-4 hover:opacity-75">Complete</button>
-                    </form>
+                    @if(auth()->user()->role != 'admin')
+                        @if($completed->contains($video->id))
+                            <button type="button" class="w-full rounded border border-red-800 font-bold text-red-800 text-center p-4" disabled>Completed</button>
+                        @else
+                        <form method="POST" id="complete-form" action="{{ route('member.ecourses.lessons.complete', [$ecourse->slug, $video->lesson_uu]) }}">
+                            @csrf
+                            <button type="submit" class="w-full rounded bg-red-800 font-bold text-white text-center p-4 hover:opacity-75">Complete</button>
+                        </form>
+                        @endif
                     @endif
                     @if($next)
                     <h3 class="font-bold text-xl">Next</h3>

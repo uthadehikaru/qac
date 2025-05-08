@@ -43,6 +43,9 @@ class EcoursesDataTable extends DataTable
             ->editColumn('price', function ($row) {
                 return $row->price_format;
             })
+            ->editColumn('title', function ($row) {
+                return '<a class="text-blue-500" href="'.route('member.ecourses.show', $row->slug).'">'.$row->title.'</a>';
+            })
             ->editColumn('lessons_count', function ($row) {
                 return '<a class="text-blue-500" href="'.route('admin.ecourses.show', $row->id).'">'.$row->lessons_count.' lessons</a>';
             })
@@ -54,7 +57,7 @@ class EcoursesDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['template', 'action', 'subscribers_count', 'lessons_count', 'published_at']);
+            ->rawColumns(['title', 'action', 'lessons_count', 'published_at']);
     }
 
     /**

@@ -15,7 +15,11 @@ class MemberEcoursesController extends Controller
      */
     public function index(EcourseService $ecourseService, OrderService $orderService)
     {
-        $member_id = Auth::user()->member->id;
+        if(Auth::user()->role == 'admin') {
+            return redirect()->route('admin.ecourses.index');
+        }
+
+        $member_id = Auth::user()->member?->id;
         $data['ecourses'] = $ecourseService->memberEcourses($member_id)
             ->transform(function ($ecourse) use ($member_id) {
                 $ecourse->completed = (new SubscriptionService)->getCompletedLessons($ecourse->id, $member_id)->count();
@@ -32,7 +36,7 @@ class MemberEcoursesController extends Controller
      */
     public function show(SubscriptionService $subscriptionService, string $slug)
     {
-        $member_id = Auth::user()->member->id;
+        $member_id = Auth::user()->member?->id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
         $data['ecourse'] = $ecourse;
         $data['sections'] = $subscriptionService->getSections($ecourse->id);

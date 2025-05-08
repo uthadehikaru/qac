@@ -169,7 +169,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('courses/{course}/batches/{batch}/members/{id}', [MemberBatchController::class, 'destroy'])->name('courses.batches.members.delete');
     });
 
-    Route::middleware(['roles:member'])->prefix('member')->name('member.')->group(function () {
+    Route::middleware(['roles:member,admin'])->prefix('member')->name('member.')->group(function () {
         Route::get('/dashboard', [MDashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
