@@ -32,6 +32,9 @@ class RegisteredUserController extends Controller
 
         $course = Course::find($request->course_id);
         $data['course'] = $course;
+        if(!$course) {
+            abort(404);
+        }
         $batch = $course->batches()->open()->first();
 
         if ($course->level > 1) {
