@@ -14,7 +14,7 @@ class SecureVideo extends Controller
      */
     public function __invoke(SubscriptionService $subscriptionService, string $slug, string $lesson_uu)
     {
-        $member_id = Auth::user()->member->id;
+        $member_id = Auth::user()->member?->id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
         $video = $subscriptionService->getLesson($lesson_uu);
         if (! $ecourse || ! $video || ! $video->getMedia('videos')->first()) {
