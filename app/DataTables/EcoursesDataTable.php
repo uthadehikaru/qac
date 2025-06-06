@@ -102,7 +102,9 @@ class EcoursesDataTable extends DataTable
     {
         return [
             Column::make('title'),
-            Column::make('lessons_count')->title('Lessons'),
+            Column::make('lessons_count')->title('Lessons')
+                ->searchable(false)
+                ->orderable(false),
             Column::make('course_id')->title('Kelas'),
             Column::make('is_only_active_batch')->title('Type'),
             Column::make('published_at')->title('Is Published'),
