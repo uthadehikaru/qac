@@ -69,6 +69,7 @@ class RegisteredUserController extends Controller
             'password' => 'required|string|confirmed|min:8',
             'phone' => 'required|numeric|unique:members|min:8',
             'gender' => 'required|in:pria,wanita',
+            'regency_id' => 'required|exists:regencies,id',
             'session' => 'sometimes',
             'profesi' => 'nullable',
             'pendidikan' => 'nullable',
