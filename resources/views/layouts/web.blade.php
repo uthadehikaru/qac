@@ -19,11 +19,7 @@
         <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
         <style>
         .gradient {
-            background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
-        }
-        .background {
-            background: url(images/bg2.jpg);
-            background-position:center;background-attachment:fixed;
+            background: #e9a621;
         }
         @auth
         .dropdown:hover .dropdown-menu {
@@ -44,13 +40,13 @@
             </div>
             <ul class="list-reset flex justify-center flex-1 items-center">
                 <li class="mr-3">
-                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center" href="{{ url('/') }}">Kelas</a>
+                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Kelas</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center" href="{{ url('/') }}">Program Alumni</a>
+                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center" href="{{ url('/') }}">Event</a>
+                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
                 </li>
             </ul>
             <div class="block pr-4">
@@ -63,17 +59,17 @@
             </div>
             <div class="w-full flex-grow hidden mt-2 text-black p-4 z-20" id="nav-content">
             <ul class="list-reset justify-end flex-1 items-center">
-                <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#testimonial">Testimoni</a>
+                <li class="mr-3 text-right">
+                <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#testimonial">Testimoni</a>
                 </li>
-                <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ route('faq') }}">FAQ</a>
+                <li class="mr-3 text-right">
+                <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('faq') }}">FAQ</a>
                 </li>
-                <li class="mr-3">
+                <li class="mr-3 text-right">
                     @guest    
-                    <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Masuk</a>
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Masuk</a>
                     @else
-                    <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ route('logout') }}">Keluar</a>
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('logout') }}">Keluar</a>
                     @endguest
                 </li>
             </ul>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Course;
+use App\Models\Ecourse;
 use App\Models\Event;
 use App\Models\MemberBatch;
 use App\Models\System;
@@ -17,7 +18,8 @@ class HomeController extends Controller
     {
         $data['testimonials'] = MemberBatch::testimonial()->take(3)->get();
         $data['courses'] = Course::with('batches')->active()->get();
-        $data['latest_events'] = Event::latest('event_at')->take(3)->get();
+        $data['ecourses'] = Ecourse::latest()->take(4)->get();
+        $data['latest_events'] = Event::latest('event_at')->take(2)->get();
         $data['latest_ecourses'] = $ecourseService->latestEcourses(4);
         $data['about_1'] = System::value('about_1');
         $data['about_2'] = System::value('about_2');
