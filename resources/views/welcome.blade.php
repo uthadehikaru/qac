@@ -1,14 +1,16 @@
 <x-web-layout>
     <!--Hero-->
         <div class="pt-16 pb-8">
-            <div class="container-full mx-auto flex flex-wrap flex-col md:flex-row items-center">
-                <div class="owl-carousel">
+            <div class="container-full mx-auto flex flex-wrap flex-col md:flex-row items-center relative">
+                <button class="owl-nav-custom owl-prev absolute left-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-red-800 hover:text-white transition" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <div class="owl-carousel px-24 py-12">
                     @forelse ($banners as $banner)
                     <a href="{{ $banner->url }}" class="w-full text-center"><img src="{{ $banner->imageUrl('image') }}" /></a>
                     @empty
                     <div class="w-full text-center"><img src="{{ asset('images/banner.jpg') }}" /></div>
                     @endforelse
                 </div>
+                <button class="owl-nav-custom owl-next absolute right-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-red-800 hover:text-white transition" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
             </div>
         </div>
         <div class="relative -mt-12 lg:-mt-24">
@@ -148,19 +150,27 @@
     <script src="owlcarousel/owl.carousel.min.js"></script>
     <script>
         jQuery(document).ready(function($){
-            $(".owl-carousel").owlCarousel({
+            var $owl = $(".owl-carousel").owlCarousel({
                 items:1,
                 loop:true,
                 autoplay: true,
                 autoplayTimeout:3000,
                 animateOut: 'fadeOut',
+                nav: false, // We'll use custom nav
+                dots: false
             });
-            
-    @if($popup_image)
-            $('.close-popup').click(function(){
-                $('#popup').addClass('hidden')
-            })
-    @endif
+            // Custom Navigation Events
+            $('.owl-prev').click(function() {
+                $owl.trigger('prev.owl.carousel');
+            });
+            $('.owl-next').click(function() {
+                $owl.trigger('next.owl.carousel');
+            });
+            @if($popup_image)
+                    $('.close-popup').click(function(){
+                        $('#popup').addClass('hidden')
+                    })
+            @endif
         });
     </script>
 </x-slot>

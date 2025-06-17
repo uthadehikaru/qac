@@ -15,6 +15,7 @@
         </style>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css?family=Comfortaa&family=Montserrat" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('font-awesome/css/all.min.css') }}">
         <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
         <style>
         .gradient {
