@@ -30,24 +30,23 @@ class RegisteredUserController extends Controller
         $data['batch'] = $data['course'] = $data['sessions'] = null;
         $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
 
-        $course = Course::find($request->course_id);
-        $data['course'] = $course;
-        if(!$course) {
-            abort(404);
-        }
-        $batch = $course->batches()->open()->first();
+        if($request->course_id) {
+            $course = Course::find($request->course_id);
+            $data['course'] = $course;
+            $batch = $course->batches()->open()->first();
 
-        if ($course->level > 1) {
-            if ($batch) {
-                return redirect()->route('member.batch.detail', $batch->id);
-            } else {
-                return redirect()->route('member.waitinglist', $course->id);
+            if ($course->level > 1) {
+                if ($batch) {
+                    return redirect()->route('member.batch.detail', $batch->id);
+                } else {
+                    return redirect()->route('member.waitinglist', $course->id);
+                }
             }
-        }
 
-        if ($batch && $batch->is_open) {
-            $data['batch'] = $batch;
-            $data['sessions'] = $batch->sessions ? explode(',', $batch->sessions) : false;
+            if ($batch && $batch->is_open) {
+                $data['batch'] = $batch;
+                $data['sessions'] = $batch->sessions ? explode(',', $batch->sessions) : false;
+            }
         }
 
         return view('auth.register', $data);
@@ -69,7 +68,7 @@ class RegisteredUserController extends Controller
             'password' => 'required|string|confirmed|min:8',
             'phone' => 'required|numeric|unique:members|min:8',
             'gender' => 'required|in:pria,wanita',
-            'regency_id' => 'required|exists:regencies,id',
+            'regency_id' => 'nullable|exists:regencies,id',
             'session' => 'sometimes',
             'profesi' => 'nullable',
             'pendidikan' => 'nullable',
@@ -88,7 +87,7 @@ class RegisteredUserController extends Controller
             'role' => 'member',
         ]));
 
-        $regency = Regency::find($request->regency_id);
+        $regency = $request->regency_id ? Regency::find($request->regency_id) : null;
 
         $member = Member::create([
             'user_id' => $user->id,
@@ -96,8 +95,8 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'gender' => $request->gender,
             'is_overseas' => $request->is_overseas ?? 0,
-            'city' => $regency->name,
-            'address' => $regency->name.' '.$regency->province->name,
+            'city' => $regency ? $regency->name : null,
+            'address' => $regency ? $regency->name.' '.$regency->province->name : null,
             'profesi' => $request->profesi,
             'pendidikan' => $request->pendidikan,
             'instagram' => $request->instagram,

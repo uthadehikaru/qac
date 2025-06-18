@@ -7,7 +7,7 @@
                 @lang('Pendaftaran')
                 @if($batch)
                     {{ $batch->full_name }}
-                @else
+                @elseif($course)
                     {{ 'Waiting List '.$course->name }}
                 @endif
                 </h2>
