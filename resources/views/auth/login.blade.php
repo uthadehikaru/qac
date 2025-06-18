@@ -53,9 +53,15 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3 bg-[#7b0c00] text-white">
                     {{ __('Login') }}
                 </x-button>
+            </div>
+            <div class="flex flex-col items-center justify-center mt-4">
+                <p class="text-sm text-gray-600">Belum punya akun?</p>
+                <a class="px-4 py-2 bg-[#7b0c00] text-white rounded-md mt-2" href="{{ route('register') }}">
+                    {{ __('Daftar') }}
+                </a>
             </div>
         </form>
     </x-auth-card>

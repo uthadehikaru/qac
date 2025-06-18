@@ -39,14 +39,25 @@
             </a>
             </div>
             <ul class="list-reset flex justify-center flex-1 items-center">
-                <li class="mr-3">
-                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Kelas</a>
+                <li class="mr-3 dropdown relative">
+                    <button class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">
+                        Kelas
+                        <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu absolute hidden bg-white shadow-lg py-2 mt-1">
+                        <a href="{{ url('/kelas-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
+                        <a href="{{ url('/kelas-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
+                        <a href="{{ url('/kelas-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
+                        <a href="{{ url('/kelas-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 3.0 (Advance Grammar)</a>
+                    </div>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
+                    <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
                 </li>
                 <li class="mr-3">
-                <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
+                    <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
                 </li>
             </ul>
             <div class="block pr-4">
@@ -67,7 +78,7 @@
                 </li>
                 <li class="mr-3 text-right">
                     @guest    
-                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Masuk</a>
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Daftar/Masuk</a>
                     @endguest
                     @auth
                     @if(auth()->user()->role == 'member')
@@ -75,6 +86,12 @@
                     @else
                     <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('admin.dashboard') }}">Admin</a>
                     @endif
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4">
+                            Keluar
+                        </button>
+                    </form>
                     @endauth
                 </li>
             </ul>
