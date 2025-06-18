@@ -5,11 +5,16 @@
             Event QAC
             </h1>
             <div class="w-full mb-4">
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <p class="text-md md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
             Kegiatan atau program yang terbuka untuk UMUM
             </p>
+            <div class="mt-4 flex flex-wrap w-full md:w-1/3 mx-auto justify-between border rounded-full p-1 border-yellow-500">
+                <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">Free Sharing</a>
+                <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full">Ngobrolin Qur'an</a>
+                <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full">E-Book</a>
+            </div>
         </div>
         <div class="flex flex-wrap -m-4">
             @foreach($events as $event)
@@ -28,7 +33,7 @@
             @endforeach
         </div>
         <div class="flex flex-wrap px-6 justify-center">
-            <a href="{{ route('event.list') }}" class="mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            <a href="{{ route('event.list') }}" class="mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 Lihat Semua
             </a>
         </div>

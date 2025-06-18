@@ -2,21 +2,21 @@
     <!--Hero-->
         <div class="pt-16 pb-8">
             <div class="container-full mx-auto flex flex-wrap flex-col md:flex-row items-center relative">
-                <button class="owl-nav-custom owl-prev absolute left-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-red-800 hover:text-white transition" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <button class="owl-nav-custom owl-prev absolute left-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-[#7b0c00] hover:text-white transition" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
                 <div class="owl-carousel px-24 py-12">
                     @forelse ($banners as $banner)
-                    <a href="{{ $banner->url }}" class="w-full text-center"><img src="{{ $banner->imageUrl('image') }}" /></a>
+                    <a href="{{ $banner->url }}" class="w-full text-center"><img class="rounded-lg" src="{{ $banner->imageUrl('image') }}" /></a>
                     @empty
                     <div class="w-full text-center"><img src="{{ asset('images/banner.jpg') }}" /></div>
                     @endforelse
                 </div>
-                <button class="owl-nav-custom owl-next absolute right-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-red-800 hover:text-white transition" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                <button class="owl-nav-custom owl-next absolute right-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-[#7b0c00] hover:text-white transition" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
             </div>
         </div>
 
         <section id="why" class="bg-white pt-12 py-8">
         <div class="container max-w-5xl mx-auto m-8">
-            <h1 class="w-full my-2 text-xl font-bold leading-tight text-center text-gray-800">
+            <h1 class="w-full my-2 text-2xl font-bold leading-tight text-center text-gray-800">
             {{ $why1->value }}
             </h1>
             <div class="w-full mb-4">
@@ -33,33 +33,86 @@
         <div class="grid grid-cols-2 gap-4">
             <section id="introduction" class="bg-white pt-12 py-8">
             <div class="container max-w-5xl mx-auto m-8">
-                <h1 class="w-full my-2 text-md md:text-xl font-bold leading-tight text-center text-gray-800">
+                <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Yuk, kenali QAC!
                 </h1>
                 <div class="w-full mb-4">
                     <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
                 </div>
                 <div class="flex flex-wrap justify-center">
-                    <img src="{{ asset('images/introduction.jpeg') }}" />
+                    <img src="{{ asset('images/introduction.png') }}" />
                 </div>
             </div>
             </section>
             <section id="howto" class="bg-white pt-12 py-8">
             <div class="container max-w-5xl mx-auto m-8">
-                <h1 class="w-full my-2 text-md md:text-xl font-bold leading-tight text-center text-gray-800">
+                <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Bagaimana metode belajarnya?
                 </h1>
                 <div class="w-full mb-4">
                     <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
                 </div>
                 <div class="flex flex-wrap justify-center">
-                    <img src="{{ asset('images/howto.jpeg') }}" />
+                    <img src="{{ asset('images/howto.png') }}" />
                 </div>
             </div>
             </section>
         </div>
 
-        <x-latest-courses :courses="$courses" :waitinglist="$waitinglist" />
+        <section id="courses" class="bg-gray-100 pt-6 py-8 background"">
+        <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
+            <div class="text-center mb-20">
+                <h1 class="text-md md:text-2xl font-bold text-center text-gray-900 mb-4">
+                Kelas QAC
+                </h1>
+                <div class="w-full mb-4">
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                </div>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                <div class="p-8 md:w-1/2">
+                    <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <div class="">
+                            <a href="#" class="">
+                                <img class="w-full object-cover object-center" 
+                                src="{{ asset('images/qac lite.png') }}" alt="QAC Lite" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:w-1/2">
+                    <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <div class="">
+                            <a href="#" class="">
+                                <img class="w-full object-cover object-center" 
+                                src="{{ asset('images/qac 1.png') }}" alt="QAC 1" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:w-1/2">
+                    <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <div class="">
+                            <a href="#" class="">
+                                <img class="w-full object-cover object-center" 
+                                src="{{ asset('images/qac 2.png') }}" alt="QAC 2" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:w-1/2">
+                    <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <div class="">
+                            <a href="#" class="">
+                                <img class="w-full object-cover object-center" 
+                                src="{{ asset('images/qac 3.png') }}" alt="QAC 3" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
 
         <x-latest-ecourses :ecourses="$ecourses" />
 
@@ -67,7 +120,7 @@
 
         <section id="testimonial" class="text-gray-600 body-font ">
             <div class="container px-5 py-8 mx-auto">
-                <h1 class="w-full my-2 text-xl font-bold leading-tight text-center text-gray-900">
+                <h1 class="w-full my-2 text-2xl font-bold leading-tight text-center text-gray-900">
                     @lang('Apa Kata Alumni QAC?')
                 </h1>
                 <div class="w-full mb-4">
@@ -88,14 +141,14 @@
                     @endforeach
                 </div>
                 <div class="flex flex-wrap px-6 justify-center">
-                    <a href="{{ route('testimonials') }}" class="mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <a href="{{ route('testimonials') }}" class="mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                         Lihat Semua
                     </a>
                 </div>
             </div>
         </section>
         <section id="register" class="mx-auto text-center mt-12 mb-12">
-        <h1 class="w-full my-2 text-xl font-bold leading-tight text-center text-gray-900">
+        <h1 class="w-full my-2 text-2xl font-bold leading-tight text-center text-gray-900">
             @lang('Bergabung Bersama Para Pejuang')
         </h1>
         <div class="w-full mb-4">
@@ -105,7 +158,7 @@
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <div class="py-8">
-            <a href="#courses" class="mt-8 mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            <a href="#courses" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 @lang('Daftar')
             </a>
         </div>

@@ -17,26 +17,31 @@
                 <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full hidden md:block">Coming Soon</a>
             </div>
         </div>
-        @if($ecourses->count())
         <div class="flex flex-wrap -m-4">
-            @foreach ($ecourses as $ecourse)
             <div class="w-1/2 p-4">
-                <a href="{{ route('ecourses.show', $ecourse->slug) }}" title="{{ $ecourse->title }}">
+                <a href="#" title="Quality Time with Qur’an">
                     <div class="p-6 rounded-lg">
-                        <img class="h-40 rounded-lg w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ Str::limit($ecourse->title, 50) }}">
-                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{ Str::limit($ecourse->title, 50) }}</h2>
+                        <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 1">
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Quality Time with Qur’an</h2>
+                        <p class="text-sm text-gray-500">164 Videos</p>
                     </div>
                 </a>
             </div>
-            @endforeach
+            
+            <div class="w-1/2 p-4">
+                <a href="#" title="Tadarus Ramadhan 'Redefinition'">
+                    <div class="p-6 rounded-lg">
+                        <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 2">
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Tadarus Ramadhan "Redefinition"</h2>
+                        <p class="text-sm text-gray-500">164 Videos</p>
+                    </div>
+                </a>
+            </div>
         </div>
         <div class="flex flex-wrap px-6 justify-center">
-            <a href="{{ route('ecourses.index') }}" class="mx-auto lg:mx-0 hover:underline bg-red-800 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            <a href="{{ route('ecourses.index') }}" class="mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 Lihat Semua
             </a>
         </div>
-        @else
-        <div class="flex justify-center text-white text-2xl"><span>Coming Soon</span></div>
-        @endif
     </div>
 </section>

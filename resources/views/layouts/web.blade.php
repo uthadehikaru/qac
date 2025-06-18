@@ -60,7 +60,7 @@
             <div class="w-full flex-grow hidden mt-2 text-black p-4 z-20" id="nav-content">
             <ul class="list-reset justify-end flex-1 items-center">
                 <li class="mr-3 text-right">
-                <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ url('/') }}#testimonial">Testimoni</a>
+                <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('testimonials') }}">Testimoni</a>
                 </li>
                 <li class="mr-3 text-right">
                 <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('faq') }}">FAQ</a>
@@ -68,9 +68,14 @@
                 <li class="mr-3 text-right">
                     @guest    
                     <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Masuk</a>
-                    @else
-                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('logout') }}">Keluar</a>
                     @endguest
+                    @auth
+                    @if(auth()->user()->role == 'member')
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('member.dashboard') }}">Profil</a>
+                    @else
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('admin.dashboard') }}">Admin</a>
+                    @endif
+                    @endauth
                 </li>
             </ul>
             </div>
