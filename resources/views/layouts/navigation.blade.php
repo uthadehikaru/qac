@@ -22,20 +22,11 @@
                     <x-nav-link :href="route('admin.courses.index')" :active="request()->is('admin/courses*')">
                         {{ __('Courses') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.testimonials.index')" :active="request()->is('admin/testimonials*')">
-                        {{ __('Testimonials') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.certificates.index')" :active="request()->is('admin/certificates*')">
-                        {{ __('Certificates') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('admin.events.index')" :active="request()->is('admin/events*')">
                         {{ __('Events') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.quiz.index')" :active="request()->is('admin/quiz*')">
-                        {{ __('Quizzes') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('admin.ecourses.index')" :active="request()->is('admin/ecourses*')">
-                        {{ __('Online Courses') }}
+                        {{ __('E-Courses') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.banners.index')" :active="request()->is('admin/banners*')">
                         {{ __('Banners') }}
