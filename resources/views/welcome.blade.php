@@ -1,56 +1,56 @@
 <x-web-layout>
     <!--Hero-->
-        <div class="pt-16 pb-8">
+        <div class="pt-16">
             <div class="container-full mx-auto flex flex-wrap flex-col md:flex-row items-center relative">
-                <button class="owl-nav-custom owl-prev absolute left-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-[#7b0c00] hover:text-white transition" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                <div class="owl-carousel px-24 py-12">
+                <button class="owl-nav-custom owl-prev absolute left-2 top-1/2 transform -translate-y-1/2 z-10 p-2" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <div class="owl-carousel px-12 py-12" id="banner">
                     @forelse ($banners as $banner)
                     <a href="{{ $banner->url }}" class="w-full text-center"><img class="rounded-lg" src="{{ $banner->imageUrl('image') }}" /></a>
                     @empty
                     <div class="w-full text-center"><img src="{{ asset('images/banner.jpg') }}" /></div>
                     @endforelse
                 </div>
-                <button class="owl-nav-custom owl-next absolute right-8 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-[#7b0c00] hover:text-white transition" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                <button class="owl-nav-custom owl-next absolute right-2 top-1/2 transform -translate-y-1/2 z-10 p-2" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
             </div>
         </div>
 
-        <section id="why" class="bg-white pt-12 py-8">
-        <div class="container max-w-5xl mx-auto m-8">
-            <h1 class="w-full my-2 text-2xl font-bold leading-tight text-center text-gray-800">
-            {{ $why1->value }}
-            </h1>
-            <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        <section id="why" class="bg-white py-8">
+            <div class="container max-w-5xl mx-auto m-8">
+                <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-800">
+                {{ $why1->value }}
+                </h1>
+                <div class="w-full mb-4">
+                    <x-divider />
+                </div>
+                <div class="flex flex-wrap justify-center">
+                    <video width="400" height="800" class="border border-gray-300 border-8 rounded-lg" controls controlsList="nodownload">
+                        <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
             </div>
-            <div class="flex flex-wrap justify-center">
-                <video width="400" height="800" class="border border-gray-300 border-8 rounded-lg" controls controlsList="nodownload">
-                    <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
-                </video>
-            </div>
-        </div>
         </section>
 
         <div class="grid grid-cols-2 gap-4">
-            <section id="introduction" class="bg-white pt-12 py-8">
+            <section id="introduction" class="bg-white py-8">
             <div class="container max-w-5xl mx-auto m-8">
-                <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
+                <h1 class="w-full my-2 text-xs md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Yuk, kenali QAC!
                 </h1>
                 <div class="w-full mb-4">
-                    <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                    <x-divider />
                 </div>
                 <div class="flex flex-wrap justify-center">
                     <img src="{{ asset('images/introduction.png') }}" />
                 </div>
             </div>
             </section>
-            <section id="howto" class="bg-white pt-12 py-8">
+            <section id="howto" class="bg-white py-8">
             <div class="container max-w-5xl mx-auto m-8">
-                <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
+                <h1 class="w-full my-2 text-xs md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Bagaimana metode belajarnya?
                 </h1>
                 <div class="w-full mb-4">
-                    <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                    <x-divider />
                 </div>
                 <div class="flex flex-wrap justify-center">
                     <img src="{{ asset('images/howto.png') }}" />
@@ -59,18 +59,18 @@
             </section>
         </div>
 
-        <section id="courses" class="bg-gray-100 pt-6 py-8 background"">
+        <section id="courses" class="pt-6 py-8">
         <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
-            <div class="text-center mb-20">
+            <div class="text-center mb-8">
                 <h1 class="text-md md:text-2xl font-bold text-center text-gray-900 mb-4">
                 Kelas QAC
                 </h1>
                 <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                <x-divider />
                 </div>
             </div>
-            <div class="flex flex-wrap -m-4">
-                <div class="p-8 md:w-1/2">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
                             <a href="#" class="">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-8 md:w-1/2">
+                <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
                             <a href="#" class="">
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-8 md:w-1/2">
+                <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
                             <a href="#" class="">
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-8 md:w-1/2">
+                <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
                             <a href="#" class="">
@@ -114,53 +114,150 @@
         </div>
         </section>
 
-        <x-latest-ecourses :ecourses="$ecourses" />
+        <section id="courses" class="pt-6 py-8">
+            <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
+                <div class="text-center mb-8">
+                    <h1 class="text-md md:text-xl font-bold text-center text-gray-900 mb-4">
+                    Program Alumni QAC
+                    </h1>
+                    <div class="w-full mb-4">
+                    <x-divider />
+                    <p class="w-full leading-relaxed text-xs mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
+                    </div>
+                    <div class="flex justify-between border rounded-full text-xs p-1 border-yellow-500">
+                        <a href="#" class="bg-yellow-500 hover:text-white px-4 py-2 rounded-full flex items-center">Recommended</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center">Tazkiyatun Nafs</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center">Long Life Learning</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full hidden md:block flex items-center">Tadabbur Pemula</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full hidden md:block flex items-center">QAC's Tadarus</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full hidden md:block flex items-center">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap -m-4">
+                    <div class="w-1/2 p-4">
+                        <a href="#" title="Quality Time with Qur'an">
+                            <div class="rounded-lg">
+                                <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 1">
+                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Quality Time with Qur'an</h2>
+                                <p class="text-xs text-gray-500">164 Videos</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="w-1/2 p-4">
+                        <a href="#" title="Tadarus Ramadhan 'Redefinition'">
+                            <div class="rounded-lg">
+                                <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 2">
+                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Tadarus Ramadhan "Redefinition"</h2>
+                                <p class="text-xs text-gray-500">164 Videos</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap px-6 justify-center">
+                    <x-qac-button href="{{ route('ecourses.index') }}">Lihat Semua</x-qac-button>
+                </div>
+            </div>
+        </section>
 
-        <x-latest-event :events="$latest_events" />
+        <section id="events" class="bg-white text-gray-600 body-font pt-12">
+            <div class="container px-5 py-2 mx-auto">
+                <div class="text-center mb-8">
+                    <h1 class="text-base md:text-xl font-bold text-center title-font text-gray-900 mb-4">
+                    Event QAC
+                    </h1>
+                    <div class="w-full mb-4">
+                        <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                    </div>
+                    <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+                    Kegiatan atau program yang terbuka untuk UMUM
+                    </p>
+                    <div class="mt-4 text-xs flex flex-wrap w-full md:w-1/3 mx-auto justify-between border rounded-full p-1 border-yellow-500">
+                        <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">Free Sharing</a>
+                        <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full">Ngobrolin Qur'an</a>
+                        <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full">E-Book</a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap -m-4">
+                    <div class="w-1/2 p-4">
+                        <a href="#" title="Quality Time with Qur'an">
+                            <div class="rounded-lg">
+                                <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/event 1.png') }}" alt="event 1">
+                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Embrace The Spirit of Ramadhan</h2>
+                                <p class="text-xs text-gray-500">6 Videos, 6 E-Books</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="w-1/2 p-4">
+                        <a href="#" title="Tadarus Ramadhan 'Redefinition'">
+                            <div class="rounded-lg">
+                                <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/event 2.png') }}" alt="program alumni 2">
+                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Special Persiapan Malam Lailatul Qadr</h2>
+                                <p class="text-xs text-gray-500">3 Videos, 3 E-Books</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap px-6 justify-center">
+                    <x-qac-button href="{{ route('event.list') }}">Lihat Semua</x-qac-button>
+                </div>
+            </div>
+        </section>
 
-        <section id="testimonial" class="text-gray-600 body-font ">
+        <section id="testimonial-section" class="text-gray-600 body-font ">
             <div class="container px-5 py-8 mx-auto">
-                <h1 class="w-full my-2 text-2xl font-bold leading-tight text-center text-gray-900">
+                <h1 class="w-full my-2 text-base font-bold leading-tight text-center text-gray-900">
                     @lang('Apa Kata Alumni QAC?')
                 </h1>
                 <div class="w-full mb-4">
                     <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
                 </div>
-                <div class="owl-carousel px-24 py-12">
-                    @foreach($testimonials as $testimonial)
-                    <div class="w-full lg:mb-0 mb-6 p-4 bg-[#fff9e4] rounded-lg">
+                <div class="owl-carousel px-4 py-4" id="testimonial">
+                    <div class="w-full lg:mb-0 p-4 bg-[#fff9e4] rounded-lg">
                         <div class="h-full text-center">
-                        <p class="text-gray-800 text-xl font-bold my-3">{{ $testimonial->batch->full_name }}</p>
-                        <p class="leading-relaxed text-gray-600 text-left">
+                        <p class="text-gray-800 text-sm font-bold my-3">QAC 2.2 Batch 2</p>
+                        <p class="leading-relaxed text-gray-600 text-center text-xs">
+                        Alhamdulillah bisa berkesempatan lanjut ikut QAC
+                        2.2. Jikalau ikut dari awal sampai tingkat ini, pasti
+                        berasa sekali bahwa pembelajarannya benar-benar
+                        disusun sedemikian rupa sehingga mudah untuk
+                        dicerna, darimana pun background-nya.
+                        </p>
+                        <span class="inline-block h-1 w-24 rounded bg-[#e9a621] mt-6 mb-4"></span>
+                        <p class="text-gray-800 text-sm font-bold">Aisha Shannaz</p>
+                        </div>
+                    </div>
+                    @foreach($testimonials as $testimonial)
+                    <div class="w-full lg:mb-0 p-4 bg-[#fff9e4] rounded-lg">
+                        <div class="h-full text-center">
+                        <p class="text-gray-800 text-sm font-bold my-3">{{ $testimonial->batch->full_name }}</p>
+                        <p class="leading-relaxed text-gray-600 text-center text-xs">
                             {!! nl2br(substr($testimonial->testimonial,0,500)) !!} ...
                         </p>
                         <span class="inline-block h-1 w-24 rounded gradient mt-6 mb-4"></span>
-                        <p class="text-gray-800 text-xl font-bold">{{ $testimonial->member->full_name }}</p>
+                        <p class="text-gray-800 text-sm font-bold">{{ $testimonial->member->full_name }}</p>
                         </div>
                     </div>
                     @endforeach
                 </div>
                 <div class="flex flex-wrap px-6 justify-center">
-                    <a href="{{ route('testimonials') }}" class="mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                        Lihat Semua
-                    </a>
+                    <x-qac-button href="{{ route('testimonials') }}">Lihat Semua</x-qac-button>
                 </div>
             </div>
         </section>
         <section id="register" class="mx-auto text-center mt-12 mb-12">
-        <h1 class="w-full my-2 text-2xl font-bold leading-tight text-center text-gray-900">
+        <h1 class="w-full my-2 text-base font-bold leading-tight text-center text-gray-900">
             @lang('Bergabung Bersama Para Pejuang')
         </h1>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
         </div>
-        <h3 class="my-4 text-xl leading-tight">
+        <h3 class="my-4 text-xs leading-tight">
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <div class="py-8">
-            <a href="#courses" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                @lang('Daftar')
-            </a>
+            <x-qac-button href="#">Daftar</x-qac-button>
         </div>
         </section>
         @if($popup_image)
@@ -192,14 +289,15 @@
     <script src="owlcarousel/owl.carousel.min.js"></script>
     <script>
         jQuery(document).ready(function($){
-            var $owl = $(".owl-carousel").owlCarousel({
+            var $owl = $("#banner").owlCarousel({
                 items:1,
                 loop:true,
                 autoplay: true,
                 autoplayTimeout:3000,
                 animateOut: 'fadeOut',
                 nav: false, // We'll use custom nav
-                dots: false
+                dots: false,
+                autoHeight: true
             });
             // Custom Navigation Events
             $('.owl-prev').click(function() {
@@ -208,12 +306,22 @@
             $('.owl-next').click(function() {
                 $owl.trigger('next.owl.carousel');
             });
-            @if($popup_image)
-                    $('.close-popup').click(function(){
-                        $('#popup').addClass('hidden')
-                    })
-            @endif
+            var $testimonialowl = $("#testimonial").owlCarousel({
+                items:1,
+                loop:false,
+                autoHeight: true
+            });
         });
     </script>
+    
+    @if($popup_image)
+    <script>
+        jQuery(document).ready(function($){
+            $('.close-popup').click(function(){
+                $('#popup').addClass('hidden')
+            });
+        });
+    </script>
+    @endif
 </x-slot>
 </x-web-layout>

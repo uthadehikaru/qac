@@ -20,3 +20,13 @@
     php artisan optimize
     php artisan up
 @endtask
+
+@task('lite', ['on' => 'web'])
+    cd domains/qacjakarta.com/lite
+    php artisan down
+    git pull
+    composer2 install --no-dev
+    php artisan migrate --force
+    php artisan optimize
+    php artisan up
+@endtask
