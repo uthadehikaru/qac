@@ -80,6 +80,21 @@ Route::resource('ecourses', EcourseController::class)
         'ecourses' => 'ecourse:slug',
     ]);
 
+Route::prefix('kelas')->name('kelas.')->group(function () {
+    Route::get('/qac-1-lite', function () {
+        return view('kelas.qac-1-lite');
+    })->name('qac-1-lite');
+    Route::get('/qac-1', function () {
+        return view('kelas.qac-1');
+    })->name('qac-1');
+    Route::get('/qac-2', function () {
+        return view('kelas.qac-2');
+    })->name('qac-2');
+    Route::get('/qac-3', function () {
+        return view('kelas.qac-3');
+    })->name('qac-3');
+});
+
 Route::get('/unsubscribe/{token}', Unsubscribe::class)->name('unsubscribe');
 
 Route::middleware(['auth'])->group(function () {

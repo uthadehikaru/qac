@@ -55,10 +55,10 @@
                         </svg>
                     </button>
                     <div class="dropdown-menu absolute hidden bg-white shadow-lg py-2 mt-1">
-                        <a href="{{ url('/kelas-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
-                        <a href="{{ url('/kelas-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
-                        <a href="{{ url('/kelas-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
-                        <a href="{{ url('/kelas-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 3.0 (Advance Grammar)</a>
+                        <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
+                        <a href="{{ route('kelas.qac-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
+                        <a href="{{ route('kelas.qac-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
+                        <a href="{{ route('kelas.qac-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 3.0 (Advance Grammar)</a>
                     </div>
                 </li>
                 <li class="mr-3">
