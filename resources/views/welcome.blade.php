@@ -172,10 +172,10 @@
                     <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
                     Kegiatan atau program yang terbuka untuk UMUM
                     </p>
-                    <div class="mt-4 text-xs flex flex-wrap w-full md:w-1/3 mx-auto justify-between border rounded-full p-1 border-yellow-500">
-                        <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">Free Sharing</a>
-                        <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full">Ngobrolin Qur'an</a>
-                        <a href="#" class=" px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full">E-Book</a>
+                    <div class="flex justify-between border rounded-full text-xs p-1 border-yellow-500">
+                        <a href="#" class="bg-yellow-500 hover:text-white px-4 py-2 rounded-full flex items-center">Free Sharing</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center">Ngobrolin Qur'an</a>
+                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center">E-Book</a>
                     </div>
                 </div>
                 <div class="flex flex-wrap -m-4">
@@ -205,7 +205,7 @@
             </div>
         </section>
 
-        <section id="testimonial-section" class="text-gray-600 body-font ">
+        <section id="testimonial-section" class="text-gray-600 body-font relative">
             <div class="container px-5 py-8 mx-auto">
                 <h1 class="w-full my-2 text-base font-bold leading-tight text-center text-gray-900">
                     @lang('Apa Kata Alumni QAC?')
@@ -213,6 +213,7 @@
                 <div class="w-full mb-4">
                     <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
                 </div>
+                <button class="owl-nav-custom testimonial-prev absolute left-1 top-1/2 transform -translate-y-1/2 z-10 p-2" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
                 <div class="owl-carousel px-4 py-4" id="testimonial">
                     <div class="w-full lg:mb-0 p-4 bg-[#fff9e4] rounded-lg">
                         <div class="h-full text-center">
@@ -241,6 +242,7 @@
                     </div>
                     @endforeach
                 </div>
+                <button class="owl-nav-custom testimonial-next absolute right-1 top-1/2 transform -translate-y-1/2 z-10 p-2" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
                 <div class="flex flex-wrap px-6 justify-center">
                     <x-qac-button href="{{ route('testimonials') }}">Lihat Semua</x-qac-button>
                 </div>
@@ -257,7 +259,7 @@
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <div class="py-8">
-            <x-qac-button href="#">Daftar</x-qac-button>
+            <x-qac-button href="{{ route('register') }}">Daftar</x-qac-button>
         </div>
         </section>
         @if($popup_image)
@@ -274,7 +276,7 @@
                         <img src="{{ asset('storage/'.$popup_image) }}" class="w-full" />
                         
                         <div class="bg-white px-4 py-3 text-center">
-                            <button type="button" class="close-popup py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="togglePopup()">Tutup</button>
+                            <x-qac-button href="javascript:void(0)" class="close-popup" onclick="togglePopup()">Tutup</x-qac-button>
                         </div>
                     </div>
                 </div>
@@ -310,6 +312,12 @@
                 items:1,
                 loop:false,
                 autoHeight: true
+            });
+            $('.testimonial-prev').click(function() {
+                $testimonialowl.trigger('prev.owl.carousel');
+            });
+            $('.testimonial-next').click(function() {
+                $testimonialowl.trigger('next.owl.carousel');
             });
         });
     </script>

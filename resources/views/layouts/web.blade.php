@@ -48,13 +48,13 @@
             </div>
             <ul class="list-reset flex justify-center flex-1 items-center">
                 <li class="mr-3 dropdown relative">
-                    <button class="inline-block flex items-center text-sm md:text-base py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">
+                    <button class="inline-block flex items-center text-xs md:text-base py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">
                         Kelas
                         <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div class="dropdown-menu absolute hidden bg-white shadow-lg py-2 mt-1">
+                    <div class="dropdown-menu absolute hidden bg-white shadow-lg py-2 mt-1 text-xs">
                         <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
                         <a href="{{ route('kelas.qac-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
                         <a href="{{ route('kelas.qac-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
@@ -62,10 +62,10 @@
                     </div>
                 </li>
                 <li class="mr-3">
-                    <a class="inline-block py-2 px-2 text-sm md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
+                    <a class="inline-block py-2 px-2 text-xs md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
                 </li>
                 <li class="mr-3">
-                    <a class="inline-block py-2 px-2 text-sm md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
+                    <a class="inline-block py-2 px-2 text-xs md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
                 </li>
             </ul>
             <div class="block pr-4">
@@ -77,7 +77,7 @@
             </button>
             </div>
             <div class="w-full flex-grow hidden mt-2 text-black p-4 z-20" id="nav-content">
-            <ul class="list-reset justify-end flex-1 items-center">
+            <ul class="list-reset justify-end flex-1 text-xs md:text-base items-center">
                 <li class="mr-3 text-right">
                 <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('testimonials') }}">Testimoni</a>
                 </li>
