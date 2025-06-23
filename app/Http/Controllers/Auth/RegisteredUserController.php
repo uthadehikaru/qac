@@ -62,12 +62,12 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'nullable|string|max:255',
             'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'phone' => 'required|numeric|unique:members|min:8',
-            'gender' => 'required|in:pria,wanita',
+            'phone' => 'nullable|numeric|unique:members|min:8',
+            'gender' => 'nullable|in:pria,wanita',
             'regency_id' => 'nullable|exists:regencies,id',
             'session' => 'sometimes',
             'profesi' => 'nullable',
@@ -81,7 +81,7 @@ class RegisteredUserController extends Controller
         DB::beginTransaction();
 
         Auth::login($user = User::create([
-            'name' => $request->name,
+            'name' => $request->name ?? $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'member',
@@ -92,8 +92,8 @@ class RegisteredUserController extends Controller
         $member = Member::create([
             'user_id' => $user->id,
             'full_name' => $request->full_name,
-            'phone' => $request->phone,
-            'gender' => $request->gender,
+            'phone' => $request->phone ?? '',
+            'gender' => $request->gender ?? 'pria',
             'is_overseas' => $request->is_overseas ?? 0,
             'city' => $regency ? $regency->name : null,
             'address' => $regency ? $regency->name.' '.$regency->province->name : null,

@@ -44,11 +44,11 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="ml-2 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('auth.otp') }}">
+                <a class="ml-2 underline text-sm text-blue-500" href="{{ route('auth.otp') }}">
                     {{ __('Gunakan OTP') }}
                 </a>
                 @if (Route::has('password.request'))
-                    <a class="ml-2 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="ml-2 underline text-sm text-blue-500" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
@@ -58,7 +58,7 @@
                 </x-button>
             </div>
             <div class="flex flex-col items-center justify-center mt-4">
-                <p class="text-sm text-gray-600">Belum punya akun?</p>
+                <p class="text-sm text-gray-600">Belum punya akun? Daftar disini:</p>
                 <a class="px-4 py-2 bg-[#7b0c00] text-white rounded-md mt-2" href="{{ route('register') }}">
                     {{ __('Daftar') }}
                 </a>
