@@ -2,15 +2,15 @@
     <x-slot name="title"> - Testimonial Alumni QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
     <div class="pt-20">
-        <div class="text-center mb-20 mx-auto text-white">
-            <h1 class="sm:text-3xl text-2xl font-medium text-center title-font mb-4">
+        <div class="text-center mb-8 mx-auto text-red-800">
+            <h1 class="sm:text-3xl text-2xl font-bold text-center title-font mb-4">
             Testimoni Peserta QAC
             </h1>
             <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
             Pesan dari para Alumni QAC
             </p>
         </div>
-        <div class="relative -mt-12 lg:-mt-24 pb-8">
+        <div class="relative -mt-12 lg:-mt-24">
         <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -29,7 +29,7 @@
             </g>
         </svg>
         </div>
-        <div class="-my-8 pt-12 bg-white divide-y-2 divide-gray-100">
+        <div class="-my-8 pt-2 bg-white divide-y-2 divide-gray-100">
             <div class="w-3/4 mx-auto">
                 @foreach($testimonials as $testimonial)
                 <div class="py-8 flex flex-wrap md:flex-nowrap">

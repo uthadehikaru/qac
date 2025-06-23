@@ -78,4 +78,9 @@ class Ecourse extends Model
     {
         return $this->hasMany(Subscription::class);
     }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

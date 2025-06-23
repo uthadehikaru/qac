@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\EcoursesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EcourseRequest;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Ecourse;
 use App\Services\EcourseService;
@@ -30,6 +31,7 @@ class EcoursesController extends Controller
     {
         $data['ecourse'] = null;
         $data['courses'] = Course::all();
+        $data['categories'] = Category::type('course')->orderBy('name')->get();
 
         return view('admin.ecourse-form', $data);
     }
@@ -64,6 +66,7 @@ class EcoursesController extends Controller
     {
         $data['ecourse'] = Ecourse::find($id);
         $data['courses'] = Course::all();
+        $data['categories'] = Category::type('course')->orderBy('name')->get();
 
         return view('admin.ecourse-form', $data);
     }

@@ -15,17 +15,25 @@
         </style>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css?family=Comfortaa&family=Montserrat" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset('font-awesome/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
         <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
         <style>
         .gradient {
             background: #e9a621;
         }
-        @auth
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-        @endauth
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            min-width: 200px;
+            border-radius: 0.375rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
         </style>
         {{ $styles ?? '' }}
     </head>
@@ -33,14 +41,14 @@
         <!--Nav-->
         <nav class="fixed w-full z-30 top-0 border-b-4 bg-white border-red-800">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-            <div class="pl-4 flex items-center">
+            <div class="pl-0 md:pl-4 flex items-center">
             <a class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ url('') }}">
                 <img class="h-8 md:h-14 inline" src="{{ asset('qacnew.png') }}" />
             </a>
             </div>
             <ul class="list-reset flex justify-center flex-1 items-center">
                 <li class="mr-3 dropdown relative">
-                    <button class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">
+                    <button class="inline-block flex items-center text-sm md:text-base py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">
                         Kelas
                         <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -54,10 +62,10 @@
                     </div>
                 </li>
                 <li class="mr-3">
-                    <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
+                    <a class="inline-block py-2 px-2 text-sm md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
                 </li>
                 <li class="mr-3">
-                    <a class="inline-block py-2 px-2 md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
+                    <a class="inline-block py-2 px-2 text-sm md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
                 </li>
             </ul>
             <div class="block pr-4">
@@ -265,6 +273,31 @@
             $('#close-modal').click(function(){
                 $('#modal').addClass('hidden')
             })
+            
+            // Dropdown functionality
+            $('.dropdown').hover(
+                function() {
+                    $(this).find('.dropdown-menu').show();
+                },
+                function() {
+                    $(this).find('.dropdown-menu').hide();
+                }
+            );
+            
+            // Also handle click events for mobile
+            $('.dropdown button').click(function(e) {
+                e.preventDefault();
+                var dropdownMenu = $(this).siblings('.dropdown-menu');
+                $('.dropdown-menu').not(dropdownMenu).hide();
+                dropdownMenu.toggle();
+            });
+            
+            // Close dropdown when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown-menu').hide();
+                }
+            });
         });
         </script>
         @if(config('app.analytic'))

@@ -102,6 +102,7 @@ class EcoursesDataTable extends DataTable
     {
         return [
             Column::make('title'),
+            Column::make('category_id')->title('Category'),
             Column::make('lessons_count')->title('Lessons')
                 ->searchable(false)
                 ->orderable(false),
