@@ -1,8 +1,16 @@
-<x-web-layout>
-<div class="mt-12 py-12 text-gray-900">
-    <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white border-b border-gray-200">
+<x-guest-layout>
+    <x-auth-card>
+        <x-slot name="logo">
+            <a href="/">
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            </a>
+        </x-slot>
+
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+        @if(session('error'))
+        <x-alert type="warning">{{ session('error') }}</x-alert>
+        @endif
 
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -146,70 +154,68 @@
                         {{ __('Login') }}
                     </a>
                 </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
-<x-slot name="scripts">
-    <script type="text/javascript">
-        // Password visibility toggle function
-        function togglePassword(fieldId) {
-            const passwordField = document.getElementById(fieldId);
-            const eyeIcon = document.getElementById(fieldId + '-eye');
-            const eyeSlashIcon = document.getElementById(fieldId + '-eye-slash');
-            
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                eyeIcon.classList.add('hidden');
-                eyeSlashIcon.classList.remove('hidden');
-            } else {
-                passwordField.type = 'password';
-                eyeIcon.classList.remove('hidden');
-                eyeSlashIcon.classList.add('hidden');
-            }
-        }
+    </x-auth-card>
 
-        // Disable register button on form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form[method="POST"]');
-            const registerBtn = document.getElementById('register-btn');
-            
-            if (form && registerBtn) {
-                form.addEventListener('submit', function() {
-                    registerBtn.disabled = true;
-                    registerBtn.textContent = '{{ __("Registering...") }}';
-                    registerBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                });
+    <x-slot name="scripts">
+        <script type="text/javascript">
+            // Password visibility toggle function
+            function togglePassword(fieldId) {
+                const passwordField = document.getElementById(fieldId);
+                const eyeIcon = document.getElementById(fieldId + '-eye');
+                const eyeSlashIcon = document.getElementById(fieldId + '-eye-slash');
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    eyeIcon.classList.add('hidden');
+                    eyeSlashIcon.classList.remove('hidden');
+                } else {
+                    passwordField.type = 'password';
+                    eyeIcon.classList.remove('hidden');
+                    eyeSlashIcon.classList.add('hidden');
+                }
             }
-        });
 
-        if($('#province_id').length){
-            $('#province_id').on('change', function() {
-                $("#regency_label").addClass('animate-bounce');
-                $("#regency_id").empty();
-                $("#district_id").empty();
-                $("#village_id").empty();
-                var province_id = $(this).val();
-                $.ajax({
-                    type:"POST",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    url:"{{ url('api/regencies') }}/"+province_id,
-                    success: function(data) {
-                        $("#regency_id").html($("<option></option>").val(0).html('-- pilih kota --'));
-                        $.each(data, function (key, row)
-                        {
-                            $("#regency_id").append($("<option></option>").val(row.id).html(row.name));
-                        });
-                        $("#regency_label").removeClass('animate-bounce');
-                    },
-                    error: function(data) {                
-                        $("#regency_label").removeClass('animate-bounce');
-                    }
-                });
+            // Disable register button on form submission
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.querySelector('form[method="POST"]');
+                const registerBtn = document.getElementById('register-btn');
+                
+                if (form && registerBtn) {
+                    form.addEventListener('submit', function() {
+                        registerBtn.disabled = true;
+                        registerBtn.textContent = '{{ __("Registering...") }}';
+                        registerBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    });
+                }
             });
-        }
-    </script>
-</x-slot>
-</x-web-layout>
+
+            if($('#province_id').length){
+                $('#province_id').on('change', function() {
+                    $("#regency_label").addClass('animate-bounce');
+                    $("#regency_id").empty();
+                    $("#district_id").empty();
+                    $("#village_id").empty();
+                    var province_id = $(this).val();
+                    $.ajax({
+                        type:"POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url:"{{ url('api/regencies') }}/"+province_id,
+                        success: function(data) {
+                            $("#regency_id").html($("<option></option>").val(0).html('-- pilih kota --'));
+                            $.each(data, function (key, row)
+                            {
+                                $("#regency_id").append($("<option></option>").val(row.id).html(row.name));
+                            });
+                            $("#regency_label").removeClass('animate-bounce');
+                        },
+                        error: function(data) {                
+                            $("#regency_label").removeClass('animate-bounce');
+                        }
+                    });
+                });
+            }
+        </script>
+    </x-slot>
+
+</x-guest-layout>

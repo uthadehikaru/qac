@@ -42,9 +42,9 @@
         <nav class="fixed w-full z-30 top-0 border-b-4 bg-white border-red-800">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <div class="pl-0 md:pl-4 flex items-center">
-            <a class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ url('') }}">
-                <img class="h-8 md:h-14 inline" src="{{ asset('qacnew.png') }}" />
-            </a>
+                <a class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ url('') }}">
+                    <img class="h-8 md:h-14 inline" src="{{ asset('qacnew.png') }}" />
+                </a>
             </div>
             <ul class="list-reset flex justify-center flex-1 items-center">
                 <li class="mr-3 dropdown relative">
