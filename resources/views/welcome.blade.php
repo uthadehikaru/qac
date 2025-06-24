@@ -215,7 +215,7 @@
                 <div class="w-full mb-4">
                     <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
                 </div>
-                <button class="owl-nav-custom testimonial-prev absolute left-1 top-1/2 transform -translate-y-1/2 z-10 p-2" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <button class="owl-nav-custom testimonial-prev absolute left-1 top-1/2 transform -translate-y-1/2 z-10 bg-[#e9a621] text-white rounded-full p-1" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
                 <div class="owl-carousel px-4 py-4" id="testimonial">
                     <div class="w-full lg:mb-0 p-4 bg-[#fff9e4] rounded-lg">
                         <div class="h-full text-center">
@@ -244,7 +244,7 @@
                     </div>
                     @endforeach
                 </div>
-                <button class="owl-nav-custom testimonial-next absolute right-1 top-1/2 transform -translate-y-1/2 z-10 p-2" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="#490d0d"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                <button class="owl-nav-custom testimonial-next absolute right-1 top-1/2 transform -translate-y-1/2 z-10 bg-[#e9a621] text-white rounded-full p-1" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
                 <div class="flex flex-wrap px-6 justify-center">
                     <x-qac-button href="{{ route('testimonials') }}">Lihat Semua</x-qac-button>
                 </div>
