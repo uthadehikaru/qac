@@ -23,9 +23,11 @@
                     <x-divider />
                 </div>
                 <div class="flex flex-wrap justify-center">
+                    @foreach($why1->getMedia('videos') as $media)
                     <video width="400" height="800" class="border border-gray-300 border-8 rounded-lg" controls controlsList="nodownload">
-                        <source src="{{ asset('apa itu qac.mp4') }}" type="video/mp4">
+                        <source src="{{ $media->getFullUrl() }}" type="video/mp4">
                     </video>
+                    @endforeach
                 </div>
             </div>
         </section>
