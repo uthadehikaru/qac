@@ -62,10 +62,10 @@
                     </div>
                 </li>
                 <li class="mr-3">
-                    <a class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Program Alumni</a>
+                    <a href="{{ route('ecourses.index') }}" class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">Program Alumni</a>
                 </li>
                 <li class="">
-                    <a class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800" href="{{ url('/') }}">Event</a>
+                    <a href="{{ route('event.list') }}" class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 text-black no-underline text-center hover:text-red-800">Event</a>
                 </li>
             </ul>
             <div class="block pr-4">

@@ -75,7 +75,7 @@
                 <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
-                            <a href="#" class="">
+                            <a href="{{ route('kelas.qac-1-lite') }}" class="">
                                 <img class="w-full object-cover object-center" 
                                 src="{{ asset('images/qac lite.png') }}" alt="QAC Lite" />
                             </a>
@@ -85,7 +85,7 @@
                 <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
-                            <a href="#" class="">
+                            <a href="{{ route('kelas.qac-1') }}" class="">
                                 <img class="w-full object-cover object-center" 
                                 src="{{ asset('images/qac 1.png') }}" alt="QAC 1" />
                             </a>
@@ -95,7 +95,7 @@
                 <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
-                            <a href="#" class="">
+                            <a href="{{ route('kelas.qac-2') }}" class="">
                                 <img class="w-full object-cover object-center" 
                                 src="{{ asset('images/qac 2.png') }}" alt="QAC 2" />
                             </a>
@@ -105,7 +105,7 @@
                 <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
-                            <a href="#" class="">
+                            <a href="{{ route('kelas.qac-3') }}" class="">
                                 <img class="w-full object-cover object-center" 
                                 src="{{ asset('images/qac 3.png') }}" alt="QAC 3" />
                             </a>
