@@ -215,10 +215,10 @@
                 @lang('Jadilah bagian dari ribuan alumni')
             </h3>
             <div class="py-8">
-                <a href="#" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                <x-qac-button href="{{ route('register') }}" class="bg-qac-orange text-white">
                     @lang('Daftar QAC 1.0 Lite')
-                </a>
+                </x-qac-button>
             </div>
-        </section>
+        </section>      
     </div>
 </x-web-layout>
