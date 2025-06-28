@@ -22,9 +22,9 @@
                 <div class="w-full mb-4">
                     <x-divider />
                 </div>
-                <div class="flex flex-wrap justify-center">
+                <div class="flex flex-wrap justify-center p-4">
                     @foreach($why1->getMedia('videos') as $media)
-                    <video width="400" height="800" class="border border-gray-300 border-8 rounded-lg" controls controlsList="nodownload">
+                    <video class="border border-black border-8 rounded-lg" controls controlsList="nodownload">
                         <source src="{{ $media->getFullUrl() }}" type="video/mp4">
                     </video>
                     @endforeach
@@ -32,7 +32,7 @@
             </div>
         </section>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <section id="introduction" class="bg-white py-8">
             <div class="container max-w-5xl mx-auto m-8">
                 <h1 class="w-full my-2 text-xs md:text-2xl font-bold leading-tight text-center text-gray-800">
@@ -71,7 +71,7 @@
                 <x-divider />
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="">
                     <div class="h-full border-2 align-center border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="">
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap -m-4">
-                    <div class="w-1/2 p-4">
+                    <div class="w-full md:w-1/2 p-4">
                         <a href="#" title="Quality Time with Qur'an">
                             <div class="rounded-lg">
                                 <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 1">
@@ -146,7 +146,7 @@
                         </a>
                     </div>
                     
-                    <div class="w-1/2 p-4">
+                    <div class="w-full md:w-1/2 p-4">
                         <a href="#" title="Tadarus Ramadhan 'Redefinition'">
                             <div class="rounded-lg">
                                 <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 2">
@@ -171,7 +171,7 @@
                     <div class="w-full mb-4">
                         <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
                     </div>
-                    <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+                    <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
                     Kegiatan atau program yang terbuka untuk UMUM
                     </p>
                     <div class="flex justify-between border rounded-full text-xs p-1 border-yellow-500">
@@ -181,7 +181,7 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap -m-4">
-                    <div class="w-1/2 p-4">
+                    <div class="w-full md:w-1/2 p-4">
                         <a href="#" title="Quality Time with Qur'an">
                             <div class="rounded-lg">
                                 <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/event 1.png') }}" alt="event 1">
@@ -191,7 +191,7 @@
                         </a>
                     </div>
                     
-                    <div class="w-1/2 p-4">
+                    <div class="w-full md:w-1/2 p-4">
                         <a href="#" title="Tadarus Ramadhan 'Redefinition'">
                             <div class="rounded-lg">
                                 <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/event 2.png') }}" alt="program alumni 2">
