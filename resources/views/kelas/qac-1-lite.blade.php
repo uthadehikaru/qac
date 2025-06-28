@@ -1,7 +1,7 @@
 <x-web-layout>
     <div class="container mx-auto">
         <img src="{{ asset('images/qac lite/logo.png') }}" alt="QAC 1.0 Lite" class="mt-24 w-36 md:w-64 mx-auto h-auto">
-        <div class="grid grid-cols-2 gap-4 items-center mt-4 px-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-4 px-2">
             <div class="border-4 border-black rounded-lg">
                 <video class="" autoplay muted loop>
                     <source src="{{ asset('storage/sample.mp4') }}" type="video/mp4">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="py-16">
-            <div class="grid grid-cols-2 gap-4 md:gap-12 items-top">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-top font-montserrat">
                 <!-- Left Column -->
                 <div class="px-1 md:px-4">
                     <h2 class="text-xs md:text-3xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
@@ -34,7 +34,7 @@
                     </ul>
                 </div>
                 <!-- Right Column -->
-                <div class="px-1 md:px-4">
+                <div class="px-1 md:px-4 font-montserrat">
                     <h3 class="text-xs md:text-xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
                     <div class="space-y-6">
                         <div class="flex items-center">
@@ -60,14 +60,14 @@
             </div>
         </div>
 
-        <div class="py-8">
+        <div class="py-8 font-montserrat">
             <div class="flex justify-center py-4">
                 <h2 class="text-lg md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">Apa itu QAC 1.0 Lite?</h2>
             </div>
             <p class="text-base md:text-2xl mx-2"><span class="font-bold">QAC 1.0 Lite</span> adalah <span class="font-bold">pembelajaran komprehensif</span>, yang terdiri dari <span class="font-bold">2 unit</span> yang bisa
             dipelajari <span class="font-bold">secara berurutan tapi bisa bertahap</span> :
             </p>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex justify-center">
                     <img src="{{ asset('images/qac lite/1a.png') }}" alt="QAC 1.0 a Lite" class="w-full h-auto mt-4 rounded-lg">
                 </div>
@@ -82,7 +82,7 @@
             <div class="flex justify-center py-4">
                 <h2 class="text-lg md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">Fasilitas apa yang didapatkan?</h2>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-montserrat">
                 <div class="flex flex-col content-start px-2">
                     <div class="flex justify-center">
                         <h3 class="text-lg md:text-2xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1a</h3>
@@ -153,7 +153,7 @@
             <div class="flex justify-center py-4">
                 <h2 class="text-xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">Silabus Belajar</h2>
             </div>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <!-- QAC 1a -->
                 <div class="">
                     <h3 class="text-sm md:text-xl font-bold text-center mb-6 px-4">Silabus Belajar<br>QAC 1a</h3>
@@ -161,14 +161,14 @@
                 </div>
 
                 <!-- QAC 1b -->
-                <div class="">
+                <div class="mt-8 md:mt-0">
                     <h3 class="text-sm md:text-xl font-bold text-center mb-6 px-4">Silabus Belajar<br>QAC 1b</h3>
                     <img src="{{ asset('images/qac lite/silabus 1b.png') }}" alt="Silabus Belajar QAC 1b" class="w-full h-auto">
                 </div>
             </div>
         </div>
 
-        <div class="py-8">
+        <div class="py-8 font-montserrat">
             <div class="flex justify-center py-4">
                 <h2 class="text-xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">FAQ</h2>
             </div>
