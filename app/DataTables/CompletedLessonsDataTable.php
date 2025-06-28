@@ -82,6 +82,7 @@ class CompletedLessonsDataTable extends DataTable
             ->minifiedAjax()
             ->dom('Bfrtip')
             ->orderBy(0)
+            ->scrollX(true)
             ->buttons(
                 Button::make('create'),
                 Button::make('reload'),
