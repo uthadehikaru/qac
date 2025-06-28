@@ -15,7 +15,7 @@
         </div>
 
         <section id="why" class="bg-white py-8">
-            <div class="container max-w-5xl mx-auto m-8">
+            <div class="container max-w-5xl mx-auto">
                 <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-800">
                 {{ $why1->value }}
                 </h1>
@@ -33,9 +33,9 @@
         </section>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <section id="introduction" class="bg-white py-8">
-            <div class="container max-w-5xl mx-auto m-8">
-                <h1 class="w-full my-2 text-xs md:text-2xl font-bold leading-tight text-center text-gray-800">
+            <section id="introduction" class="bg-white">
+            <div class="container max-w-5xl mx-auto m-0 md:m-8">
+                <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Yuk, kenali QAC!
                 </h1>
                 <div class="w-full mb-4">
@@ -46,9 +46,9 @@
                 </div>
             </div>
             </section>
-            <section id="howto" class="bg-white py-8">
-            <div class="container max-w-5xl mx-auto m-8">
-                <h1 class="w-full my-2 text-xs md:text-2xl font-bold leading-tight text-center text-gray-800">
+            <section id="howto" class="bg-white">
+            <div class="container max-w-5xl mx-auto m-0 md:m-8">
+                <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Bagaimana metode belajarnya?
                 </h1>
                 <div class="w-full mb-4">
@@ -176,14 +176,14 @@
             </div>
         </section>
 
-        <section id="events" class="bg-white text-gray-600 body-font pt-12">
+        <section id="events" class="bg-white text-gray-600 body-font pt-8">
             <div class="container px-5 py-2 mx-auto">
                 <div class="text-center mb-8">
                     <h1 class="text-base md:text-xl font-bold text-center title-font text-gray-900 mb-4">
                     Event QAC
                     </h1>
                     <div class="w-full mb-4">
-                        <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                        <x-divider />
                     </div>
                     <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
                     Kegiatan atau program yang terbuka untuk UMUM
@@ -227,7 +227,7 @@
                     @lang('Apa Kata Alumni QAC?')
                 </h1>
                 <div class="w-full mb-4">
-                    <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
+                    <x-divider />
                 </div>
                 <button class="owl-nav-custom testimonial-prev absolute left-1 top-1/2 transform -translate-y-1/2 z-10 bg-[#e9a621] text-white rounded-full p-1" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
                 <div class="owl-carousel px-4 py-4" id="testimonial">

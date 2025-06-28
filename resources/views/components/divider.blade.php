@@ -1,1 +1,1 @@
-<div class="h-1 mx-auto bg-[#e9a621] w-24 md:w-64 my-0 py-0 rounded-t"></div>
+<div class="h-1 mx-auto bg-[#e9a621] w-48 md:w-64 my-0 py-0 rounded"></div>
