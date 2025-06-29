@@ -15,7 +15,8 @@ class OrdersController extends Controller
      */
     public function index(OrdersDataTable $dataTable)
     {
-        $data['title'] = __('Orders');
+        $activeOrders = Order::active()->count();
+        $data['title'] = __('Orders').' ('.$activeOrders.' aktif)';
 
         return $dataTable->render('admin.datatable', $data);
     }

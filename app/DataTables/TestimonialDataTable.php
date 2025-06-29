@@ -61,6 +61,7 @@ class TestimonialDataTable extends DataTable
             ->orderBy(0)
             ->pageLength(100)
             ->scrollX(true)
+            ->autoWidth(false)
             ->buttons(
                 Button::make('create')
             );

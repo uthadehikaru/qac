@@ -53,6 +53,7 @@ class CategoryDataTable extends DataTable
             ->dom('Bfrtip')
             ->orderBy(0)
             ->scrollX(true)
+            ->autoWidth(false)
             ->buttons(
                 Button::make('create'),
                 Button::make('reload')

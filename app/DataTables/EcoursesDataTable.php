@@ -29,9 +29,7 @@ class EcoursesDataTable extends DataTable
 
                     return 'no active batch';
                 } else {
-                    $activeOrders = Order::active()->count();
-
-                    return 'langganan ('.$activeOrders.' aktif)';
+                    return 'langganan';
                 }
             })
             ->editColumn('published_at', function ($row) {
@@ -91,6 +89,7 @@ class EcoursesDataTable extends DataTable
             ->dom('Bfrtip')
             ->orderBy(0)
             ->scrollX(true)
+            ->autoWidth(false)
             ->buttons(
                 Button::make('create'),
                 Button::make('reload')
