@@ -44,6 +44,9 @@
     "H":"H",
     "Hello!":"Assalaamu'alaikum.",
 
+    "J":"J",
+    "Job":"Profesi",
+
     "L":"L",
     "Login":"Masuk",
     "Logout":"Keluar",
@@ -68,6 +71,7 @@
     "P":"P",
     "Password":"Kata Sandi",
     "Phone":"Nomor Telepon",
+    "Province":"Provinsi",
     "Please click the button below to verify your email address.":"Mohon klik tombol dibawah untuk memverifikasi alamat email anda.",
 
     "Q":"Q",
@@ -76,6 +80,7 @@
     "R":"R",
     "Register":"Daftar",
     "Regards":"Wassalaamu'alaikum",
+    "Regency":"Kota",
     "Remember me":"Ingat saya",
 
     "S":"S",

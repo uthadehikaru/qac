@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Course\CourseRegisterController;
 use App\Http\Controllers\EcourseController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
@@ -48,6 +49,8 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\Unsubscribe;
 use App\Http\Controllers\UploadLessonController;
 use App\Http\Controllers\UploadMediaController;
+use App\Models\Batch;
+use App\Models\Course;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,17 +85,24 @@ Route::resource('ecourses', EcourseController::class)
     ]);
 
 Route::prefix('kelas')->name('kelas.')->group(function () {
+    Route::get('/register/{course_id}/{batch_id?}', [CourseRegisterController::class, 'index'])->name('register');
     Route::get('/qac-1-lite', function () {
         return view('kelas.qac-1-lite');
     })->name('qac-1-lite');
     Route::get('/qac-1', function () {
-        return view('kelas.qac-1');
+        $data['course'] = Course::find(1);
+        $data['latestBatch'] = Batch::where('course_id', $data['course']->id)->open()->first();
+        return view('kelas.qac-1', $data);
     })->name('qac-1');
     Route::get('/qac-2', function () {
-        return view('kelas.qac-2');
+        $data['course'] = Course::find(5);
+        $data['latestBatch'] = Batch::where('course_id', $data['course']->id)->open()->first();
+        return view('kelas.qac-2', $data);
     })->name('qac-2');
     Route::get('/qac-3', function () {
-        return view('kelas.qac-3');
+        $data['course'] = Course::find(6);
+        $data['latestBatch'] = Batch::where('course_id', $data['course']->id)->open()->first();
+        return view('kelas.qac-3', $data);
     })->name('qac-3');
 });
 

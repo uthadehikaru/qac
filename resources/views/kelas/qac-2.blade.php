@@ -90,9 +90,15 @@
                 @lang('Jadilah bagian dari ribuan alumni')
             </h3>
             <div class="py-8">
-                <a href="#" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                @if($latestBatch)
+                <a href="{{ route('kelas.register',['course_id' => $course->id, 'batch_id' => $latestBatch->id]) }}" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     @lang('Daftar QAC 2.0')
                 </a>
+                @else
+                <a href="{{ route('kelas.register',['course_id' => $course->id]) }}" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    @lang('Daftar Waitinglist QAC 2.0')
+                </a>
+                @endif
             </div>
         </section>
     </div>

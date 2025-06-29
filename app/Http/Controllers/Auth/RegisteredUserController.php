@@ -138,6 +138,10 @@ class RegisteredUserController extends Controller
             return redirect()->route('member.dashboard')->with('message', 'Anda telah berhasil didaftarkan dalam waiting list');
         }
 
+        if(session()->has('url.intended')) {
+            return redirect(session()->get('url.intended'));
+        }
+
         return redirect('/');
     }
 }

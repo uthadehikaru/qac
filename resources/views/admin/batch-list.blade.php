@@ -43,6 +43,7 @@
         "scrollX":true,
         serverSide: true,
         ajax: "{{ route('admin.courses.batches.index', $course->id) }}",
+        autoWidth: false,
         columns: [
             {data: 'name', name: 'name'},
             {data: 'sessions', name: 'sessions'},
