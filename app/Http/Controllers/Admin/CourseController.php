@@ -53,7 +53,7 @@ class CourseController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'level' => 'required|numeric|min:1',
+            'level' => 'required|numeric|min:0',
             'description' => 'required',
         ]);
 
@@ -102,7 +102,7 @@ class CourseController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'level' => 'required|numeric|min:1',
+            'level' => 'required|numeric|min:0',
             'description' => 'required',
         ]);
 

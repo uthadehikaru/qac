@@ -35,7 +35,7 @@
                         Level
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                    id="grid-level" name="level" type="number" min=0 placeholder="Course Level" value="{{ old('level',$course?$course->level:1) }}">
+                    id="grid-level" name="level" type="number" min=0 placeholder="Course Level" value="{{ old('level',$course?$course->level:0) }}">
                 </div>
                 <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-is_active">
