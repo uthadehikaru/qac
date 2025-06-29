@@ -30,25 +30,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
-        <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
-        <style>
-        .gradient {
-            background: #e9a621;
-        }
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            min-width: 200px;
-            border-radius: 0.375rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/web.css') }}">
         {{ $styles ?? '' }}
     </head>
     <body class="leading-normal tracking-normal font-comfortaa">

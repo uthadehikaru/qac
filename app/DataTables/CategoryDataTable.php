@@ -19,6 +19,9 @@ class CategoryDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('type', function ($row) {
+                return $row->type == 'course' ? 'Program Alumni' : 'Event';
+            })
             ->addColumn('action', function ($row) {
                 $btn = '';
                 $btn .= '<a href="'.route('admin.categories.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
@@ -70,6 +73,7 @@ class CategoryDataTable extends DataTable
         return [
             Column::make('name'),
             Column::make('slug'),
+            Column::make('type'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

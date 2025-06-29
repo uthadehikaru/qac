@@ -31,7 +31,7 @@ class EcoursesController extends Controller
     {
         $data['ecourse'] = null;
         $data['courses'] = Course::all();
-        $data['categories'] = Category::type('course')->orderBy('name')->get();
+        $data['categories'] = Category::orderBy('name')->get();
 
         return view('admin.ecourse-form', $data);
     }
@@ -66,7 +66,7 @@ class EcoursesController extends Controller
     {
         $data['ecourse'] = Ecourse::find($id);
         $data['courses'] = Course::all();
-        $data['categories'] = Category::type('course')->orderBy('name')->get();
+        $data['categories'] = Category::orderBy('name')->get();
 
         return view('admin.ecourse-form', $data);
     }

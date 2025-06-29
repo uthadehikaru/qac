@@ -36,6 +36,7 @@ class HomeController extends Controller
         }
         $data['banners'] = Banner::where('is_active', 1)->get();
         $data['categories'] = Category::where('type', 'course')->get();
+        $data['eventCategories'] = Category::where('type', 'event')->get();
 
         return view('welcome', $data);
     }
