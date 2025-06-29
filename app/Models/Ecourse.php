@@ -49,9 +49,9 @@ class Ecourse extends Model
         $query->where('is_only_active_batch', 1);
     }
 
-    public function scopeBundle(Builder $query): void
+    public function scopeCourse(Builder $query): void
     {
-        $query->whereNull('course_id');
+        $query->whereNotNull('course_id');
     }
 
     public function getPublishedAttribute()

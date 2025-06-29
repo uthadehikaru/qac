@@ -1,43 +1,127 @@
 <x-web-layout>
-    <x-slot name="title"> - Online Course Terbaru QAC</x-slot>
+    <x-slot name="title"> - Program Alumni QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
-    <div class="pt-20">
-        <div class="text-center mx-auto">
-            <h1 class="sm:text-3xl text-2xl font-medium text-center title-font mb-4">
-            Dapatkan Akses ke {{ $ecourses->count() }} Online Courses Sekarang
-            </h1>
-            <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-            Anda berhak mengakses Seluruh Online Courses kami dengan berlangganan hanya <span class="font-bold">@money(\App\Models\System::value('subscription_fee'))/bulan</span>.
-            </p>
-
-            
-            <div class="flex flex-wrap px-6 justify-center">
-                <a href="{{ route('checkout') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Daftar Sekarang
-                </a>
-            </div>
-        </div>
-        <div class="-my-8 pt-8 bg-white divide-y-2 divide-gray-100">
-            
-            @if(session('error'))
-                <x-alert type="warning">{{ session('error') }}</x-alert>
-            @endif
-            <div class="w-3/4 mx-auto">
-                <div class="flex flex-wrap -m-4">
-                    @foreach ($ecourses as $ecourse)
-                    <div class="xl:w-1/3 md:w-1/2 p-4 hover:opacity-75">
-                        <a href="{{ route('ecourses.show', $ecourse->slug) }}">
-                            <div class="bg-gray-100 p-6 rounded-lg">
-                                <img class="h-40 rounded w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="content">
-                                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{ $ecourse->title }}</h2>
-                                <p class="leading-relaxed text-base">{{ $ecourse->description }}</p>
-                            </div>
-                        </a>
-                    </div>
+        <div class="relative py-4">
+            <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
+                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black">
+                    <a href="{{ route('ecourses.index') }}" class="{{ $selected_category == null ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} px-4 py-2 rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Recommended</a>
+                    @foreach($categories as $category)
+                    <a href="{{ route('ecourses.index', ['category' => $category->slug]) }}" class="px-4 py-2 {{ $category->slug == $selected_category ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2 text-xs">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
+            <button class="filter-nav-custom filter-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Next">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
         </div>
-    </div>
+        <div class="flex flex-wrap mx-2">
+            @forelse($ecourses as $ecourse)
+            <div class="w-full md:w-1/3 p-4">
+                <a href="{{ route('ecourses.show', $ecourse->slug) }}" title="{{ $ecourse->title }}">
+                    <div class="rounded-lg">
+                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}">
+                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
+                        <p class="text-xs text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
+                    </div>
+                </a>
+            </div>
+            @empty
+            <div class="w-full md:w-1/3 p-4">
+                <a href="#" title="Quality Time with Qur'an">
+                    <div class="rounded-lg">
+                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 1">
+                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Quality Time with Qur'an</h2>
+                        <p class="text-xs text-gray-500">164 Videos</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="w-full md:w-1/3 p-4">
+                <a href="#" title="Tadarus Ramadhan 'Redefinition'">
+                    <div class="rounded-lg">
+                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 2">
+                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Tadarus Ramadhan "Redefinition"</h2>
+                        <p class="text-xs text-gray-500">164 Videos</p>
+                    </div>
+                </a>
+            </div>
+            @endforelse
+        </div>
     </section>
+    <div class="fixed bottom-4 right-4 text-sm flex gap-2 items-center">
+        <p>Jika mengalami kendala, silakan hubungi whatsapp kami.</p>
+        <a href="https://wa.me/6281234567890" class="bg-green-400 px-4 py-2 rounded-full text-black text-sm">Whatsapp</a>
+    </div>
+    <x-slot name="scripts">
+        <script>
+            jQuery(document).ready(function($){
+                
+                // Filter Carousel functionality
+                let currentPosition = 0;
+                const $filterCarousel = $('.filter-carousel');
+                const $filterItems = $filterCarousel.find('a');
+                const $container = $filterCarousel.parent();
+                
+                // Calculate actual item widths dynamically
+                function calculateItemWidth() {
+                    return $filterItems.first().outerWidth(true); // Include margin
+                }
+                
+                function updateCarousel() {
+                    const itemWidth = calculateItemWidth();
+                    const containerWidth = $container.width();
+                    const totalWidth = $filterItems.length * itemWidth;
+                    const maxPosition = Math.max(0, totalWidth - containerWidth + 32); // Add extra space for padding
+                    
+                    // Show/hide navigation buttons based on position
+                    $('.filter-prev').toggle(currentPosition > 0);
+                    $('.filter-next').toggle(currentPosition < maxPosition);
+                    
+                    // Ensure we don't exceed max position
+                    if (currentPosition > maxPosition) {
+                        currentPosition = maxPosition;
+                    }
+                    
+                    $filterCarousel.css('transform', `translateX(-${currentPosition}px)`);
+                }
+
+                // Initialize carousel
+                updateCarousel();
+
+                // Previous button click
+                $('.filter-prev').click(function() {
+                    if (currentPosition > 0) {
+                        const itemWidth = calculateItemWidth();
+                        currentPosition = Math.max(0, currentPosition - itemWidth);
+                        updateCarousel();
+                    }
+                });
+
+                // Next button click
+                $('.filter-next').click(function() {
+                    const itemWidth = calculateItemWidth();
+                    const containerWidth = $container.width();
+                    const totalWidth = $filterItems.length * itemWidth;
+                    const maxPosition = Math.max(0, totalWidth - containerWidth + 32); // Add extra space for padding
+                    
+                    if (currentPosition < maxPosition) {
+                        currentPosition = Math.min(maxPosition, currentPosition + itemWidth);
+                        updateCarousel();
+                    }
+                });
+
+                // Handle window resize
+                $(window).resize(function() {
+                    updateCarousel();
+                });
+            });
+        </script>
+    </x-slot>
 </x-web-layout>

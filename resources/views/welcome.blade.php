@@ -119,9 +119,11 @@
         <section id="courses" class="pt-6 py-8">
             <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
                 <div class="text-center mb-8">
-                    <h1 class="text-md md:text-xl font-bold text-center text-gray-900 mb-4">
-                    Program Alumni QAC
-                    </h1>
+                    <a href="{{ route('ecourses.index') }}">
+                        <h1 class="text-md md:text-xl font-bold text-center text-gray-900 mb-4">
+                        Program Alumni QAC
+                        </h1>
+                    </a>
                     <div class="w-full mb-4">
                     <x-divider />
                     <p class="w-full leading-relaxed text-xs mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
@@ -134,12 +136,10 @@
                         </button>
                         <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
                             <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out">
-                                <a href="#" class="bg-yellow-500 hover:text-white px-4 py-2 rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Recommended</a>
-                                <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Tazkiyatun Nafs</a>
-                                <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Long Life Learning</a>
-                                <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Tadabbur Pemula</a>
-                                <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center whitespace-nowrap mr-2 text-xs">QAC's Tadarus</a>
-                                <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Coming Soon</a>
+                                <a href="{{ route('ecourses.index') }}" class="bg-yellow-500 hover:text-white px-4 py-2 rounded-full flex items-center whitespace-nowrap mr-2 text-xs">Recommended</a>
+                                @foreach($categories as $category)
+                                <a href="{{ route('ecourses.index', ['category' => $category->slug]) }}" class="px-4 py-2 rounded-full flex items-center whitespace-nowrap mr-2 text-xs">{{ $category->name }}</a>
+                                @endforeach
                             </div>
                         </div>
                         <button class="filter-nav-custom filter-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Next">

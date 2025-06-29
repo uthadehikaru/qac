@@ -20,9 +20,18 @@ class EcourseService
         return Ecourse::published()->latest()->take($limit)->get();
     }
 
-    public function publishedEcourses()
+    public function publishedEcourses($category = null)
     {
-        return Ecourse::published()->bundle()->latest()->get();
+        $query = Ecourse::published()->course()
+        ->with('category')
+        ->withCount('lessons');
+        if ($category) {
+            $query->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        }
+
+        return $query->latest()->get();
     }
 
     public function updateOrCreate($data, $id = null): Ecourse

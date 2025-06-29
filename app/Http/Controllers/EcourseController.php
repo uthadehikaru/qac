@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Ecourse;
 use App\Services\EcourseService;
+use Illuminate\Http\Request;
 
 class EcourseController extends Controller
 {
-    public function index(EcourseService $ecourseService)
+    public function index(EcourseService $ecourseService, Request $request)
     {
-        $data['ecourses'] = $ecourseService->publishedEcourses();
+        $data['ecourses'] = [];
+        if ($request->category) {
+            $data['ecourses'] = $ecourseService->publishedEcourses($request->category);
+        }
+
+        $data['categories'] = Category::where('type', 'course')->get();
+        $data['selected_category'] = $request->category;
 
         return view('ecourse-list', $data);
     }

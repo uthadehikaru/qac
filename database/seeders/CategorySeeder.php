@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $courses = ['Tazkiyatun Nafs', 'Long Life Learning', 'Tadabbur Pemula', 'QAC Tadarus'];
+        $courses = ['Tazkiyatun Nafs', 'Long Life Learning', 'Tadabbur Pemula', 'QAC Tadarus', 'Coming Soon'];
         foreach ($courses as $course) {
             Category::firstOrCreate([
                 'type' => 'course',

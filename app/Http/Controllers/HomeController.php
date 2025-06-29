@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Ecourse;
 use App\Models\Event;
@@ -34,6 +35,7 @@ class HomeController extends Controller
             Cookie::queue('displayed_banner', true, 60);
         }
         $data['banners'] = Banner::where('is_active', 1)->get();
+        $data['categories'] = Category::where('type', 'course')->get();
 
         return view('welcome', $data);
     }
