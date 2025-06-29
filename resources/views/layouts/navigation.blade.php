@@ -28,6 +28,9 @@
                     <x-nav-link :href="route('admin.ecourses.index')" :active="request()->is('admin/ecourses*')">
                         {{ __('E-Courses') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->is('admin/orders*')">
+                        {{ __('Orders') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.testimonials.index')" :active="request()->is('admin/testimonials*')">
                         {{ __('Testimonials') }}
                     </x-nav-link>
@@ -126,6 +129,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.ecourses.index')" :active="request()->is('admin/ecourses*')">
                 {{ __('E-Courses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->is('admin/orders*')">
+                {{ __('Orders') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.testimonials.index')" :active="request()->is('admin/testimonials*')">
                 {{ __('Testimonials') }}

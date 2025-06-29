@@ -22,7 +22,7 @@ class EcoursesDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('is_only_active_batch', function ($row) {
                 if ($row->is_only_active_batch) {
-                    $batch = $row->course->batches()->running()->first();
+                    $batch = $row->course?->batches()->running()->first();
                     if ($batch) {
                         return 'batch '.$batch->name;
                     }
@@ -38,7 +38,10 @@ class EcoursesDataTable extends DataTable
                 return $row->published_at ? '<span class="p-1 text-white bg-green-500">Yes</span>' : '<span class="p-1 text-white bg-red-500">No</span>';
             })
             ->editColumn('course_id', function ($row) {
-                return $row->course?->name ?? 'All Level';
+                return $row->course?->name ?? 'Umum';
+            })
+            ->editColumn('category_id', function ($row) {
+                return $row->category?->name ?? 'No Category';
             })
             ->editColumn('price', function ($row) {
                 return $row->price_format;

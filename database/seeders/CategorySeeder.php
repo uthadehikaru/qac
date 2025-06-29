@@ -22,14 +22,5 @@ class CategorySeeder extends Seeder
                 'slug' => Str::slug($course),
             ]);
         }
-
-        $events = ['Free Sharing', 'Ngobrolin Quran', 'E-Book'];
-        foreach ($events as $event) {
-            Category::firstOrCreate([
-                'type' => 'event',
-                'name' => $event,
-                'slug' => Str::slug($event),
-            ]);
-        }
     }
 }

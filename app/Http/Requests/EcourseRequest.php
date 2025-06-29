@@ -26,7 +26,7 @@ class EcourseRequest extends FormRequest
             'slug' => 'nullable|max:255',
             'description' => 'nullable|max:255',
             'thumbnail' => 'nullable|image',
-            'course_id' => 'required',
+            'course_id' => 'nullable|exists:courses,id',
             'is_only_active_batch' => 'nullable',
             'category_id' => 'nullable',
         ];

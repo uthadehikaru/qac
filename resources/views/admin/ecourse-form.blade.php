@@ -59,11 +59,11 @@
                     </div>
                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-thumbnail">
-                            Course
+                            Kelas
                         </label>
                         <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        id="grid-course_id" name="course_id" required>
-                            <option value="">-- pilih kelas --</option>
+                        id="grid-course_id" name="course_id">
+                            <option value="">Umum</option>
                             @foreach ($courses as $course)
                             <option value="{{ $course->id }}" {{ $ecourse && $ecourse->course_id==$course->id?'selected':'' }}>{{ $course->name }}</option>
                             @endforeach

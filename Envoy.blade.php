@@ -27,6 +27,7 @@
     git pull
     composer2 install --no-dev
     php artisan migrate --force
+    php artisan db:seed CategorySeeder --force
     php artisan optimize
     php artisan up
 @endtask

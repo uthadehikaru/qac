@@ -27,6 +27,9 @@ class EcourseService
 
     public function updateOrCreate($data, $id = null): Ecourse
     {
+        if (!$data['course_id']) {
+            $data['is_only_active_batch'] = false;
+        }
         if ($id) {
             $ecourse = Ecourse::find($id);
             $ecourse->update($data);

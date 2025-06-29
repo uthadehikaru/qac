@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AddSubscriberFromBatch;
 use App\Http\Controllers\Admin\AddSubscriberFromCourse;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\BatchController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\CompletedLessonsController;
 use App\Http\Controllers\Admin\ConfirmOrder;
@@ -149,6 +150,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('systems', SystemController::class);
         Route::resource('certificates', CertificateController::class);
         Route::resource('banners', BannersController::class);
+        Route::resource('categories', CategoryController::class);
 
         // ECOURSES
         Route::resource('ecourses', EcoursesController::class);
