@@ -34,6 +34,15 @@ class EcourseService
         return $query->latest()->get();
     }
 
+    public function recommendedEcourses()
+    {
+        return Ecourse::published()->course()
+        ->with('category')
+        ->withCount('lessons')
+        ->recomendation()
+        ->get();
+    }
+
     public function updateOrCreate($data, $id = null): Ecourse
     {
         if (!$data['course_id']) {

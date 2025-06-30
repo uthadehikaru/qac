@@ -22,43 +22,21 @@
             </button>
         </div>
         <div class="flex flex-wrap mx-2">
-            @if(!$selected_category)
+            @forelse($ecourses as $ecourse)
             <div class="w-full md:w-1/3 p-4">
-                <a href="#" title="Quality Time with Qur'an">
+                <a href="{{ route('ecourses.show', $ecourse->slug) }}" title="{{ $ecourse->title }}">
                     <div class="rounded-lg">
-                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 1">
-                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Quality Time with Qur'an</h2>
-                        <p class="text-xs text-gray-500">164 Videos</p>
+                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}">
+                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
+                        <p class="text-xs text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
                     </div>
                 </a>
             </div>
-            
-            <div class="w-full md:w-1/3 p-4">
-                <a href="#" title="Tadarus Ramadhan 'Redefinition'">
-                    <div class="rounded-lg">
-                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 2">
-                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Tadarus Ramadhan "Redefinition"</h2>
-                        <p class="text-xs text-gray-500">164 Videos</p>
-                    </div>
-                </a>
+            @empty
+            <div class="w-full text-center p-4 h-64 flex items-center justify-center">
+                <p class="text-black font-bold text-xs md:text-base">Segera Hadir Program-Program Baru, Insyaa Allah</p>
             </div>
-            @else
-                @forelse($ecourses as $ecourse)
-                <div class="w-full md:w-1/3 p-4">
-                    <a href="{{ route('ecourses.show', $ecourse->slug) }}" title="{{ $ecourse->title }}">
-                        <div class="rounded-lg">
-                            <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}">
-                            <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
-                            <p class="text-xs text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
-                        </div>
-                    </a>
-                </div>
-                @empty
-                <div class="w-full text-center p-4 h-64 flex items-center justify-center">
-                    <p class="text-black font-bold text-xs md:text-base">Segera Hadir Program-Program Baru, Insyaa Allah</p>
-                </div>
-                @endforelse
-            @endif
+            @endforelse
         </div>
     </section>
     <div class="fixed bottom-4 right-4 text-sm flex gap-2 items-center">

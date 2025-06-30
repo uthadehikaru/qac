@@ -27,10 +27,13 @@ class EcoursesDataTable extends DataTable
                         return 'batch '.$batch->name;
                     }
 
-                    return 'no active batch';
+                    return $row->course->name.' - no active batch';
                 } else {
                     return 'langganan';
                 }
+            })
+            ->editColumn('level', function ($row) {
+                return $row->is_only_active_batch ? '-' : ($row->level==0 ? 'Umum' : $row->level);
             })
             ->editColumn('published_at', function ($row) {
                 return $row->published_at ? '<span class="p-1 text-white bg-green-500">Yes</span>' : '<span class="p-1 text-white bg-red-500">No</span>';
@@ -109,8 +112,9 @@ class EcoursesDataTable extends DataTable
             Column::make('lessons_count')->title('Lessons')
                 ->searchable(false)
                 ->orderable(false),
-            Column::make('course_id')->title('Kelas'),
             Column::make('is_only_active_batch')->title('Type'),
+            Column::make('level')->title('Level'),
+            Column::make('recomendation')->title('Rekomendasi'),
             Column::make('published_at')->title('Is Published'),
             Column::computed('action')
                 ->exportable(false)

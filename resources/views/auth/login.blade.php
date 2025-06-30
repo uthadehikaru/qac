@@ -9,7 +9,7 @@
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
         @if(session('error'))
-        <x-alert type="warning">{{ session('error') }}</x-alert>
+        <x-alert type="warning" title="Perhatian">{{ session('error') }}</x-alert>
         @endif
 
         <!-- Validation Errors -->
