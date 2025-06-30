@@ -99,10 +99,10 @@
                         </label>
                         <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                         id="grid-level" name="level">
-                            <option value="0">Umum</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                            <option value="0" @selected($ecourse && $ecourse->level==0)>Umum</option>
+                            <option value="1" @selected($ecourse && $ecourse->level==1)>1</option>
+                            <option value="2" @selected($ecourse && $ecourse->level==2)>2</option>
+                            <option value="3" @selected($ecourse && $ecourse->level==3)>3</option>
                         </select>
                     </div>
                 </div>
