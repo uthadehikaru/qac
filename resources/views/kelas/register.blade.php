@@ -1,7 +1,11 @@
 <x-web-layout>
     <x-auth-card>
         <x-slot name="logo">
+            @if($lite)
+            <h1 class="text-2xl font-bold text-center mt-24">Pendaftaran QAC 1.0 Lite</h1>
+            @else
             <h1 class="text-2xl font-bold text-center mt-24">Pendaftaran {{ $batch ? '' : 'Waiting List'}} <br> {{ $course->name }}</h1>
+            @endif
         </x-slot>
 
         <!-- Session Status -->
@@ -19,7 +23,7 @@
                 <p class="py-4">Waktu kursus : {{ $batch->duration }}</p>
                 @endif
 
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('kelas.register', ['course_id' => $course->id]) }}">
                     @csrf
                     @if($batch)
                     <input type="hidden" name="batch_id" value="{{ $batch->id }}" />
@@ -27,6 +31,7 @@
                     @if($course)
                     <input type="hidden" name="course_id" value="{{ $course->id }}" />
                     @endif
+                    <input type="hidden" name="lite" value="{{ $lite }}" />
 
                     <!-- Full Name -->
                     <div class="mt-4">
@@ -41,7 +46,7 @@
                     <div class="mt-4">
                         <x-label for="phone" :value="__('Nomor WhatsApp')" />
 
-                        <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+                        <x-input id="phone" class="block mt-1 w-full" placeholder="masukkan dengan format 6281234567890" type="text" name="phone" :value="old('phone')" required />
                     </div>
 
                     <p class="text-red-500">*pastikan nomor whatsapp aktif, untuk diinfokan terkait kelas</p>
@@ -102,6 +107,30 @@
                     </div>
                     <p class="text-sm text-gray-500">** pilih provinsi dan kota di indonesia sesuai asal domisili jika anda berada diluar negeri</p>
 
+                    @if($lite)
+                    <!-- Pilihan Kelas -->
+                    <div class="mt-4">
+                        <x-label class="text-xl font-bold" :value="__('Pilihan Kelas')" />
+
+                        <div class="mt-6">
+                            <label class="block text-gray-500 font-bold">
+                                <input type="radio" name="package" value="1a" class="mr-2 leading-tight" required>
+                                <span class="text-sm">
+                                    QAC 1a (Rp 300.000,-)
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="block text-gray-500 font-bold">
+                                <input type="radio" name="package" value="bundling" class="mr-2 leading-tight" required>
+                                <span class="text-sm">
+                                    Bundling QAC 1a dan QAC 1b (Rp 550.000,-)
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    @endif
                     <div class="mt-4 text-blue-500">
                         <x-label class="text-center text-xl py-2" for="password_confirmation" :value="__('Syarat dan Ketentuan')" />
                         <p class="text-sm py-2">Saya dengan senang hati akan melakukan hal berikut: *</p>

@@ -39,7 +39,7 @@
             @endforelse
         </div>
     </section>
-    <div class="fixed bottom-4 right-4 text-sm flex gap-2 items-center">
+    <div class="fixed bottom-4 right-4 text-sm flex gap-2 items-center bg-white">
         <p>Jika mengalami kendala, silakan hubungi whatsapp kami.</p>
         <a href="https://wa.me/6281234567890" class="bg-green-400 px-4 py-2 rounded-full text-black text-sm">Whatsapp</a>
     </div>

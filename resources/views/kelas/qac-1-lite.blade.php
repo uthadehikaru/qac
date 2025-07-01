@@ -215,7 +215,7 @@
                 @lang('Jadilah bagian dari ribuan alumni')
             </h3>
             <div class="py-8">
-                <x-qac-button href="{{ route('register') }}" class="bg-qac-orange text-white">
+                <x-qac-button href="{{ route('kelas.register', ['course_id' => $course->id]) }}" class="bg-qac-orange text-white">
                     @lang('Daftar QAC 1.0 Lite')
                 </x-qac-button>
             </div>

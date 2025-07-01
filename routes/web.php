@@ -86,8 +86,10 @@ Route::resource('ecourses', EcourseController::class)
 
 Route::prefix('kelas')->name('kelas.')->group(function () {
     Route::get('/register/{course_id}/{batch_id?}', [CourseRegisterController::class, 'index'])->name('register');
+    Route::post('/register/{course_id}/{batch_id?}', [CourseRegisterController::class, 'submit'])->name('register.submit');
     Route::get('/qac-1-lite', function () {
-        return view('kelas.qac-1-lite');
+        $data['course'] = Course::where('name', 'like', '%QAC 1.0 Lite%')->where('level', 0)->first();
+        return view('kelas.qac-1-lite', $data);
     })->name('qac-1-lite');
     Route::get('/qac-1', function () {
         $data['course'] = Course::find(1);
