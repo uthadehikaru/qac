@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Ecourse;
+use App\Models\Member;
 use App\Services\EcourseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,10 @@ class EcourseController extends Controller
             $data['ecourses'] = $ecourseService->publishedEcourses($request->category);
         }else{
             $data['ecourses'] = $ecourseService->recommendedEcourses();
+        }
+        $data['subscription'] = null;
+        if(Auth::check()){
+            $data['subscription'] = Member::where('user_id', Auth::user()->id)->first();
         }
 
         $data['categories'] = Category::where('type', 'course')->get();

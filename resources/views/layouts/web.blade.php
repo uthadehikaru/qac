@@ -134,39 +134,7 @@
                 </span>
             </div>
         </footer>
-        <!-- begin : modal -->
-        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="modal">
-            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 transition-opacity">
-                <div class="absolute inset-0 bg-gray-900 opacity-75" />
-                </div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl 
-                transform transition-all mt-20 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                <div class="text-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <h1 class="text-2xl mb-2">PANDUAN LOGIN UNTUK MASUK WEBSITE</h1>
-
-                <p class="mb-2">Assalamu'alaikum Warahmatullahi Wabarakatuh..</p>
-
-                <p class="mb-2">Untuk bisa <a href="{{ route('login') }}" class="text-blue-500 font-bold pointer">masuk</a> ke dalam Website qacjakarta.id, Anda harus sudah menjadi  Alumni QAC.</p>
-
-                <p class="mb-2">Silahkan isi yang dimasukkan saat pendaftaran (yang terdaftar) :</p>
-                <ul class="list-disc ml-4 mb-2">
-                    <li><span class="font-bold">Kolom Email</span> dengan <span class="font-bold">EMAIL ANDA</span></li>
-                    <li><span class="font-bold">Kolom Pasword</span> dengan <span class="font-bold">NOMOR HP ANDA</span></li>
-                </ul>
-
-                <p class="mb-2">Bila password lupa, maka klik "Lupa kata sandi" atau anda bisa menggunakan OTP untuk login</p>
-
-                <p class="mb-2">Jika mengalami kesulitan, bisa DM instagram <a href="https://www.instagram.com/qacjakarta/" target="_blank">@qacjakarta</a></p>
-                </div>
-                <div class="bg-white px-4 py-3 text-right">
-                    <button type="button" id="close-modal" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="toggleModal()"><i class="fas fa-times"></i> Tutup</button>
-                    <a href="{{ route('login') }}" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i class="fas fa-plus"></i> Masuk</a>
-                </div>
-                </div>
-            </div>
-        </div>
+        
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
         <script type="text/javascript">
         $.ajaxSetup({

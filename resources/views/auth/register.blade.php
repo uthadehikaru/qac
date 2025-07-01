@@ -150,7 +150,7 @@
                 
                 <div class="flex flex-col items-center justify-center mt-4">
                     <p class="text-sm text-gray-600">Sudah punya akun? Login disini:</p>
-                    <a class="px-4 py-2 bg-[#7b0c00] text-white rounded-md mt-2" href="{{ route('login') }}">
+                    <a class="px-4 py-2 border border-[#7b0c00] text-[#7b0c00] font-bold rounded-md mt-2 text-xs" href="{{ route('login') }}">
                         {{ __('Login') }}
                     </a>
                 </div>
