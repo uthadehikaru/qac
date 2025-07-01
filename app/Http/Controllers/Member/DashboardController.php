@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
-use App\Models\Event;
 use App\Models\Member;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -15,7 +14,6 @@ class DashboardController extends Controller
         $member = Member::with(['batches', 'courses'])->where('user_id', Auth::id())->first();
         $data['member'] = $member;
         $data['courses'] = Course::orderBy('level')->active()->get();
-        $data['incomingEvents'] = Event::incoming()->oldest('event_at')->get();
 
         return view('member.dashboard', $data);
     }

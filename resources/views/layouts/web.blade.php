@@ -86,7 +86,7 @@
                     @endguest
                     @auth
                     @if(auth()->user()->role == 'member')
-                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('member.dashboard') }}">Profil</a>
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('member.profile') }}">Profil</a>
                     @else
                     <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('admin.dashboard') }}">Admin</a>
                     @endif

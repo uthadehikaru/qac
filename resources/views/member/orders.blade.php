@@ -1,45 +1,25 @@
-<x-app-layout>
-    <div class="pt-8">
-        <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('member.ecourses.index') }}" class="text-blue-500">My Courses</a> / <span class="">Riwayat Langganan</span>
-        </div>  
-    </div>
-    <x-alert type="info">
-        Hubungi <a href="https://wa.me/{{ \App\Models\System::value('whatsapp_ecourse') }}?text={{ urlencode('Halo QAC, saya ingin konfirmasi pesanan.') }}" 
-        class="underline font-bold px-2" target="_blank"
-        >whatsapp admin QAC</a> untuk informasi tata cara pembayaran dan pengiriman bukti transfer
-    </x-alert>
+<x-member-layout>
     <x-panel>
-        <h1 class="font-bold text-xl text-center mb-4">Riwayat Langganan</h1>
-            <table class="w-full text-sm md:text-md">
-                <tr>
-                    <th>Tanggal</th>
-                    <th>Harga</th>
-                    <th>Jumlah Bulan</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                </tr>
-            @forelse ($orders as $order)
-                <tr class="my-2">
-                    <td class="text-center">{{ $order->created_at->format('d M Y') }}</td>
-                    <td class="text-center">@money($order->price)</td>
-                    <td class="text-center">{{ $order->months }}</td>
-                    <td class="text-center">@money($order->total)</td>
-                    <td class="text-center">
-                        @if($order->verified_at)
-                        {{ $order->is_active?"Aktif":"Inaktif" }} : {{ $order->start_date?->format('d M Y') }} - {{ $order->end_date?->format('d M Y') }}
-                        @else
-                        Belum dikonfirmasi
-                        @endif
-                    </td>
-                </tr>
-            @empty
-            <tr class="text-center" colspan="4"><td>
-                Anda belum berlangganan Online Course QAC, <a href="{{ route('ecourses.index') }}" class="text-blue-500 underline font-bold">Daftar Disini</a>
-                </td></tr>
-            @endforelse
-            </table>
-            {{ $orders->links() }}
+        <h1 class="font-bold text-xl mb-4">Lihat semua Transaksi Langganan, kelas hingga sertifikatmu di QAC</h1>
+        @forelse ($orders as $order)
+            <div class="flex justify-between my-2 p-4 items-start border border-[#ffdf79] rounded-lg">
+                <div class="flex flex-col gap-2">
+                    <div class="text-sm font-bold">Langganan Program Alumni {{ $order->months }} bulan</div>
+                    @if($order->verified_at)
+                    <div class="text-xs">Pembayaran pada {{ $order->verified_at->format('d M Y') }}</div>
+                    <div class="text-xs">Langganan aktif hingga {{ $order->end_date?->format('d M Y') }}</div>
+                    @else
+                    <div class="text-xs">Pemesanan pada {{ $order->created_at->format('d M Y') }}</div>
+                    @endif
+                </div>
+                <x-qac-button class="text-xs font-bold">{{ $order->verified_at ? 'Aktif' : 'Menunggu Konfirmasi' }}</x-qac-button>
+            </div>
+        @empty
+        <div class="text-center">
+            Anda belum berlangganan Online Course QAC, <a href="{{ route('ecourses.index') }}" class="text-blue-500 underline font-bold">Daftar Disini</a>
+        </div>
+        @endforelse
+        {{ $orders->links() }}
     </x-panel>
     
-</x-app-layout>
+</x-member-layout>
