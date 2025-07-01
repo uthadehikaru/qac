@@ -37,7 +37,7 @@
                     <div class="mt-4">
                         <x-label for="full_name" :value="__('Full Name')" />
 
-                        <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name', Auth::user()->name)" required />
+                        <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name', $member->full_name)" required />
                     </div>
 
                     <p class="text-red-500">*pastikan nama lengkap sesuai kartu identitas. akan digunakan untuk pembuatan e-sertifikat</p>
@@ -46,7 +46,7 @@
                     <div class="mt-4">
                         <x-label for="phone" :value="__('Nomor WhatsApp')" />
 
-                        <x-input id="phone" class="block mt-1 w-full" placeholder="masukkan dengan format 6281234567890" type="text" name="phone" :value="old('phone')" required />
+                        <x-input id="phone" class="block mt-1 w-full" placeholder="masukkan dengan format 6281234567890" type="text" name="phone" :value="old('phone', $member->phone)" required />
                     </div>
 
                     <p class="text-red-500">*pastikan nomor whatsapp aktif, untuk diinfokan terkait kelas</p>
@@ -55,7 +55,7 @@
                     <div class="mt-4">
                         <x-label for="job" :value="__('Job')" />
 
-                        <x-input id="job" class="block mt-1 w-full" type="text" name="job" :value="old('job')" />
+                        <x-input id="job" class="block mt-1 w-full" type="text" name="job" :value="old('job', $member->profesi)" />
                     </div>
                     
                     <!-- Education -->
@@ -64,13 +64,13 @@
 
                         <select id="education" class="block mt-1 w-full p-2 rounded-md shadow-sm border-2 border-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="education">
                             <option value="">Pilih Pendidikan Terakhir</option>
-                            <option value="SD" {{ old('education') == 'SD' ? 'selected' : '' }}>SD</option>
-                            <option value="SMP" {{ old('education') == 'SMP' ? 'selected' : '' }}>SMP</option>
-                            <option value="SMA" {{ old('education') == 'SMA' ? 'selected' : '' }}>SMA/SMK</option>
-                            <option value="D3" {{ old('education') == 'D3' ? 'selected' : '' }}>D3</option>
-                            <option value="S1" {{ old('education') == 'S1' ? 'selected' : '' }}>S1</option>
-                            <option value="S2" {{ old('education') == 'S2' ? 'selected' : '' }}>S2</option>
-                            <option value="S3" {{ old('education') == 'S3' ? 'selected' : '' }}>S3</option>
+                            <option value="SD" {{ old('education', $member->pendidikan) == 'SD' ? 'selected' : '' }}>SD</option>
+                            <option value="SMP" {{ old('education', $member->pendidikan) == 'SMP' ? 'selected' : '' }}>SMP</option>
+                            <option value="SMA" {{ old('education', $member->pendidikan) == 'SMA' ? 'selected' : '' }}>SMA/SMK</option>
+                            <option value="D3" {{ old('education', $member->pendidikan) == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="S1" {{ old('education', $member->pendidikan) == 'S1' ? 'selected' : '' }}>S1</option>
+                            <option value="S2" {{ old('education', $member->pendidikan) == 'S2' ? 'selected' : '' }}>S2</option>
+                            <option value="S3" {{ old('education', $member->pendidikan) == 'S3' ? 'selected' : '' }}>S3</option>
                         </select>
                     </div>
                     
@@ -81,7 +81,7 @@
                         <select id="province_id" class="block mt-1 w-full p-2 rounded-md shadow-sm border-2 border-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="province">
                             <option value="">Pilih Provinsi</option>
                             @foreach($provinces as $province)
-                            <option value="{{ $province->id }}">{{ $province->name }}</option>
+                            <option value="{{ $province->id }}" {{ old('province', $member_province) == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -91,6 +91,10 @@
                         <x-label for="regency_id" :value="__('Regency')" />
 
                         <select id="regency_id" class="block mt-1 w-full p-2 rounded-md shadow-sm border-2 border-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="regency">
+                            <option value="">Pilih Kota</option>
+                            @foreach($regencies as $regency)
+                            <option value="{{ $regency->id }}" {{ old('regency', $member_regency) == $regency->id ? 'selected' : '' }}>{{ $regency->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -99,7 +103,7 @@
                     
                     <div class="md:flex md:items-left my-6">
                         <label class="md:w-full block text-gray-500 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" name="is_overseas" value="1">
+                        <input class="mr-2 leading-tight" type="checkbox" name="is_overseas" value="1" {{ old('is_overseas', $member->is_overseas) == 1 ? 'checked' : '' }}>
                         <span class="text-sm">
                             Saat ini berada di luar negeri
                         </span>

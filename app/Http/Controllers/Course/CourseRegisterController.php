@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\Province;
+use App\Models\Queue;
 use App\Models\Regency;
 use App\Models\User;
+use App\Notifications\AdminWaitinglist;
 use App\Notifications\BatchRegistration;
 use App\Notifications\MemberBatchRegistration;
+use App\Notifications\MemberWaitinglist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +27,18 @@ class CourseRegisterController extends Controller
             session()->put('url.intended', route('kelas.register', ['course_id' => $course_id, 'batch_id' => $batch_id]));
             return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu untuk melanjutkan pendaftaran');
         }
+        $data['member'] = Auth::user()->member;
+        $regency = Regency::where('name', $data['member']->city)->first();
+        $data['member_regency'] = $regency ? $regency->id : null;
+        $data['member_province'] = $regency ? $regency->province_id : null;
         $data['course'] = Course::find($course_id);
         $data['lite'] = Str::startsWith($data['course']->name, 'QAC 1.0 Lite');
         $data['batch'] = Batch::find($batch_id);
         $data['provinces'] = Province::orderBy('name')->get();
+        $data['regencies'] = [];
+        if($data['member_province']) {
+            $data['regencies'] = Regency::where('province_id', $data['member_province'])->orderBy('name')->get();
+        }
         return view('kelas.register', $data);
     }
 
@@ -35,6 +46,7 @@ class CourseRegisterController extends Controller
     {
         $data = $request->validate([
             'full_name' => 'required|string|max:255',
+            'batch_id' => 'nullable|exists:batches,id',
             'phone' => 'required|numeric',
             'job' => 'nullable|string|max:255',
             'education' => 'nullable|string|max:255',
@@ -48,7 +60,10 @@ class CourseRegisterController extends Controller
         DB::beginTransaction();
         try{
             $course = Course::find($course_id);
-            $batch = Batch::find($batch_id);
+            $batch = null;
+            if(isset($data['batch_id'])){
+                $batch = Batch::find($data['batch_id']);
+            }
             $regency = $data['regency'] ? Regency::find($data['regency']) : null;
 
             $user = User::with('member')->find(Auth::user()->id);
@@ -98,10 +113,10 @@ class CourseRegisterController extends Controller
                         $admin->notify(new BatchRegistration($memberBatch));
                     }
                 }
-            }else{
+            }elseif($batch){
                 $member->batches()->attach($batch->id);
 
-                $member->batches()->attach($request->batch_id);
+                $member->batches()->attach($batch->id);
 
                 $memberBatch = $member->batches()->latest()->first()->pivot;
 
@@ -110,13 +125,22 @@ class CourseRegisterController extends Controller
                 foreach (User::where('role', 'admin')->get() as $admin) {
                     $admin->notify(new BatchRegistration($memberBatch));
                 }
+            }else{
+                $queue = Queue::create([
+                    'course_id' => $request->course_id,
+                    'member_id' => $member->id,
+                ]);
+                $member->user->notify(new MemberWaitinglist($queue));
+                foreach (User::where('role', 'admin')->get() as $admin) {
+                    $admin->notify(new AdminWaitinglist($queue));
+                }
             }
 
             DB::commit();
 
             return redirect()->route('member.dashboard')->with('success', 'Pendaftaran berhasil');
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::error($e);
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan saat pendaftaran');
         }
