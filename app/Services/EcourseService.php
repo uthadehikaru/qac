@@ -43,6 +43,19 @@ class EcourseService
         ->get();
     }
 
+    public function publicEcourses($category_id = null)
+    {
+        return Ecourse::published()->public()
+        ->with('category')
+        ->withCount('lessons')
+        ->when($category_id, function ($query) use ($category_id) {
+            $query->whereHas('category', function ($query) use ($category_id) {
+                $query->where('id', $category_id);
+            });
+        })
+        ->get();
+    }
+
     public function updateOrCreate($data, $id = null): Ecourse
     {
         if (!$data['course_id']) {

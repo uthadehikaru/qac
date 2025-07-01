@@ -150,25 +150,17 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap mx-2">
+                    @foreach($latest_ecourses as $ecourse)
                     <div class="w-full md:w-1/2 p-4">
-                        <a href="#" title="Quality Time with Qur'an">
+                        <a href="{{ route('ecourses.show', $ecourse->slug) }}" title="{{ $ecourse->title }}">
                             <div class="rounded-lg">
-                                <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 1">
-                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Quality Time with Qur'an</h2>
-                                <p class="text-xs text-gray-500">164 Videos</p>
+                                <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}">
+                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
+                                <p class="text-xs text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
                             </div>
                         </a>
                     </div>
-                    
-                    <div class="w-full md:w-1/2 p-4">
-                        <a href="#" title="Tadarus Ramadhan 'Redefinition'">
-                            <div class="rounded-lg">
-                                <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 2">
-                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Tadarus Ramadhan "Redefinition"</h2>
-                                <p class="text-xs text-gray-500">164 Videos</p>
-                            </div>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="flex flex-wrap px-6 justify-center">
                     <x-qac-button href="{{ route('ecourses.index') }}">Lihat Semua</x-qac-button>
@@ -188,32 +180,24 @@
                     <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
                     Kegiatan atau program yang terbuka untuk UMUM
                     </p>
-                    <div class="flex justify-between border rounded-full text-xs p-1 border-yellow-500">
-                        <a href="#" class="bg-yellow-500 hover:text-white px-4 py-2 rounded-full flex items-center">Free Sharing</a>
-                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center">Ngobrolin Qur'an</a>
-                        <a href="#" class="px-4 py-2 hover:bg-yellow-500 hover:text-white rounded-full flex items-center">E-Book</a>
+                    <div class="inline-flex justify-between lg:justify-center border rounded-full text-xs p-1 border-yellow-500">
+                        @foreach($eventCategories as $category)
+                        <a href="{{ route('event.list', ['category' => $category->slug]) }}" class="{{ $selectedEventCategory->id == $category->id ? 'bg-yellow-500' : 'bg-white' }} text-black px-4 py-2 rounded-full flex items-center">{{ $category->name }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="flex flex-wrap -m-4">
+                    @foreach($latest_events as $event)
                     <div class="w-full md:w-1/2 p-4">
-                        <a href="#" title="Quality Time with Qur'an">
+                        <a href="{{ route('event.detail', $event->slug) }}" title="{{ $event->title }}">
                             <div class="rounded-lg">
-                                <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/event 1.png') }}" alt="event 1">
-                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Embrace The Spirit of Ramadhan</h2>
-                                <p class="text-xs text-gray-500">6 Videos, 6 E-Books</p>
+                                <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
+                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
+                                <p class="text-xs text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
                             </div>
                         </a>
                     </div>
-                    
-                    <div class="w-full md:w-1/2 p-4">
-                        <a href="#" title="Tadarus Ramadhan 'Redefinition'">
-                            <div class="rounded-lg">
-                                <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ asset('images/event 2.png') }}" alt="program alumni 2">
-                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">Special Persiapan Malam Lailatul Qadr</h2>
-                                <p class="text-xs text-gray-500">3 Videos, 3 E-Books</p>
-                            </div>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="flex flex-wrap px-6 justify-center">
                     <x-qac-button href="{{ route('event.list') }}">Lihat Semua</x-qac-button>

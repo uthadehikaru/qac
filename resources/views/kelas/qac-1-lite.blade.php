@@ -182,7 +182,7 @@
                 <!-- FAQ Item 2 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Bagaimana kalau saya alumni QAC 1.0 yang dulu, mau ikutan QAC 1.0 lite ? Berapa investasinya & caranya bagaimana ?</h3>
-                    <p>Alumni QAC 1.0 dianggap sebagai reseat = cukup inventasi 50% dari QAC 1.0 lite, cara daftar seperti biasa, masuk ke web <a href="qacjakarta.id" class="text-blue-600 hover:underline">qacjakarta.id</a></p>
+                    <p>Alumni QAC 1.0 dianggap sebagai reseat = cukup inventasi 50% dari QAC 1.0 lite, cara daftar seperti biasa, masuk ke web <a href="/" class="text-blue-600 hover:underline">qacjakarta.id</a></p>
                 </div>
 
                 <!-- FAQ Item 3 -->
@@ -194,13 +194,13 @@
                 <!-- FAQ Item 4 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Saya sudah dapat akses rekaman materi belajar QAC 1.0 Lite tetapi ingin bisa ikut yang Live QAC 1.0, bagaimana caranya ?</h3>
-                    <p>Untuk mengikuti QAC 1.0 Live silakan daftar di Waiting List Kelas QAC 1.0 (<a href="#" class="text-blue-600 hover:underline">Link daftar QAC 1.0</a>)</p>
+                    <p>Untuk mengikuti QAC 1.0 Live silakan daftar di Waiting List Kelas QAC 1.0 (<a href="{{ route('kelas.qac-1') }}" class="text-blue-600 hover:underline">Link daftar QAC 1.0</a>)</p>
                 </div>
 
                 <!-- FAQ Item 5 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Apakah ada kelas lanjutan setelah selesai QAC 1b ?</h3>
-                    <p>Ada, yaitu QAC 2.0 silakan daftar di Waiting List Kelas QAC 2.0 (<a href="#" class="text-blue-600 hover:underline">Link daftar QAC 2.0</a>)</p>
+                    <p>Ada, yaitu QAC 2.0 silakan daftar di Waiting List Kelas QAC 2.0 (<a href="{{ route('kelas.qac-2') }}" class="text-blue-600 hover:underline">Link daftar QAC 2.0</a>)</p>
                 </div>
             </div>
         </div>

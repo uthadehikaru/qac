@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
+use App\Services\EcourseService;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(EcourseService $ecourseService, Request $request)
     {
-        $data['latestEvents'] = Event::latest('event_at')->simplePaginate(5);
+        
+        $data['eventCategories'] = Category::where('type', 'event')->get();
+        $data['selectedEventCategory'] = $request->has('category') ? $data['eventCategories']->where('slug', $request->category)->first() : $data['eventCategories']->first();
+        $data['latest_events'] = $ecourseService->publicEcourses($data['selectedEventCategory']->id);
 
         return view('event-list', $data);
     }

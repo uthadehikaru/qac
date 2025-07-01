@@ -1,12 +1,6 @@
 <x-web-layout>
     <x-slot name="title"> - Program Alumni QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
-        @if(!$subscription)
-        <div class="flex justify-center items-center gap-2 my-4">
-            <p>Anda Belum berlangganan</p>
-            <x-qac-button href="{{ route('checkout') }}">Langganan Sekarang</x-qac-link>
-        </div>
-        @endif
         <div class="relative py-4">
             <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">

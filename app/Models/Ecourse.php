@@ -60,6 +60,12 @@ class Ecourse extends Model
         $query->whereNotNull('course_id');
     }
 
+    public function scopePublic(Builder $query): void
+    {
+        $query->where('level', 0)
+        ->where('is_only_active_batch', 0);
+    }
+
     public function getPublishedAttribute()
     {
         return $this->published_at;
