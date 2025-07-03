@@ -76,7 +76,8 @@ class OrdersDataTable extends DataTable
      */
     public function query(Order $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()
+        ->latest();
     }
 
     /**

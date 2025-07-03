@@ -2,7 +2,7 @@
     <div class="m-6">
         <div class="flex flex-wrap -m-4">
             @forelse ($histories as $history)
-            <div class="w-full md:w-1/3 p-4">
+            <div class="w-full md:w-1/2 lg:w-1/3 p-4">
                 <a href="{{ route('member.ecourses.lessons', [$history->lesson->ecourse->slug, $history->lesson->lesson_uu]) }}" class="ecourse" title="{{ $history->lesson->ecourse->title }}">
                     <div class="rounded-lg">
                         <img class="rounded-lg border border-gray-200 w-full h-64 object-cover object-center mb-6" src="{{ $history->lesson->ecourse->imageUrl('thumbnail') }}" alt="{{ $history->lesson->ecourse->title }}">

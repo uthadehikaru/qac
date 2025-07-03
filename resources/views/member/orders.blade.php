@@ -16,7 +16,7 @@
             </div>
         @empty
         <div class="text-center">
-            Anda belum berlangganan Online Course QAC, <a href="{{ route('ecourses.index') }}" class="text-blue-500 underline font-bold">Daftar Disini</a>
+            Anda belum berlangganan Online Course QAC, <a href="{{ route('checkout') }}" class="text-blue-500 underline font-bold">Daftar Disini</a>
         </div>
         @endforelse
         {{ $orders->links() }}
