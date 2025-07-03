@@ -13,21 +13,23 @@ class LessonVideo extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(EcourseService $ecourseService, SubscriptionService $subscriptionService, string $slug, string $section_id = null, string $lesson_uu = null)
+    public function __invoke(EcourseService $ecourseService, SubscriptionService $subscriptionService, string $slug, ?string $lesson_uu = null)
     {
         $member_id = Auth::user()->member?->id;
         $data['member_id'] = $member_id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
-        $section = $subscriptionService->getSection($section_id);
-        $data['section'] = $section;
         $data['ecourse'] = $ecourse;
-        $videos = $subscriptionService->getVideos($ecourse->id, $section_id);
+        $videos = $subscriptionService->getVideos($ecourse->id);
         $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id)->pluck('lesson_id');
         if ($lesson_uu) {
             $data['video'] = $subscriptionService->getLesson($lesson_uu);
         } else {
             $data['video'] = $videos->first();
         }
+        if(!$data['video']){
+            return redirect()->route('member.ecourses.show', $slug);
+        }
+        $ecourseService->addHistory($data['video']->id, $member_id);
         $data['videos'] = $videos;
         $allVideos = $subscriptionService->getVideos($ecourse->id);
         $data['next'] = $ecourseService->getNext($allVideos, $lesson_uu);

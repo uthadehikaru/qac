@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('member.history') }}" class="flex items-center gap-2 hover:bg-[#ffdf79] p-2 rounded-lg">
+                            <a href="{{ route('member.history') }}" class="flex items-center gap-2 {{ url()->current() == route('member.history') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79] p-2 rounded-lg' }}  p-2 rounded-lg">
                                 <img src="{{ asset('images/icons/play.png') }}" alt="Histori Video" class="w-6 h-6" />
                                 <span class="text-sm font-bold">Histori Video</span>
                             </a>
@@ -38,7 +38,7 @@
                 </div>
             </x-panel>
         </div>
-        <div class="w-full lg:w-3/4">
+        <div class="w-full mt-0 lg:mt-12 lg:w-3/4">
             {{ $slot }}
         </div>
     </div>

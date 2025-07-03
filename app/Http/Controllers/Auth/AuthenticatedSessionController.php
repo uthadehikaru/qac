@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('member.ecourses.index');
+        return redirect()->route('home');
     }
 
     /**

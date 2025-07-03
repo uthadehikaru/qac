@@ -1,6 +1,4 @@
 <x-member-layout>
-
-    <x-panel>
     
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -10,7 +8,7 @@
 
         <form id="profile" method="post" action="{{ route('member.profile.update') }}">
         @csrf
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <div class="px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div class="-mx-3 md:flex mb-6">
                 <div class="md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-full_name">
@@ -57,86 +55,14 @@
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-address">
-                        Alamat
-                    </label>
-                    <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
-                    id="grid-address" name="address" placeholder="your address">{{ Auth::user()->member->address }}</textarea>
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/4 px-3">
-                    <label id="province_label" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="province_id">
-                        Provinsi
-                    </label>
-                    <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
-                    id="province_id" name="province_id" required>
-                        <option value="">-- pilih provinsi --</option>
-                        @foreach($provinces as $province)
-                        <option value="{{ $province->id }}" {{ $province_id==$province->id?'selected':'' }}>{{ $province->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="md:w-1/4 px-3">
-                    <label id="regency_label" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="regency_id">
-                        Kota
-                    </label>
-                    <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
-                    id="regency_id" name="regency_id" required>
-                        @foreach($regencies as $regency)
-                        <option value="{{ $regency->id }}" {{ $regency_id==$regency->id?'selected':'' }}>{{ $regency->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="md:w-1/4 px-3">
-                    <label id="district_label" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="district_id">
-                        Kecamatan
-                    </label>
-                    <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
-                    id="district_id" name="district_id" required>
-                        @foreach($districts as $district)
-                        <option value="{{ $district->id }}" {{ $district_id==$district->id?'selected':'' }}>{{ $district->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="md:w-1/4 px-3">
-                    <label id="village_label" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="village_id">
-                        Kelurahan
-                    </label>
-                    <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
-                    id="village_id" name="village_id" required>
-                        @foreach($villages as $village)
-                        <option value="{{ $village->id }}" {{ $village_id==$village->id?'selected':'' }}>{{ $village->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zipcode">
-                        Kode Pos
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                    id="grid-zipcode" name="zipcode" type="text" placeholder="Your zipcode" value="{{ Auth::user()->member->zipcode }}" required>
-                </div>
-                <div class="md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-instagram">
-                        Instagram
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                    id="grid-instagram" name="instagram" type="text" placeholder="Your Instagram" value="{{ Auth::user()->member->instagram }}">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-profesi">
                         Profesi
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                     id="grid-profesi" name="profesi" type="text" placeholder="Your profesi" value="{{ Auth::user()->member->profesi }}" required>
                 </div>
-                <div class="md:w-1/2 px-3">
+                <div class="md:w-1/3 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-pendidikan">
                         Pendidikan
                     </label>
@@ -149,24 +75,38 @@
                         </select>
                     </div>
                 </div>
+                <div class="md:w-1/3 px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-address">
+                        Domisili
+                    </label>
+                    <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
+                    id="grid-address" name="address" placeholder="your address">{{ Auth::user()->member->address }}</textarea>
+                </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
                 <div class="md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-is_notify">
-                        Notifikasi Email
-                    </label>
+                    <x-qac-button href="{{ route('member.password') }}">
+                        Ubah Password
+                    </x-qac-button>
+                </div>
+            </div>
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3">
                     <div class="relative">
-                        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" 
-                        id="grid-is_notify" name="is_notify" required>
-                        <option value="1" {{ Auth::user()->is_notify?'selected':'' }}>Ya</option>
-                        <option value="0" {{ Auth::user()->is_notify==false?'selected':'' }}>Tidak</option>
-                        </select>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" name="is_notify" value="1" {{ Auth::user()->is_notify ? 'checked' : '' }}>
+                            <span class="ml-2 text-gray-700">Saya bersedia menerima notifikasi Email dari QAC</span>
+                        </label>
                     </div>
                 </div>
             </div>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-[#7b0c00] text-white font-bold py-2 px-4 rounded-full">
+                    Simpan
+                </button>
+            </div>
         </div>
         </form>
-    </x-panel>
     
 <x-slot name="scripts">
     <script type="text/javascript">

@@ -1,12 +1,4 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            {{ __('Ubah Password') }}
-        </h2>
-    </x-slot>
-
-    <x-panel>
-    
+<x-member-layout>
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
         @if(session('error'))
@@ -18,7 +10,7 @@
 
         <form id="password" method="post" action="{{ route('member.password.update') }}">
         @csrf
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <div class="px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div class="-mx-3 mb-6">
                 <div class="w-full px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-old-password">
@@ -45,5 +37,4 @@
             </div>
         </div>
         </form>
-    </x-panel>
-</x-app-layout>
+</x-member-layout>

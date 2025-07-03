@@ -35,7 +35,7 @@
                     </div>
                     <p class="leading-relaxed mt-2">{!! nl2br($ecourse->description) !!}</p>
                     <div class="flex">
-                        <a href="{{ route('checkout') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Daftar Sekarang</a>
+                        <x-qac-button href="{{ route('member.ecourses.show', $ecourse->slug) }}">Tonton Sekarang</x-qac-button>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,11 @@ use App\Models\Subscription;
 
 class SubscriptionService
 {
+    public function getActiveSubscription($member_id)
+    {
+        return Subscription::where('member_id', $member_id)->where('end_date', '>=', date('Y-m-d'))->latest('start_date')->first();
+    }
+
     public function addMember($data)
     {
         return Subscription::firstOrCreate([

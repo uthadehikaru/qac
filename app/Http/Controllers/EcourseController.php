@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Ecourse;
-use App\Models\Member;
 use App\Services\EcourseService;
+use App\Services\MemberService;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EcourseController extends Controller
 {
-    public function index(EcourseService $ecourseService, Request $request)
+    public function index(EcourseService $ecourseService, OrderService $orderService, MemberService $memberService, Request $request)
     {
         $data['ecourses'] = [];
         if ($request->category) {
@@ -19,9 +20,14 @@ class EcourseController extends Controller
         }else{
             $data['ecourses'] = $ecourseService->recommendedEcourses();
         }
-        $data['subscription'] = null;
+        $data['activeOrder'] = null;
         if(Auth::check()){
-            $data['subscription'] = Member::where('user_id', Auth::user()->id)->first();
+            $data['activeOrder'] = $orderService->activeOrder();
+        }
+
+        $data['isAlumni'] = false;
+        if(Auth::check()){
+            $data['isAlumni'] = $memberService->isAlumni(Auth::user()->member->id);
         }
 
         $data['categories'] = Category::where('type', 'course')->get();
@@ -30,7 +36,7 @@ class EcourseController extends Controller
         return view('ecourse-list', $data);
     }
 
-    public function show(EcourseService $ecourseService, Ecourse $ecourse)
+    public function show(EcourseService $ecourseService, Ecourse $ecourse, MemberService $memberService)
     {
         if(!Auth::check()) {
             session()->put('url.intended', route('ecourses.index'));
@@ -38,6 +44,10 @@ class EcourseController extends Controller
         }
         if (! $ecourse->published) {
             return abort(404);
+        }
+        $isAlumni = $memberService->isAlumni(Auth::user()->member->id);
+        if($ecourse->level >= 1 && !$isAlumni){
+            return back()->with('error', 'Kamu belum menjadi alumni QAC, silakan daftar QAC 1.0 Lite 1b terlebih dahulu');
         }
 
         $data['ecourse'] = $ecourse;

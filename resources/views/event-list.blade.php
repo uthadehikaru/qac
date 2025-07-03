@@ -1,6 +1,11 @@
 <x-web-layout>
     <x-slot name="title"> - Event QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
+        @if($activeOrder)
+        <x-active-order :order="$activeOrder" />
+        @endif
+
+
         <div class="relative py-4">
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
                 <div class="flex justify-between lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black">
@@ -13,7 +18,7 @@
         <div class="flex flex-wrap mx-2">
             @forelse($latest_events as $event)
             <div class="w-full md:w-1/3 p-4">
-                <a href="{{ route('event.detail', $event->slug) }}" class="ecourse" title="{{ $event->title }}">
+                <a href="{{ route('member.ecourses.lessons', $event->slug) }}" class="ecourse" title="{{ $event->title }}">
                     <div class="rounded-lg">
                         <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
                         <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>

@@ -39,6 +39,7 @@ use App\Http\Controllers\Member\CompleteLesson;
 use App\Http\Controllers\Member\DashboardController as MDashboardController;
 use App\Http\Controllers\Member\LessonVideo;
 use App\Http\Controllers\Member\MemberEcoursesController;
+use App\Http\Controllers\Member\MemberHistoryController;
 use App\Http\Controllers\Member\MemberOrdersController;
 use App\Http\Controllers\Member\MemberSubscriptionController;
 use App\Http\Controllers\Member\PasswordController;
@@ -210,11 +211,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/batch/{id}', [MBatchController::class, 'detail'])->name('batch.detail');
         Route::post('/batch/{id}/register', [MBatchController::class, 'register'])->name('batch.register');
         Route::resource('ecourses', MemberEcoursesController::class)->only(['index', 'show']);
-        Route::get('ecourses/{slug}/learn/{section}/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
+        Route::get('ecourses/{slug}/learn/{lesson?}', LessonVideo::class)->name('ecourses.lessons');
         Route::get('ecourses/{slug}/video/{lesson}', SecureVideo::class)->name('ecourses.lessons.video');
         Route::post('ecourses/{slug}/learn/{lesson}', CompleteLesson::class)->name('ecourses.lessons.complete');
         Route::resource('subscriptions', MemberSubscriptionController::class)->only(['index', 'show']);
         Route::resource('orders', MemberOrdersController::class)->only(['index', 'show']);
+        Route::get('history', [MemberHistoryController::class, 'index'])->name('history');
     });
 });
 

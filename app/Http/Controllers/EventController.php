@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Event;
 use App\Services\EcourseService;
-use Auth;
+use App\Services\OrderService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function index(EcourseService $ecourseService, Request $request)
+    public function index(EcourseService $ecourseService, OrderService $orderService, Request $request)
     {
         
         $data['eventCategories'] = Category::where('type', 'event')->get();
         $data['selectedEventCategory'] = $request->has('category') ? $data['eventCategories']->where('slug', $request->category)->first() : $data['eventCategories']->first();
         $data['latest_events'] = $ecourseService->publicEcourses($data['selectedEventCategory']->id);
+        $data['activeOrder'] = null;
+        if(Auth::check()){
+            $data['activeOrder'] = $orderService->activeOrder();
+        }
 
         return view('event-list', $data);
     }

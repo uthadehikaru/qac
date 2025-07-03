@@ -1,62 +1,46 @@
-<x-app-layout>
-    <x-slot name="header">
-        <a href="{{ route('member.ecourses.index') }}" class="text-red-800 font-semibold text-gray-800 leading-tight inline">
-            My Courses
-        </a>
-        <a href="{{ route('member.ecourses.show', $ecourse->slug) }}" class="text-red-800 font-semibold text-gray-800 leading-tight inline">
-            / {{ $ecourse->title }}
-        </a>
-        <h2 class="font-semibold text-gray-800 leading-tight inline">
-            / Sesi / {{ $section->name }}
-        </h2>
-        <h2 class="font-semibold text-gray-800 leading-tight inline">
-            / {{ $video->subject }}
-        </h2>
-    </x-slot>
+<x-web-layout>
 
-    <x-panel>
+    <x-panel class="mt-20">
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="{{ $ecourse->level ? route('ecourses.index') : route('event.list') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                        <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                        </svg>
+                        {{ $ecourse->level ? 'Program Alumni' : 'Event QAC' }}
+                    </a>
+                </li>
+                @if($ecourse->category)
+                <li class="inline-flex items-center">
+                    <a href="{{ $ecourse->level ? route('ecourses.index', ['category' => $ecourse->category->slug]) : route('event.list', ['category' => $ecourse->category->slug]) }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                        <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        {{ $ecourse->category->name }}
+                    </a>
+                </li>
+                @endif
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ $ecourse->title }}</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
         <div class="container mx-auto">
-            <div class="w-full flex flex-col md:flex-row gap-x-2">
+            <div class="w-full flex flex-col md:flex-row gap-8">
                 <div class="content md:w-2/3">
                     <video width="100%" height="240" controls autoplay controlsList="nodownload">
                     <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
-                </div>
-                <div class="md:w-1/3 flex flex-col gap-y-2">
-                    <div class="flex justify-between border-b py-4 bg-gray-200 px-2">
-                        <p class="font-bold text-gray-800">{{ $section->name }}</p>
-                        <p class="text-gray-600">{{ $videos->count() }} Lessons</p>
-                    </div>
-                    @foreach ($videos as $lesson)
-                        <x-lesson-card :video="$lesson" :ecourse="$ecourse" :completed="$completed"
-                        :current="$video" />
-                    @endforeach
-                </div>
-            </div>
-            <div class="w-full flex flex-col md:flex-row gap-x-2 p-6">
-                <div class="md:w-2/3 flex flex-col gap-y-8 mt-4 p-4">
-                    <p>{{ $video->description }}</p>
-                    @if(auth()->user()->role != 'admin')
-                        @if($completed->contains($video->id))
-                            <button type="button" class="w-full rounded border border-red-800 font-bold text-red-800 text-center p-4" disabled>Completed</button>
-                        @else
-                        <form method="POST" id="complete-form" action="{{ route('member.ecourses.lessons.complete', [$ecourse->slug, $video->lesson_uu]) }}">
-                            @csrf
-                            <button type="submit" class="w-full rounded bg-red-800 font-bold text-white text-center p-4 hover:opacity-75">Complete</button>
-                        </form>
-                        @endif
-                    @endif
-                    @if($next)
-                    <h3 class="font-bold text-xl">Next</h3>
-                    <x-lesson-card :video="$next" id="next" :ecourse="$ecourse" :completed="$completed" />
-                    @else
-                    <h3 class="font-bold text-xl">End of Lesson</h3>
-                    @endif
-                </div>
-                <div class="md:w-1/3 flex flex-col mt-4">
-                    <div class="">
-                        <p class="text-lg font-bold ">Downloads</p>
+                    <p class="mt-8">{{ $video->description }}</p>
+                    <div class="mt-8">
+                        <p class="text-lg font-bold ">Download Theory, Workbook & Daily Activities:</p>
                         <ul class="list-decimal pl-4 mt-2">
                         @foreach ($video->getMedia('downloads') as $media)
                             <li class="p-2"><a href="{{ $media->getFullUrl() }}" target="_blank" class="text-red-800">{{ $media->file_name }}</a></li>
@@ -64,6 +48,12 @@
                         </ul>
                     </div>
 
+                </div>
+                <div class="md:w-1/3 mt-8 md:mt-0 flex flex-col gap-y-2">
+                    @foreach ($videos as $lesson)
+                        <x-lesson-card :video="$lesson" :ecourse="$ecourse" :completed="$completed"
+                        :current="$video" />
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -105,4 +95,4 @@
   });
 /*]]>*/</script>
 </x-slot>
-</x-app-layout>
+</x-web-layout>

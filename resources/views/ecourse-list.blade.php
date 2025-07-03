@@ -1,6 +1,10 @@
 <x-web-layout>
     <x-slot name="title"> - Program Alumni QAC</x-slot>
     <section class="mt-20 text-gray-600 body-font overflow-hidden">
+        @if($activeOrder)
+        <x-active-order :order="$activeOrder" />
+        @endif
+
         <div class="relative py-4">
             <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
@@ -24,7 +28,7 @@
         <div class="flex flex-wrap mx-2">
             @forelse($ecourses as $ecourse)
             <div class="w-full md:w-1/3 p-4">
-                <a href="{{ route('ecourses.show', $ecourse->slug) }}" class="ecourse" title="{{ $ecourse->title }}">
+                <a href="{{ route('member.ecourses.lessons', $ecourse->slug) }}" class="ecourse" title="{{ $ecourse->title }}">
                     <div class="rounded-lg">
                         <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}">
                         <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
@@ -61,7 +65,7 @@
         </div>
         <script>
             jQuery(document).ready(function($){
-                @if(Auth::check())
+                @if(!$isAlumni)
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');

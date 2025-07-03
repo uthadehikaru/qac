@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\Member\CompleteLesson;
 use App\Models\Batch;
+use App\Models\CompletedLesson;
 use App\Models\Ecourse;
 use App\Models\Lesson;
 use App\Models\Order;
@@ -195,5 +197,21 @@ class EcourseService
             ->whereNull('verified_at')
             ->first();
 
+    }
+
+    public function addHistory($lesson_id, $member_id)
+    {
+        $history = CompletedLesson::firstOrCreate([
+            'lesson_id' => $lesson_id,
+            'member_id' => $member_id,
+        ]);
+        $history->touch();
+
+        return $history;
+    }
+
+    public function memberHistory($member_id)
+    {
+        return CompletedLesson::where('member_id', $member_id)->latest('updated_at')->paginate(6);
     }
 }

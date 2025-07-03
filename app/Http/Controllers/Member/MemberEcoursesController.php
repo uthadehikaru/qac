@@ -39,8 +39,7 @@ class MemberEcoursesController extends Controller
         $member_id = Auth::user()->member?->id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
         $data['ecourse'] = $ecourse;
-        $data['sections'] = $subscriptionService->getSections($ecourse->id);
-        $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id);
+        $data['videos'] = $subscriptionService->getVideos($ecourse->id);
 
         return view('member.ecourse', $data);
     }
