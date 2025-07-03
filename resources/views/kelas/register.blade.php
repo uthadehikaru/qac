@@ -33,6 +33,7 @@
                     @endif
                     <input type="hidden" name="lite" value="{{ $lite }}" />
 
+                    @if(!$is_registered)
                     <!-- Full Name -->
                     <div class="mt-4">
                         <x-label for="full_name" :value="__('Full Name')" />
@@ -110,6 +111,15 @@
                         </label>
                     </div>
                     <p class="text-sm text-gray-500">** pilih provinsi dan kota di indonesia sesuai asal domisili jika anda berada diluar negeri</p>
+                    @else
+                    <input type="hidden" name="full_name" value="{{ $member->full_name }}" />
+                    <input type="hidden" name="phone" value="{{ $member->phone }}" />
+                    <input type="hidden" name="job" value="{{ $member->profesi }}" />
+                    <input type="hidden" name="education" value="{{ $member->pendidikan }}" />
+                    <input type="hidden" name="regency" value="{{ $member_regency }}" />
+                    <input type="hidden" name="province" value="{{ $member_province }}" />
+                    <input type="hidden" name="is_overseas" value="{{ $member->is_overseas }}" />
+                    @endif
 
                     @if($lite)
                     <!-- Pilihan Kelas -->
@@ -124,6 +134,17 @@
                                 </span>
                             </label>
                         </div>
+
+                        @if($is_registered)
+                        <div class="mt-4">
+                            <label class="block text-gray-500 font-bold">
+                                <input type="radio" name="package" value="1b" class="mr-2 leading-tight" required>
+                                <span class="text-sm">
+                                    QAC 1b (Rp 300.000,-)
+                                </span>
+                            </label>
+                        </div>
+                        @endif
 
                         <div class="mt-4">
                             <label class="block text-gray-500 font-bold">

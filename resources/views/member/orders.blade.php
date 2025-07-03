@@ -1,4 +1,10 @@
 <x-member-layout>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <x-panel>
         <h1 class="font-bold text-xl mb-4">Lihat semua Transaksi Langganan, kelas hingga sertifikatmu di QAC</h1>
         @forelse ($orders as $order)

@@ -17,6 +17,7 @@ use DB;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Image;
 use Str;
 use Validator;
@@ -338,6 +339,7 @@ class MemberBatchController extends Controller
         $memberBatch->status = $status;
         $memberBatch->save();
         $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
+        Cache::forget('member_is_alumni_'.$memberBatch->member_id);
 
         return back()->with('status', 'Berhasil memperbaharui status');
     }
@@ -362,6 +364,7 @@ class MemberBatchController extends Controller
             $memberBatch->status = $status_id;
             $memberBatch->save();
             $memberBatch->member->user->notify(new BatchStatusUpdate($memberBatch));
+            Cache::forget('member_is_alumni_'.$memberBatch->member_id);
             $count++;
         }
 

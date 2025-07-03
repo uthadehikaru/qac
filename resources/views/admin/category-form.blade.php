@@ -33,6 +33,19 @@
                     id="grid-name" name="name" type="text" placeholder="category name" value="{{ old('name', $category?$category->name:'') }}">
                 </div>
             </div>
+            
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-url">
+                        @lang('Type')
+                    </label>
+                    <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                    id="grid-name" name="type">
+                        <option value="event" {{ old('type', $category?$category->type:'event') == 'event' ? 'selected' : '' }}>Event</option>
+                        <option value="course" {{ old('type', $category?$category->type:'course') == 'course' ? 'selected' : '' }}>Program Alumni</option>
+                    </select>
+                </div>
+            </div>
         </div>
         </form>
     </x-panel>

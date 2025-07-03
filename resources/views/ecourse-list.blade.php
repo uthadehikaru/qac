@@ -56,7 +56,12 @@
                         <img src="{{ asset('images/close.png') }}" alt="Close" class="w-6 h-6">
                     </button>
                     <h3 class="text-xl font-bold mb-4 text-center flex items-center justify-center gap-2"><img src="{{ asset('images/lock.png') }}" alt="Akses Terkunci" class="w-10 h-10 inline-block">Akses Terkunci!!! <img src="{{ asset('images/lock.png') }}" alt="Akses Terkunci" class="w-10 h-10 inline-block"></h3>
-                    @if(!$isAlumni)
+                    @if(!auth()->check())
+                    <p class="text-gray-600 mb-6 text-center">Untuk menonton full video ini, kamu perlu daftar kelas QAC 1.0 Lite <span class="font-bold text-black">agar memahami secara utuh tadabbur dengan bahasa Arab Al-Qur'an</span> dan setelahnya dapat <span class="font-bold text-black">menikmati ratusan video program alumni lainnya</span>😊</p>
+                    <div class="flex justify-center gap-4">
+                        <x-qac-button href="{{ route('kelas.qac-1-lite') }}">Daftar Kelas QAC 1.0 Lite</x-qac-button>
+                    </div>
+                    @elseif(!$isAlumni)
                     <p class="text-gray-600 mb-6 text-center">Untuk menonton full video ini, kamu perlu daftar <span class="font-bold text-black">kelas QAC 1b</span> agar <span class="font-bold text-black">memahami secara utuh tadabbur dengan bahasa Arab Al-Qur'an</span> dan setelahnya dapat <span class="font-bold text-black">menikmati ratusan video program alumni lainnya</span>😊</p>
                     <div class="flex justify-center gap-4">
                         <x-qac-button href="{{ route('kelas.qac-1-lite') }}">Daftar Kelas QAC 1b</x-qac-button>

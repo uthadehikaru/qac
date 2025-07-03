@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Course;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Batch;
+use App\Models\Member;
 use App\Models\Province;
 use App\Models\Queue;
 use App\Models\Regency;
@@ -27,7 +28,8 @@ class CourseRegisterController extends Controller
             session()->put('url.intended', route('kelas.register', ['course_id' => $course_id, 'batch_id' => $batch_id]));
             return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu untuk melanjutkan pendaftaran');
         }
-        $data['member'] = Auth::user()->member;
+        $data['member'] = Member::with('batches')->where('user_id', Auth::user()->id)->first();
+        $data['is_registered'] = $data['member']->batches()->count() > 0;
         $regency = Regency::where('name', $data['member']->city)->first();
         $data['member_regency'] = $regency ? $regency->id : null;
         $data['member_province'] = $regency ? $regency->province_id : null;
@@ -138,7 +140,7 @@ class CourseRegisterController extends Controller
 
             DB::commit();
 
-            return redirect()->route('member.dashboard')->with('success', 'Pendaftaran berhasil');
+            return redirect()->route('member.orders.index')->with('success', 'Pendaftaran berhasil');
         } catch (\Exception $e) {
             Log::error($e);
             DB::rollBack();

@@ -31,7 +31,7 @@
         </nav>
         <div class="flex flex-col md:flex-row gap-8">
             <div class="w-full md:w-2/3">
-                <img alt="{{ $ecourse->title }}" class="w-full h-80 object-contain md:object-cover object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
+                <img alt="{{ $ecourse->title }}" class="w-full h-full object-contain md:object-cover object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
                 <p>{{ $ecourse->description }}</p>
             </div>
             <div class="w-full md:w-1/3 mt-8 md:mt-0 flex flex-col gap-y-2">

@@ -38,9 +38,9 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'type' => 'required|string|in:event,course',
         ]);
         $data['slug'] = Str::slug($data['name']);
-        $data['type'] = 'course';
 
         Category::create($data);
 
@@ -72,9 +72,9 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'type' => 'required|string|in:event,course',
         ]);
         $data['slug'] = Str::slug($data['name']);
-        $data['type'] = 'course';
 
         $category = Category::find($id);
         $category->update($data);
