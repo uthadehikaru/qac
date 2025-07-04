@@ -1,6 +1,6 @@
 <x-web-layout>
     <div class="container mx-auto">
-        <div class="grid grid-cols-2 gap-4 items-center mt-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-24">
             <div class="flex flex-col items-center justify-center">
                 <img src="{{ asset('images/qac 3/logo.png') }}" alt="QAC 3.0" class="w-full h-auto">
                 <img src="{{ asset('images/qac 3/desc.png') }}" alt="QAC 3.0" class="w-full h-auto">
@@ -8,7 +8,7 @@
             <img src="{{ asset('images/qac-lite-video.jpg') }}" alt="QAC 3.0" class="w-full h-auto">
         </div>
 
-        <div class="grid grid-cols-2 gap-4 items-start mt-24 mx-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-24 mx-2">
             <div class="flex flex-col items-center justify-center gap-4">
                 <h2 class="text-sm md:text-xl font-bold text-center rounded-full bg-[#ffdf79] p-2">Going deeper to Qur’an</h2>
                 <p class="text-xs md:text-base">Bagaimana memahami ketika Al-Qur’an keluar dari aturan grammar dan berusaha menelaah pesan-pesan tersembunyi, sehingga kita bisa lebih menikmati membaca Al-Qur’an.</p>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 items-start mt-24 mx-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-24 mx-2">
             <div class="rounded-lg bg-[#ffdf79] p-4">
             <h2 class="text-xs md:text-xl font-bold text-center mb-4">Fasilitas apa yang didapatkan?</h2>
                 <ul class="flex flex-col gap-4">
@@ -82,11 +82,11 @@
             </div>
         </div>
 
-        <section id="register" class="mx-auto text-center mt-12 mb-12">
+        <section id="register" class="flex flex-col items-center justify-center mt-12 mb-12">
             <h1 class="w-full my-2 text-xl md:text-2xl font-bold leading-tight text-center text-gray-900">
             Timeline silabus belajar <br> QAC 3.0
             </h1>
-            <img src="{{ asset('images/qac 3/silabus.png') }}" alt="Silabus QAC 3.0" class="w-full h-auto">
+            <img src="{{ asset('images/qac 3/silabus.png') }}" alt="Silabus QAC 3.0" class="w-full md:w-1/2 h-auto">
         </section>
 
         

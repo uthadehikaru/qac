@@ -13,12 +13,12 @@
             </div>
         </div>
 
-        <div class="py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-top font-montserrat">
+        <div class="py-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4 items-top font-montserrat">
                 <!-- Left Column -->
                 <div class="px-1 md:px-4">
-                    <h2 class="text-xs md:text-3xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
-                    <ul class="space-y-3 text-xs md:text-lg">
+                    <h2 class="text-xl md:text-3xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
+                    <ul class="space-y-4 text-base md:text-xl">
                         <li class="flex items-center">
                             <i class="fas fa-check-circle text-green-500 fa-fw mr-2"></i>
                             <span class="italic">Sesuai pacemu</span>
@@ -35,7 +35,7 @@
                 </div>
                 <!-- Right Column -->
                 <div class="px-1 md:px-4 font-montserrat">
-                    <h3 class="text-xs md:text-xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
+                    <h3 class="text-xl md:text-3xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
                     <div class="space-y-6">
                         <div class="flex items-center">
                             <div class="text-xs md:text-lg">

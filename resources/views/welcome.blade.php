@@ -15,7 +15,7 @@
         </div>
 
         <section id="why" class="bg-white py-8">
-            <div class="container max-w-5xl mx-auto">
+            <div class="container max-full mx-auto">
                 <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-800">
                 {{ $why1->value }}
                 </h1>
@@ -34,7 +34,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <section id="introduction" class="bg-white">
-            <div class="container max-w-5xl mx-auto m-0 md:m-8">
+            <div class="w-full">
                 <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Yuk, kenali QAC!
                 </h1>
@@ -47,7 +47,7 @@
             </div>
             </section>
             <section id="howto" class="bg-white">
-            <div class="container max-w-5xl mx-auto m-0 md:m-8">
+            <div class="w-full">
                 <h1 class="w-full my-2 text-md md:text-2xl font-bold leading-tight text-center text-gray-800">
                 Bagaimana metode belajarnya?
                 </h1>

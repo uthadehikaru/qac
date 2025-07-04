@@ -18,7 +18,7 @@ class LessonVideo extends Controller
     {
         $activeOrder = $orderService->activeOrder();
         if(!$activeOrder){
-            return back()->with('error', 'Anda belum memiliki langganan aktif');
+            return redirect()->route('checkout')->with('error', 'Anda belum memiliki langganan aktif');
         }
         $member_id = Auth::user()->member?->id;
         $data['member_id'] = $member_id;
