@@ -199,7 +199,7 @@
                     </div>
                     @endforeach
                 </div>
-                <div class="flex flex-wrap px-6 justify-center">
+                <div class="flex flex-wrap px-6 justify-center mt-8">
                     <x-qac-button href="{{ route('event.list') }}">Lihat Semua</x-qac-button>
                 </div>
             </div>

@@ -42,4 +42,9 @@
             {{ $slot }}
         </div>
     </div>
+    @if(isset($scripts))
+    <x-slot name="scripts">
+        {{ $scripts }}
+    </x-slot>
+    @endif
 </x-web-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Services\EcourseService;
+use App\Services\OrderService;
 use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,12 @@ class LessonVideo extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(EcourseService $ecourseService, SubscriptionService $subscriptionService, string $slug, ?string $lesson_uu = null)
+    public function __invoke(EcourseService $ecourseService, SubscriptionService $subscriptionService, OrderService $orderService, string $slug, ?string $lesson_uu = null)
     {
+        $activeOrder = $orderService->activeOrder();
+        if(!$activeOrder){
+            return back()->with('error', 'Anda belum memiliki langganan aktif');
+        }
         $member_id = Auth::user()->member?->id;
         $data['member_id'] = $member_id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);

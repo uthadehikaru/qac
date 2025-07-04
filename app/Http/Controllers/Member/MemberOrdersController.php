@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use App\Services\SubscriptionService;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,7 @@ class MemberOrdersController extends Controller
     public function index(SubscriptionService $subscriptionService)
     {
         $data['orders'] = $subscriptionService->orders(Auth::user()->member->id);
+        $data['batches'] = Member::with('batches')->where('user_id', Auth::user()->id)->first()->batches->sortByDesc('start_date')->all();
 
         return view('member.orders', $data);
     }

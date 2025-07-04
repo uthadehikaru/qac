@@ -119,7 +119,7 @@ class Member extends Model
 
     public function batches()
     {
-        return $this->belongsToMany(Batch::class, 'member_batch')->withPivot('id', 'session', 'status', 'new_book', 'reseat')->using(MemberBatch::class);
+        return $this->belongsToMany(Batch::class, 'member_batch')->withPivot('id', 'session', 'status', 'new_book', 'reseat', 'approved_at')->using(MemberBatch::class);
     }
 
     public function paidBatches()
