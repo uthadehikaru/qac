@@ -1,6 +1,27 @@
 <x-web-layout>
 
     <x-panel class="mt-20">
+        @if($ecourse->is_only_active_batch)
+        <div class="relative py-4 md:py-12">
+            <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
+                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
+                    @foreach($sections as $section)
+                    <a href="{{ route('member.ecourses.lessons', [ 'slug' => $ecourse->slug, 'section' => $section->id]) }}" class="px-4 py-2 {{ $video->section_id == $section->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $section->name }}</a>
+                    @endforeach
+                </div>
+            </div>
+            <button class="filter-nav-custom filter-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Next">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+        @else
         <nav class="flex mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -31,6 +52,7 @@
                 </li>
             </ol>
         </nav>
+        @endif
         <div class="container mx-auto">
             <div class="w-full flex flex-col md:flex-row gap-8">
                 <div class="content md:w-2/3">
@@ -38,20 +60,23 @@
                     <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
+                    <p class="mt-8">{{ $video->subject }}</p>
                     <p class="mt-8">{{ $video->description }}</p>
                     <div class="mt-8">
                         <p class="text-lg font-bold ">Download Theory, Workbook & Daily Activities:</p>
                         <ul class="list-decimal pl-4 mt-2">
-                        @foreach ($video->getMedia('downloads') as $media)
+                        @forelse ($video->getMedia('downloads') as $media)
                             <li class="p-2"><a href="{{ $media->getFullUrl() }}" target="_blank" class="text-red-800">{{ $media->file_name }}</a></li>
-                        @endforeach
+                        @empty
+                        <p class="text-gray-500">No downloads available</p>
+                        @endforelse
                         </ul>
                     </div>
 
                 </div>
                 <div class="md:w-1/3 mt-8 md:mt-0 flex flex-col gap-y-2">
                     @foreach ($videos as $lesson)
-                        <x-lesson-card :video="$lesson" :ecourse="$ecourse" :completed="$completed"
+                        <x-lesson-card :video="$lesson" :ecourse="$ecourse"
                         :current="$video" />
                     @endforeach
                 </div>
@@ -85,12 +110,64 @@
 <script>/*<![CDATA[*/
   $(document).ready(function(){
     document.addEventListener('contextmenu', event => event.preventDefault());
-    $('video').on('ended',function(){
-        @if($completed->contains($video->id))
-            $('#next')[0].click();
-        @else
-            $('#complete-form').submit();
-        @endif
+                
+    // Filter Carousel functionality
+    let currentPosition = 0;
+    const $filterCarousel = $('.filter-carousel');
+    const $filterItems = $filterCarousel.find('a');
+    const $container = $filterCarousel.parent();
+    
+    // Calculate actual item widths dynamically
+    function calculateItemWidth() {
+        return $filterItems.first().outerWidth(true); // Include margin
+    }
+    
+    function updateCarousel() {
+        const itemWidth = calculateItemWidth();
+        const containerWidth = $container.width();
+        const totalWidth = $filterItems.length * itemWidth;
+        const maxPosition = Math.max(0, totalWidth - containerWidth + 32); // Add extra space for padding
+        
+        // Show/hide navigation buttons based on position
+        $('.filter-prev').toggle(currentPosition > 0);
+        $('.filter-next').toggle(currentPosition < maxPosition);
+        
+        // Ensure we don't exceed max position
+        if (currentPosition > maxPosition) {
+            currentPosition = maxPosition;
+        }
+        
+        $filterCarousel.css('transform', `translateX(-${currentPosition}px)`);
+    }
+
+    // Initialize carousel
+    updateCarousel();
+
+    // Previous button click
+    $('.filter-prev').click(function() {
+        if (currentPosition > 0) {
+            const itemWidth = calculateItemWidth();
+            currentPosition = Math.max(0, currentPosition - itemWidth);
+            updateCarousel();
+        }
+    });
+
+    // Next button click
+    $('.filter-next').click(function() {
+        const itemWidth = calculateItemWidth();
+        const containerWidth = $container.width();
+        const totalWidth = $filterItems.length * itemWidth;
+        const maxPosition = Math.max(0, totalWidth - containerWidth + 32); // Add extra space for padding
+        
+        if (currentPosition < maxPosition) {
+            currentPosition = Math.min(maxPosition, currentPosition + itemWidth);
+            updateCarousel();
+        }
+    });
+
+    // Handle window resize
+    $(window).resize(function() {
+        updateCarousel();
     });
   });
 /*]]>*/</script>

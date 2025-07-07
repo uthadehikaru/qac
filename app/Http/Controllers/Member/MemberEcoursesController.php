@@ -23,7 +23,7 @@ class MemberEcoursesController extends Controller
         $data['ecourses'] = $ecourseService->memberEcourses($member_id)
             ->transform(function ($ecourse) use ($member_id) {
                 $ecourse->completed = (new SubscriptionService)->getCompletedLessons($ecourse->id, $member_id)->count();
-
+ 
                 return $ecourse;
             });
         $data['order'] = $orderService->activeOrder();

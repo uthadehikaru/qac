@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Course;
 use App\Models\Ecourse;
+use App\Models\Lesson;
+use App\Models\Section;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -14,16 +16,35 @@ class EcourseSeeder extends Seeder
      */
     public function run(): void
     {
-        copy(public_path('images\QAC 1.0.jpg'), public_path('storage\ecourses\qac 1.jpg'));
         foreach(Course::all() as $course) {
-            Ecourse::firstOrCreate([
+            copy(public_path('images/qac lite.png'), public_path('storage/ecourses/'.$course->name.'.png'));
+            $ecourse = Ecourse::updateOrCreate([
                 'course_id' => $course->id,
             ],[
                 'title' => $course->name,
                 'slug' => Str::slug($course->name),
-                'thumbnail' => 'ecourses/qac 1.jpg',
+                'thumbnail' => 'ecourses/'.$course->name.'.png',
                 'is_only_active_batch' => true,
             ]);
+
+            $sections = Section::all();
+
+            for($i=1; $i<=5; $i++) {
+                $lesson = Lesson::updateOrCreate([
+                    'ecourse_id' => $ecourse->id,
+                    'order_no' => $i,
+                ],[
+                    'section_id' => $sections->random()->id,
+                    'lesson_uu' => Str::uuid(),
+                    'subject' => $course->name . ' lesson ' . $i,
+                    'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+                ]);
+
+                // Add media thumbnail to lesson
+                $lesson->addMedia(public_path('images/qac lite.png'))
+                    ->preservingOriginal()
+                    ->toMediaCollection('thumbnail', 'public');
+            }
         }
     }
 }

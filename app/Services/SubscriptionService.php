@@ -34,13 +34,6 @@ class SubscriptionService
             ->first();
     }
 
-    public function getSections($ecourse_id)
-    {
-        return Section::whereRelation('lessons', 'ecourse_id', $ecourse_id)
-            ->orderBy('order_no')
-            ->get();
-    }
-
     public function getSection($section_id)
     {
         return Section::find($section_id);

@@ -25,7 +25,7 @@ class Lesson extends Model implements HasMedia
             'crop' => false,
             'disk' => 'public',
             'path' => 'lessons',
-            'placeholder' => '/event qac.jpg',
+            'placeholder' => '/images/ecourse-banner.jpg',
             'rules' => 'image|max:2000',
         ],
     ];

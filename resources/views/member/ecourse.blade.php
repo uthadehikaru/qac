@@ -33,17 +33,17 @@
         @endif
         <div class="flex flex-col md:flex-row gap-8">
             <div class="w-full md:w-2/3">
-                <img alt="{{ $ecourse->title }}" class="w-full h-full object-contain md:object-cover object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
+                <img alt="{{ $ecourse->title }}" class="w-full object-contain md:object-cover object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />
                 <p>{{ $ecourse->description }}</p>
             </div>
             <div class="w-full md:w-1/3 mt-8 md:mt-0 flex flex-col gap-y-2">
                 @forelse ($videos as $video)
-                    <x-lesson-card :video="$video" :ecourse="$ecourse" :completed="$completed"
+                    <x-lesson-card :video="$video" :ecourse="$ecourse"
                     :current="$video" />
                 @empty
                     <p>Belum ada video</p>
                 @endforelse
             </div>
-        </div>
+        </div> 
 </x-panel>
 </x-web-layout>

@@ -52,7 +52,13 @@
                         </svg>
                     </button>
                     <div class="dropdown-menu absolute hidden bg-white shadow-lg text-xs md:text-base">
+                        @if($member_level >= 0)
                         <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
+                        <a href="{{ route('member.ecourses.lessons', 'qac-10-lite-1a') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">Kelas QAC 1a</a>
+                        <a href="{{ $member_level==1 ? route('member.ecourses.lessons', 'qac-10-lite-1b') : '#' }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">Kelas QAC 1b</a>
+                        @else
+                        <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
+                        @endif
                         <a href="{{ route('kelas.qac-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
                         <a href="{{ route('kelas.qac-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
                         <a href="{{ route('kelas.qac-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] hover:text-white whitespace-nowrap">QAC 3.0 (Advance Grammar)</a>

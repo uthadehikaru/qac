@@ -90,6 +90,13 @@ class EcourseService
         return Section::all();
     }
 
+    public function getEcourseSections($ecourse_id)
+    {
+        return Section::whereRelation('lessons', 'ecourse_id', $ecourse_id)
+            ->orderBy('order_no')
+            ->get();
+    }
+
     public function getLesson($id): Lesson
     {
         return Lesson::find($id);
