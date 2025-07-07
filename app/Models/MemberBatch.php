@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Facades\Cache;
 
 class MemberBatch extends Pivot
 {
@@ -53,18 +54,12 @@ class MemberBatch extends Pivot
     {
         parent::boot();
 
-        static::creating(function ($memberBatch) {
-            // Set approved_at when status is PAID on creation
-            if ($memberBatch->status == self::STATUS_PAID) {
-                $memberBatch->approved_at = Carbon::now();
-            }
-        });
-
         static::updating(function ($memberBatch) {
             // Set approved_at when status changes to PAID
             if ($memberBatch->isDirty('status') && $memberBatch->status == self::STATUS_PAID) {
                 $memberBatch->approved_at = Carbon::now();
             }
+            Cache::forget('member_level_'.$memberBatch->member_id);
         });
     }
 
