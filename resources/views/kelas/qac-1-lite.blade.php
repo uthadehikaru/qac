@@ -38,19 +38,19 @@
                     <h3 class="text-xl md:text-3xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
                     <div class="space-y-6">
                         <div class="flex items-center">
-                            <div class="text-xs md:text-lg">
+                            <div class="text-sm md:text-lg">
                                 <p>Yang ingin <span class="font-bold">tadabbur Al-Qur'an sampai level bahasa Arabnya</span></p>
                             </div>
                             <img src="{{ asset('images/qac-lite-icon-1.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-auto ml-auto">
                         </div>
                         <div class="flex items-center">
-                            <div class="text-xs md:text-lg">
+                            <div class="text-sm md:text-lg">
                                 <p>Yang ingin mengetahui <span class="font-bold">esensi pesan Al-Qur'an</span> untuknya</p>
                             </div>
                             <img src="{{ asset('images/qac-lite-icon-2.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-auto ml-auto">
                         </div>
                         <div class="flex items-center">
-                            <div class="text-xs md:text-lg">
+                            <div class="text-sm md:text-lg">
                                 <p>Yang <span class="font-bold">mencari kebenaran</span>, ingin mengetahui <span class="font-bold">esensi hidup</span></p>
                             </div>
                             <img src="{{ asset('images/qac-lite-icon-3.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-auto ml-auto">
@@ -87,7 +87,7 @@
                     <div class="flex justify-center">
                         <h3 class="text-lg md:text-2xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1a</h3>
                     </div>
-                    <ul class="space-y-3 text-xs md:text-lg bg-[#ffdf79]">
+                    <ul class="space-y-3 text-sm md:text-lg bg-[#ffdf79]">
                         <li class="p-2 text-center border-b border-black">
                         10 video materi pembelajaran, bisa diakses selama 1 bulan dari waktu daftar
                         </li>
@@ -112,7 +112,7 @@
                     <div class="flex justify-center">
                     <h3 class="text-lg md:text-2xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1b</h3>
                     </div>
-                    <ul class="space-y-3 text-xs md:text-lg bg-[#ffdf79]">
+                    <ul class="space-y-3 text-sm md:text-lg bg-[#ffdf79]">
                         <li class="p-2 text-center border-b border-black">
                         10 video materi pembelajaran, bisa diakses
                         selama 1 bulan dari waktu daftar

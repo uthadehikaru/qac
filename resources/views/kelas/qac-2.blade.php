@@ -17,55 +17,55 @@
                 <h2 class="text-xl md:text-3xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('images/qac 2/1.png') }}" alt="Tujuan 1 QAC 2.0" class="h-16 w-16">
-                    <p class="text-center text-xs md:text-base">Fokus 1 kata dan perubahannya (sharf dasar) tentang Keluarga Keci</p>
+                    <p class="text-center text-sm md:text-base">Fokus 1 kata dan perubahannya (sharf dasar) tentang Keluarga Keci</p>
                 </div>
                 <div class="flex items-center justify-center">
-                    <p class="text-center text-xs md:text-base">Pendalaman makna, mengupas Keluarga Besar</p>
+                    <p class="text-center text-sm md:text-base">Pendalaman makna, mengupas Keluarga Besar</p>
                     <img src="{{ asset('images/qac 2/2.png') }}" alt="Tujuan 2 QAC 2.0" class="h-16 w-16">
                 </div>
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('images/qac 2/3.png') }}" alt="Tujuan 3 QAC 2.0" class="h-16 w-16">
-                    <p class="text-center text-xs md:text-base">Contoh-contoh Tadabbur Al-Qur’an versi QAC 2.0</p>
+                    <p class="text-center text-sm md:text-base">Contoh-contoh Tadabbur Al-Qur’an versi QAC 2.0</p>
                 </div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4 items-start mt-24 mx-2 py-0 md:py-8">
             <div class="rounded-lg bg-[#ffdf79] p-4">
-                <h2 class="text-sm md:text-xl text-center mb-4">Fasilitas apa yang didapatkan?</h2>
+                <h2 class="text-base md:text-xl text-center mb-4">Fasilitas apa yang didapatkan?</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/time.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Kursus 1 sesi persiapan + 9 x sesi</p>
+                        <p class="text-sm md:text-base">Kursus 1 sesi persiapan + 9 x sesi</p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/pdf.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Buku berupa pdf (download di web): <br> Theory, Workbook & Daily Activities</p>
+                        <p class="text-sm md:text-base">Buku berupa pdf (download di web): <br> Theory, Workbook & Daily Activities</p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/video.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Video rangkuman (bisa diakses selama 1 bulan setelah kelas) </p>
+                        <p class="text-sm md:text-base">Video rangkuman (bisa diakses selama 1 bulan setelah kelas) </p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/people.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Acara-acara Alumni QAC (selamanya)</p>
+                        <p class="text-sm md:text-base">Acara-acara Alumni QAC (selamanya)</p>
                     </li>
                 </ul>
             </div>
             <div class="p-4">
-                <h2 class="text-sm md:text-xl text-center mb-4">Teknis (perlu komitmen)</h2>
+                <h2 class="text-base md:text-xl text-center mb-4">Teknis (perlu komitmen)</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/date.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Setiap hari Senin, Rabu dan Jum’at. <br> Sabtu & Ahad libur, selama 9 x.</p>
+                        <p class="text-sm md:text-base">Setiap hari Senin, Rabu dan Jum’at. <br> Sabtu & Ahad libur, selama 9 x.</p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/clock.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Pilihan : Pagi (8.30) atau Malam (20.00)</p>
+                        <p class="text-sm md:text-base">Pilihan : Pagi (8.30) atau Malam (20.00)</p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/live.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-xs md:text-base">Kelas ONLINE LIVE ZOOM dengan Video persiapan materi yang wajib ditonton sebelum kelas</p>
+                        <p class="text-sm md:text-base">Kelas ONLINE LIVE ZOOM dengan Video persiapan materi yang wajib ditonton sebelum kelas</p>
                     </li>
                 </ul>
             </div>

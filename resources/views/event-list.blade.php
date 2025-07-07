@@ -8,9 +8,9 @@
 
         <div class="relative py-4">
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
-                <div class="flex justify-between lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black">
+                <div class="flex justify-between lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
                     @foreach($eventCategories as $category)
-                    <a href="{{ route('event.list', ['category' => $category->slug]) }}" class="px-4 py-2 {{ $category->id == $selectedEventCategory->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2 text-xs">{{ $category->name }}</a>
+                    <a href="{{ route('event.list', ['category' => $category->slug]) }}" class="px-4 py-2 {{ $category->id == $selectedEventCategory->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
@@ -21,8 +21,8 @@
                 <a href="{{ route('member.ecourses.lessons', $event->slug) }}" class="ecourse" title="{{ $event->title }}">
                     <div class="rounded-lg">
                         <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
-                        <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
-                        <p class="text-xs text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
+                        <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
+                        <p class="text-xs md:text-base text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
                     </div>
                 </a>
             </div>
@@ -33,11 +33,7 @@
             @endforelse
         </div>
     </section>
-    <div class="fixed bottom-4 right-4 text-sm flex gap-2 items-center bg-white">
-        <p>Jika mengalami kendala, silakan hubungi whatsapp kami.</p>
-        <a href="https://wa.me/6281234567890" class="bg-green-400 px-4 py-2 rounded-full text-black text-sm">Whatsapp</a>
-    </div>
-    
+    <x-whatsapp-button />
     <x-slot name="scripts">
     @if(auth()->check() && !$activeOrder)
     <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="subscriptionModal">

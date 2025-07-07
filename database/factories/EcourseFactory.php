@@ -30,6 +30,7 @@ class EcourseFactory extends Factory
             'views' => $this->faker->numberBetween(0, 1000),
             'published_at' => $this->faker->boolean(70) ? $this->faker->dateTimeThisYear() : null,
             'course_id' => null,
+            'category_id' => null,
         ];
     }
 

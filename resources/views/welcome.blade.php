@@ -120,13 +120,13 @@
             <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
                 <div class="text-center mb-8">
                     <a href="{{ route('ecourses.index') }}">
-                        <h1 class="text-md md:text-xl font-bold text-center text-gray-900 mb-4">
+                        <h1 class="text-md md:text-2xl font-bold text-center text-gray-900 mb-4">
                         Program Alumni QAC
                         </h1>
                     </a>
                     <div class="w-full mb-4">
                     <x-divider />
-                    <p class="w-full leading-relaxed text-xs mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
+                    <p class="w-full leading-relaxed text-xs md:text-base mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
                     </div>
                     <div class="relative">
                         <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
@@ -155,8 +155,8 @@
                         <a href="{{ route('ecourses.show', $ecourse->slug) }}" title="{{ $ecourse->title }}">
                             <div class="rounded-lg">
                                 <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}">
-                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
-                                <p class="text-xs text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
+                                <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
+                                <p class="text-xs md:text-base text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
                             </div>
                         </a>
                     </div>
@@ -171,13 +171,13 @@
         <section id="events" class="bg-white text-gray-600 body-font pt-8">
             <div class="container px-5 py-2 mx-auto">
                 <div class="text-center mb-8">
-                    <h1 class="text-base md:text-xl font-bold text-center title-font text-gray-900 mb-4">
+                    <h1 class="text-base md:text-2xl font-bold text-center title-font text-gray-900 mb-4">
                     Event QAC
                     </h1>
                     <div class="w-full mb-4">
                         <x-divider />
                     </div>
-                    <p class="text-xs md:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
+                    <p class="text-xs md:text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
                     Kegiatan atau program yang terbuka untuk UMUM
                     </p>
                     <div class="inline-flex justify-between lg:justify-center border rounded-full text-xs p-1 border-yellow-500">
@@ -192,8 +192,8 @@
                         <a href="{{ route('event.detail', $event->slug) }}" title="{{ $event->title }}">
                             <div class="rounded-lg">
                                 <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
-                                <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
-                                <p class="text-xs text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
+                                <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
+                                <p class="text-xs md:text-base text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
                             </div>
                         </a>
                     </div>
@@ -207,7 +207,7 @@
 
         <section id="testimonial-section" class="text-gray-600 body-font relative">
             <div class="container px-5 py-8 mx-auto">
-                <h1 class="w-full my-2 text-base font-bold leading-tight text-center text-gray-900">
+                <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-900">
                     @lang('Apa Kata Alumni QAC?')
                 </h1>
                 <div class="w-full mb-4">
@@ -217,8 +217,8 @@
                 <div class="owl-carousel px-4 py-4" id="testimonial">
                     <div class="w-full lg:mb-0 p-4 bg-[#fff9e4] rounded-lg">
                         <div class="h-full text-center">
-                        <p class="text-gray-800 text-sm font-bold my-3">QAC 2.2 Batch 2</p>
-                        <p class="leading-relaxed text-gray-600 text-center text-xs">
+                        <p class="text-gray-800 text-sm md:text-base font-bold my-3">QAC 2.2 Batch 2</p>
+                        <p class="leading-relaxed text-gray-600 text-center text-xs md:text-base">
                         Alhamdulillah bisa berkesempatan lanjut ikut QAC
                         2.2. Jikalau ikut dari awal sampai tingkat ini, pasti
                         berasa sekali bahwa pembelajarannya benar-benar
@@ -226,18 +226,18 @@
                         dicerna, darimana pun background-nya.
                         </p>
                         <span class="inline-block h-1 w-24 rounded bg-[#e9a621] mt-6 mb-4"></span>
-                        <p class="text-gray-800 text-sm font-bold">Aisha Shannaz</p>
+                        <p class="text-gray-800 text-sm md:text-base font-bold">Aisha Shannaz</p>
                         </div>
                     </div>
                     @foreach($testimonials as $testimonial)
                     <div class="w-full lg:mb-0 p-4 bg-[#fff9e4] rounded-lg">
                         <div class="h-full text-center">
-                        <p class="text-gray-800 text-sm font-bold my-3">{{ $testimonial->batch->full_name }}</p>
-                        <p class="leading-relaxed text-gray-600 text-center text-xs">
+                        <p class="text-gray-800 text-sm md:text-base font-bold my-3">{{ $testimonial->batch->full_name }}</p>
+                        <p class="leading-relaxed text-gray-600 text-center text-xs md:text-base">
                             {!! nl2br(substr($testimonial->testimonial,0,500)) !!} ...
                         </p>
                         <span class="inline-block h-1 w-24 rounded gradient mt-6 mb-4"></span>
-                        <p class="text-gray-800 text-sm font-bold">{{ $testimonial->member->full_name }}</p>
+                        <p class="text-gray-800 text-sm md:text-base font-bold">{{ $testimonial->member->full_name }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -249,13 +249,13 @@
             </div>
         </section>
         <section id="register" class="mx-auto text-center mt-12 mb-12">
-        <h1 class="w-full my-2 text-base font-bold leading-tight text-center text-gray-900">
+        <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-900">
             @lang('Bergabung Bersama Para Pejuang')
         </h1>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
         </div>
-        <h3 class="my-4 text-xs leading-tight">
+        <h3 class="my-4 text-xs md:text-base leading-tight">
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <div class="py-8">

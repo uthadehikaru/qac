@@ -1,6 +1,7 @@
 <x-web-layout>
 
     <x-panel class="mt-20">
+        @if(!$ecourse->is_only_active_batch)
         <nav class="flex mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -29,6 +30,7 @@
                 </li>
             </ol>
         </nav>
+        @endif
         <div class="flex flex-col md:flex-row gap-8">
             <div class="w-full md:w-2/3">
                 <img alt="{{ $ecourse->title }}" class="w-full h-full object-contain md:object-cover object-center rounded" src="{{ $ecourse->imageUrl('thumbnail') }}" />

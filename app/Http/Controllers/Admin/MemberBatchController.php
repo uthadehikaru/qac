@@ -162,15 +162,10 @@ class MemberBatchController extends Controller
             'session' => $request->session,
             'status' => $request->status,
             'note' => $request->note,
-            'new_book' => $request->new_book,
+            'new_book' => $request->new_book ?? 0,
             'reseat' => $request->reseat,
             'testimonial' => $request->testimonial,
         ];
-        if ($request->status == 6) {
-            $data['approved_at'] = Carbon::now();
-        } else {
-            $data['approved_at'] = null;
-        }
 
         $memberBatch->update($data);
         if ($memberBatch->wasChanged('status')) {

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class MemberBatch extends Pivot
@@ -10,6 +11,8 @@ class MemberBatch extends Pivot
     use HasFactory;
 
     protected $table = 'member_batch';
+
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'member_id',
@@ -42,7 +45,28 @@ class MemberBatch extends Pivot
 
     public $timestamps = false;
 
-    protected $dates = ['approved_at'];
+    protected $casts = [
+        'approved_at' => 'datetime',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($memberBatch) {
+            // Set approved_at when status is PAID on creation
+            if ($memberBatch->status == self::STATUS_PAID) {
+                $memberBatch->approved_at = Carbon::now();
+            }
+        });
+
+        static::updating(function ($memberBatch) {
+            // Set approved_at when status changes to PAID
+            if ($memberBatch->isDirty('status') && $memberBatch->status == self::STATUS_PAID) {
+                $memberBatch->approved_at = Carbon::now();
+            }
+        });
+    }
 
     public function member()
     {

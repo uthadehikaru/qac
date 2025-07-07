@@ -12,7 +12,7 @@
                 <div class="flex flex-col gap-2">
                     <div class="text-sm font-bold">Kelas {{ $batch->course->name }}</div>
                     @if($batch->pivot->approved_at)
-                    <div class="text-xs"Pembayaran pada {{ $batch->pivot->approved_at->format('d M Y') }}</div>
+                    <div class="text-xs">Pembayaran pada {{ $batch->pivot->approved_at->format('d M Y') }}</div>
                     @else
                     <div class="text-xs">Menunggu verifikasi pembayaran</div>
                     @endif

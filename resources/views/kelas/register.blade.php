@@ -2,9 +2,9 @@
     <x-auth-card>
         <x-slot name="logo">
             @if($lite)
-            <h1 class="text-2xl font-bold text-center mt-24">Pendaftaran QAC 1.0 Lite</h1>
+            <h1 class="text-2xl font-bold text-center mt-24 md:mt-48">Pendaftaran QAC 1.0 Lite</h1>
             @else
-            <h1 class="text-2xl font-bold text-center mt-24">Pendaftaran {{ $batch ? '' : 'Waiting List'}} <br> {{ $course->name }}</h1>
+            <h1 class="text-2xl font-bold text-center mt-24 md:mt-48">Pendaftaran {{ $batch ? '' : 'Waiting List'}} <br> {{ $course->name }}</h1>
             @endif
         </x-slot>
 
@@ -201,10 +201,23 @@
                 const registerBtn = document.getElementById('register-btn');
                 
                 if (form && registerBtn) {
-                    form.addEventListener('submit', function() {
+                    form.addEventListener('submit', function(e) {
+                        // Prevent double submission
+                        if (registerBtn.disabled) {
+                            e.preventDefault();
+                            return false;
+                        }
+                        
+                        // Disable button and show loading state
                         registerBtn.disabled = true;
                         registerBtn.textContent = '{{ __("Registering...") }}';
                         registerBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                        
+                        // Also disable all form inputs to prevent changes during submission
+                        const formInputs = form.querySelectorAll('input, select, textarea');
+                        formInputs.forEach(input => {
+                            input.disabled = true;
+                        });
                     });
                 }
             });
