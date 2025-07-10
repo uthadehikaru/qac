@@ -80,7 +80,7 @@
 
         <div class="py-8">
             <div class="flex justify-center py-4">
-                <h2 class="text-2xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">Fasilitas apa yang didapatkan?</h2>
+                <h2 class="text-lg md:text-3xl text-center font-bold mb-4 border-b-4 border-[#e9a621]">Fasilitas apa yang didapatkan?</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-montserrat">
                 <div class="flex flex-col content-start px-2">
