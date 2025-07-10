@@ -17,8 +17,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4 items-top font-montserrat">
                 <!-- Left Column -->
                 <div class="px-1 md:px-4">
-                    <h2 class="text-xl md:text-3xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
-                    <ul class="space-y-4 text-xl md:text-3xl">
+                    <h2 class="text-xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
+                    <ul class="space-y-4 text-base md:text-xl">
                         <li class="flex items-center">
                         <img src="{{ asset('images/qac lite/check.png') }}" alt="QAC 1.0 Lite" class="h-12 md:h-24 mr-2"/>
                             <span class="italic">Sesuai pacemu</span>
@@ -35,25 +35,25 @@
                 </div>
                 <!-- Right Column -->
                 <div class="px-1 md:px-4 font-montserrat">
-                    <h3 class="text-3xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
+                    <h3 class="text-xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
                     <div class="space-y-6">
                         <div class="flex items-center">
-                            <div class="text-xl">
+                            <div class="text-base md:text-xl">
                                 <p>Yang ingin <span class="font-bold">tadabbur Al-Qur'an sampai level bahasa Arabnya</span></p>
                             </div>
-                            <img src="{{ asset('images/qac lite/1.png') }}" alt="QAC 1.0 Lite" class="h-48 ml-auto">
+                            <img src="{{ asset('images/qac lite/1.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-48 ml-auto">
                         </div>
                         <div class="flex items-center">
-                            <div class="text-xl">
+                            <div class="text-base md:text-xl">
                                 <p>Yang ingin mengetahui <span class="font-bold">esensi pesan Al-Qur'an</span> untuknya</p>
                             </div>
-                            <img src="{{ asset('images/qac lite/2.png') }}" alt="QAC 1.0 Lite" class="h-48 ml-auto">
+                            <img src="{{ asset('images/qac lite/2.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-48 ml-auto">
                         </div>
                         <div class="flex items-center">
-                            <div class="text-xl">
+                            <div class="text-base md:text-xl">
                                 <p>Yang <span class="font-bold">mencari kebenaran</span>, ingin mengetahui <span class="font-bold">esensi hidup</span></p>
                             </div>
-                            <img src="{{ asset('images/qac lite/3.png') }}" alt="QAC 1.0 Lite" class="h-48 ml-auto">
+                            <img src="{{ asset('images/qac lite/3.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-48 ml-auto">
                         </div>
                     </div>
                 </div>
