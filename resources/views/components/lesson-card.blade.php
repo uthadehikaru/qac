@@ -1,6 +1,7 @@
-<div class="w-full flex flex-col gap-y-2">
-    <img class="w-full md:w-3/4" src="{{ $video->imageUrl('thumbnail') }}" alt="{{ $video->subject }}" />
+<div class="w-full">
     <a id="{{ $id ?? $video->lesson_uu }}" href="{{ route('member.ecourses.lessons', [$ecourse->slug, $video->lesson_uu]) }}" 
-    class="font-bold flex items-center w-full py-4 text-red-800">
-    {{ $video->subject }}</a>
+    class="font-bold flex flex-col gap-y-2 items-start justify-start w-full py-4 {{ $current->lesson_uu == $video->lesson_uu ? 'text-yellow-500' : 'text-red-800' }} hover:text-yellow-500">
+    <img class="w-full md:w-3/4" src="{{ $video->imageUrl('thumbnail') }}" alt="{{ $video->subject }}" />
+    <span class="text-sm">{{ $video->subject }}</span>
+    </a>
 </div>

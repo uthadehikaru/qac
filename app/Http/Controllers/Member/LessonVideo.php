@@ -24,7 +24,7 @@ class LessonVideo extends Controller
         $activeOrder = $orderService->activeOrder();
         if(!$activeOrder && !$ecourse->is_only_active_batch){
             return redirect()->route('checkout')->with('error', 'Anda belum memiliki langganan aktif');
-        }else{
+        }elseif($ecourse->is_only_active_batch){
             $isLite = Str::startsWith($ecourse->course->name, 'QAC 1.0 Lite');
             $activeBatch = $memberService->checkMemberActiveBatch($member_id, $ecourse->course_id, $isLite);
             if(!$activeBatch){
@@ -43,10 +43,9 @@ class LessonVideo extends Controller
         } else {
             $data['video'] = $videos->first();
         }
-        if(!$data['video']){
-            return redirect()->route('member.ecourses.show', $slug);
+        if($data['video']){
+            $ecourseService->addHistory($data['video']->id, $member_id);
         }
-        $ecourseService->addHistory($data['video']->id, $member_id);
         $data['videos'] = $videos;
         $data['next'] = $ecourseService->getNext($videos, $lesson_uu);
 

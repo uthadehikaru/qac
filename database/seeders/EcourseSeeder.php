@@ -27,23 +27,31 @@ class EcourseSeeder extends Seeder
                 'is_only_active_batch' => true,
             ]);
 
-            $sections = Section::all();
-
-            for($i=1; $i<=5; $i++) {
+            for($i=1; $i<=4; $i++) {
+                $section = Section::where('order_no', $i)->first();
                 $lesson = Lesson::updateOrCreate([
                     'ecourse_id' => $ecourse->id,
                     'order_no' => $i,
                 ],[
-                    'section_id' => $sections->random()->id,
+                    'section_id' => $section->id,
                     'lesson_uu' => Str::uuid(),
                     'subject' => $course->name . ' lesson ' . $i,
                     'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
                 ]);
 
                 // Add media thumbnail to lesson
+                if(!$lesson->getFirstMedia('thumbnail')) {
                 $lesson->addMedia(public_path('images/qac lite.png'))
                     ->preservingOriginal()
                     ->toMediaCollection('thumbnail', 'public');
+                }
+
+                // Add media video to lesson
+                if(!$lesson->getFirstMedia('videos')) {
+                    $lesson->addMedia(public_path('storage/sample.mp4'))
+                        ->preservingOriginal()
+                        ->toMediaCollection('videos', 'public');
+                }
             }
         }
     }

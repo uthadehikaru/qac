@@ -34,13 +34,8 @@ class MemberEcoursesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubscriptionService $subscriptionService, string $slug)
+    public function show(string $slug)
     {
-        $member_id = Auth::user()->member?->id;
-        $ecourse = $subscriptionService->getEcourse($slug, $member_id);
-        $data['ecourse'] = $ecourse;
-        $data['videos'] = $subscriptionService->getVideos($ecourse->id);
-
-        return view('member.ecourse', $data);
+        return redirect()->route('member.ecourses.lessons', $slug);
     }
 }

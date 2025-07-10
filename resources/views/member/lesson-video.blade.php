@@ -56,10 +56,17 @@
         <div class="container mx-auto">
             <div class="w-full flex flex-col md:flex-row gap-8">
                 <div class="content md:w-2/3">
+                    @if($video?->getMedia('videos')->first())
                     <video width="100%" height="240" controls autoplay controlsList="nodownload">
                     <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>
+                    @elseif($video)
+                    <img src="{{ $video->imageUrl('thumbnail') }}" alt="No video available" class="w-full h-auto">
+                    @else
+                    <img src="{{ $ecourse->imageUrl('thumbnail') }}" alt="No video available" class="w-full h-auto">
+                    @endif
+                   @if($video)
                     <p class="mt-8">{{ $video->subject }}</p>
                     <p class="mt-8">{{ $video->description }}</p>
                     <div class="mt-8">
@@ -72,13 +79,16 @@
                         @endforelse
                         </ul>
                     </div>
+                    @endif
 
                 </div>
                 <div class="md:w-1/3 mt-8 md:mt-0 flex flex-col gap-y-2">
-                    @foreach ($videos as $lesson)
+                    @forelse ($videos as $lesson)
                         <x-lesson-card :video="$lesson" :ecourse="$ecourse"
                         :current="$video" />
-                    @endforeach
+                    @empty
+                    <p class="text-gray-500">Belum ada video yang tersedia</p>
+                    @endforelse
                 </div>
             </div>
         </div>
