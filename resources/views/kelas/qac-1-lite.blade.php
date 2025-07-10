@@ -1,4 +1,7 @@
 <x-web-layout>
+    <x-slot name="title">
+        - QAC 1.0 Lite (Self Paced)
+    </x-slot>
     <div class="container mx-auto mt-12 md:mt-24">
         <img src="{{ asset('images/qac lite/logo.png') }}" alt="QAC 1.0 Lite" class="w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-4 px-2">

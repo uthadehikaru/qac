@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="title">
+        - Masuk
+    </x-slot>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">

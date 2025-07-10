@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="title">
+        - Pendaftaran
+    </x-slot>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
@@ -131,15 +134,6 @@
                         @endif
                     </div>
                     @endif
-
-                    <div class="md:flex md:items-left my-6">
-                        <label class="md:w-full block text-gray-500 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" name="term_condition" required>
-                        <span class="text-sm">
-                            dengan mendaftar, saya menyetujui <span class="text-blue-500">syarat dan ketentuan</span> yang berlaku
-                        </span>
-                        </label>
-                    </div>
 
                     <div class="flex items-center justify-end mt-4">
                         <x-button id="register-btn" class="ml-4" type="submit">

@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="title">
+        - Lupa Password
+    </x-slot>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
@@ -27,8 +30,11 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Kirim Email Reset Password') }}
+                <a class="ml-2 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    {{ __('Kembali ke login') }}
+                </a>
+                <x-button class="ml-3">
+                    {{ __('Kirim') }}
                 </x-button>
             </div>
         </form>

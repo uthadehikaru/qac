@@ -75,7 +75,6 @@ class RegisteredUserController extends Controller
             'instagram' => '',
             'batch_id' => 'sometimes',
             'course_id' => 'sometimes',
-            'term_condition' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -132,16 +131,7 @@ class RegisteredUserController extends Controller
 
         DB::commit();
 
-        if ($request->has('batch_id')) {
-            return redirect()->route('member.batches.detail', $memberBatch->id);
-        } elseif ($request->has('course_id')) {
-            return redirect()->route('member.dashboard')->with('message', 'Anda telah berhasil didaftarkan dalam waiting list');
-        }
-
-        if(session()->has('url.intended')) {
-            return redirect(session()->get('url.intended'));
-        }
-
-        return redirect('/');
+        // Redirect back to register form with success message
+        return redirect()->route('register')->with('success', 'Registrasi berhasil! Anda akan dialihkan dalam 5 detik.');
     }
 }
