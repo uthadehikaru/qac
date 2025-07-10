@@ -40,40 +40,40 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4 items-start mt-24 mx-2 py-0 md:py-8">
             <div class="rounded-lg bg-[#ffdf79] p-4">
-                <h2 class="text-base md:text-xl text-center mb-4">Fasilitas apa yang didapatkan?</h2>
+                <h2 class="text-xl text-center mb-4">Fasilitas apa yang didapatkan?</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/time.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat">Kursus 1 sesi persiapan + <span class="font-bold">9 x sesi</span></p>
+                        <p class="text-base font-montserrat">Kursus 1 sesi persiapan + <span class="font-bold">9 x sesi</span></p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/pdf.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat">Buku berupa pdf (download di web): <br> <span class="font-bold">Theory, Workbook & Daily Activities</span></p>
+                        <p class="text-base font-montserrat">Buku berupa pdf (download di web): <br> <span class="font-bold">Theory, Workbook & Daily Activities</span></p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/video.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat">Video rangkuman <span class="font-bold">(bisa diakses selama 1 bulan setelah kelas)</span> </p>
+                        <p class="text-base font-montserrat">Video rangkuman <span class="font-bold">(bisa diakses selama 1 bulan setelah kelas)</span> </p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/people.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat">Acara-acara Alumni QAC <span class="font-bold">(selamanya)</span></p>
+                        <p class="text-base font-montserrat">Acara-acara Alumni QAC <span class="font-bold">(selamanya)</span></p>
                     </li>
                 </ul>
             </div>
             <div class="p-4">
-                <h2 class="text-base md:text-xl text-center mb-4">Teknis (perlu komitmen)</h2>
+                <h2 class="text-xl text-center mb-4">Teknis (perlu komitmen)</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/date.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat">Setiap hari <span class="font-bold">Senin, Rabu dan Jum’at</span>. <br> Sabtu & Ahad libur, selama 9 x.</p>
+                        <p class="text-base font-montserrat">Setiap hari <span class="font-bold">Senin, Rabu dan Jum’at</span>. <br> Sabtu & Ahad libur, selama 9 x.</p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                     <img src="{{ asset('images/icons/clock.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat">Pilihan : <span class="font-bold">Pagi (8.30)</span> atau <span class="font-bold">Malam (20.00)</span></p>
+                        <p class="text-base font-montserrat">Pilihan : <span class="font-bold">Pagi (8.30)</span> atau <span class="font-bold">Malam (20.00)</span></p>
                     </li>
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/live.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
-                        <p class="text-sm md:text-base font-montserrat"><span class="font-bold">Kelas ONLINE LIVE ZOOM</span> dengan Video persiapan materi yang <span class="font-bold">wajib</span> ditonton <span class="font-bold">sebelum kelas</span></p>
+                        <p class="text-base font-montserrat"><span class="font-bold">Kelas ONLINE LIVE ZOOM</span> dengan Video persiapan materi yang <span class="font-bold">wajib</span> ditonton <span class="font-bold">sebelum kelas</span></p>
                     </li>
                 </ul>
             </div>
