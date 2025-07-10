@@ -7,13 +7,23 @@
 
 
         <div class="relative py-4">
+            <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
-                <div class="flex justify-between lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
+                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
                     @foreach($eventCategories as $category)
                     <a href="{{ route('event.list', ['category' => $category->slug]) }}" class="px-4 py-2 {{ $category->id == $selectedEventCategory->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
+            <button class="filter-nav-custom filter-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Next">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
         </div>
         <div class="flex flex-wrap mx-2">
             @forelse($latest_events as $event)
@@ -51,14 +61,94 @@
                 </div>
             </div>
         </div>
+    @endif
     <script>
             jQuery(document).ready(function($){
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');
                 });
+                
+                // Filter Carousel functionality
+                let currentPosition = 0;
+                const $filterCarousel = $('.filter-carousel');
+                const $filterItems = $filterCarousel.find('a');
+                const $container = $filterCarousel.parent();
+                
+                // Calculate actual item widths dynamically
+                function calculateItemWidth() {
+                    return $filterItems.first().outerWidth(true); // Include margin
+                }
+                
+                function updateCarousel() {
+                    const itemWidth = calculateItemWidth();
+                    const containerWidth = $container.width();
+                    const totalWidth = $filterItems.length * itemWidth;
+                    const maxPosition = Math.max(0, totalWidth - containerWidth + 32); // Add extra space for padding
+                    
+                    // Show/hide navigation buttons based on position
+                    $('.filter-prev').toggle(currentPosition > 0);
+                    $('.filter-next').toggle(currentPosition < maxPosition);
+                    
+                    // Ensure we don't exceed max position
+                    if (currentPosition > maxPosition) {
+                        currentPosition = maxPosition;
+                    }
+                    
+                    $filterCarousel.css('transform', `translateX(-${currentPosition}px)`);
+                }
+
+                // Function to scroll to selected category
+                function scrollToSelectedCategory() {
+                    const selectedItem = $filterCarousel.find('a.bg-yellow-500');
+                    if (selectedItem.length > 0) {
+                        const itemWidth = calculateItemWidth();
+                        const itemIndex = selectedItem.index();
+                        const containerWidth = $container.width();
+                        
+                        // Calculate position to center the selected item
+                        const targetPosition = (itemIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+                        currentPosition = Math.max(0, Math.min(targetPosition, $filterItems.length * itemWidth - containerWidth + 32));
+                        
+                        updateCarousel();
+                    }
+                }
+
+                // Initialize carousel
+                updateCarousel();
+                
+                // Scroll to selected category after initialization
+                setTimeout(scrollToSelectedCategory, 100);
+
+                // Previous button click
+                $('.filter-prev').click(function() {
+                    if (currentPosition > 0) {
+                        const itemWidth = calculateItemWidth();
+                        currentPosition = Math.max(0, currentPosition - itemWidth);
+                        updateCarousel();
+                    }
+                });
+
+                // Next button click
+                $('.filter-next').click(function() {
+                    const itemWidth = calculateItemWidth();
+                    const containerWidth = $container.width();
+                    const totalWidth = $filterItems.length * itemWidth;
+                    const maxPosition = Math.max(0, totalWidth - containerWidth + 32); // Add extra space for padding
+                    
+                    if (currentPosition < maxPosition) {
+                        currentPosition = Math.min(maxPosition, currentPosition + itemWidth);
+                        updateCarousel();
+                    }
+                });
+
+                // Handle window resize
+                $(window).resize(function() {
+                    updateCarousel();
+                    // Re-scroll to selected category after resize
+                    setTimeout(scrollToSelectedCategory, 100);
+                });
             });
     </script>
-    @endif
     </x-slot>
 </x-web-layout>

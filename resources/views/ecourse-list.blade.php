@@ -110,8 +110,27 @@
                     $filterCarousel.css('transform', `translateX(-${currentPosition}px)`);
                 }
 
+                // Function to scroll to selected category
+                function scrollToSelectedCategory() {
+                    const selectedItem = $filterCarousel.find('a.bg-yellow-500');
+                    if (selectedItem.length > 0) {
+                        const itemWidth = calculateItemWidth();
+                        const itemIndex = selectedItem.index();
+                        const containerWidth = $container.width();
+                        
+                        // Calculate position to center the selected item
+                        const targetPosition = (itemIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+                        currentPosition = Math.max(0, Math.min(targetPosition, $filterItems.length * itemWidth - containerWidth + 32));
+                        
+                        updateCarousel();
+                    }
+                }
+
                 // Initialize carousel
                 updateCarousel();
+                
+                // Scroll to selected category after initialization
+                setTimeout(scrollToSelectedCategory, 100);
 
                 // Previous button click
                 $('.filter-prev').click(function() {
@@ -138,6 +157,8 @@
                 // Handle window resize
                 $(window).resize(function() {
                     updateCarousel();
+                    // Re-scroll to selected category after resize
+                    setTimeout(scrollToSelectedCategory, 100);
                 });
             });
         </script>
