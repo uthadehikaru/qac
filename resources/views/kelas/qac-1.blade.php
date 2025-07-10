@@ -18,22 +18,22 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-4 items-start mt-24">
             <div class="flex flex-col items-center justify-center">
-                <img src="{{ asset('images/qac 1/quote.png') }}" alt="Quote QAC 1.0" class="w-full h-auto">
-                <img src="{{ asset('images/qac 1/quote image.png') }}" alt="Quote QAC 1.0" class="w-1/2 md:w-2/3 h-auto">
+                <img src="{{ asset('images/qac 1/quote.png') }}" alt="Quote QAC 1.0" class="w-full md:w-2/3 h-auto">
+                <img src="{{ asset('images/qac 1/quote image.png') }}" alt="Quote QAC 1.0" class="h-48 w-48 md:h-64 md:w-64">
             </div>
             <div class="flex flex-col justify-center">
-                <h2 class="text-3xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/qac 1/1.png') }}" alt="Quote QAC 1.0" class="w-1/3 h-auto">
-                    <p class="text-center text-3xl font-montserrat"><span class="font-bold">Fondasi</span> Bahasa Arab Al-Qur’an</p>
+                <h2 class="text-2xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
+                <div class="flex items-center justify-center gap-4">
+                    <img src="{{ asset('images/qac 1/1.png') }}" alt="Quote QAC 1.0" class="w-1/2 text-center h-24 w-24 md:h-48 md:w-48">
+                    <p class="text-center text-xl font-montserrat"><span class="font-bold">Fondasi</span> Bahasa Arab Al-Qur’an</p>
                 </div>
-                <div class="flex items-center justify-center">
-                    <p class="text-center text-3xl font-montserrat">Tata Bahasa Arab Al-Qur’an <span class="font-bold">dasar</span></p>
-                    <img src="{{ asset('images/qac 1/2.png') }}" alt="Quote QAC 1.0" class="w-1/3 h-auto">
+                <div class="flex items-center justify-center gap-4">
+                    <p class="text-center text-xl font-montserrat">Tata Bahasa Arab Al-Qur’an <span class="font-bold">dasar</span></p>
+                    <img src="{{ asset('images/qac 1/2.png') }}" alt="Quote QAC 1.0" class="w-1/2 text-center h-24 w-24 md:h-48 md:w-48">
                 </div>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/qac 1/3.png') }}" alt="Quote QAC 1.0" class="w-1/3 h-auto">
-                    <p class="text-center text-3xl font-montserrat"><span class="font-bold">Persiapan</span> ke level selanjutnya (QAC 2.0)</p>
+                <div class="flex items-center justify-center gap-4">
+                    <img src="{{ asset('images/qac 1/3.png') }}" alt="Quote QAC 1.0" class="w-1/2 text-center h-24 w-24 md:h-48 md:w-48">
+                    <p class="text-center text-xl font-montserrat"><span class="font-bold">Persiapan</span> ke level selanjutnya (QAC 2.0)</p>
                 </div>
             </div>
         </div>
