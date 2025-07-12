@@ -1,6 +1,6 @@
 <x-web-layout>
     <x-slot name="title"> - Program Alumni QAC</x-slot>
-    <section class="mt-20 text-gray-600 body-font overflow-hidden">
+    <section class="mt-20 md:mt-24 text-gray-600 body-font overflow-hidden">
         @if($activeOrder)
         <x-active-order :order="$activeOrder" />
         @endif
