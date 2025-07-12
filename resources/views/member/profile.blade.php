@@ -10,14 +10,14 @@
         @csrf
         <div class="px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-1/2 px-3">
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-full_name">
                         Nama Lengkap
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
                     id="grid-full_name" name="full_name" type="text" placeholder="Your Full Name" value="{{ Auth::user()->member->full_name }}" required>
                 </div>
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-name">
                         Nama Panggilan
                     </label>
@@ -34,7 +34,7 @@
                     id="grid-email" name="email" type="email" placeholder="Your Email" value="{{ Auth::user()->email }}" disabled>
                     <p class="text-red text-xs italic">@lang('Email tidak dapat diubah')</p>
                 </div>
-                <div class="md:w-1/3 px-3">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-phone">
                         Whatsapp
                     </label>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="-mx-3 md:flex mb-6">
+            <div class="-mx-3 md:flex mb-6 md:mb-0">
                 <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-profesi">
                         Profesi
@@ -62,7 +62,7 @@
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                     id="grid-profesi" name="profesi" type="text" placeholder="Your profesi" value="{{ Auth::user()->member->profesi }}" required>
                 </div>
-                <div class="md:w-1/3 px-3">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-pendidikan">
                         Pendidikan
                     </label>
@@ -75,7 +75,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="md:w-1/3 px-3">
+                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-address">
                         Domisili
                     </label>
@@ -85,9 +85,9 @@
             </div>
             <div class="-mx-3 md:flex mb-6">
                 <div class="md:w-1/2 px-3">
-                    <x-qac-button href="{{ route('member.password') }}">
+                    <a href="{{ route('member.password') }}" class="text-xs md:text-base border-2 border-[#7b0c00] text-[#7b0c00] font-bold py-2 px-4 rounded-full">
                         Ubah Password
-                    </x-qac-button>
+                    </a>
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-6">
