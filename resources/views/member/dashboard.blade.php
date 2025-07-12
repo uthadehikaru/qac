@@ -84,15 +84,10 @@
                     <tr>
                         <td class="px-2 py-4 text-sm text-gray-500">
 
-                            <div class="flex justify-start space-x-1">
-                                <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="border-2 bg-indigo-500 text-white rounded-md p-1">
+                            <div class="flex flex-col md:flex-row justify-start space-x-1">
+                                <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="border-2 bg-blue-500 text-white rounded-md p-1 text-xs md:text-base">
                                     Detail
                                 </a>
-                                @if($batch->file)
-                                <a href="{{ $batch->file->fileUrl('filename') }}" target="_blank" class="border-2 bg-indigo-500 text-white rounded-md p-1">
-                                    Sertifikat
-                                </a>
-                                @endif
                             </div>
                         </td>
                         <td class="px-2 py-4">
@@ -103,6 +98,12 @@
                         </td>
                         <td class="px-2 py-4">
                             @lang('batch.status_'.$batch->pivot->status)
+                            
+                            @if($batch->file)
+                            <a href="{{ $batch->file->fileUrl('filename') }}" target="_blank" class="text-xs md:text-base text-indigo-500 underline">
+                                Sertifikat
+                            </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
