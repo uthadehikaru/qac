@@ -18,22 +18,22 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-24 px-4 md:px-0">
             <div class="flex flex-col items-center justify-center px-4 md:px-0">
-                <h2 class="text-2xl font-bold text-center mb-4">Tujuannya apa?</h2>
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Tujuannya apa?</h2>
                 <img src="{{ asset('images/qac 2/tujuan.png') }}" alt="Tujuan QAC 2.0" class="w-full h-auto">
             </div>
-            <div class="flex flex-col justify-center px-4 md:px-0">
-                <h2 class="text-xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
+            <div class="flex flex-col justify-center px-4 md:px-0 gap-4 md:gap-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-12">Apa aja yang akan dibahas?</h2>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/qac 2/1.png') }}" alt="Tujuan 1 QAC 2.0" class="h-24">
-                    <p class="text-center text-xl font-montserrat">Fokus <span class="font-bold">1 kata dan perubahannya</span> (sharf dasar) tentang Keluarga Keci</p>
+                    <img src="{{ asset('images/qac 2/1.png') }}" alt="Tujuan 1 QAC 2.0" class="h-48">
+                    <p class="text-right text-xl md:text-3xl font-montserrat px-0 md:px-12">Fokus <span class="font-bold">1 kata dan perubahannya</span> (sharf dasar) tentang Keluarga Kecil</p>
                 </div>
                 <div class="flex items-center justify-center">
-                    <p class="text-center text-xl font-montserrat"><span class="font-bold">Pendalaman makna</span>, mengupas Keluarga Besar</p>
-                    <img src="{{ asset('images/qac 2/2.png') }}" alt="Tujuan 2 QAC 2.0" class="h-24">
+                    <p class="text-left text-xl md:text-3xl font-montserrat px-0 md:px-12"><span class="font-bold">Pendalaman makna</span>, mengupas Keluarga Besar</p>
+                    <img src="{{ asset('images/qac 2/2.png') }}" alt="Tujuan 2 QAC 2.0" class="h-48">
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/qac 2/3.png') }}" alt="Tujuan 3 QAC 2.0" class="h-24">
-                    <p class="text-center text-xl font-montserrat">Contoh-contoh <span class="font-bold">Tadabbur Al-Qur’an versi QAC 2.0</span></p>
+                    <img src="{{ asset('images/qac 2/3.png') }}" alt="Tujuan 3 QAC 2.0" class="h-48">
+                    <p class="text-right text-xl md:text-3xl font-montserrat px-0 md:px-12">Contoh-contoh <span class="font-bold">Tadabbur Al-Qur’an versi QAC 2.0</span></p>
                 </div>
             </div>
         </div>
