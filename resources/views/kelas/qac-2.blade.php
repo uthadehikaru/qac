@@ -17,12 +17,12 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-24 px-4 md:px-0">
-            <div class="flex flex-col items-center justify-center">
-                <h2 class="text-3xl font-bold text-center mb-4">Tujuannya apa?</h2>
+            <div class="flex flex-col items-center justify-center px-4 md:px-0">
+                <h2 class="text-2xl font-bold text-center mb-4">Tujuannya apa?</h2>
                 <img src="{{ asset('images/qac 2/tujuan.png') }}" alt="Tujuan QAC 2.0" class="w-full h-auto">
             </div>
-            <div class="flex flex-col justify-center">
-                <h2 class="text-3xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
+            <div class="flex flex-col justify-center px-4 md:px-0">
+                <h2 class="text-xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('images/qac 2/1.png') }}" alt="Tujuan 1 QAC 2.0" class="h-24">
                     <p class="text-center text-xl font-montserrat">Fokus <span class="font-bold">1 kata dan perubahannya</span> (sharf dasar) tentang Keluarga Keci</p>
@@ -40,7 +40,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4 items-start mt-24 mx-2 py-0 md:py-8">
             <div class="rounded-lg bg-[#ffdf79] p-4">
-                <h2 class="text-xl text-center mb-4">Fasilitas apa yang didapatkan?</h2>
+                <h2 class="text-2xl text-center mb-4 underline">Fasilitas apa yang didapatkan?</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/time.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">
@@ -61,7 +61,7 @@
                 </ul>
             </div>
             <div class="p-4">
-                <h2 class="text-xl text-center mb-4">Teknis (perlu komitmen)</h2>
+                <h2 class="text-xl text-center mb-4 underline">Teknis (perlu komitmen)</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/date.png') }}" alt="Quote QAC 2.0" class="h-8 w-8">

@@ -40,7 +40,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-24 mx-2">
             <div class="rounded-lg bg-[#ffdf79] p-4">
-                <h2 class="text-xl text-center mb-4">Fasilitas apa yang didapatkan?</h2>
+                <h2 class="text-xl text-center mb-4 underline">Fasilitas apa yang didapatkan?</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/time.png') }}" alt="Quote QAC 1.0" class="h-8 w-8">
@@ -61,7 +61,7 @@
                 </ul>
             </div>
             <div class="p-4">
-                <h2 class="text-xl text-center mb-4">Teknis (perlu komitmen)</h2>
+                <h2 class="text-xl text-center mb-4 underline">Teknis (perlu komitmen)</h2>
                 <ul class="flex flex-col gap-4">
                     <li class="flex justify-start items-center gap-2">
                         <img src="{{ asset('images/icons/date.png') }}" alt="Quote QAC 1.0" class="h-8 w-8">
