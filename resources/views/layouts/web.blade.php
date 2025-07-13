@@ -38,7 +38,7 @@
         <!--Nav-->
         <nav class="fixed w-full z-30 top-0 border-b-4 bg-white border-red-800">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-            <div class="pl-0 md:pl-4 flex items-center">
+            <div class="pl-2 md:pl-4 flex items-center">
                 <a class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ url('') }}">
                     <img class="h-8 md:h-14 inline" src="{{ asset('qacnew.png') }}" />
                 </a>
@@ -53,15 +53,15 @@
                     </button>
                     <div class="dropdown-menu absolute hidden bg-white font-bold shadow-lg text-xs md:text-base border-2 border-[#ffdf79]">
                         @if($member_level >= 0)
-                        <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#ffdf79] whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
-                        <a href="{{ route('member.ecourses.lessons', 'qac-10-lite-1a') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] whitespace-nowrap">Kelas QAC 1a</a>
-                        <a href="{{ $member_level==1 ? route('member.ecourses.lessons', 'qac-10-lite-1b') : '#' }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#e9a621] whitespace-nowrap">Kelas QAC 1b</a>
+                        <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-1-lite') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
+                        <a href="{{ route('member.ecourses.lessons', 'qac-10-lite-1a') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('member/ecourses/lessons/qac-10-lite-1a') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">Kelas QAC 1a</a>
+                        <a href="{{ $member_level==1 ? route('member.ecourses.lessons', 'qac-10-lite-1b') : '#' }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('member/ecourses/lessons/qac-10-lite-1b') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">Kelas QAC 1b</a>
                         @else
-                        <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#ffdf79] whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
+                        <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-1-lite') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
                         @endif
-                        <a href="{{ route('kelas.qac-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#ffdf79] whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
-                        <a href="{{ route('kelas.qac-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#ffdf79] whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
-                        <a href="{{ route('kelas.qac-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md hover:bg-[#ffdf79] whitespace-nowrap">QAC 3.0 (Advance Grammar)</a>
+                        <a href="{{ route('kelas.qac-1') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-1') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 1.0 (Basic Grammar)</a>
+                        <a href="{{ route('kelas.qac-2') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-2') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 2.0 (Basic Sharf)</a>
+                        <a href="{{ route('kelas.qac-3') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-3') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 3.0 (Advance Grammar)</a>
                     </div>
                 </li>
                 <li class="mr-3">

@@ -1,6 +1,6 @@
 <x-web-layout>
     <x-slot name="title"> - Event QAC</x-slot>
-    <section class="mt-20 text-gray-600 body-font overflow-hidden">
+    <section class="mt-20 md:mt-24 text-gray-600 body-font overflow-hidden">
         @if($activeOrder)
         <x-active-order :order="$activeOrder" />
         @endif
@@ -30,7 +30,8 @@
             <div class="w-full md:w-1/3 p-4">
                 <a href="{{ route('member.ecourses.lessons', $event->slug) }}" class="ecourse" title="{{ $event->title }}">
                     <div class="rounded-lg">
-                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
+                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}"
+                        onerror="this.onerror=null; this.src='{{ asset('images/banner.jpg') }}';">
                         <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
                         <p class="text-xs md:text-base text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
                     </div>

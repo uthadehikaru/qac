@@ -12,7 +12,7 @@
                 </video>
             </div>
             <div class="flex justify-center">
-                <img src="{{ asset('images/qac lite/quote.png') }}" alt="QAC 1.0 Lite" class="w-full h-auto">
+                <img src="{{ asset('images/qac lite/quote lite.png') }}" alt="QAC 1.0 Lite" class="w-full h-auto">
             </div>
         </div>
 
