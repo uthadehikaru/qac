@@ -5,7 +5,7 @@
             <div class="w-full md:w-1/2 p-4">
                 <a href="{{ route('member.ecourses.lessons', [$history->lesson->ecourse->slug, $history->lesson->lesson_uu]) }}" class="ecourse" title="{{ $history->lesson->ecourse->title }}">
                     <div class="rounded-lg">
-                        <img class="rounded-lg border border-gray-200 w-full h-48 object-cover object-center mb-6"
+                        <img class="rounded-lg border border-gray-200 w-full h-64 md:h-72 object-cover object-center mb-6"
                         onerror="this.onerror=null; this.src='{{ asset('images/banner.jpg') }}';"
                         src="{{ $history->lesson->ecourse->imageUrl('thumbnail') }}" alt="{{ $history->lesson->ecourse->title }}">
                         <h2 class="text-xs text-gray-900 font-medium title-font mb-2">{{ $history->lesson->subject }}</h2>
