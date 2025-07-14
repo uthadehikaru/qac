@@ -95,17 +95,17 @@
                 <x-divider />
             </div>
             <h3 class="my-4 text-base md:text-2xl leading-tight">
-                @lang('Jadilah bagian dari ribuan alumni')
+                @lang('Khusus Alumni QAC 1.0')
             </h3>
             <div class="py-8">
                 @if($latestBatch)
-                <a href="{{ route('kelas.register',['course_id' => $course->id, 'batch_id' => $latestBatch->id]) }}" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                <x-register-button href="{{ route('kelas.register',['course_id' => $course->id, 'batch_id' => $latestBatch->id]) }}">
                     @lang('Daftar QAC 2.0')
-                </a>
+                </x-register-button>
                 @else
-                <a href="{{ route('kelas.register',['course_id' => $course->id]) }}" class="mt-8 mx-auto lg:mx-0 hover:underline bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                <x-register-button href="{{ route('kelas.register',['course_id' => $course->id]) }}">
                     @lang('Daftar Waitinglist QAC 2.0')
-                </a>
+                </x-register-button>
                 @endif
             </div>
         </section>

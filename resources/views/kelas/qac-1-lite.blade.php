@@ -129,7 +129,7 @@
                         <span class="font-bold">Video Free Event dan Program Alumni QAC (hampir 200 video)</span> : contoh tadabbur Al-Qur’an, Step tadabbur pemula, Travel to Allah, Invitation to Baitullah, Redefinition, Surah at Glance dll, bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <p>Masuk <span class="font-bold">rup Whatsapp QAC 1b dan *grup Whatsapp info alumni</span> (sekitar 1000 alumni)</p>
+                        <p>Masuk <span class="font-bold">grup Whatsapp QAC 1b dan *grup Whatsapp info alumni</span> (sekitar 1000 alumni)</p>
                         <p><span class="text-xs">*setelah menyelesaikan sampai QAC 1b</span></p>
                         </li>
                         <li class="p-4 text-center border-b border-black">
@@ -203,9 +203,9 @@
                 @lang('Jadilah bagian dari ribuan alumni')
             </h3>
             <div class="py-8">
-                <x-qac-button href="{{ route('kelas.register', ['course_id' => $course->id]) }}" class="bg-qac-orange text-white">
+                <x-register-button href="{{ route('kelas.register', ['course_id' => $course->id]) }}">
                     @lang('Daftar QAC 1.0 Lite')
-                </x-qac-button>
+                </x-register-button>
             </div>
         </section>      
     </div>
