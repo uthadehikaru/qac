@@ -16,7 +16,7 @@
 
         <section id="why" class="bg-white py-8">
             <div class="container max-full mx-auto">
-                <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-800">
+                <h1 class="w-full my-2 text-base md:text-3xl font-bold leading-tight text-center text-gray-800">
                 {{ $why1->value }}
                 </h1>
                 <div class="w-full mb-4">
@@ -64,7 +64,7 @@
         <section id="courses" class="pt-6 py-8">
         <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
             <div class="text-center mb-8">
-                <h1 class="text-md md:text-2xl font-bold text-center text-gray-900 mb-4">
+                <h1 class="text-md md:text-3xl font-bold text-center text-gray-900 mb-4">
                 Kelas QAC
                 </h1>
                 <div class="w-full mb-4">
@@ -120,13 +120,13 @@
             <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
                 <div class="text-center mb-8">
                     <a href="{{ route('ecourses.index') }}">
-                        <h1 class="text-md md:text-2xl font-bold text-center text-gray-900 mb-4">
+                        <h1 class="text-md md:text-3xl font-bold text-center text-gray-900 mb-4">
                         Program Alumni QAC
                         </h1>
                     </a>
                     <div class="w-full mb-4">
                     <x-divider />
-                    <p class="w-full leading-relaxed text-xs md:text-base mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
+                    <p class="w-full leading-relaxed text-xs md:text-lg mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
                     </div>
                     <div class="relative">
                         <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
@@ -171,13 +171,13 @@
         <section id="events" class="bg-white text-gray-600 body-font pt-8">
             <div class="container px-5 py-2 mx-auto">
                 <div class="text-center mb-8">
-                    <h1 class="text-base md:text-2xl font-bold text-center title-font text-gray-900 mb-4">
+                    <h1 class="text-base md:text-3xl font-bold text-center title-font text-gray-900 mb-4">
                     Event QAC
                     </h1>
                     <div class="w-full mb-4">
                         <x-divider />
                     </div>
-                    <p class="text-xs md:text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
+                    <p class="text-xs md:text-lg leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto mb-4">
                     Kegiatan atau program yang terbuka untuk UMUM
                     </p>
                     <div class="inline-flex justify-between lg:justify-center border rounded-full text-xs p-1 border-yellow-500">
@@ -207,7 +207,7 @@
 
         <section id="testimonial-section" class="text-gray-600 body-font relative">
             <div class="container px-5 py-8 mx-auto">
-                <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-900">
+                <h1 class="w-full my-2 text-base md:text-3xl font-bold leading-tight text-center text-gray-900">
                     @lang('Apa Kata Alumni QAC?')
                 </h1>
                 <div class="w-full mb-4">
@@ -249,13 +249,13 @@
             </div>
         </section>
         <section id="register" class="mx-auto text-center mt-12 mb-12">
-        <h1 class="w-full my-2 text-base md:text-2xl font-bold leading-tight text-center text-gray-900">
+        <h1 class="w-full my-2 text-base md:text-3xl font-bold leading-tight text-center text-gray-900">
             @lang('Bergabung Bersama Para Pejuang')
         </h1>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 my-0 py-0 rounded-t"></div>
         </div>
-        <h3 class="my-4 text-xs md:text-base leading-tight">
+        <h3 class="my-4 text-xs md:text-lg leading-tight">
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <div class="py-8">
