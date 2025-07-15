@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex flex-wrap justify-center p-4">
                     @foreach($why1->getMedia('videos') as $media)
-                    <video class="border border-black border-8 rounded-lg" controls controlsList="nodownload">
+                    <video class="border border-black border-8 rounded-lg w-full md:w-3/4 mx-auto" controls controlsList="nodownload">
                         <source src="{{ $media->getFullUrl() }}" type="video/mp4">
                     </video>
                     @endforeach

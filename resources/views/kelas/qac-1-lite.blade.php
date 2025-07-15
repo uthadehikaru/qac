@@ -2,8 +2,8 @@
     <x-slot name="title">
         - QAC 1.0 Lite (Self Paced)
     </x-slot>
-    <div class="container mx-auto mt-12 md:mt-24">
-        <img src="{{ asset('images/qac lite/logo.png') }}" alt="QAC 1.0 Lite" class="w-full">
+    <div class="container mx-auto mt-24">
+        <img src="{{ asset('images/qac lite/logo.png') }}" alt="QAC 1.0 Lite" class="w-2/3 md:w-1/2 mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-4 px-2">
             <div class="border-4 border-black rounded-lg">
                 <video class="" autoplay muted loop>
@@ -16,12 +16,12 @@
             </div>
         </div>
 
-        <div class="py-4 px-4 md:px-0">
+        <div class="py-4 md:py-24 px-4 md:px-0">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4 items-top font-montserrat">
                 <!-- Left Column -->
                 <div class="px-1 md:px-4">
-                    <h2 class="text-xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
-                    <ul class="space-y-4 text-base md:text-xl">
+                    <h2 class="text-xl md:text-2xl mb-4">Belajar <strong class="font-bold">esensi</strong> bahasa Arab Al-Qur'an sampai tadabbur.</h2>
+                    <ul class="space-y-4 text-base md:text-2xl">
                         <li class="flex items-center">
                         <img src="{{ asset('images/qac lite/check.png') }}" alt="QAC 1.0 Lite" class="h-12 md:h-24 mr-2"/>
                             <span class="italic">Sesuai pacemu</span>
@@ -38,22 +38,22 @@
                 </div>
                 <!-- Right Column -->
                 <div class="px-1 md:px-4 font-montserrat">
-                    <h3 class="text-xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-6">Cocok untuk <strong class="underline">muslim dewasa</strong>:</h3>
                     <div class="space-y-6">
                         <div class="flex items-center">
-                            <div class="text-base md:text-xl">
+                            <div class="text-base md:text-2xl">
                                 <p>Yang ingin <span class="font-bold">tadabbur Al-Qur'an sampai level bahasa Arabnya</span></p>
                             </div>
                             <img src="{{ asset('images/qac lite/1.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-48 ml-auto">
                         </div>
                         <div class="flex items-center">
-                            <div class="text-base md:text-xl">
+                            <div class="text-base md:text-2xl">
                                 <p>Yang ingin mengetahui <span class="font-bold">esensi pesan Al-Qur'an</span> untuknya</p>
                             </div>
                             <img src="{{ asset('images/qac lite/2.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-48 ml-auto">
                         </div>
                         <div class="flex items-center">
-                            <div class="text-base md:text-xl">
+                            <div class="text-base md:text-2xl">
                                 <p>Yang <span class="font-bold">mencari kebenaran</span>, ingin mengetahui <span class="font-bold">esensi hidup</span></p>
                             </div>
                             <img src="{{ asset('images/qac lite/3.png') }}" alt="QAC 1.0 Lite" class="h-24 md:h-48 ml-auto">
@@ -67,7 +67,7 @@
             <div class="flex justify-center py-4">
                 <h2 class="text-xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">Apa itu QAC 1.0 Lite?</h2>
             </div>
-            <p class="text-base md:text-2xl mx-2"><span class="font-bold">QAC 1.0 Lite</span> adalah <span class="font-bold">pembelajaran komprehensif</span>, yang terdiri dari <span class="font-bold">2 unit</span> yang bisa
+            <p class="text-base md:text-xl mx-2"><span class="font-bold">QAC 1.0 Lite</span> adalah <span class="font-bold">pembelajaran komprehensif</span>, yang terdiri dari <span class="font-bold">2 unit</span> yang bisa
             dipelajari <span class="font-bold">secara berurutan tapi bisa bertahap</span> :
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -90,7 +90,7 @@
                     <div class="flex justify-center">
                         <h3 class="text-2xl md:text-3xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1a</h3>
                     </div>
-                    <ul class="space-y-3 text-sm md:text-lg bg-[#ffdf79]">
+                    <ul class="space-y-3 text-sm md:text-base bg-[#ffdf79]">
                         <li class="p-4 text-center border-b border-black">
                         10 video materi pembelajaran, <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
                         </li>
@@ -115,7 +115,7 @@
                     <div class="flex justify-center">
                     <h3 class="text-2xl md:text-3xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1b</h3>
                     </div>
-                    <ul class="space-y-3 text-sm md:text-lg bg-[#ffdf79]">
+                    <ul class="space-y-3 text-sm md:text-base bg-[#ffdf79]">
                         <li class="p-4 text-center border-b border-black">
                         10 video materi pembelajaran, <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
                         </li>
@@ -160,7 +160,7 @@
             <div class="flex justify-center py-4">
                 <h2 class="text-xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">FAQ</h2>
             </div>
-            <div class="max-w-4xl mx-auto px-4">
+            <div class="max-w-4xl mx-auto px-4 text-base md:text-xl">
                 <!-- FAQ Item 1 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Bagaimana kalau hanya ambil QAC 1a saja ?</h3>
@@ -193,7 +193,7 @@
             </div>
         </div>
         <section id="register" class="mx-auto text-center mt-12 mb-12">
-            <h1 class="w-full my-2 text-xl md:text-2xl font-bold leading-tight text-center text-gray-900">
+            <h1 class="w-full my-2 text-xl md:text-3xl font-bold leading-tight text-center text-gray-900">
                 @lang('Bergabung Bersama Para Pejuang')
             </h1>
             <div class="w-full mb-4">
