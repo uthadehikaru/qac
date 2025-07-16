@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             if(Auth::check() && Auth::user()->role === 'member'){
                 $member = Auth::user()->member;
                 $level = Cache::remember('member_level_'.$member->id, 60 * 60 * 24, function () use ($member) {
-                    $level = 0;
+                    $level = -1;
                     foreach($member->batches()->wherePivot('status', '>=', MemberBatch::STATUS_PAID)->get() as $batch){
                         $isLite = Str::startsWith($batch->course->name, 'QAC 1.0 Lite');
                         if($isLite){

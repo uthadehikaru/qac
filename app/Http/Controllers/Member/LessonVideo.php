@@ -21,6 +21,9 @@ class LessonVideo extends Controller
         $member_id = Auth::user()->member?->id;
         $data['member_id'] = $member_id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
+        if(!$ecourse){
+            return redirect()->route('home')->with('error', 'Kelas tidak ditemukan');
+        }
         $activeOrder = $orderService->activeOrder();
         if(!$activeOrder && !$ecourse->is_only_active_batch){
             return redirect()->route('checkout')->with('error', 'Anda belum memiliki langganan aktif');

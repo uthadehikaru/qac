@@ -14,6 +14,9 @@ class CourseDetailController extends Controller
     public function qac1Lite(MemberService $memberService)
     {
         $data['course'] = Course::where('name', 'like', '%QAC 1.0 Lite%')->where('level', 0)->first();
+        if(!$data['course']){
+            return redirect()->route('home')->with('error', 'Kelas tidak ditemukan');
+        }
         
         // Check if user is logged in and registered on active batch
         if (Auth::check() && Auth::user()->member) {
