@@ -132,6 +132,6 @@ class RegisteredUserController extends Controller
         DB::commit();
 
         // Redirect back to register form with success message
-        return redirect()->route('register')->with('success', 'Registrasi berhasil! Anda akan dialihkan dalam 5 detik.');
+        return redirect()->route('home');
     }
 }
