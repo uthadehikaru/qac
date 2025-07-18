@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Province;
 use App\Models\Queue;
 use App\Models\Regency;
+use App\Models\System;
 use App\Models\User;
 use App\Notifications\AdminWaitinglist;
 use App\Notifications\BatchRegistration;
@@ -88,12 +89,12 @@ class CourseRegisterController extends Controller
             if($data['lite']) {
                 $data['package'] = $data['package'] ?? '1a';
                 if($data['package'] == 'bundling') {
-                    $lite1a = Course::where('name', 'QAC 1.0 Lite 1a')->first();
+                    $lite1a = Course::find(System::value('qac_1_lite_1a'));
                     $batch1a = $lite1a->batches()->first();
-                    $lite1b = Course::where('name', 'QAC 1.0 Lite 1b')->first();
+                    $lite1b = Course::find(System::value('qac_1_lite_1b'));
                     $batch1b = $lite1b->batches()->first();
-                    $member->batches()->attach($batch1a->id);
-                    $member->batches()->attach($batch1b->id);
+                    $member->batches()->attach($batch1a->id, ['session' => 'bundling']);
+                    $member->batches()->attach($batch1b->id, ['session' => 'bundling']);
 
                     $memberBatch = $member->batches()->latest()->first()->pivot;
 
@@ -103,7 +104,11 @@ class CourseRegisterController extends Controller
                         $admin->notify(new BatchRegistration($memberBatch));
                     }
                 }else{
-                    $course = Course::where('name', 'QAC 1.0 Lite '.$data['package'])->first();
+                    if($data['package'] == '1a') {
+                        $course = Course::find(System::value('qac_1_lite_1a'));
+                    }else{
+                        $course = Course::find(System::value('qac_1_lite_1b'));
+                    }
                     $batch = $course->batches()->first();
                     $member->batches()->attach($batch->id);
 

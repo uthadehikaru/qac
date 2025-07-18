@@ -10,7 +10,7 @@
         @foreach ($memberBatches as $memberBatch)
             <div class="flex justify-between my-2 p-4 items-start border border-[#ffdf79] rounded-lg">
                 <div class="flex flex-col gap-2">
-                    <div class="text-sm font-bold">Kelas {{ $memberBatch->batch->full_name }}</div>
+                    <div class="text-sm font-bold">Kelas {{ $memberBatch->batch->full_name }} {{ $memberBatch->session }}</div>
                     @if($memberBatch->approved_at || $memberBatch->status >= 3)
                     <div class="text-xs">Pembayaran pada {{ $memberBatch->approved_at?->format('d M Y') ?? $memberBatch->batch->created_at->format('d M Y') }}</div>
                     @else

@@ -132,6 +132,6 @@ class RegisteredUserController extends Controller
         DB::commit();
 
         // Redirect back to register form with success message
-        return redirect()->route('home');
+        return redirect()->intended('/');
     }
 }
