@@ -108,8 +108,8 @@
             <h3 class="my-4 text-base md:text-2xl leading-tight">
                 @lang('Khusus Alumni QAC 2.0')
             </h3>
+            @if($course)
             <div class="py-8">
-                
                 @if($latestBatch)
                 <x-register-button href="{{ route('kelas.register',['course_id' => $course->id, 'batch_id' => $latestBatch->id]) }}">
                     @lang('Daftar QAC 3.0')
@@ -120,6 +120,7 @@
                 </x-register-button>
                 @endif
             </div>
+            @endif
         </section>
     </div>
 </x-web-layout>

@@ -202,11 +202,13 @@
             <h3 class="my-4 text-base md:text-2xl leading-tight">
                 @lang('Jadilah bagian dari ribuan alumni')
             </h3>
+            @if($course)
             <div class="py-8">
                 <x-register-button href="{{ route('kelas.register', ['course_id' => $course->id]) }}">
                     @lang('Daftar QAC 1.0 Lite')
                 </x-register-button>
             </div>
+            @endif
         </section>      
     </div>
 </x-web-layout>

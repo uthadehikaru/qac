@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Batch;
 use App\Models\Course;
 use App\Models\Ecourse;
+use App\Models\System;
 use App\Services\MemberService;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,13 +14,9 @@ class CourseDetailController extends Controller
 {
     public function qac1Lite(MemberService $memberService)
     {
-        $data['course'] = Course::where('name', 'like', '%QAC 1.0 Lite%')->where('level', 0)->first();
-        if(!$data['course']){
-            return redirect()->route('home')->with('error', 'Kelas tidak ditemukan');
-        }
-        
+        $data['course'] = Course::find(System::value('qac_1_lite_1a'));
         // Check if user is logged in and registered on active batch
-        if (Auth::check() && Auth::user()->member) {
+        if (Auth::check() && Auth::user()->member && $data['course']) {
             $member = Auth::user()->member;
             $activeBatch = $memberService->checkMemberActiveBatch($member->id, $data['course']->id, true);
             
@@ -40,11 +37,11 @@ class CourseDetailController extends Controller
 
     public function qac1(MemberService $memberService)
     {
-        $data['course'] = Course::find(1);
-        $data['latestBatch'] = Batch::where('course_id', $data['course']->id)->open()->first();
+        $data['course'] = Course::find(System::value('qac_1'));
+        $data['latestBatch'] = Batch::where('course_id', $data['course']?->id)->open()->first();
         
         // Check if user is logged in and registered on active batch
-        if (Auth::check() && Auth::user()->member) {
+        if (Auth::check() && Auth::user()->member && $data['course']) {
             $member = Auth::user()->member;
             $activeBatch = $memberService->checkMemberActiveBatch($member->id, $data['course']->id);
             
@@ -66,11 +63,11 @@ class CourseDetailController extends Controller
 
     public function qac2(MemberService $memberService)
     {
-        $data['course'] = Course::find(5);
-        $data['latestBatch'] = Batch::where('course_id', $data['course']->id)->open()->first();
+        $data['course'] = Course::find(System::value('qac_2'));
+        $data['latestBatch'] = Batch::where('course_id', $data['course']?->id)->open()->first();
         
         // Check if user is logged in and registered on active batch
-        if (Auth::check() && Auth::user()->member) {
+        if (Auth::check() && Auth::user()->member && $data['course']) {
             $member = Auth::user()->member;
             $activeBatch = $memberService->checkMemberActiveBatch($member->id, $data['course']->id);
             
@@ -92,11 +89,11 @@ class CourseDetailController extends Controller
 
     public function qac3(MemberService $memberService)
     {
-        $data['course'] = Course::find(6);
-        $data['latestBatch'] = Batch::where('course_id', $data['course']->id)->open()->first();
+        $data['course'] = Course::find(System::value('qac_3'));
+        $data['latestBatch'] = Batch::where('course_id', $data['course']?->id)->open()->first();
         
         // Check if user is logged in and registered on active batch
-        if (Auth::check() && Auth::user()->member) {
+        if (Auth::check() && Auth::user()->member && $data['course']) {
             $member = Auth::user()->member;
             $activeBatch = $memberService->checkMemberActiveBatch($member->id, $data['course']->id);
             

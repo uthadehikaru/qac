@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\System;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,12 @@ class SystemController extends Controller
         $data['ecource_access_month'] = System::value('ecource_access_month');
         $data['why1'] = System::where('key', 'why1')->first();
         $data['why2'] = System::where('key', 'why2')->first();
-
+        $data['qac_1_lite_1a'] = System::value('qac_1_lite_1a');
+        $data['qac_1_lite_1b'] = System::value('qac_1_lite_1b');
+        $data['qac_1'] = System::value('qac_1');
+        $data['qac_2'] = System::value('qac_2');
+        $data['qac_3'] = System::value('qac_3');
+        $data['courses'] = Course::orderBy('level')->active()->get();
         return view('admin.setting', $data);
     }
 
@@ -49,11 +55,11 @@ class SystemController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request->only(['about_1', 'about_2', 'whatsapp', 'waitinglist', 'popup_image', 'popup_active', 'whatsapp_ecourse', 'ecource_access_month']) as $key => $data) {
+        foreach ($request->only(['about_1', 'about_2', 'whatsapp', 'waitinglist', 'popup_image', 'popup_active', 'whatsapp_ecourse', 'ecource_access_month', 'qac_1_lite_1a', 'qac_1_lite_1b', 'qac_1', 'qac_2', 'qac_3']) as $key => $data) {
             if ($key == 'popup_image') {
                 $data = $request->file('popup_image')->store('files', 'public');
             }
-            System::where('key', $key)->update(['value' => $data]);
+            System::where('key', $key)->update(['value' => $data ?? '']);
         }
 
         return redirect()->route('admin.systems.index')->with('status', 'System created successfully');
@@ -101,7 +107,7 @@ class SystemController extends Controller
         ]);
 
         $data = $request->all();
-        $system = System::find($id)->update($data);
+        System::find($id)->update($data);
 
         return redirect()->route('admin.systems.index')->with('status', 'System updated successfully');
     }

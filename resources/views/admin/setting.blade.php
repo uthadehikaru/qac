@@ -92,6 +92,68 @@
                     </select>
                     </div>
                 </div>
+                <div class="-mx-3 md:flex mb-6">
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-qac-1-lite-1a">
+                            Course QAC 1.0 Lite 1A
+                        </label>
+                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-qac-1-lite-1a" name="qac_1_lite_1a" >
+                            <option value="" {{ $qac_1_lite_1a?'selected':'' }}>Select Course</option>
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}" {{ $qac_1_lite_1a == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-waitinglist">
+                            Course QAC 1.0 Lite 1B
+                        </label>
+                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-qac-1-lite-1b" name="qac_1_lite_1b" >
+                            <option value="" {{ $qac_1_lite_1b?'selected':'' }}>Select Course</option>
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}" {{ $qac_1_lite_1b == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-qac-1">
+                            Course QAC 1.0
+                        </label>
+                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-qac-1" name="qac_1" >
+                            <option value="" {{ $qac_1?'selected':'' }}>Select Course</option>
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}" {{ $qac_1 == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-qac-2">
+                            Course QAC 2.0
+                        </label>
+                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-qac-2" name="qac_2" >
+                            <option value="" {{ $qac_2?'selected':'' }}>Select Course</option>
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}" {{ $qac_2 == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-qac-3">
+                            Course QAC 3.0
+                        </label>
+                        <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-qac-3" name="qac_3" >
+                            <option value="" {{ $qac_3?'selected':'' }}>Select Course</option>
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}" {{ $qac_3 == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
         </form>
         

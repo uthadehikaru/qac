@@ -27,6 +27,17 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white text-xs divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-2 py-4">
+                            <a href="{{ route('kelas.qac-1-lite') }}" class="bg-green-500 text-white rounded-md p-1">Daftar</a>
+                        </td>
+                        <td class="px-2 py-4">
+                            QAC 1.0 Lite
+                        </td>
+                        <td class="px-2 py-4">
+                            Online
+                        </td>
+                    </tr>
                     @foreach($courses as $course)
                     <tr>
                         <td class="px-2 py-4">

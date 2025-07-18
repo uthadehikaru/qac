@@ -90,5 +90,40 @@ class SystemSeeder extends Seeder
             'value' => '1',
             'is_array' => false,
         ]);
+
+        System::firstOrCreate([
+            'key' => 'qac_1_lite_1a',
+        ], [
+            'value' => '',
+            'is_array' => false,
+        ]);
+
+        System::firstOrCreate([
+            'key' => 'qac_1_lite_1b',
+        ], [
+            'value' => '',
+            'is_array' => false,
+        ]);
+
+        System::firstOrCreate([
+            'key' => 'qac_1',
+        ], [
+            'value' => '',
+            'is_array' => false,
+        ]);
+
+        System::firstOrCreate([
+            'key' => 'qac_2',
+        ], [
+            'value' => '',
+            'is_array' => false,
+        ]);
+
+        System::firstOrCreate([
+            'key' => 'qac_3',
+        ], [
+            'value' => '',
+            'is_array' => false,
+        ]);
     }
 }

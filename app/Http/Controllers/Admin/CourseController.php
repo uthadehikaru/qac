@@ -63,6 +63,7 @@ class CourseController extends Controller
             'level' => $request->level,
             'description' => $request->description,
             'is_active' => $request->is_active,
+            'is_lite' => $request->is_lite,
         ]);
 
         return redirect()->route('admin.courses.index')->with('status', 'Course created');
@@ -112,6 +113,7 @@ class CourseController extends Controller
             'level' => $request->level,
             'description' => $request->description,
             'is_active' => $request->is_active,
+            'is_lite' => $request->is_lite,
         ]);
 
         return redirect()->route('admin.courses.index')->with('status', 'Course updated');

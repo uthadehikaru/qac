@@ -42,6 +42,9 @@ class CourseDataTable extends DataTable
             ->editColumn('is_active', function ($row) {
                 return $row->is_active ? 'Yes' : 'No';
             })
+            ->editColumn('is_lite', function ($row) {
+                return $row->is_lite ? 'Yes' : 'No';
+            })
             ->addColumn('action', function ($row) {
                 $btn = '<a href="'.route('admin.courses.edit', $row->id).'" class="ml-3 text-yellow-500">Edit</a>';
                 $btn .= '<a href="#" id="delete-'.$row->id.'" class="delete ml-3 text-red-500" data-id="'.$row->id.'">Delete</a>';
@@ -98,6 +101,7 @@ class CourseDataTable extends DataTable
             Column::make('name'),
             Column::make('level'),
             Column::make('is_active'),
+            Column::make('is_lite'),
             Column::make('batch'),
             Column::make('participants')->title('Peserta'),
             Column::make('waitinglist'),

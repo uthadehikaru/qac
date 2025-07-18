@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         $member = Member::with(['batches', 'courses'])->where('user_id', Auth::id())->first();
         $data['member'] = $member;
-        $data['courses'] = Course::orderBy('level')->active()->get();
+        $data['courses'] = Course::orderBy('level')->active()->where('is_lite', false)->get();
 
         return view('member.dashboard', $data);
     }
