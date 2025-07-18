@@ -140,22 +140,6 @@
             </div>
         </div>
 
-        <div class="py-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <!-- QAC 1a -->
-                <div class="">
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-6 px-4">Silabus Belajar<br>QAC 1a</h3>
-                    <img src="{{ asset('images/qac lite/silabus 1a.png') }}" alt="Silabus Belajar QAC 1a" class="w-full h-auto">
-                </div>
-
-                <!-- QAC 1b -->
-                <div class="mt-12 md:mt-0">
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-6 px-4">Silabus Belajar<br>QAC 1b</h3>
-                    <img src="{{ asset('images/qac lite/silabus 1b.png') }}" alt="Silabus Belajar QAC 1b" class="w-full h-auto">
-                </div>
-            </div>
-        </div>
-
         <div class="py-8 font-montserrat">
             <div class="flex justify-center py-4">
                 <h2 class="text-xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">FAQ</h2>
