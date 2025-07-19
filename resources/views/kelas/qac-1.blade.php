@@ -9,7 +9,7 @@
                 <img src="{{ asset('images/qac 1/desc.png') }}" alt="QAC 1.0" class="w-full h-auto">
             </div>
             <div class="border-4 border-black rounded-lg">
-                <video class="" autoplay muted loop>
+                <video class="" controls controlsList="nodownload">
                     <source src="{{ asset('storage/sample.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>

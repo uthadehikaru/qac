@@ -6,7 +6,7 @@
         <img src="{{ asset('images/qac lite/logo.png') }}" alt="QAC 1.0 Lite" class="w-2/3 md:w-1/2 mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-4 px-2">
             <div class="border-4 border-black rounded-lg">
-                <video class="" autoplay muted loop>
+                <video class="" controls controlsList="nodownload">
                     <source src="{{ asset('storage/sample.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
