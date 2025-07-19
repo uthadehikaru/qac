@@ -1,6 +1,6 @@
 <x-web-layout>
 
-    <x-panel class="mt-20">
+    <x-panel class="">
         @if($ecourse->is_only_active_batch)
         <div class="relative py-4 md:py-12">
             <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
@@ -57,7 +57,7 @@
             <div class="w-full flex flex-col md:flex-row gap-8">
                 <div class="content md:w-2/3">
                     @if($video?->getMedia('videos')->first())
-                    <video width="100%" height="240" controls autoplay controlsList="nodownload">
+                    <video width="100%" height="240" controls controlsList="nodownload">
                     <source src="{{ route('member.ecourses.lessons.video', [$ecourse->slug, $video->lesson_uu]) }}" type="video/mp4">
                     Your browser does not support the video tag.
                     </video>

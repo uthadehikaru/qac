@@ -28,33 +28,33 @@
                 </thead>
                 <tbody class="bg-white text-xs divide-y divide-gray-200">
                     <tr>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             <a href="{{ route('kelas.qac-1-lite') }}" class="bg-green-500 text-white rounded-md p-1">Daftar</a>
                         </td>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             QAC 1.0 Lite
                         </td>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             Online
                         </td>
                     </tr>
                     @foreach($courses as $course)
                     <tr>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             @if($course->lastBatch() && $course->lastBatch()->isOpen)
                             <a href="{{ route('member.batch.detail', $course->lastBatch()->id) }}" class="bg-green-500 text-white rounded-md p-1">
                                 {{ $member->isReseat($course->lastBatch()) ? 'Reseat' : 'Daftar kelas' }}
                             </a>
                             @elseif($course->members()->where('member_id',$member->id)->exists())
-                            <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-red-500 text-white rounded-md p-1">Batalkan waiting list</a>
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-red-500 text-white rounded-md p-1">Batalkan waitinglist</a>
                             @else
-                            <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-blue-500 text-white rounded-md p-1">Daftar Waiting List</a>
+                            <a href="{{ route('member.waitinglist', $course->id) }}" class="bg-blue-500 text-white rounded-md p-1">Daftar Waitinglist</a>
                             @endif
                         </td>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             {{ $course->name }}
                         </td>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             @if($course->lastBatch() && $course->lastBatch()->isOpen)
                                 {{ $course->lastBatch()->full_name }}
                             @else
@@ -93,21 +93,25 @@
                 <tbody class="bg-white text-xs divide-y divide-gray-200">
                     @foreach($member->batches as $batch)
                     <tr>
-                        <td class="px-2 py-4 text-sm text-gray-500">
+                        <td class="px-2 py-4 text-sm text-gray-500 text-center">
 
                             <div class="flex flex-col md:flex-row justify-start space-x-1">
-                                <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="border-2 bg-blue-500 text-white rounded-md p-1 text-xs md:text-base">
+                                @if($batch->pivot->status >= \App\Models\MemberBatch::STATUS_PAID)
+                                <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="bg-blue-500 text-white rounded-md p-1">
                                     Detail
                                 </a>
+                                @endif
                             </div>
                         </td>
-                        <td class="px-2 py-4">
-                            {{ $batch->full_name }} {{ $batch->session }}
+                        <td class="px-2 py-4 text-center">
+                            {{ $batch->full_name }} {{ $batch->pivot->session }}
                         </td>
-                        <td class="px-2 py-4">
-                            {{ $batch->duration }}
+                        <td class="px-2 py-4 text-center">
+                            @if($batch->pivot->status >= \App\Models\MemberBatch::STATUS_PAID)
+                            {{ $batch->course->is_lite ? 'Aktif sampai '.liteduration($batch->pivot->id) : $batch->duration }}
+                            @endif
                         </td>
-                        <td class="px-2 py-4">
+                        <td class="px-2 py-4 text-center">
                             @lang('batch.status_'.$batch->pivot->status)
                             
                             @if($batch->file)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ecourse;
 use App\Models\Member;
 use App\Models\MemberBatch;
 use Auth;
@@ -50,11 +51,15 @@ class BatchMemberController extends Controller
         if (! $batchMember) {
             abort(404);
         }
-        $data['batchMember'] = $batchMember;
-        $data['statuses'] = MemberBatch::statuses;
-        $data['member'] = Member::where('user_id', Auth::id())->first();
 
-        return view('member.batch-member-detail', $data);
+        $ecourse = Ecourse::where('course_id', $batchMember->batch->course_id)
+        ->where('is_only_active_batch', true)
+        ->first();
+        
+        if (!$ecourse) {
+            return redirect()->back()->with('error', 'Anda belum dapat mengakses kelas ini. Silahkan hubungi admin.');
+        }
 
+        return redirect()->route('member.ecourses.lessons', $ecourse->slug);
     }
 }
