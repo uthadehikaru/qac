@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\MemberBatchUpdated;
 use App\Listeners\LogSuccessfulLogin;
+use App\Listeners\UpdateLiteBatch;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         Login::class => [
             LogSuccessfulLogin::class,
+        ],
+        MemberBatchUpdated::class => [
+            UpdateLiteBatch::class,
         ],
     ];
 

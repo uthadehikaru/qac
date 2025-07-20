@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\MemberBatchUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -48,6 +49,10 @@ class MemberBatch extends Pivot
 
     protected $casts = [
         'approved_at' => 'datetime',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => MemberBatchUpdated::class,
     ];
 
     public static function boot()

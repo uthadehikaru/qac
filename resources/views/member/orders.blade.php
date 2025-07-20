@@ -20,7 +20,7 @@
                 <x-qac-button class="text-xs font-bold">@lang('batch.status_'.$memberBatch->status) </x-qac-button>
             </div>
             <div class="flex justify-between my-2 p-4 items-start">
-                <p class="text-xs text-gray-500 w-1/2">Sertifikat dapat diunduh setelah kelas {{ $memberBatch->batch->name }} selesai</p>
+                <p class="text-xs text-gray-500 w-1/2">Sertifikat dapat diunduh setelah kelas selesai</p>
                 @if($memberBatch->file)
                 <x-qac-button href="{{ $memberBatch->file->fileUrl('filename') }}" target="_blank">E-Certificate</x-qac-button>
                 @else
