@@ -67,6 +67,9 @@ class MemberBatchDataTable extends DataTable
                 $value = __('batch.status_'.$row->status);
                 if ($row->status != 0 && $row->status < 6) {
                     $nextStatus = $row->status == 1 ? $row->status + 2 : $row->status + 1;
+                    if($row->batch->course->is_lite){
+                        $nextStatus = MemberBatch::STATUS_GRADUATED;
+                    }
                     $value .= ' <a href="'.route('admin.courses.batches.members.status', ['course' => $row->batch->course_id, 'batch' => $row->batch_id, 'id' => $row->id, 'status' => $nextStatus]).'" class="text-blue-500 pointer">('.__('batch.status_'.$nextStatus).')</a>';
                 }
 
