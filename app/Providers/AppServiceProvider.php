@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\MemberBatch;
+use App\Models\System;
+use App\Services\MemberService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -34,26 +36,18 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo 'Rp. '.number_format($money, 0, ',', '.').',-'; ?>";
         });
         View::composer('*', function ($view) {
-            $view->with('member_level', -1);
+            $qac_lite_1a = false;
+            $qac_lite_1b = false;
             if(Auth::check() && Auth::user()->role === 'member'){
+                $memberService = app(MemberService::class);
                 $member = Auth::user()->member;
-                $level = Cache::remember('member_level_'.$member->id, 60 * 60 * 24, function () use ($member) {
-                    $level = -1;
-                    foreach($member->batches()->wherePivot('status', '>=', MemberBatch::STATUS_PAID)->get() as $batch){
-                        $isLite = Str::startsWith($batch->course->name, 'QAC 1.0 Lite');
-                        if($isLite){
-                            $approved_at = $batch->approved_at;
-                            $end_course = Carbon::parse($approved_at)->addDays(30);
-                            if($end_course->isPast()){
-                                continue;
-                            }
-                        }
-                        $level = max($level, $batch->course->level);
-                    }
-                    return $level;
-                });
-                $view->with('member_level', $level);
+                $batch1a = $memberService->checkMemberActiveBatch($member->id, System::value('qac_1_lite_1a'), true);
+                $batch1b = $memberService->checkMemberActiveBatch($member->id, System::value('qac_1_lite_1b'), true);
+                $qac_lite_1a = $batch1a ? true : false;
+                $qac_lite_1b = $batch1b ? true : false;
             }
+            $view->with('qac_lite_1a', $qac_lite_1a);
+            $view->with('qac_lite_1b', $qac_lite_1b);
         });
     }
 }

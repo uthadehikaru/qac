@@ -25,7 +25,6 @@ class CourseDetailController extends Controller
                 $ecourse = Ecourse::where('course_id', $data['course']->id)
                     ->where('is_only_active_batch', true)
                     ->first();
-                
                 if ($ecourse) {
                     return redirect()->route('member.ecourses.lessons', $ecourse->slug);
                 }

@@ -52,10 +52,10 @@
                         </svg>
                     </button>
                     <div class="dropdown-menu absolute hidden bg-white font-bold shadow-lg text-xs md:text-base border-2 border-[#ffdf79]">
-                        @if($member_level >= 0)
+                        @if($qac_lite_1a || $qac_lite_1b)
                         <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-1-lite') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
                         <a href="{{ route('member.ecourses.lessons', 'qac-10-lite-1a') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('member/ecourses/lessons/qac-10-lite-1a') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">Kelas QAC 1a</a>
-                        <a href="{{ $member_level==1 ? route('member.ecourses.lessons', 'qac-10-lite-1b') : '#' }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('member/ecourses/lessons/qac-10-lite-1b') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">Kelas QAC 1b</a>
+                        <a href="{{ $qac_lite_1b ? route('member.ecourses.lessons', 'qac-10-lite-1b') : '#' }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('member/ecourses/lessons/qac-10-lite-1b') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">Kelas QAC 1b</a>
                         @else
                         <a href="{{ route('kelas.qac-1-lite') }}" class="block mx-4 my-2 px-4 py-2 text-black rounded-md {{ request()->is('kelas/qac-1-lite') ? 'bg-[#ffdf79]' : 'hover:bg-[#ffdf79]' }} whitespace-nowrap">QAC 1.0 Lite (Self Paced)</a>
                         @endif

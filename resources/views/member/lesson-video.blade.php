@@ -1,8 +1,8 @@
 <x-web-layout>
 
-    <x-panel class="">
+    <x-panel class="mt-12">
         @if($ecourse->is_only_active_batch)
-        <div class="relative py-4 md:py-12">
+        <div class="relative py-4 mb-4">
             <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
