@@ -65,10 +65,12 @@
     @endif
     <script>
             jQuery(document).ready(function($){
+                @if(auth()->check() && !$activeOrder)
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');
                 });
+                @endif
                 
                 // Filter Carousel functionality
                 let currentPosition = 0;
