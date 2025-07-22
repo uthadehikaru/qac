@@ -189,7 +189,7 @@
                 <div class="flex flex-wrap -m-4">
                     @foreach($latest_events as $event)
                     <div class="w-full md:w-1/2 p-4">
-                        <a href="{{ route('event.detail', $event->slug) }}" title="{{ $event->title }}">
+                        <a href="{{ route('ecourses.show', $event->slug) }}" title="{{ $event->title }}">
                             <div class="rounded-lg">
                                 <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}">
                                 <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>

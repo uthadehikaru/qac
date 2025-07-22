@@ -46,7 +46,7 @@
     </section>
     <x-whatsapp-button />
     <x-slot name="scripts">
-    @if(auth()->check() && !$activeOrder)
+    @if(auth()->check() || !$activeOrder)
     <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="subscriptionModal">
             <div class="flex items-center justify-center min-h-screen">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75"></div>
@@ -65,7 +65,7 @@
     @endif
     <script>
             jQuery(document).ready(function($){
-                @if(auth()->check() && !$activeOrder)
+                @if(auth()->check() || !$activeOrder)
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');
