@@ -122,7 +122,7 @@ class LiteTest extends TestCase
         $updateLiteBatch->handle(new MemberBatchUpdated($memberBatch1a));
 
         $memberBatch1b->refresh();
-        $this->assertEquals(MemberBatch::STATUS_PAID, $memberBatch1b->status);
+        $this->assertEquals(MemberBatch::STATUS_GRADUATED, $memberBatch1b->status);
 
         $order = Order::where('member_id', $member->id)->first();
         $this->assertNotNull($order);

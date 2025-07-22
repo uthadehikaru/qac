@@ -27,9 +27,7 @@ class UpdateLiteBatch
     public function handle(MemberBatchUpdated $event): void
     {
         $isLite = $event->memberBatch->batch->course->is_lite;
-        Log::debug('update batch',[$isLite]);
         if ($isLite) {
-            Log::debug('update batch',[$event->memberBatch->session]);
             if($event->memberBatch->session == 'bundling') {
                 $count = MemberBatch::where('member_id', $event->memberBatch->member_id)
                     ->where('batch_id', '!=', $event->memberBatch->batch_id)
@@ -39,7 +37,6 @@ class UpdateLiteBatch
                         'status' => $event->memberBatch->status,
                         'approved_at' => $event->memberBatch->approved_at,
                     ]);
-                Log::debug('update batch',[$count]);
             }
             $activeOrder = Order::where('member_id', $event->memberBatch->member_id)
                 ->active()
@@ -62,7 +59,6 @@ class UpdateLiteBatch
                 'end_date' => $startDate->addMonths($months)->endOfDay(),
                 'verified_at' => Carbon::now(),
             ]);
-            Log::debug('update batch',[$order]);
         }
     }
 }
