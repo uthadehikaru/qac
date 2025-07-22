@@ -67,7 +67,7 @@
                     <img src="{{ $ecourse->imageUrl('thumbnail') }}" alt="No video available" class="w-full h-auto">
                     @endif
                    @if($video)
-                    <p class="mt-8">{{ $video->subject }}</p>
+                    <p class="mt-8 font-bold">{{ $video->subject }}</p>
                     <p class="mt-8">{{ $video->description }}</p>
                     <div class="mt-8">
                         <p class="text-lg font-bold ">Download Theory, Workbook & Daily Activities:</p>
