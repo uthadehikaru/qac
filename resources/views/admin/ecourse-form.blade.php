@@ -37,7 +37,7 @@
                             @lang('Slug')
                         </label>
                         <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                        id="grid-slug" name="slug" type="text" placeholder="ecourse slug" value="{{ old('slug', $ecourse?$ecourse->slug:'') }}" readonly>
+                        id="grid-slug" name="slug" type="text" placeholder="ecourse slug" value="{{ old('slug', $ecourse?$ecourse->slug:'') }}">
                     </div>
                 </div>
                 <div class="-mx-3 md:flex mb-6">
