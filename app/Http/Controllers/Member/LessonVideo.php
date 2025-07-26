@@ -24,7 +24,7 @@ class LessonVideo extends Controller
         $data['member_id'] = $member_id;
         $ecourse = $subscriptionService->getEcourse($slug, $member_id);
         if(!$ecourse){
-            return redirect()->route('home')->with('error', 'Kelas tidak ditemukan');
+            return abort(404);
         }
         $activeOrder = $orderService->activeOrder();
         if(!$activeOrder && !$ecourse->is_only_active_batch){
