@@ -3,6 +3,12 @@
         - QAC 1.0 Lite (Self Paced)
     </x-slot>
     <div class="container mx-auto mt-24">
+        @if(session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+        @endif
         <img src="{{ asset('images/qac lite/logo.png') }}" alt="QAC 1.0 Lite" class="w-2/3 md:w-1/2 mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-4 px-2">
             <div class="border-4 border-black rounded-lg">
