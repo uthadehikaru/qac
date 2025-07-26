@@ -179,6 +179,27 @@
     $(window).resize(function() {
         updateCarousel();
     });
+
+    // Auto-scroll to selected section when page loads
+    function scrollToSelectedSection() {
+        const $selectedItem = $filterCarousel.find('a.bg-yellow-500');
+        if ($selectedItem.length > 0) {
+            const itemWidth = calculateItemWidth();
+            const containerWidth = $container.width();
+            const selectedIndex = $filterItems.index($selectedItem);
+            const selectedPosition = selectedIndex * itemWidth;
+            
+            // Calculate if the selected item is outside the visible area
+            if (selectedPosition < currentPosition || selectedPosition > currentPosition + containerWidth - itemWidth) {
+                // Scroll to show the selected item
+                currentPosition = Math.max(0, selectedPosition - containerWidth / 2 + itemWidth / 2);
+                updateCarousel();
+            }
+        }
+    }
+
+    // Call scroll to selected section after initialization
+    setTimeout(scrollToSelectedSection, 100);
   });
 /*]]>*/</script>
 </x-slot>
