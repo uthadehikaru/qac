@@ -88,6 +88,9 @@
                 <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('faq') }}">FAQ</a>
                 </li>
                 <li class="mr-3 text-right">
+                <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('donasi') }}">Donasi</a>
+                </li>
+                <li class="mr-3 text-right">
                     @guest    
                     <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Daftar/Masuk</a>
                     @endguest
