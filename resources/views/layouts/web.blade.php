@@ -92,7 +92,7 @@
                 </li>
                 <li class="mr-3 text-right">
                     @guest    
-                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="{{ route('login') }}">Daftar/Masuk</a>
+                    <a class="inline-block text-black no-underline hover:text-red-800 hover:text-underline py-2 px-4" href="javascript:void(0)" onclick="toggleModal()">Daftar/Masuk</a>
                     @endguest
                     @auth
                     @if(auth()->user()->role == 'member')
@@ -115,6 +115,39 @@
         </nav>
         {{ $slot }}
         
+        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0" id="modal">
+            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity">
+                <div class="absolute inset-0 bg-gray-900 opacity-75">
+                </div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen">​</span>
+                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl 
+                transform transition-all mt-20 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                <div class="text-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <h1 class="text-2xl mb-2 text-center">Panduan Login/masuk Akun QAC</h1>
+
+                <p class="mb-2">Assalamu'alaikum Warahmatullahi Wabarakatuh..</p>
+
+                <p class="mb-2">Untuk bisa <a href="{{ route('login') }}" class="underline font-bold pointer">masuk</a> ke dalam Website qacjakarta.id, Anda harus sudah daftar akun atau daftar kelas
+                QAC 1.0 Lite</p>
+
+                <p class="mb-2">Silahkan isi yang dimasukkan saat pendaftaran (yang terdaftar) :</p>
+                <ul class="list-disc ml-4 mb-2">
+                    <li><span class="font-bold">Kolom Email</span> dengan <span class="font-bold">EMAIL ANDA</span></li>
+                    <li><span class="font-bold">Kolom Pasword</span> dengan <span class="font-bold">NOMOR HP ANDA ATAU SESUAI YANG ANDA ISI</span></li>
+                </ul>
+
+                <p class="mb-2">Bila password lupa, maka klik "Lupa kata sandi" atau anda bisa menggunakan "OTP" untuk login</p>
+
+                <p class="mb-2">Jika mengalami kesulitan, bisa DM instagram <a href="https://www.instagram.com/qacjakarta/" target="_blank">@qacjakarta</a></p>
+                </div>
+                <div class="bg-white px-4 py-3 text-right">
+                    <button type="button" id="close-modal" class="border-2 border-red-800 text-red-800 px-4 rounded-full mr-2" onclick="toggleModal()">Tutup</button>
+                    <x-qac-button href="{{ route('login') }}" class="text-center">Daftar/Masuk</x-qac-button>
+                </div>
+                </div>
+            </div>
+        </div>
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
         <script type="text/javascript">
         $.ajaxSetup({

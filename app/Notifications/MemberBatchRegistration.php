@@ -45,7 +45,7 @@ class MemberBatchRegistration extends Notification
         return (new MailMessage)
             ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
             ->line($this->getMessage())
-            ->action(__('Whatsapp Admin QAC'), $this->getLink());
+            ->action(__('WA Admin QAC'), $this->getLink());
     }
 
     /**
