@@ -259,7 +259,7 @@
             @lang('Jadilah bagian dari ribuan alumni')
         </h3>
         <div class="py-8">
-            <x-qac-button href="{{ route('register') }}">Daftar</x-qac-button>
+            <a href="{{ route('kelas.qac-1-lite') }}" class="bg-[#7b0c00] text-white font-bold rounded-full py-2 px-4 text-xl md:text-3xl">Daftar Sekarang</a>
         </div>
         </section>
         @if($popup_image)
