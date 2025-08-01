@@ -44,7 +44,9 @@
             @endforelse
         </div>
     </section>
+    @if(auth()->check())
     <x-whatsapp-button />
+    @endif
     <x-slot name="scripts">
         <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="subscriptionModal">
             <div class="flex items-center justify-center min-h-screen">

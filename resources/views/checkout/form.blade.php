@@ -27,7 +27,9 @@
                 </form>
             </div>
         </div>
+        @if(auth()->check())
         <x-whatsapp-button />
+        @endif
     </section>
 
 </x-member-layout>

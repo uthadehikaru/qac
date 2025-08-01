@@ -114,7 +114,11 @@
         <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
         {{ $slot }}
-        
+        @if(!auth()->check())
+        <a href="{{ route('kelas.qac-1-lite') }}" class="fixed bottom-4 right-4 h-10 md:h-16 z-50">
+        <img src="{{ asset('images/daftar.png') }}" alt="Daftar" class="w-full h-full">
+        </a>
+        @endif
         <div class="hidden z-50 overflow-y-auto top-0 w-full left-0" id="modal">
             <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity">
