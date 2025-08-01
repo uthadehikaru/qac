@@ -1,9 +1,32 @@
 <x-member-layout>
     <div class="mt-4 md:mt-8 px-4">
         @if(session('success'))
+        @php
+            $whatsappNumber = \App\Models\System::value('whatsapp_ecourse');
+            $whatsappMessage = urlencode("Assalaamu'alaikum QAC, saya ingin konfirmasi pendaftaran saya. terima kasih");
+            $whatsappUrl = "https://wa.me/{$whatsappNumber}?text={$whatsappMessage}";
+        @endphp
         <div class="alert alert-success">
             {{ session('success') }}
+            <div class="mt-2">
+                <p class="text-sm text-gray-700 mb-2">Anda akan dialihkan ke <a href="https://wa.me/{{ $whatsappNumber }}" target="_blank">WA Admin QAC</a> dalam <span id="countdown">5</span> detik...</p>
+            </div>
         </div>
+        <script>
+            // Countdown and auto redirect to WhatsApp after 5 seconds
+            let countdown = 5;
+            const countdownElement = document.getElementById('countdown');
+            
+            const timer = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.open('{{ $whatsappUrl }}', '_blank');
+                }
+            }, 1000);
+        </script>
         @endif
 
         <h1 class="font-bold text-xl mb-4">Lihat semua Transaksi Langganan, kelas hingga sertifikatmu di QAC</h1>

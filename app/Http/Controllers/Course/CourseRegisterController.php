@@ -19,19 +19,36 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class CourseRegisterController extends Controller
 {
     public function index($course_id, $batch_id = null)
     {
-        if(!Auth::check()) {
-            session()->put('url.intended', route('kelas.register', ['course_id' => $course_id, 'batch_id' => $batch_id]));
-            return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu untuk melanjutkan pendaftaran');
+        $data['member'] = null;
+        $regency = null;
+        $data['is_registered'] = false;
+        $data['full_name'] = null;
+        $data['phone'] = null;
+        $data['job'] = null;
+        $data['education'] = null;
+        $data['province'] = null;
+        $data['regency'] = null;
+        $data['is_overseas'] = null;
+        $data['is_registered'] = 0;
+        if(Auth::check()) {
+            $data['member'] = Member::with('batches')->where('user_id', Auth::user()->id)->first();
+            $data['is_registered'] = $data['member']->batches()->count() > 0 ? 1 : 0;
+            $regency = Regency::where('name', $data['member']->city)->first();
+            $data['full_name'] = $data['member']->full_name;
+            $data['phone'] = $data['member']->phone;
+            $data['job'] = $data['member']->profesi;
+            $data['education'] = $data['member']->pendidikan;
+            $data['province'] = $data['member']->province;
+            $data['regency'] = $data['member']->city;
+            $data['is_overseas'] = $data['member']->is_overseas;
         }
-        $data['member'] = Member::with('batches')->where('user_id', Auth::user()->id)->first();
-        $data['is_registered'] = $data['member']->batches()->count() > 0;
-        $regency = Regency::where('name', $data['member']->city)->first();
         $data['member_regency'] = $regency ? $regency->id : null;
         $data['member_province'] = $regency ? $regency->province_id : null;
         $data['course'] = Course::find($course_id);
@@ -51,6 +68,8 @@ class CourseRegisterController extends Controller
             'full_name' => 'required|string|max:255',
             'batch_id' => 'nullable|exists:batches,id',
             'phone' => 'required|numeric',
+            'email' => 'required_if:is_registered,0|email|unique:users,email',
+            'password' => 'required_if:is_registered,0|string|min:8|confirmed',
             'job' => 'nullable|string|max:255',
             'education' => 'nullable|string|max:255',
             'province' => 'nullable|string|max:255',
@@ -58,6 +77,7 @@ class CourseRegisterController extends Controller
             'is_overseas' => 'nullable|boolean',
             'package' => 'nullable|required_if:lite,1|in:1a,1b,bundling',
             'lite' => 'nullable|boolean',
+            'term_condition' => 'required|accepted',
         ]);
 
         DB::beginTransaction();
@@ -69,22 +89,47 @@ class CourseRegisterController extends Controller
             }
             $regency = $data['regency'] ? Regency::find($data['regency']) : null;
 
-            $user = User::with('member')->find(Auth::user()->id);
-            $user->update([
-                'name' => $data['full_name'],
-            ]);
+            $user = null;
+            $member = null;
+            if(Auth::check()) {
+                $user = User::with('member')->find(Auth::user()->id);
+                $user->update([
+                    'name' => $data['full_name'],
+                ]);
+                $member = $user->member;
 
-            $member = $user->member;
-            $member->update([
-                'full_name' => $data['full_name'],
-                'phone' => $data['phone'],
-                'profesi' => $data['job'],
-                'pendidikan' => $data['education'],
-                'city' => $regency ? $regency->name : null,
-                'address' => $regency ? $regency->name.' '.$regency->province->name : null,
-                'is_overseas' => isset($data['is_overseas']) ? $data['is_overseas'] : 0,
-            ]);
-            $member->save();
+                $member->update([
+                    'full_name' => $data['full_name'],
+                    'phone' => $data['phone'],
+                    'profesi' => $data['job'],
+                    'pendidikan' => $data['education'],
+                    'city' => $regency ? $regency->name : null,
+                    'address' => $regency ? $regency->name.' '.$regency->province->name : null,
+                    'is_overseas' => isset($data['is_overseas']) ? $data['is_overseas'] : 0,
+                ]);
+                $member->save();
+            }else{
+                $user = User::create([
+                    'name' => $data['full_name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                    'role' => 'member',
+                ]);
+
+                $member = Member::create([
+                    'user_id' => $user->id,
+                    'full_name' => $data['full_name'],
+                    'phone' => $data['phone'] ?? '',
+                    'gender' => $data['gender'] ?? 'pria',
+                    'is_overseas' => $data['is_overseas'] ?? 0,
+                    'city' => $regency ? $regency->name : null,
+                    'address' => $regency ? $regency->name.' '.$regency->province->name : null,
+                    'profesi' => $data['job'],
+                    'pendidikan' => $data['education'],
+                ]);
+
+                Auth::login($user);
+            }
 
             if($data['lite']) {
                 $data['package'] = $data['package'] ?? '1a';
@@ -134,7 +179,7 @@ class CourseRegisterController extends Controller
                 }
             }else{
                 $queue = Queue::create([
-                    'course_id' => $request->course_id,
+                    'course_id' => $course_id,
                     'member_id' => $member->id,
                 ]);
                 $member->user->notify(new MemberWaitinglist($queue));

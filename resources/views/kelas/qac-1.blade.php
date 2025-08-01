@@ -25,10 +25,10 @@
                 <h2 class="text-2xl font-bold text-center mb-4">Apa aja yang akan dibahas?</h2>
                 <div class="flex items-center justify-center gap-4 md:gap-12">
                     <img src="{{ asset('images/qac 1/1.png') }}" alt="Quote QAC 1.0" class="text-center h-24 w-24 md:h-48 md:w-48 mx-0 md:mx-24">
-                    <p class="text-center text-xl md:text-lg px-0 md:px-8 font-montserrat"><span class="font-bold">Fondasi</span> Bahasa Arab Al-Qur’an</p>
+                    <p class="text-center text-xl md:text-lg px-0 md:px-8 font-montserrat whitespace-nowrap"><span class="font-bold">Fondasi</span> Bahasa Arab <br> Al-Qur’an</p>
                 </div>
                 <div class="flex items-center justify-center gap-4">
-                    <p class="text-center text-xl md:text-lg px-0 md:px-8 font-montserrat">Tata Bahasa Arab Al-Qur’an <span class="font-bold">dasar</span></p>
+                    <p class="text-center text-xl md:text-lg px-0 md:px-8 font-montserrat whitespace-nowrap">Tata Bahasa Arab <br> Al-Qur’an <span class="font-bold">dasar</span></p>
                     <img src="{{ asset('images/qac 1/2.png') }}" alt="Quote QAC 1.0" class="text-center h-24 w-24 md:h-48 md:w-48 mx-0 md:mx-24">
                 </div>
                 <div class="flex items-center justify-center gap-4">

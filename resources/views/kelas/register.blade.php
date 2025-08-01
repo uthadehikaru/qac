@@ -23,7 +23,7 @@
                 <p class="py-4">Waktu kursus : {{ $batch->duration }}</p>
                 @endif
 
-                <form method="POST" action="{{ route('kelas.register', ['course_id' => $course->id]) }}">
+                <form method="POST" action="{{ route('kelas.register.submit', ['course_id' => $course->id]) }}">
                     @csrf
                     @if($batch)
                     <input type="hidden" name="batch_id" value="{{ $batch->id }}" />
@@ -32,13 +32,14 @@
                     <input type="hidden" name="course_id" value="{{ $course->id }}" />
                     @endif
                     <input type="hidden" name="lite" value="{{ $lite }}" />
+                    <input type="hidden" name="is_registered" value="{{ $is_registered }}" />
 
                     @if(!$is_registered)
                     <!-- Full Name -->
                     <div class="mt-4">
                         <x-label for="full_name" :value="__('Full Name')" />
 
-                        <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name', $member->full_name)" required />
+                        <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name', $full_name)" required />
                     </div>
 
                     <p class="text-red-500">*pastikan nama lengkap sesuai kartu identitas. akan digunakan untuk pembuatan e-sertifikat</p>
@@ -47,16 +48,37 @@
                     <div class="mt-4">
                         <x-label for="phone" :value="__('Nomor WhatsApp')" />
 
-                        <x-input id="phone" class="block mt-1 w-full" placeholder="masukkan dengan format 6281234567890" type="text" name="phone" :value="old('phone', $member->phone)" required />
+                        <x-input id="phone" class="block mt-1 w-full" placeholder="masukkan dengan format 6281234567890" type="text" name="phone" :value="old('phone', $phone)" required />
                     </div>
 
                     <p class="text-red-500">*pastikan nomor whatsapp aktif, untuk diinfokan terkait kelas</p>
+                    
+                    <!-- Email -->
+                    <div class="mt-4">
+                        <x-label for="email" :value="__('Email')" />
+
+                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mt-4">
+                        <x-label for="password" :value="__('Password')" />
+
+                        <x-input id="password" class="block mt-1 w-full" type="password" name="password" :value="old('password')" required />
+                    </div>
+
+                    <!-- Password Confirmation -->
+                    <div class="mt-4">
+                        <x-label for="password_confirmation" :value="__('Password Confirmation')" />
+
+                        <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" :value="old('password_confirmation')" required />
+                    </div>
                     
                     <!-- Job -->
                     <div class="mt-4">
                         <x-label for="job" :value="__('Job')" />
 
-                        <x-input id="job" class="block mt-1 w-full" type="text" name="job" :value="old('job', $member->profesi)" />
+                        <x-input id="job" class="block mt-1 w-full" type="text" name="job" :value="old('job', $job)" />
                     </div>
                     
                     <!-- Education -->
@@ -65,13 +87,13 @@
 
                         <select id="education" class="block mt-1 w-full p-2 rounded-md shadow-sm border-2 border-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="education">
                             <option value="">Pilih Pendidikan Terakhir</option>
-                            <option value="SD" {{ old('education', $member->pendidikan) == 'SD' ? 'selected' : '' }}>SD</option>
-                            <option value="SMP" {{ old('education', $member->pendidikan) == 'SMP' ? 'selected' : '' }}>SMP</option>
-                            <option value="SMA" {{ old('education', $member->pendidikan) == 'SMA' ? 'selected' : '' }}>SMA/SMK</option>
-                            <option value="D3" {{ old('education', $member->pendidikan) == 'D3' ? 'selected' : '' }}>D3</option>
-                            <option value="S1" {{ old('education', $member->pendidikan) == 'S1' ? 'selected' : '' }}>S1</option>
-                            <option value="S2" {{ old('education', $member->pendidikan) == 'S2' ? 'selected' : '' }}>S2</option>
-                            <option value="S3" {{ old('education', $member->pendidikan) == 'S3' ? 'selected' : '' }}>S3</option>
+                            <option value="SD" {{ old('education', $education) == 'SD' ? 'selected' : '' }}>SD</option>
+                            <option value="SMP" {{ old('education', $education) == 'SMP' ? 'selected' : '' }}>SMP</option>
+                            <option value="SMA" {{ old('education', $education) == 'SMA' ? 'selected' : '' }}>SMA/SMK</option>
+                            <option value="D3" {{ old('education', $education) == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="S1" {{ old('education', $education) == 'S1' ? 'selected' : '' }}>S1</option>
+                            <option value="S2" {{ old('education', $education) == 'S2' ? 'selected' : '' }}>S2</option>
+                            <option value="S3" {{ old('education', $education) == 'S3' ? 'selected' : '' }}>S3</option>
                         </select>
                     </div>
                     
@@ -104,7 +126,7 @@
                     
                     <div class="md:flex md:items-left my-6">
                         <label class="md:w-full block text-gray-500 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" name="is_overseas" value="1" {{ old('is_overseas', $member->is_overseas) == 1 ? 'checked' : '' }}>
+                        <input class="mr-2 leading-tight" type="checkbox" name="is_overseas" value="1" {{ old('is_overseas', $is_overseas) == 1 ? 'checked' : '' }}>
                         <span class="text-sm">
                             Saat ini berada di luar negeri
                         </span>
@@ -112,13 +134,13 @@
                     </div>
                     <p class="text-sm text-gray-500">** pilih provinsi dan kota di indonesia sesuai asal domisili jika anda berada diluar negeri</p>
                     @else
-                    <input type="hidden" name="full_name" value="{{ $member->full_name }}" />
-                    <input type="hidden" name="phone" value="{{ $member->phone }}" />
-                    <input type="hidden" name="job" value="{{ $member->profesi }}" />
-                    <input type="hidden" name="education" value="{{ $member->pendidikan }}" />
+                    <input type="hidden" name="full_name" value="{{ $full_name }}" />
+                    <input type="hidden" name="phone" value="{{ $phone }}" />
+                    <input type="hidden" name="job" value="{{ $job }}" />
+                    <input type="hidden" name="education" value="{{ $education }}" />
                     <input type="hidden" name="regency" value="{{ $member_regency }}" />
                     <input type="hidden" name="province" value="{{ $member_province }}" />
-                    <input type="hidden" name="is_overseas" value="{{ $member->is_overseas }}" />
+                    <input type="hidden" name="is_overseas" value="{{ $is_overseas }}" />
                     @endif
 
                     @if($lite)
@@ -130,7 +152,7 @@
                             <label class="block text-gray-500 font-bold">
                                 <input type="radio" name="package" value="1a" class="mr-2 leading-tight" required>
                                 <span class="text-sm">
-                                    QAC 1a (Rp 300.000,-)
+                                    QAC 1a
                                 </span>
                             </label>
                         </div>
@@ -140,7 +162,7 @@
                             <label class="block text-gray-500 font-bold">
                                 <input type="radio" name="package" value="1b" class="mr-2 leading-tight" required>
                                 <span class="text-sm">
-                                    QAC 1b (Rp 300.000,-)
+                                    QAC 1b
                                 </span>
                             </label>
                         </div>
@@ -150,7 +172,7 @@
                             <label class="block text-gray-500 font-bold">
                                 <input type="radio" name="package" value="bundling" class="mr-2 leading-tight" required>
                                 <span class="text-sm">
-                                    Bundling QAC 1a dan QAC 1b (Rp 550.000,-)
+                                    Paket QAC 1a dan QAC 1b
                                 </span>
                             </label>
                         </div>
@@ -213,11 +235,8 @@
                         registerBtn.textContent = '{{ __("Registering...") }}';
                         registerBtn.classList.add('opacity-50', 'cursor-not-allowed');
                         
-                        // Also disable all form inputs to prevent changes during submission
-                        const formInputs = form.querySelectorAll('input, select, textarea');
-                        formInputs.forEach(input => {
-                            input.disabled = true;
-                        });
+                        // Don't disable form inputs as they need to be submitted
+                        // The disabled button is sufficient to prevent double submission
                     });
                 }
             });
