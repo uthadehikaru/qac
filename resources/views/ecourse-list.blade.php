@@ -31,7 +31,7 @@
                 <a href="{{ route('member.ecourses.lessons', $ecourse->slug) }}" class="ecourse" title="{{ $ecourse->title }}">
                     <div class="rounded-lg">
                         <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}"
-                        onerror="this.onerror=null; this.src='{{ asset('images/banner.jpg') }}';">
+                        onerror="this.onerror=null; this.src='{{ asset('images/placeholder.png') }}';">
                         <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
                         <p class="text-xs md:text-base text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
                     </div>
