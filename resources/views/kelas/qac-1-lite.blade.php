@@ -98,10 +98,7 @@
                     </div>
                     <ul class="space-y-3 text-sm md:text-base bg-[#ffdf79]">
                         <li class="p-4 text-center border-b border-black">
-                        10 video materi pembelajaran, <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
-                        </li>
-                        <li class="p-4 text-center border-b border-black">
-                        Materi : teori & latihan bentuk <span class="font-bold">pdf di download</span> di web
+                        Video materi pembelajaran (teori & latihan dalam <span class="font-bold">bentuk pdf di download</span> di web). Semuanya <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
                         <span class="font-bold">ONLINE LIVE ZOOM</span> untuk  Q & A pembelajaran <span class="font-bold">di setiap akhir pekan selama 4 kali/bulan</span>
@@ -110,7 +107,7 @@
                         <span class="font-bold">Video Free Event QAC</span> : Contoh Ngobrolin Quran, Free Sharing, dl bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        Masuk <span class="font-bold">grup Whatsapp QAC 1a</span>
+                        Masuk <span class="font-bold">grup WA QAC 1a</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
                         <span class="font-bold">Sertifikat belajar</span>
@@ -123,10 +120,7 @@
                     </div>
                     <ul class="space-y-3 text-sm md:text-base bg-[#ffdf79]">
                         <li class="p-4 text-center border-b border-black">
-                        10 video materi pembelajaran, <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
-                        </li>
-                        <li class="p-4 text-center border-b border-black">
-                        Materi : teori & latihan bentuk <span class="font-bold">pdf di download</span> di web
+                        Video materi pembelajaran (teori & latihan dalam <span class="font-bold">bentuk pdf di download</span> di web). Semuanya <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
                         <span class="font-bold">ONLINE LIVE ZOOM</span> untuk  Q & A pembelajaran <span class="font-bold">di setiap akhir pekan selama 4 kali/bulan</span>
@@ -135,7 +129,7 @@
                         <span class="font-bold">Video Free Event dan Program Alumni QAC (hampir 200 video)</span> : contoh tadabbur Al-Qur’an, Step tadabbur pemula, Travel to Allah, Invitation to Baitullah, Redefinition, Surah at Glance dll, bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <p>Masuk <span class="font-bold">grup Whatsapp QAC 1b dan *grup Whatsapp info alumni</span> (sekitar 1000 alumni)</p>
+                        <p>Masuk <span class="font-bold">grup WA QAC 1b dan *grup WA info alumni</span> (sekitar 1000 alumni)</p>
                         <p><span class="text-xs">*setelah menyelesaikan sampai QAC 1b</span></p>
                         </li>
                         <li class="p-4 text-center border-b border-black">
