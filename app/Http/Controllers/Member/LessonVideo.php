@@ -53,6 +53,7 @@ class LessonVideo extends Controller
             $selectedSection = $data['sections']->first()?->id;
         }
         $videos = $subscriptionService->getVideos($ecourse->id, $selectedSection);
+        $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id)->pluck('lesson_id')->count();
         if ($lesson_uu) {
             $data['video'] = $subscriptionService->getLesson($lesson_uu);
         } else {
@@ -66,4 +67,4 @@ class LessonVideo extends Controller
 
         return view('member.lesson-video', $data);
     }
-}
+} 
