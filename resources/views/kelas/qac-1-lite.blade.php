@@ -172,7 +172,33 @@
                 <!-- FAQ Item 5 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Apakah ada kelas lanjutan setelah selesai QAC 1b ?</h3>
-                    <p>Ada, yaitu QAC 2.0 silakan daftar di Waiting List Kelas QAC 2.0 (<a href="{{ route('kelas.qac-2') }}" class="text-blue-600 hover:underline">Link daftar QAC 2.0</a>)</p>
+                    <p>Ada, yaitu QAC 2.0 Live silakan daftar di Waiting List Kelas QAC 2.0 (<a href="{{ route('kelas.qac-2') }}" class="text-blue-600 hover:underline">Link daftar QAC 2.0</a>)</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-bold mb-2">Bagaimana jika saya sedang belajar QAC 1a dan/atau QAC 1b, namun saya ingin memperpanjang belajar saya, misalnya 2-3 bulan?</h3>
+                    <p>Bisa, jika anda ingin perpanjang, <span class="font-bold">cukup investasi 50% dari harga normal</span></p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-bold mb-2">Jika saya daftar kelas QAC 1b (setelah belajar QAC 1a), apakah saya mendapatkan materi QAC 1a juga?</h3>
+                    <p><span class="font-bold">Ya</span>, anda mendapatkan materi QAC 1a, selama belajar QAC 1b berdurasi 1 bulan </p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-bold mb-2">Jika saya daftar satu Paket (Kelas 1a dan kelas 1b), apakah saya mendapatkan materi QAC 1a juga?</h3>
+                    <p><span class="font-bold">Ya</span>, anda mendapatkan materi QAC 1a selama berdurasi 2 bulan </p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-bold mb-2">Adakah rekaman ONLINE LIVE ZOOM untuk Q & A pembelajaran di setiap akhir pekan?</h3>
+                    <p><span class="font-bold">Tidak ada</span>, jadi silakan manfaatkan sebaik-baiknya untuk Q & A selama ONLINE LIVE
+                    ZOOM</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-bold mb-2">Apakah ada fasilitas tanya jawab private untuk belajar Bahasa Arab Al-Qur'an ini?</h3>
+                    <p>Kami menyediakan <span class="font-bold">fasilitas grup WA QAC 1 a dan QAC 1 b</span> untuk menjawab pertanyaan selama belajar, dibuat agar bisa saling belajar dari pertanyaan teman-teman</p>
                 </div>
             </div>
         </div>
