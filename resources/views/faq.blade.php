@@ -72,7 +72,7 @@
                 <li class="font-bold">a. Program</li>
                 <li class="font-bold">b. Kapan pendaftaran </li>
                 <li class="font-bold">c. Apa itu QAC </li>
-                <li class="font-bold">d. Berbagai macam event : acara umum dan acara alumni yang rutin dilaksanakan, insya Allah</li>
+                <li class="font-bold">d. Sharing dari beberapa orang alumni yang sudah melalui program QAC 1.0, QAC 2.0 (QAC 2.1 dan QAC 2.2) serta QAC 3.0</li>
                 <p class="py-1">Atau mau berinteraksi lebih lanjut bisa <span class="font-bold">DM admin IG, atau admin WA, <a class="text-red-500 pointer" href="https://wa.me/{{ \App\Models\System::value('whatsapp') }}">{{ \App\Models\System::value('whatsapp') }}</a></span>.</p>
                 </span>
             </details>
@@ -84,7 +84,7 @@
                 Bagaimana cara ikutan kursus QAC ?
                 </summary>
                 <span>
-                <p class="py-1">aranya mendaftar dengan <span class="font-bold">mengisi form pendaftaran di @QACJakarta</span>, tetapi sebelumnya peserta harus sudah menyetujui beberapa <span class="font-bold">aturan main</span> selama belajar di QAC yang ada di brosur QAC.</p>
+                <p class="py-1">Caranya mendaftar dengan <span class="font-bold">mengisi form pendaftaran di @QACJakarta</span>,  tetapi sebelumnya peserta harus sudah menyetujui beberapa aturan main selama belajar di QAC yang ada di brosur QAC.</p>
                 </span>
             </details>
             <details class="mb-4">
@@ -92,7 +92,7 @@
                 Adakah yang tidak berbayar ?
                 </summary>
                 <span>
-                <p class="py-1">Ada, QAC sering melakukan acara <span class="font-bold">free sharing</span> “Qur’an & me” dan “One step closer to Qur’an”, itu biasanya diinformasikan di <span class="font-bold">IG @QACJakarta</span>.</p>
+                <p class="py-1">Ada, QAC sering melakukan acara <span class="font-bold">free sharing</span> “Qur’an & me” dan “One step closer to Qur’an”, itu biasanya diinformasikan di <a href="https://www.instagram.com/qacjakarta/" target="_blank" class="font-bold">IG @QACJakarta</a>.</p>
                 </span>
             </details>
             <details class="mb-4">
@@ -101,10 +101,10 @@
                 </summary>
                 <span>
                 <p class="py-1">Levelnya yang sudah ada di QAC  :</p>
-                <p class="py-1 pl-4"><span class="font-bold">1. Level dasar : QAC 1.0</span>, yaitu level <span class="font-bold">pemula</span> dari yang <span class="font-bold">belum pernah</span> belajar bahasa Arab Al-Qur’an sebelumnya. Di level ini mempelajari hubungan antar kata secara keseluruhan, merupakan <span class="font-bold">dasar tata bahasa Arab Al-Qur’an</span>.</p>
+                <p class="py-1 pl-4"><span class="font-bold">1. <span class="font-bold">Level dasar</span> : <span class="font-bold">QAC 1 Online Fast Track (QAC 1.0)</span>, yaitu level <span class="font-bold">pemula</span> dari yang <span class="font-bold">belum pernah</span> belajar bahasa Arab Al-Qur’an sebelumnya. Di level ini mempelajari hubungan antar kata secara keseluruhan, merupakan <span class="font-bold">dasar tata bahasa Arab Al-Qur’an</span></p>
                 <p class="py-1 pl-4 font-bold">2. Level lanjutan :</p>
-                    <p class="py-1 pl-8"><span class="font-bold">a. QAC 2.0 yaitu</span> mempelajari 1 kata secara mendalam dengan berbagai macam bentuknya menjadi ratusan jenis kata, merupakan bagian dasar dan bentuk standar dari morfologi bahasa Arab Al-Qur’an.</p>
-                    <p class="py-1 pl-8"><span class="font-bold">b. QAC 3.0 yaitu merupakan level advance</span>, membahas berbagai macam bentuk <span class="font-bold">tidak standar (abnormal)</span> dari tata bahasa dan morfologi bahasa Arab Al-Qur’an.</p>
+                    <p class="py-1 pl-8"><span class="font-bold">a. <span class="font-bold">QAC 2.0 yaitu terdiri dari QAC 2.1 & QAC 2.2</span>. Di level ini mempelajari 1 kata secara mendalam dengan berbagai macam bentuknya menjadi ratusan jenis kata, merupakan bagian dasar dan bentuk standar dari morfologi bahasa Arab Al-Qur’an.</p>
+                    <p class="py-1 pl-8"><span class="font-bold">b. <span class="font-bold">QAC 3.0 yaitu merupakan level advance</span>, membahas berbagai macam bentuk <span class="font-bold">tidak standar (abnormal)</span> dari tata bahasa dan morfologi bahasa Arab Al-Qur’an.</p>
                 </span>
             </details>
             <details class="mb-4">
@@ -125,19 +125,10 @@
                 <p class="py-1 font-bold">1. Minimal SMP</p>
                 <p class="py-1">2. Mampu membaca Al-Qur’an <span class="font-bold">minimal</span> setara <span class="font-bold">iqra’ 4</span></p>
                 <p class="py-1">3. Mempunyai <span class="font-bold">fasilitas online</span> (HP /tablet / laptop) dan <span class="font-bold">internet dengan sinyal bagus</span></p>
-                <p class="py-1">4. <span class="font-bold">Mampu mendedikasikan waktunya</span> pada waktu yang telah ditentukan yaitu 16 hari berturut-turut</p>
-                <p class="py-1">5. Akan lebih baik bila mampu Bahasa Inggris, tetapi tidak harus</p>
-                <p class="py-1">6. <span class="font-bold">Tidak harus</span> mampu menulis Bahasa Arab</p>
-                <p class="py-1">7. <span class="font-bold">Tidak perlu</span> kemampuan Bahasa Arab, belum pernah belajar dipersilahkan</p>
-                <p class="py-1">8. <span class="font-bold">Kemauan sendiri, tidak dipaksa oleh orang lain</span></p>
-                </span>
-            </details>
-            <details class="mb-4">
-                <summary class="font-semibold pointer  bg-gray-200 rounded-md py-2 px-4">
-                Kenapa kelas QAC 1 Online Fast Track (QAC 1.0) dilakukan 16 hari berturut-turut ?
-                </summary>
-                <span>
-                <p class="py-1">Karena untuk mengantisipasi keistiqamahan dalam belajar, tetapi tiap hari hanya 1 jam saja. Bagi yang tidak bersedia sedari awal untuk mengikuti 16 hari berturut-turut, maka tidak dianjurkan untuk mengikuti kelas QAC.</p>
+                <p class="py-1">4. Akan lebih baik bila mampu Bahasa Inggris, tetapi tidak harus</p>
+                <p class="py-1">5. <span class="font-bold">Tidak harus</span> mampu menulis Bahasa Arab</p>
+                <p class="py-1">6. <span class="font-bold">Tidak perlu</span> kemampuan Bahasa Arab, belum pernah belajar dipersilahkan</p>
+                <p class="py-1">7. <span class="font-bold">Kemauan sendiri, tidak dipaksa oleh orang lain</span></p>
                 </span>
             </details>
             <details class="mb-4">
@@ -145,7 +136,7 @@
                 Apakah QAC, ada kelas offline ?
                 </summary>
                 <span>
-                <p class="py-1">Untuk saat ini QAC belum ada kelas offline, dikarenakan pandemi dan agar dapat menjangkau para Qur’an seeker dimanapun berada.</p>
+                <p class="py-1"><span class="font-bold">Bisa, dengan syarat &  ketentuan</span> : pengiriman materi QAC yang berupa hard copy <span class="font-bold">diusahakan sendiri</span> oleh peserta luar negeri. Saat ini sudah ada puluhan peserta dari luar negeri yang terjauh adalah dari Jerman, yang begitu semangatnya, mereka mengusahakan sendiri pengiriman materinya.</p>
                 </span>
             </details>
             <details class="mb-4">

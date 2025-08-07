@@ -114,7 +114,7 @@
         <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
         {{ $slot }}
-        @if(!auth()->check())
+        @if(!auth()->check() && (!request()->is('kelas/register*') && !request()->is('donasi')))
         <a href="{{ route('kelas.qac-1-lite') }}" class="fixed bottom-4 right-4 h-10 md:h-16 z-10">
         <img src="{{ asset('images/daftar.png') }}" alt="Daftar" class="w-full h-full">
         </a>
