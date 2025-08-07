@@ -119,7 +119,7 @@
         <img src="{{ asset('images/daftar.png') }}" alt="Daftar" class="w-full h-full">
         </a>
         @endif
-        <div class="hidden z-100 overflow-y-auto top-0 w-full left-0" id="modal">
+        <div class="hidden fixed z-[9999] overflow-y-auto top-0 w-full left-0" id="modal">
             <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity">
                     <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
