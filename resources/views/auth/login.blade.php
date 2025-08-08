@@ -73,7 +73,7 @@
             </div>
             <div class="flex flex-col items-center justify-center mt-4">
                 <p class="text-sm text-gray-600">Belum punya akun? Daftar disini:</p>
-                <a class="px-4 py-2 border border-[#7b0c00] text-[#7b0c00] font-bold rounded-md mt-2 text-xs" href="{{ route('register') }}">
+                <a class="px-4 py-2 border border-[#7b0c00] text-[#7b0c00] font-bold rounded-md mt-2 text-xs" href="{{ route('register', ['register_only' => true]) }}">
                     {{ __('Daftar') }}
                 </a>
             </div>

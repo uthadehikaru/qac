@@ -26,6 +26,10 @@ class RegisteredUserController extends Controller
      */
     public function create(Request $request)
     {
+        if(!$request->has('register_only')) {
+            return redirect()->route('kelas.qac-1-lite');
+        }
+
         $data['educations'] = ['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2', 'S3'];
         $data['batch'] = $data['course'] = $data['sessions'] = null;
         $data['provinces'] = DB::table('provinces')->orderBy('name')->get();
