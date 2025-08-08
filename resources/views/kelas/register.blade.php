@@ -178,22 +178,13 @@
                         </div>
                     </div>
                     @endif
-                    <div class="mt-4 text-blue-500">
-                        <x-label class="text-center text-xl py-2" for="password_confirmation" :value="__('Syarat dan Ketentuan')" />
-                        <p class="text-sm py-2">Saya dengan senang hati akan melakukan hal berikut: *</p>
-                        @if($batch)
+                    <div class="mt-4 text-blue-500 font-bold">
+                        <p class="text-center text-sm py-2">Syarat dan Ketentuan</p>
+                        <p class="text-sm py-2">Saya dengan senang hati akan melakukan hal berikut:</p>
                         <p class="text-sm">1. Saya berperan aktif mengikuti rangkaian kursus dengan bahagia, ceria dan tetap positif</p>
                         <p class="text-sm">2. Akan bersungguh-sungguh mengikuti kursus ini</p>
                         <p class="text-sm">3. Akan menjalin kerjasama baik antar peserta dan penyelenggara</p>
-                        <p class="text-sm">4. Komitmen waktu 60 menit pada setiap sesi yang telah ditentukan (Konsekuensi terlambat/tidak hadir online, tidak ada pengulangan)</p>
-                        <p class="text-sm">5. Bila berhalangan darurat, silahkan menginformasikan 1 hari sebelumnya</p>
-                        <p class="text-sm">6. Bersabar menunggu respon dari penyelenggara</p>
-                        <P class="font-bold">Perhatian! Pendaftaran ini hanya untuk 1 orang, anda tidak diperbolehkan untuk membagikan materi dalam bentuk apapun kepada orang lain. *</p>
-                        @elseif($course)
-                        <p class="text-sm">1. Saya berperan aktif mengikuti rangkaian kursus dengan bahagia, ceria dan tetap positif</p>
-                        <p class="text-sm">2. Akan bersungguh-sungguh mengikuti kursus ini</p>
-                        <p class="text-sm">3. Akan menjalin kerjasama baik antar peserta dan penyelenggara</p>
-                        @endif
+                        <p class="text-sm">4. Tidak menyebarluaskan, meng-copy sebagian atau keseluruhan dari materi Kelas QAC</p>
                     </div>
 
                     <div class="md:flex md:items-left my-6">
