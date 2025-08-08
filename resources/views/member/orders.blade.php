@@ -9,12 +9,12 @@
         <div class="alert alert-success">
             {{ session('success') }}
             <div class="mt-2">
-                <p class="text-sm text-gray-700 mb-2">Anda akan dialihkan ke <a href="https://wa.me/{{ $whatsappNumber }}" target="_blank">WA Admin QAC</a> dalam <span id="countdown">5</span> detik...</p>
+                <p class="text-sm text-gray-700 mb-2">Anda akan dialihkan ke <a href="https://wa.me/{{ $whatsappNumber }}" target="_blank">WA Admin QAC</a> dalam <span id="countdown" class="font-bold text-red-500">3</span> detik... klik <a href="{{ $whatsappUrl }}" target="_blank" class="text-blue-500 font-bold">disini</a> jika tidak ingin menunggu WA Admin QAC</p>
             </div>
         </div>
         <script>
             // Countdown and auto redirect to WhatsApp after 5 seconds
-            let countdown = 5;
+            let countdown = 3;
             const countdownElement = document.getElementById('countdown');
             
             const timer = setInterval(function() {
@@ -23,7 +23,7 @@
                 
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    window.open('{{ $whatsappUrl }}', '_blank');
+                    window.location.replace('{{ $whatsappUrl }}');
                 }
             }, 1000);
         </script>
