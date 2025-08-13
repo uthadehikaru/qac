@@ -10,7 +10,7 @@
             </div>
             <div class="border-4 border-black rounded-lg">
                 <video class="" controls controlsList="nodownload">
-                    <source src="{{ asset('storage/sample.mp4') }}" type="video/mp4">
+                    <source src="{{ asset('storage/videos/qac-3.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
