@@ -109,9 +109,6 @@
                         <li class="p-4 text-center border-b border-black">
                         Masuk <span class="font-bold">grup WA QAC 1a</span>
                         </li>
-                        <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">Sertifikat belajar</span>
-                        </li>
                     </ul>
                 </div>
                 <div class="flex flex-col content-start px-2">
