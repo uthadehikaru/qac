@@ -154,6 +154,22 @@
                         </select>
                     </div>
                 </div>
+                <div class="-mx-3 md:flex mb-6">
+                    <div class="md:w-full px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-faq">
+                            FAQ Content (Markdown Editor)
+                        </label>
+                        <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-faq" name="faq" rows="20" placeholder="Enter FAQ content in markdown format...">{{ $faq }}</textarea>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <strong>Markdown Editor Features:</strong><br>
+                            • Toolbar with formatting buttons<br>
+                            • Live preview toggle<br>
+                            • Auto-save functionality<br>
+                            • Keyboard shortcuts (Ctrl+B for bold, Ctrl+I for italic, etc.)
+                        </p>
+                    </div>
+                </div>
             </div>
         </form>
         
@@ -212,9 +228,45 @@
     <x-slot name="styles">        
         <link href="{{ asset('fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('dropzone-5.9.3/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     </x-slot>
     <x-slot name="scripts">        
         <script src="{{ asset('fileuploads/js/fileupload.js') }}"></script>
         <script src="{{ asset('dropzone-5.9.3/dropzone.min.js') }}"></script>
+        <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+        <script>
+            // Initialize EasyMDE markdown editor
+            document.addEventListener('DOMContentLoaded', function() {
+                const easyMDE = new EasyMDE({
+                    element: document.getElementById('grid-faq'),
+                    spellChecker: false,
+                    autosave: {
+                        enabled: true,
+                        uniqueId: 'faq-content',
+                        delay: 1000,
+                    },
+                    toolbar: [
+                        'bold', 'italic', 'heading', '|',
+                        'quote', 'unordered-list', 'ordered-list', '|',
+                        'link', 'image', '|',
+                        'preview', 'side-by-side', 'fullscreen', '|',
+                        'guide'
+                    ],
+                    placeholder: 'Enter FAQ content in markdown format...',
+                    status: ['lines', 'words', 'cursor'],
+                    minHeight: '400px',
+                    maxHeight: '600px',
+                    renderingConfig: {
+                        singleLineBreaks: false,
+                        codeSyntaxHighlighting: true,
+                    }
+                });
+
+                // Sync with form submission
+                document.getElementById('form').addEventListener('submit', function() {
+                    document.getElementById('grid-faq').value = easyMDE.value();
+                });
+            });
+        </script>
     </x-slot>
 </x-app-layout>

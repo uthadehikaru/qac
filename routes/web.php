@@ -65,7 +65,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::view('/faq', 'faq')->name('faq');
+Route::get('/faq', [App\Http\Controllers\FAQController::class, 'index'])->name('faq');
 Route::view('/donasi', 'donasi')->name('donasi');
 Route::get('/events', [EventController::class, 'index'])->name('event.list');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event.detail');
