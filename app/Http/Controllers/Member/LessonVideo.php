@@ -46,6 +46,7 @@ class LessonVideo extends Controller
                 }
             }
         }
+        $data['activeOrder'] = $activeOrder;
         $data['ecourse'] = $ecourse;
         $selectedSection = $request->section;
         $data['sections'] = $ecourseService->getEcourseSections($ecourse->id);
