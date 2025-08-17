@@ -155,6 +155,15 @@
                     </div>
                 </div>
                 <div class="-mx-3 md:flex mb-6">
+                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-inactive_days">
+                            Inactive Days
+                        </label>
+                        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                        id="grid-inactive_days" type="number" name="inactive_days" value="{{ $inactive_days }}" />
+                    </div>
+                </div>
+                <div class="-mx-3 md:flex mb-6">
                     <div class="md:w-full px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-faq">
                             FAQ Content (Markdown Editor)

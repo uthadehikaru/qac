@@ -13,7 +13,7 @@
             </div>
         </div>
         <script>
-            // Countdown and auto redirect to WhatsApp after 5 seconds
+            // Countdown and auto redirect to WhatsApp after 3 seconds
             let countdown = 3;
             const countdownElement = document.getElementById('countdown');
             
@@ -23,7 +23,8 @@
                 
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    window.location.replace('{{ $whatsappUrl }}');
+                    // Use window.location.href instead of replace to preserve browser history
+                    window.location.href = '{{ $whatsappUrl }}';
                 }
             }, 1000);
         </script>

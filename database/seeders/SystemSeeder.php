@@ -127,6 +127,13 @@ class SystemSeeder extends Seeder
         ]);
 
         System::firstOrCreate([
+            'key' => 'inactive_days',
+        ], [
+            'value' => '3',
+            'is_array' => false,
+        ]);
+
+        System::firstOrCreate([
             'key' => 'faq',
         ], [
             'value' => '# QAC

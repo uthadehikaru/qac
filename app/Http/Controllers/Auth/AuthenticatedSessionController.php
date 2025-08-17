@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\System;
+use App\Services\EcourseService;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +27,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request, EcourseService $ecourseService, OrderService $orderService)
     {
         $request->authenticate();
 
@@ -36,6 +39,18 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::user()->is_admin) {
             return redirect()->route('admin.dashboard');
+        }
+
+        $inactive_days = System::value('inactive_days');
+        $member_id = Auth::user()->member?->id;
+        $lastHistory = $ecourseService->lastHistory($member_id);
+        $diffDate = 0;
+        if($lastHistory) {
+            $diffDate = $lastHistory->updated_at->diffInDays(now());
+        }
+
+        if($diffDate >= $inactive_days) {
+            return redirect()->route('home')->with('alert', 'Assalamualaikum kami melihat kamu belum aktif belajar kelas selama '.$diffDate.' hari, yuk lanjutkan belajarnya untuk terus Tadabbur dan belajar Bahasa Arab Al-Quran');
         }
 
         return redirect()->route('home');

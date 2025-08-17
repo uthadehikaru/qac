@@ -13,6 +13,6 @@ class LoginAsUser extends Controller
     {
         Auth::login($user);
 
-        return redirect()->intended(route('member.dashboard'));
+        return redirect()->route('member.dashboard');
     }
 }

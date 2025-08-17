@@ -5,6 +5,8 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CompletedLesson;
+use App\Models\Order;
 
 class Member extends Model
 {
@@ -149,5 +151,15 @@ class Member extends Model
         return $this->batches->contains(function ($memberBatch, $key) use ($batch) {
             return $memberBatch->course_id == $batch->course_id;
         });
+    }
+
+    public function completedLessons()
+    {
+        return $this->hasMany(CompletedLesson::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

@@ -24,6 +24,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        
+        // Check for inactive members and send reminder emails daily at 9 AM
+        $schedule->command('app:inactive-member')
+                 ->dailyAt('09:00')
+                 ->withoutOverlapping()
+                 ->runInBackground();
     }
 
     /**

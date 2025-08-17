@@ -119,6 +119,23 @@
         <img src="{{ asset('images/daftar.png') }}" alt="Daftar" class="w-full h-full">
         </a>
         @endif
+        @if(session()->has('alert'))
+        <div class="fixed z-10 inset-0 overflow-y-auto" id="alert">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75"></div>
+            <div class="relative bg-white rounded-lg p-8 max-w-lg w-full mx-4">
+                <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onclick="document.getElementById('subscriptionModal').classList.add('hidden')">
+                    <img src="{{ asset('images/close.png') }}" alt="Close" class="w-6 h-6">
+                </button>
+                <h3 class="text-xl font-bold mb-4 text-center flex items-center justify-center gap-2 text-[#7b0c00]">REMINDER</h3>
+                <p class="text-gray-600 mb-6 text-center">{{ session()->get('alert') }}</p>
+                <div class="flex justify-center gap-4">
+                    <x-qac-button href="{{ route('member.dashboard') }}">Belajar Sekarang</x-qac-button>
+                </div>
+            </div>
+        </div>
+    </div>
+        @endif
         <div class="hidden fixed z-[9999] overflow-y-auto top-0 w-full left-0" id="modal">
             <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity">
@@ -201,7 +218,10 @@
             $('#nav-content').addClass('hidden')
         }
 
-        
+        function toggleAlert() { 
+            document.getElementById('alert').classList.toggle('hidden')
+        }
+
         jQuery(document).ready(function($){
             $('#modal').click(function(){
                 $(this).addClass('hidden')

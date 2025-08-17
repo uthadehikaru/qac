@@ -219,6 +219,13 @@ class EcourseService
 
     public function memberHistory($member_id)
     {
-        return CompletedLesson::where('member_id', $member_id)->latest('updated_at')->paginate(6);
+        return CompletedLesson::where('member_id', $member_id)
+        ->whereHas('lesson.ecourse')
+        ->latest('updated_at')->paginate(6);
+    }
+
+    public function lastHistory($member_id)
+    {
+        return CompletedLesson::where('member_id', $member_id)->latest('updated_at')->first();
     }
 }

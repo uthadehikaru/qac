@@ -6,7 +6,9 @@ use App\Events\MemberBatchUpdated;
 use App\Models\MemberBatch;
 use App\Models\Order;
 use App\Models\System;
+use App\Services\OrderService;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -38,11 +40,9 @@ class UpdateLiteBatch
                         'approved_at' => $event->memberBatch->approved_at,
                     ]);
             }
-            $activeOrder = Order::where('member_id', $event->memberBatch->member_id)
-                ->active()
-                ->orderBy('end_date','desc')
-                ->first();
-            $startDate = Carbon::now();
+            $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->latest()->first();
+            $startDate = CarbonImmutable::now();
+            $endDate = CarbonImmutable::now();
             if ($activeOrder) {
                 $startDate = $activeOrder->end_date;
             }
@@ -50,13 +50,14 @@ class UpdateLiteBatch
             if($event->memberBatch->session == 'bundling') {
                 $months = $months * 2;
             }
+            $endDate = $startDate->addMonths($months);
             $order = Order::create([
                 'member_id' => $event->memberBatch->member_id,
-                'start_date' => $startDate->startOfDay(),
+                'start_date' => $startDate,
                 'price' => 0,
                 'months' => $months,
                 'total' => 0,
-                'end_date' => $startDate->addMonths($months)->endOfDay(),
+                'end_date' => $endDate,
                 'verified_at' => Carbon::now(),
             ]);
         }
