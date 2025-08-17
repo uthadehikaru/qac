@@ -43,6 +43,7 @@
                 </div>
                 <x-qac-button class="text-xs font-bold">@lang('batch.status_'.$memberBatch->status) </x-qac-button>
             </div>
+            @if(!str_contains($memberBatch->batch->full_name, 'Lite 1a'))
             <div class="flex justify-between my-2 p-4 items-start">
                 <p class="text-xs text-gray-500 w-1/2">Sertifikat dapat diunduh setelah kelas selesai</p>
                 @if($memberBatch->file)
@@ -51,6 +52,7 @@
                 <a href="#" class="text-xs font-bold bg-gray-200 text-gray-500 px-4 py-2 rounded-full">E-Certificate</a>
                 @endif
             </div>
+            @endif
         @endforeach
 
         @foreach ($orders as $order)
