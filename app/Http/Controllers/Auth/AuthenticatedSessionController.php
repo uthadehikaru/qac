@@ -33,12 +33,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (session()->has('url.intended')) {
-            return redirect(session()->get('url.intended'));
-        }
-
         if (Auth::user()->is_admin) {
             return redirect()->route('admin.dashboard');
+        }
+
+        if (session()->has('url.intended')) {
+            return redirect(session()->get('url.intended'));
         }
 
         $inactive_days = System::value('inactive_days');
