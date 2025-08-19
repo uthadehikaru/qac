@@ -132,6 +132,7 @@ class MemberBatchController extends Controller
         $data['batchMember'] = $batchMember;
         $batch = Batch::find($batch_id);
         $data['statuses'] = MemberBatch::statuses;
+        $data['registered'] = $batchMember->status == MemberBatch::STATUS_REGISTERED;
         $data['batch'] = $batch;
         $data['sessions'] = $batch->sessions != '' ? explode(',', $batch->sessions) : [];
 

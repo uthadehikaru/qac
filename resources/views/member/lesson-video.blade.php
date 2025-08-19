@@ -3,7 +3,7 @@
     <x-panel class="mt-12">
         @if($activeOrder)
         <div class="border rounded-full text-center py-2 px-4 bg-green-500 w-fit mx-auto mb-4">
-            <p>Kelas Anda aktif hingga {{ $activeOrder->end_date->setTimezone('Asia/Jakarta')->isoFormat('D MMMM Y') }}</p>
+            <p>Kelas atau Langganan Anda aktif hingga {{ $activeOrder->end_date->setTimezone('Asia/Jakarta')->isoFormat('D MMMM Y') }}</p>
         </div>
         @endif
         @if($ecourse->is_only_active_batch)

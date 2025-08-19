@@ -5,6 +5,9 @@
         - <a href="{{ route('admin.courses.batches.members', [$batch->course->id, $batch->id]) }}" class="pointer text-blue-500">@lang('Batch') {{ $batch->full_name }}</a>
         </h2>
         <div class="float-right">
+            @if($registered)
+            <x-link-button  href="{{ route('admin.courses.batches.members.status', [$batch->course_id, $batch->id, $batchMember->id, 3]) }}" type="success" id="confirm" class=" ml-3">Konfirmasi</x-button>
+            @endif
             <x-link-button  href="javascript:void(0)" onclick="document.getElementById('form').submit();" id="save" class=" ml-3">Simpan</x-button>
         </div>
     </x-slot>

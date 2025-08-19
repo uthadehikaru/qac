@@ -92,7 +92,7 @@
         <div class="content">
             <div class="greeting">Assalaamu'alaikum.</div>
             <div class="message">
-                Dear {{ $member->full_name }}, kami melihat kamu belum aktif belajar kelas selama {{ $inactiveDays }} hari, yuk lanjutkan belajarnya untuk terus Tadabbur dan belajar Bahasa Arab Al-Qur'an 😊
+                Dear {{ $member->full_name }}, kami melihat kamu belum aktif belajar selama {{ $inactiveDays }} hari, yuk lanjutkan belajarnya untuk terus Tadabbur dan belajar Bahasa Arab Al-Qur'an 😊
             </div>
             <div style="text-align: center;">
                 <a href="{{ $actionUrl }}" class="button">{{ $actionText }}</a>

@@ -31,7 +31,7 @@ class UpdateLiteBatch
         $isLite = $event->memberBatch->batch->course->is_lite;
         if ($isLite) {
             if($event->memberBatch->session == 'bundling') {
-                $count = MemberBatch::where('member_id', $event->memberBatch->member_id)
+                MemberBatch::where('member_id', $event->memberBatch->member_id)
                     ->where('batch_id', '!=', $event->memberBatch->batch_id)
                     ->where('session', 'bundling')
                     ->where('status', MemberBatch::STATUS_REGISTERED)
@@ -51,7 +51,7 @@ class UpdateLiteBatch
                 $months = $months * 2;
             }
             $endDate = $startDate->addMonths($months);
-            $order = Order::create([
+            Order::create([
                 'member_id' => $event->memberBatch->member_id,
                 'start_date' => $startDate,
                 'price' => 0,
