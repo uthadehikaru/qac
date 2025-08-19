@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Certificate;
+use App\Models\File;
 use App\Notifications\CertificateCreated;
 use App\Models\Member;
 use App\Models\MemberBatch;
@@ -10,7 +11,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
-use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 

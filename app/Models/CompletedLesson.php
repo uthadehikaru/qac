@@ -18,6 +18,7 @@ class CompletedLesson extends Model
 
     protected $dispatchesEvents = [
         'created' => CompletedLessonUpdated::class,
+        'updated' => CompletedLessonUpdated::class,
     ];
 
     public function lesson(): BelongsTo

@@ -74,36 +74,27 @@ class CheckCompletedLesson
         
         // Check if all lessons are completed
         if ($completedLessons >= $totalLessons && $totalLessons > 0) {
-            Log::info("Member {$member->id} has completed all lessons for ecourse {$ecourse->id} ({$completedLessons}/{$totalLessons})");
-            
             // Find the member's batch for this course
             $memberBatch = MemberBatch::where('member_id', $member->id)
                 ->whereHas('batch', function ($query) use ($ecourse) {
                     $query->where('course_id', $ecourse->course_id);
                 })
                 ->where('status', '>=', MemberBatch::STATUS_PAID)
-                ->where('status', '<', MemberBatch::STATUS_GRADUATED)
+                ->where('status', '<=', MemberBatch::STATUS_GRADUATED)
                 ->first();
             
-            if ($memberBatch) {
+            if ($memberBatch && !$memberBatch->file) {
                 // Update member batch status to graduated
                 $memberBatch->update([
                     'status' => MemberBatch::STATUS_GRADUATED
                 ]);
                 
-                Log::info("Updated member batch {$memberBatch->id} to graduated status for member {$member->id}");
-                
                 // Generate certificate if batch has certificate template
                 if ($memberBatch->batch->certificate_id) {
                     (new MemberService)->generateCertificate($memberBatch->batch->certificate, $memberBatch);
-                } else {
-                    Log::info("No certificate template found for batch {$memberBatch->batch_id}");
+                    Log::info("Generated certificate for member {$member->id} in batch {$memberBatch->id}");
                 }
-            } else {
-                Log::warning("No active member batch found for member {$member->id} and course {$ecourse->course_id}");
             }
-        } else {
-            Log::debug("Member {$member->id} has completed {$completedLessons}/{$totalLessons} lessons for ecourse {$ecourse->id}");
         }
     }
 }
