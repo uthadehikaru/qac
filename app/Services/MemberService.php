@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Cache;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Image;
-use Illuminate\Support\Facades\Str;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class MemberService
 {
