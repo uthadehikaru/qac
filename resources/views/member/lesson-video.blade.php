@@ -86,9 +86,9 @@
                     </div>
                     @endif
                     @if($videos->count())
-                    <h2 class="font-bold text-md my-4">{{ $completed }} of {{ $videos->count() }} Lessons Completed</h2>                    
+                    <h2 class="font-bold text-md my-4">{{ $completed }} of {{ $allVideos->count() }} Lessons Completed</h2>                    
                     <div class="w-full rounded-full h-2.5 bg-gray-300 mt-2">
-                        <div class="bg-red-800 h-2.5 rounded-full" style="width: {{ $videos->count() ? round(($completed/$videos->count())*100):0 }}%"></div>
+                        <div class="bg-red-800 h-2.5 rounded-full" style="width: {{ $allVideos->count() ? round(($completed/$allVideos->count())*100):0 }}%"></div>
                     </div>
                     @endif
 

@@ -53,6 +53,7 @@ class LessonVideo extends Controller
         if(!$selectedSection){
             $selectedSection = $data['sections']->first()?->id;
         }
+        $allVideos = $subscriptionService->getVideos($ecourse->id);
         $videos = $subscriptionService->getVideos($ecourse->id, $selectedSection);
         $data['completed'] = $subscriptionService->getCompletedLessons($ecourse->id, $member_id)->pluck('lesson_id')->count();
         if ($lesson_uu) {
@@ -63,9 +64,10 @@ class LessonVideo extends Controller
         if($data['video']){
             $ecourseService->addHistory($data['video']->id, $member_id);
         }
-        if($data['completed'] > $videos->count()){
-            $data['completed'] = $videos->count();
+        if($data['completed'] > $allVideos->count()){
+            $data['completed'] = $allVideos->count();
         }
+        $data['allVideos'] = $allVideos;
         $data['videos'] = $videos;
         $data['next'] = $ecourseService->getNext($videos, $lesson_uu);
 

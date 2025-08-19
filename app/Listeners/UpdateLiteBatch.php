@@ -30,36 +30,42 @@ class UpdateLiteBatch
     {
         $isLite = $event->memberBatch->batch->course->is_lite;
         if ($isLite) {
-            if($event->memberBatch->session == 'bundling') {
-                MemberBatch::where('member_id', $event->memberBatch->member_id)
-                    ->where('batch_id', '!=', $event->memberBatch->batch_id)
-                    ->where('session', 'bundling')
-                    ->where('status', MemberBatch::STATUS_REGISTERED)
-                    ->update([
-                        'status' => $event->memberBatch->status,
-                        'approved_at' => $event->memberBatch->approved_at,
-                    ]);
+            // Only create order when status changes from REGISTERED to PAID
+            $originalStatus = $event->memberBatch->getOriginal('status');
+            $currentStatus = $event->memberBatch->status;
+            
+            if ($originalStatus == MemberBatch::STATUS_REGISTERED && $currentStatus == MemberBatch::STATUS_PAID) {
+                if($event->memberBatch->session == 'bundling') {
+                    MemberBatch::where('member_id', $event->memberBatch->member_id)
+                        ->where('batch_id', '!=', $event->memberBatch->batch_id)
+                        ->where('session', 'bundling')
+                        ->where('status', MemberBatch::STATUS_REGISTERED)
+                        ->update([
+                            'status' => $event->memberBatch->status,
+                            'approved_at' => $event->memberBatch->approved_at,
+                        ]);
+                }
+                $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->latest()->first();
+                $startDate = CarbonImmutable::now();
+                $endDate = CarbonImmutable::now();
+                if ($activeOrder) {
+                    $startDate = $activeOrder->end_date;
+                }
+                $months = System::value('ecourse_access_months',1);
+                if($event->memberBatch->session == 'bundling') {
+                    $months = $months * 2;
+                }
+                $endDate = $startDate->addMonths($months);
+                Order::create([
+                    'member_id' => $event->memberBatch->member_id,
+                    'start_date' => $startDate,
+                    'price' => 0,
+                    'months' => $months,
+                    'total' => 0,
+                    'end_date' => $endDate,
+                    'verified_at' => Carbon::now(),
+                ]);
             }
-            $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->latest()->first();
-            $startDate = CarbonImmutable::now();
-            $endDate = CarbonImmutable::now();
-            if ($activeOrder) {
-                $startDate = $activeOrder->end_date;
-            }
-            $months = System::value('ecourse_access_months',1);
-            if($event->memberBatch->session == 'bundling') {
-                $months = $months * 2;
-            }
-            $endDate = $startDate->addMonths($months);
-            Order::create([
-                'member_id' => $event->memberBatch->member_id,
-                'start_date' => $startDate,
-                'price' => 0,
-                'months' => $months,
-                'total' => 0,
-                'end_date' => $endDate,
-                'verified_at' => Carbon::now(),
-            ]);
         }
     }
 }

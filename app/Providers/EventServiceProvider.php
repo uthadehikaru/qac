@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\CompletedLessonUpdated;
 use App\Events\MemberBatchUpdated;
+use App\Listeners\CheckCompletedLesson;
 use App\Listeners\LogSuccessfulLogin;
 use App\Listeners\UpdateLiteBatch;
 use Illuminate\Auth\Events\Login;
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         MemberBatchUpdated::class => [
             UpdateLiteBatch::class,
+        ],
+        CompletedLessonUpdated::class => [
+            CheckCompletedLesson::class,
         ],
     ];
 

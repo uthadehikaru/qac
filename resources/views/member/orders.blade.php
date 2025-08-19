@@ -43,7 +43,7 @@
                 </div>
                 <x-qac-button class="text-xs font-bold">@lang('batch.status_'.$memberBatch->status) </x-qac-button>
             </div>
-            @if(!str_contains($memberBatch->batch->full_name, 'Lite 1a'))
+            @if($memberBatch->status > 1 && $memberBatch->batch->certificate_id)
             <div class="flex justify-between my-2 p-4 items-start">
                 <p class="text-xs text-gray-500 w-1/2">Sertifikat dapat diunduh setelah kelas selesai</p>
                 @if($memberBatch->file)

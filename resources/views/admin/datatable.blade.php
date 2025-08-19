@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
             {!! $title !!}
         </h2>
+            <div class="flex items-center flex-col md:flex-row gap-2">
             @if(isset($button))
                 {!! $button !!}
             @endif
@@ -11,6 +12,7 @@
                     <x-link-button class="float-right ml-2" href="{{ $button['href'] }}">{{ $button['name'] }}</x-link-button>
                 @endforeach
             @endif
+            </div>
     </x-slot>
     
     @if(session('message'))
