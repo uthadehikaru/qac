@@ -6,27 +6,6 @@
             <p>Kelas atau Langganan Anda aktif hingga {{ $activeOrder->end_date->setTimezone('Asia/Jakarta')->isoFormat('D MMMM Y') }}</p>
         </div>
         @endif
-        @if($ecourse->is_only_active_batch)
-        <div class="relative py-4 mb-4">
-            <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
-                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
-                    @foreach($sections as $section)
-                    <a href="{{ route('member.ecourses.lessons', [ 'slug' => $ecourse->slug, 'section' => $section->id]) }}" class="px-4 py-2 {{ $video->section_id == $section->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $section->name }}</a>
-                    @endforeach
-                </div>
-            </div>
-            <button class="filter-nav-custom filter-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Next">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
-        </div>
-        @else
         <nav class="flex mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -57,7 +36,25 @@
                 </li>
             </ol>
         </nav>
-        @endif
+        <div class="relative py-4 mb-4">
+            <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
+                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
+                    @foreach($sections as $section)
+                    <a href="{{ route('member.ecourses.lessons', [ 'slug' => $ecourse->slug, 'section' => $section->id]) }}" class="px-4 py-2 {{ $video->section_id == $section->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $section->name }}</a>
+                    @endforeach
+                </div>
+            </div>
+            <button class="filter-nav-custom filter-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Next">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
         <div class="container mx-auto">
             <div class="w-full flex flex-col md:flex-row gap-8">
                 <div class="content md:w-2/3">
