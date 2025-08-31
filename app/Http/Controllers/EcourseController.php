@@ -26,7 +26,7 @@ class EcourseController extends Controller
         }
 
         $data['isAlumni'] = false;
-        if(Auth::check()){
+        if(Auth::check() && Auth::user()->member){
             $data['isAlumni'] = $memberService->isAlumni(Auth::user()->member->id);
         }
 
@@ -45,7 +45,7 @@ class EcourseController extends Controller
         if (! $ecourse->published) {
             return abort(404);
         }
-        $isAlumni = $memberService->isAlumni(Auth::user()->member->id);
+        $isAlumni = $memberService->isAlumni(Auth::user()->member?->id);
         if($ecourse->level >= 1 && !$isAlumni){
             return back()->with('error', 'Kamu belum menjadi alumni QAC, silakan daftar QAC 1.0 Lite 1b terlebih dahulu');
         }
