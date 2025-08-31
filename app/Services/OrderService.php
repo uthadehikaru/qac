@@ -44,6 +44,6 @@ class OrderService
 
     public function activeOrder()
     {
-        return Order::where('member_id', Auth::user()->member->id)->verified()->latest()->first();
+        return Order::where('member_id', Auth::user()->member?->id)->verified()->latest()->first();
     }
 }
