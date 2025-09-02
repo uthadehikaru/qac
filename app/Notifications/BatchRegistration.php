@@ -12,6 +12,7 @@ class BatchRegistration extends Notification
     use Queueable;
 
     private $memberBatch;
+    private $batchName;
 
     /**
      * Create a new notification instance.
@@ -21,6 +22,11 @@ class BatchRegistration extends Notification
     public function __construct(MemberBatch $memberBatch)
     {
         $this->memberBatch = $memberBatch;
+        
+        $this->batchName = $this->memberBatch->batch->full_name;
+        if ($this->memberBatch->session == 'bundling') {
+            $this->batchName = $this->memberBatch->batch->course->name. ' Bundling';
+        }
     }
 
     /**
@@ -43,7 +49,7 @@ class BatchRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
+            ->subject('Pendaftaran '.$this->batchName)
             ->line($this->getMessage())
             ->action(__('Detail'), $this->getLink());
     }
@@ -70,7 +76,7 @@ class BatchRegistration extends Notification
 
     private function getMessage()
     {
-        $message = __('user.registration', ['member' => $this->memberBatch->member->full_name, 'batch' => $this->memberBatch->batch->full_name]);
+        $message = __('user.registration', ['member' => $this->memberBatch->member->full_name, 'batch' => $this->batchName]);
         if ($this->memberBatch->member->is_overseas) {
             $message .= ' [Luar Negeri]';
         }

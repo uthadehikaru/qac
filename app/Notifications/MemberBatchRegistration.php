@@ -12,6 +12,7 @@ class MemberBatchRegistration extends Notification
     use Queueable;
 
     private $memberBatch;
+    private $batchName;
 
     /**
      * Create a new notification instance.
@@ -21,6 +22,11 @@ class MemberBatchRegistration extends Notification
     public function __construct(MemberBatch $memberBatch)
     {
         $this->memberBatch = $memberBatch;
+        
+        $this->batchName = $this->memberBatch->batch->full_name;
+        if ($this->memberBatch->session == 'bundling') {
+            $this->batchName = $this->memberBatch->batch->course->name. ' Bundling';
+        }
     }
 
     /**
@@ -43,7 +49,7 @@ class MemberBatchRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Pendaftaran '.$this->memberBatch->batch->full_name)
+            ->subject('Pendaftaran '.$this->batchName)
             ->line($this->getMessage())
             ->action(__('WA Admin QAC'), $this->getLink());
     }
@@ -65,11 +71,11 @@ class MemberBatchRegistration extends Notification
 
     private function getLink()
     {
-        return 'https://wa.me/'.\App\Models\System::value('whatsapp').'?text='.urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$this->memberBatch->batch->full_name.' atas nama '.$this->memberBatch->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih');
+        return 'https://wa.me/'.\App\Models\System::value('whatsapp').'?text='.urlencode('Assalaamu\'alaikum QAC, saya sudah mendaftar '.$this->batchName.' atas nama '.$this->memberBatch->member->full_name.'. mohon dibantu untuk proses selanjutnya. terima kasih');
     }
 
     private function getMessage()
     {
-        return __('member.registration', ['member' => $this->memberBatch->member->full_name, 'batch' => $this->memberBatch->batch->full_name]);
+        return __('member.registration', ['member' => $this->memberBatch->member->full_name, 'batch' => $this->batchName]);
     }
 }
