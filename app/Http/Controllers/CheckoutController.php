@@ -29,6 +29,10 @@ class CheckoutController extends Controller
 
     public function store(Request $request, OrderService $orderService)
     {
+        $request->validate([
+            'months' => 'required|integer|min:1',
+        ]);
+        
         $data = [
             'member_id' => Auth::user()->member->id,
             'price' => System::value('subscription_fee'),

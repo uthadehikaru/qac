@@ -19,7 +19,7 @@
                     @csrf
                     <div class="flex flex-col justify-center items-center gap-2">
                         <div class="flex gap-2 items-center">
-                            <input type="number" name="months" class="p-2 border border-gray-300 rounded-md">
+                            <input type="number" name="months" class="p-2 border border-gray-300 rounded-md" required min="1">
                             <label for="months" class="text-base md:text-xl font-bold text-black">Bulan</label>
                         </div>
                         <button type="submit" class="bg-[#7b0c00] text-white font-bold rounded-lg my-6 py-2 px-4 text-xl md:text-3xl">Daftar Langganan</button>
