@@ -68,6 +68,7 @@ class MemberBatchController extends Controller
         $data['batchMember'] = null;
         $batch = Batch::find($batch_id);
         $data['batch'] = $batch;
+        $data['registered'] = false;
         $data['statuses'] = MemberBatch::statuses;
         $data['sessions'] = $batch->sessions != '' ? explode(',', $batch->sessions) : [];
         $data['members'] = Member::whereNotExists(function ($query) use ($batch_id) {
