@@ -63,6 +63,8 @@ class LessonVideo extends Controller
         }
         if($data['video']){
             $ecourseService->addHistory($data['video']->id, $member_id);
+        }else{
+            return abort(404);
         }
         if($data['completed'] > $allVideos->count()){
             $data['completed'] = $allVideos->count();

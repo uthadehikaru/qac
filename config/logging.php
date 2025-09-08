@@ -37,7 +37,7 @@ return [
     'channels' => [
         'qac' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'sentry'],
+            'channels' => ['sentry'],
             'name' => 'qac-channel'
         ],
         'stack' => [
