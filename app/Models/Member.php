@@ -162,4 +162,9 @@ class Member extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function queues()
+    {
+        return $this->hasMany(Queue::class);
+    }
 }
