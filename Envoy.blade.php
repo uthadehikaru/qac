@@ -8,6 +8,7 @@
 @task('deploy', ['on' => 'web'])
     cd domains/qacjakarta.com/qac
     git pull origin main
+    php artisan cache:clear
     php artisan optimize
 @endtask
 

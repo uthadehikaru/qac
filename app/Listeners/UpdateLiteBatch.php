@@ -45,7 +45,7 @@ class UpdateLiteBatch
                             'approved_at' => $event->memberBatch->approved_at,
                         ]);
                 }
-                $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->latest()->first();
+                $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->active()->latest()->first();
                 $startDate = CarbonImmutable::now();
                 $endDate = CarbonImmutable::now();
                 if ($activeOrder) {
