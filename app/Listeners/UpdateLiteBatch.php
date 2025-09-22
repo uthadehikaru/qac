@@ -45,17 +45,19 @@ class UpdateLiteBatch
                             'approved_at' => $event->memberBatch->approved_at,
                         ]);
                 }
-                $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->active()->latest()->first();
-                $startDate = CarbonImmutable::now();
-                $endDate = CarbonImmutable::now();
-                if ($activeOrder) {
-                    $startDate = $activeOrder->end_date;
-                }
                 $months = System::value('ecourse_access_months',1);
                 if($event->memberBatch->session == 'bundling') {
                     $months = $months * 2;
                 }
-                $endDate = $startDate->addMonths($months);
+                $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->latest()->first();
+                $startDate = CarbonImmutable::now();
+                $endDate = CarbonImmutable::now();
+                if ($activeOrder && $activeOrder->end_date > $startDate) {
+                    $startDate = $activeOrder->end_date;
+                    $endDate = $activeOrder->end_date->addMonths($months);
+                }else{
+                    $endDate = $startDate->addMonths($months);
+                }
                 Order::create([
                     'member_id' => $event->memberBatch->member_id,
                     'start_date' => $startDate,
