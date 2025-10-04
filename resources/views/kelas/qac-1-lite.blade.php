@@ -209,7 +209,21 @@
             <h3 class="my-4 text-base md:text-2xl leading-tight">
                 @lang('Jadilah bagian dari ribuan alumni')
             </h3>
-            @if($course)
+            @if($qac_lite_1a)
+            <div class="py-8">
+                <x-register-button href="{{ route('member.ecourses.lessons', 'qac-10-lite-1a') }}">
+                    @lang('Mulai belajar QAC Lite 1a')
+                </x-register-button>
+            </div>
+            @endif
+            @if($qac_lite_1b)
+            <div class="py-8">
+                <x-register-button href="{{ route('member.ecourses.lessons', 'qac-10-lite-1b') }}">
+                    @lang('Mulai belajar QAC Lite 1b')
+                </x-register-button>
+            </div>
+            @endif
+            @if(!$qac_lite_1a && !$qac_lite_1b)
             <div class="py-8">
                 <x-register-button href="{{ route('kelas.register', ['course_id' => $course->id]) }}">
                     @lang('Daftar QAC 1.0 Lite')
