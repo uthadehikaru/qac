@@ -7,6 +7,7 @@ use App\Models\File;
 use App\Notifications\CertificateCreated;
 use App\Models\Member;
 use App\Models\MemberBatch;
+use App\Models\System;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Endroid\QrCode\QrCode;
@@ -46,7 +47,11 @@ class MemberService
             ->first();
         if($isLite && $memberBatch){
             $approved_at = $memberBatch->approved_at;
-            $end_course = Carbon::parse($approved_at)->addDays(30);
+            $duration = System::value('ecourse_access_months', 1);
+            if($memberBatch->session == 'bundling'){
+                $duration = $duration * 2;
+            }
+            $end_course = Carbon::parse($approved_at)->addMonths($duration);
             if($end_course->isPast()){
                 return null;
             }

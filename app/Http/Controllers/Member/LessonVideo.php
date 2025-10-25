@@ -27,7 +27,7 @@ class LessonVideo extends Controller
             return abort(404);
         }
         $activeOrder = $orderService->activeOrder();
-        if(!$activeOrder && !$ecourse->is_only_active_batch){
+        if(!$activeOrder){
             return redirect()->route('checkout')->with('error', 'Anda belum memiliki langganan aktif');
         }elseif($ecourse->is_only_active_batch){
             $isLite = Str::startsWith($ecourse->course->name, 'QAC 1.0 Lite');
