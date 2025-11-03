@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\Member;
+use App\Models\MemberBatch;
 use App\Models\Province;
 use App\Models\Queue;
 use App\Models\Regency;
@@ -15,6 +16,7 @@ use App\Notifications\AdminWaitinglist;
 use App\Notifications\BatchRegistration;
 use App\Notifications\MemberBatchRegistration;
 use App\Notifications\MemberWaitinglist;
+use App\Services\MemberService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +64,7 @@ class CourseRegisterController extends Controller
         return view('kelas.register', $data);
     }
 
-    public function submit(Request $request, $course_id, $batch_id = null)
+    public function submit(MemberService $memberService, Request $request, $course_id, $batch_id = null)
     {
         $data = $request->validate([
             'full_name' => 'required|string|max:255',
@@ -138,6 +140,11 @@ class CourseRegisterController extends Controller
                     $batch1a = $lite1a->batches()->first();
                     $lite1b = Course::find(System::value('qac_1_lite_1b'));
                     $batch1b = $lite1b->batches()->first();
+                    $activeBatch1a = $memberService->checkMemberActiveBatch($member->id, $lite1a->id, true);
+                    if($activeBatch1a) {
+                        return back()->with('error', 'Anda masih mengikuti kelas '.$lite1a->name.' bundling');
+                    }
+
                     $member->batches()->attach($batch1a->id, ['session' => 'bundling']);
                     $member->batches()->attach($batch1b->id, ['session' => 'bundling']);
 
@@ -155,6 +162,10 @@ class CourseRegisterController extends Controller
                         $course = Course::find(System::value('qac_1_lite_1b'));
                     }
                     $batch = $course->batches()->first();
+                    $activeBatch = $memberService->checkMemberActiveBatch($member->id, $course->id, true);
+                    if($activeBatch) {
+                        return back()->with('error', 'Anda masih mengikuti kelas '.$activeBatch->batch->full_name);
+                    }
                     $member->batches()->attach($batch->id);
 
                     $memberBatch = $member->batches()->latest()->first()->pivot;
@@ -166,8 +177,18 @@ class CourseRegisterController extends Controller
                     }
                 }
             }elseif($batch){
-                $member->batches()->attach($batch->id);
+                $lastBatch = Auth::user()->member->batches()
+                    ->wherePivot('status', MemberBatch::STATUS_GRADUATED)
+                    ->orderBy('pivot_id', 'desc')->first();
+                $lastLevel = $lastBatch ? $lastBatch->course->level : 0;
+                $currentLevel = $batch ? $batch->course->level : 0;
+                if ($lastBatch && $lastBatch->id == $batch->id) {
+                    return back()->with('error', 'Anda telah mendaftar kelas ini');
+                }
 
+                if ($lastLevel < $currentLevel - 1) {
+                    return back()->with('error', 'Maaf, Anda belum menyelesaikan level sebelumnya');
+                }
                 $member->batches()->attach($batch->id);
 
                 $memberBatch = $member->batches()->latest()->first()->pivot;
