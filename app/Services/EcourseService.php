@@ -24,7 +24,7 @@ class EcourseService
 
     public function publishedEcourses($category = null)
     {
-        $query = Ecourse::published()->course()
+        $query = Ecourse::published()
         ->with('category')
         ->withCount('lessons');
         if ($category) {
