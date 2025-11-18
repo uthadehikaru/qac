@@ -38,7 +38,7 @@ class EcourseService
 
     public function recommendedEcourses()
     {
-        return Ecourse::published()->course()
+        return Ecourse::published()
         ->with('category')
         ->withCount('lessons')
         ->recomendation()
