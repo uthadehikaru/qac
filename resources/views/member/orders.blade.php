@@ -66,7 +66,13 @@
                     <div class="text-xs">Pemesanan pada {{ $order->created_at->format('d M Y') }}</div>
                     @endif
                 </div>
-                <x-qac-button class="text-xs font-bold">{{ $order->verified_at ? 'Aktif' : 'Menunggu Konfirmasi' }}</x-qac-button>
+                @if($order->verified_at && $order->end_date >= date('Y-m-d'))
+                <x-qac-button class="text-xs font-bold">Langganan Aktif</x-qac-button>
+                @elseif($order->verified_at && $order->end_date < date('Y-m-d'))
+                <x-qac-button class="text-xs font-bold">Langganan Berakhir</x-qac-button>
+                @else
+                <x-qac-button class="text-xs font-bold">Menunggu Konfirmasi</x-qac-button>
+                @endif
             </div>
         @endforeach
     </div>
