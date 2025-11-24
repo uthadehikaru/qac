@@ -19,7 +19,7 @@ class AppHelper
         $memberBatch = MemberBatch::find($memberBatch_id);
         $approved_at = $memberBatch->approved_at;
         if (!$approved_at) {
-            $approved_at = Carbon::now();
+            return 'Menunggu Konfirmasi';
         }
         
         // Check if session is bundling (assuming bundling sessions contain 'bundling' in the name)
@@ -31,7 +31,7 @@ class AppHelper
         // If bundling, add twice of access months
         $ecourse_access_month = System::value('ecourse_access_month', 1);
         $duration = $isBundling ? $ecourse_access_month*2 : $ecourse_access_month;
-        return $approved_at->addMonths($duration)->format('d M Y');
+        return $approved_at->format('d M Y').' s/d '.$approved_at->addMonths($duration)->format('d M Y');
     }
 }
 

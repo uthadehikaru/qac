@@ -108,7 +108,7 @@
                         </td>
                         <td class="px-2 py-4 text-center">
                             @if($batch->pivot->status >= \App\Models\MemberBatch::STATUS_PAID)
-                            {{ $batch->course->is_lite ? 'Aktif sampai '.liteduration($batch->pivot->id) : $batch->duration }}
+                            {{ $batch->course->is_lite ? liteduration($batch->pivot->id) : $batch->duration }}
                             @endif
                         </td>
                         <td class="px-2 py-4 text-center">
