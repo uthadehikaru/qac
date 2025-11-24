@@ -42,7 +42,7 @@ class UpdateLiteBatch
                         ->where('status', MemberBatch::STATUS_REGISTERED)
                         ->update([
                             'status' => $event->memberBatch->status,
-                            'approved_at' => $event->memberBatch->approved_at,
+                            'approved_at' => now(),
                         ]);
                 }
                 $months = System::value('ecourse_access_months',1);
