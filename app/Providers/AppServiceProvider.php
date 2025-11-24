@@ -45,7 +45,6 @@ class AppServiceProvider extends ServiceProvider
                 $batch1b = $memberService->checkMemberActiveBatch($member->id, System::value('qac_1_lite_1b'), true);
                 $qac_lite_1a = $batch1a ? true : false;
                 $qac_lite_1b = $batch1b ? true : false;
-                dd($batch1a, $batch1b);
             }
             $view->with('qac_lite_1a', $qac_lite_1a);
             $view->with('qac_lite_1b', $qac_lite_1b);
