@@ -96,9 +96,9 @@
                         <td class="px-2 py-4 text-sm text-gray-500 text-center">
 
                             <div class="flex flex-col md:flex-row justify-start space-x-1">
-                                @if($batch->pivot->status >= \App\Models\MemberBatch::STATUS_PAID)
+                                @if($batch->pivot->status >= \App\Models\MemberBatch::STATUS_PAID && $batch->activeBatch(Auth::user()->member->id))
                                 <a href="{{ route('member.batches.detail', $batch->pivot->id) }}" class="bg-blue-500 text-white rounded-md p-1">
-                                    Detail
+                                    Mulai Belajar
                                 </a>
                                 @endif
                             </div>

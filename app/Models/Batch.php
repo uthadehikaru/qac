@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\MemberService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -138,5 +139,11 @@ class Batch extends Model
         }
 
         return null;
+    }
+
+    public function activeBatch($member_id)
+    {
+        $memberService = new MemberService();
+        return $memberService->checkMemberActiveBatch($member_id, $this->course_id, $this->course->is_lite);
     }
 }

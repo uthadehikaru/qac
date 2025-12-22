@@ -37,11 +37,7 @@ class MemberService
     {
         $memberBatch = MemberBatch::where('member_id', $memberId)
             ->whereHas('batch', function ($query) use ($courseId, $isLite) {
-                $query->where('course_id', $courseId)
-                ->when(!$isLite, function ($query) {
-                    $query->where('start_at', '<=', now())
-                        ->where('end_at', '>=', now());
-                });
+                $query->where('course_id', $courseId);
             })
             ->where('status', '>=', MemberBatch::STATUS_PAID)
             ->first();
@@ -52,6 +48,13 @@ class MemberService
                 $duration = $duration * 2;
             }
             $end_course = Carbon::parse($approved_at)->addMonths($duration);
+            if($end_course->isPast()){
+                return null;
+            }
+        }elseif(!$isLite){
+            $end_at = $memberBatch->batch->end_at;
+            $duration = System::value('ecourse_access_months', 1);
+            $end_course = Carbon::parse($end_at)->addMonths($duration);
             if($end_course->isPast()){
                 return null;
             }
