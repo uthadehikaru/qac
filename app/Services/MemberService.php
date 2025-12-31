@@ -40,6 +40,7 @@ class MemberService
                 $query->where('course_id', $courseId);
             })
             ->where('status', '>=', MemberBatch::STATUS_PAID)
+            ->latest('approved_at')
             ->first();
         if($isLite && $memberBatch){
             $approved_at = $memberBatch->approved_at;
