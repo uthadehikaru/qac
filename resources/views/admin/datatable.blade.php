@@ -67,6 +67,10 @@
                 success: function (data){
                     $('#delete-'+id).closest('tr').remove();
                     alert(data.status);
+                },
+                error: function (data){
+                    const response = JSON.parse(data.responseText);
+                    alert('error : '+response.status);
                 }
             });
         }

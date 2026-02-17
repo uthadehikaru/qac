@@ -8,10 +8,10 @@ use App\Models\Member;
 use App\Models\User;
 use App\Notifications\MemberResetPassword;
 use Carbon\Carbon;
-use DB;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Str;
+use Illuminate\Support\Str;
 
 class MemberController extends Controller
 {
@@ -193,12 +193,18 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        $member = Member::find($id);
-        $user = $member->user;
-        $member->delete();
-        $user->delete();
-
-        return response()->json(['status' => 'Deleted Successfully']);
+        try{
+            DB::beginTransaction();
+            $member = Member::find($id);
+            $user = $member->user;
+            $member->delete();
+            $user->delete();
+            DB::commit();
+            return response()->json(['status' => 'Deleted Successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'Failed to delete member'], 500);
+        }
     }
 
     public function verify($user_id)
