@@ -41,7 +41,7 @@ class CourseRegisterController extends Controller
         $data['is_registered'] = 0;
         if(Auth::check()) {
             $data['member'] = Member::with('batches')->where('user_id', Auth::user()->id)->first();
-            $data['is_registered'] = $data['member']->batches()->count() > 0 ? 1 : 0;
+            $data['is_registered'] = 1;
             $regency = Regency::where('name', $data['member']->city)->first();
             $data['full_name'] = $data['member']->full_name;
             $data['phone'] = $data['member']->phone;
