@@ -44,7 +44,7 @@ class MemberService
             ->first();
         if($isLite && $memberBatch){
             $approved_at = $memberBatch->approved_at;
-            $duration = System::value('ecourse_access_months', 1);
+            $duration = System::value('ecource_access_month', 1);
             if($memberBatch->session == 'bundling'){
                 $duration = $duration * 2;
             }
@@ -54,7 +54,7 @@ class MemberService
             }
         }elseif(!$isLite){
             $end_at = $memberBatch->batch->end_at;
-            $duration = System::value('ecourse_access_months', 1);
+            $duration = System::value('ecource_access_month', 1);
             $end_course = Carbon::parse($end_at)->addMonths($duration);
             if($end_course->isPast()){
                 return null;

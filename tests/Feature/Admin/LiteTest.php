@@ -54,7 +54,7 @@ class LiteTest extends TestCase
             'registration_start_at' => now()->subDays(1),
             'registration_end_at' => now()->addDays(1),
         ]);
-        System::where('key', 'ecourse_access_months')->update(['value' => 1]);
+        System::where('key', 'ecource_access_month')->update(['value' => 1]);
         System::where('key', 'qac_1_lite_1a')->update(['value' => $this->lite1a->id]);
         System::where('key', 'qac_1_lite_1b')->update(['value' => $this->lite1b->id]);
     }

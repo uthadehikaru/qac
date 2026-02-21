@@ -45,7 +45,7 @@ class UpdateLiteBatch
                             'approved_at' => now(),
                         ]);
                 }
-                $months = System::value('ecourse_access_months',1);
+                $months = System::value('ecource_access_month',1);
                 if($event->memberBatch->session == 'bundling') {
                     $months = $months * 2;
                 }
