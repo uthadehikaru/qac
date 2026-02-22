@@ -147,32 +147,11 @@
                     <!-- Pilihan Kelas -->
                     <div class="mt-4">
                         <x-label class="text-xl font-bold" :value="__('Pilihan Kelas')" />
-
-                        <div class="mt-6">
-                            <label class="block text-gray-500 font-bold">
-                                <input type="radio" name="package" value="1a" class="mr-2 leading-tight" required>
-                                <span class="text-sm">
-                                    QAC 1a
-                                </span>
-                            </label>
-                        </div>
-
-                        @if($is_registered)
-                        <div class="mt-4">
-                            <label class="block text-gray-500 font-bold">
-                                <input type="radio" name="package" value="1b" class="mr-2 leading-tight" required>
-                                <span class="text-sm">
-                                    QAC 1b
-                                </span>
-                            </label>
-                        </div>
-                        @endif
-
                         <div class="mt-4">
                             <label class="block text-gray-500 font-bold">
                                 <input type="radio" name="package" value="bundling" class="mr-2 leading-tight" required>
                                 <span class="text-sm">
-                                    Paket QAC 1a dan QAC 1b
+                                    QAC Lite Bundling (QAC 1a dan QAC 1b)
                                 </span>
                             </label>
                         </div>
