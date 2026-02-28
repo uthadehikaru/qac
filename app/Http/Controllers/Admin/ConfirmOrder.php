@@ -17,7 +17,7 @@ class ConfirmOrder extends Controller
         $order = Order::find($order_id);
         DB::transaction(function () use ($order) {
 
-            $activeOrder = Order::active()
+            $activeOrder = Order::verified()
                 ->where('member_id', $order->member_id)
                 ->latest('end_date')
                 ->first();

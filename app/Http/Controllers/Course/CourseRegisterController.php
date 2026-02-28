@@ -69,7 +69,7 @@ class CourseRegisterController extends Controller
         $data = $request->validate([
             'full_name' => 'required|string|max:255',
             'batch_id' => 'nullable|exists:batches,id',
-            'phone' => 'required|numeric',
+            'phone' => 'nullable|numeric',
             'email' => 'required_if:is_registered,0|email|unique:users,email',
             'password' => 'required_if:is_registered,0|string|min:8|confirmed',
             'job' => 'nullable|string|max:255',
@@ -102,7 +102,7 @@ class CourseRegisterController extends Controller
 
                 $member->update([
                     'full_name' => $data['full_name'],
-                    'phone' => $data['phone'],
+                    'phone' => $data['phone'] ?? '',
                     'profesi' => $data['job'],
                     'pendidikan' => $data['education'],
                     'city' => $regency ? $regency->name : null,
