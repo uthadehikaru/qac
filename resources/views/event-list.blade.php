@@ -1,10 +1,12 @@
 <x-web-layout>
     <x-slot name="title"> - Event QAC</x-slot>
     <section class="mt-20 md:mt-24 text-gray-600 body-font overflow-hidden">
-        @if($activeOrder)
-        <x-active-order :order="$activeOrder" />
+        @if($endCourse)
+        <x-end-course :endCourse="$endCourse" />
         @endif
-
+        @if($endOrder)
+        <x-active-order :order="$endOrder" />
+        @endif
 
         <div class="relative py-4">
             <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">

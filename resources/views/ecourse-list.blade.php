@@ -1,8 +1,11 @@
 <x-web-layout>
     <x-slot name="title"> - Program Alumni QAC</x-slot>
     <section class="mt-20 md:mt-24 text-gray-600 body-font overflow-hidden">
-        @if($activeOrder)
-        <x-active-order :order="$activeOrder" />
+        @if($endCourse)
+        <x-end-course :endCourse="$endCourse" />
+        @endif
+        @if($endOrder)
+        <x-active-order :order="$endOrder" />
         @endif
 
         <div class="relative py-4">
