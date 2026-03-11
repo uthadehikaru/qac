@@ -73,15 +73,12 @@
             <div class="flex justify-center py-4">
                 <h2 class="text-xl md:text-3xl font-bold mb-4 border-b-4 border-[#e9a621]">Apa itu QAC 1.0 Lite?</h2>
             </div>
-            <p class="text-base md:text-xl mx-2"><span class="font-bold">QAC 1.0 Lite</span> adalah <span class="font-bold">pembelajaran komprehensif</span>, yang terdiri dari <span class="font-bold">2 unit</span> yang bisa
-            dipelajari <span class="font-bold">secara berurutan tapi bisa bertahap</span> :
+            <p class="text-base md:text-xl mx-2"><span class="font-bold">QAC 1.0 Lite</span> adalah <span class="font-bold">pembelajaran komprehensif</span> yang bisa
+            dipelajari <span class="font-bold">secara berurutan dan bertahap</span> :
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4">
                 <div class="flex justify-center">
-                    <img src="{{ asset('images/qac lite/1a.png') }}" alt="QAC 1.0 a Lite" class="w-full h-auto mt-4 rounded-lg">
-                </div>
-                <div class="flex justify-center">
-                    <img src="{{ asset('images/qac lite/1b.png') }}" alt="QAC 1.0 b Lite" class="w-full h-auto mt-4 rounded-lg">
+                    <img src="{{ asset('images/qac-lite.png') }}" alt="QAC 1.0 Lite" class="w-full md:w-1/2 h-auto mt-4 rounded-lg">
                 </div>
             </div>
         </div>
@@ -91,46 +88,29 @@
             <div class="flex justify-center py-4">
                 <h2 class="text-lg md:text-3xl text-center font-bold mb-4 border-b-4 border-[#e9a621]">Fasilitas apa yang didapatkan?</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-montserrat">
+            <div class="grid grid-cols-1 gap-4 font-montserrat">
                 <div class="flex flex-col content-start px-2">
                     <div class="flex justify-center">
-                        <h3 class="text-2xl md:text-3xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1a</h3>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1.0 Lite</h3>
                     </div>
-                    <ul class="space-y-3 text-sm md:text-base bg-[#ffdf79]">
+                    <ul class="w-full md:w-1/2 mx-auto space-y-3 text-sm md:text-base bg-[#ffdf79]">
                         <li class="p-4 text-center border-b border-black">
-                        Video materi pembelajaran (teori & latihan dalam <span class="font-bold">bentuk pdf di download</span> di web). Semuanya <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
+                        20+ video materi pembelajaran, bisa diakses <span class="font-bold">selama 6 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">ONLINE LIVE ZOOM</span> untuk  Q & A pembelajaran <span class="font-bold">di setiap akhir pekan selama 4 kali/bulan</span>
+                        Materi: teori & latihan bentuk pdf di download di web
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">Video Free Acara Umum QAC</span> : Contoh Ngobrolin Quran, Free Sharing, dl bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
+                        <span class="font-bold">ONLINE LIVE ZOOM</span> untuk Q & A pembelajaran di setiap akhir pekan selama 4 kali/bulan
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        Masuk <span class="font-bold">grup WA QAC 1a</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="flex flex-col content-start px-2">
-                    <div class="flex justify-center">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4 p-2 bg-[#490d0d] text-white rounded-lg">QAC 1b</h3>
-                    </div>
-                    <ul class="space-y-3 text-sm md:text-base bg-[#ffdf79]">
-                        <li class="p-4 text-center border-b border-black">
-                        Video materi pembelajaran (teori & latihan dalam <span class="font-bold">bentuk pdf di download</span> di web). Semuanya <span class="font-bold">bisa diakses selama 1 bulan dari waktu daftar</span>
+                        Video Acara Umum dan Acara Alumni QAC (hampir 200 video): contoh tadabbur Al-Qur'an, Step tadabbur pemula, Travel to Allah, Invitation to Baitullah, Redefinition, Surah at Glance dll, bisa diakses <span class="font-bold">selama 6 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">ONLINE LIVE ZOOM</span> untuk  Q & A pembelajaran <span class="font-bold">di setiap akhir pekan selama 4 kali/bulan</span>
+                        Masuk grup Whatsapp QAC 1.0 Lite dan <span class="font-bold">grup Whatsapp info alumni (sekitar 1000 alumni)</span> <span class="text-sm italic">setelah menyelesaikan sampai QAC 1b</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">Video Free Acara Umum dan Acara Alumni QAC</span> : contoh tadabbur Al-Qur’an, Step tadabbur pemula, Travel to Allah, Invitation to Baitullah, Redefinition, Surah at Glance dll, bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
-                        </li>
-                        <li class="p-4 text-center border-b border-black">
-                        <p>Masuk <span class="font-bold">grup WA QAC 1b dan *grup WA info alumni</span></p>
-                        <p><span class="text-xs">*setelah menyelesaikan sampai QAC 1b</span></p>
-                        </li>
-                        <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">Sertifikat belajar</span>
+                        Sertifikat belajar
                         </li>
                     </ul>
                 </div>
