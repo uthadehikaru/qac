@@ -126,7 +126,7 @@
                     </a>
                     <div class="w-full mb-4">
                     <x-divider />
-                    <p class="w-full leading-relaxed text-xs md:text-lg mt-4">Terdapat lebih dari 100+ video Tadabbur Al-Qur'an</p>
+                    <p class="w-full leading-relaxed text-xs md:text-lg mt-4">Terdapat lebih dari 200+ video Tadabbur Al-Qur'an</p>
                     </div>
                     <div class="relative">
                         <button class="filter-nav-custom filter-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-yellow-500 text-white rounded-full p-1 shadow-lg" aria-label="Previous">
