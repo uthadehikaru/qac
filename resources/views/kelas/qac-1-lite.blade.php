@@ -124,58 +124,32 @@
             <div class="max-w-4xl mx-auto px-4 text-base md:text-xl">
                 <!-- FAQ Item 1 -->
                 <div class="mb-6">
-                    <h3 class="font-bold mb-2">Bagaimana kalau hanya ambil QAC 1a saja ?</h3>
-                    <p>Tidak bisa, karena QAC 1a masih 50% dari keseluruhan materi QAC 1.0 Lite, sehingga untuk mendapatkan pemahaman utuh harus diselesaikan hingga QAC 1b.</p>
+                    <h3 class="font-bold mb-2">Bagaimana kalau saya alumni QAC 1.0 yang dulu, mau ikutan QAC 1.0 lite ? Berapa investasinya & caranya bagaimana ?</h3>
+                    <p>Alumni QAC 1.0 dianggap sebagai reseat = cukup investasi 50% dari QAC 1.0 lite, cara daftar seperti biasa, masuk ke web <a href="/" class="text-blue-600 hover:underline">qacjakarta.id</a></p>
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="mb-6">
-                    <h3 class="font-bold mb-2">Bagaimana kalau saya alumni QAC 1.0 yang dulu, mau ikutan QAC 1.0 lite ? Berapa investasinya & caranya bagaimana ?</h3>
-                    <p>Alumni QAC 1.0 dianggap sebagai reseat = cukup inventasi 50% dari QAC 1.0 lite, cara daftar seperti biasa, masuk ke web <a href="/" class="text-blue-600 hover:underline">qacjakarta.id</a></p>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="mb-6">
-                    <h3 class="font-bold mb-2">Saya ingin ikut acara-acara alumni QAC 1.0 yang Live, bagaimana caranya ?</h3>
-                    <p>Selesaikan sampai dengan QAC 1b</p>
-                </div>
-
-                <!-- FAQ Item 4 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Saya sudah dapat akses rekaman materi belajar QAC 1.0 Lite tetapi ingin bisa ikut yang Live QAC 1.0, bagaimana caranya ?</h3>
                     <p>Untuk mengikuti QAC 1.0 Live silakan daftar di Waiting List Kelas QAC 1.0 (<a href="{{ route('kelas.qac-1') }}" class="text-blue-600 hover:underline">Link daftar QAC 1.0</a>)</p>
                 </div>
 
-                <!-- FAQ Item 5 -->
+                <!-- FAQ Item 3 -->
                 <div class="mb-6">
-                    <h3 class="font-bold mb-2">Apakah ada kelas lanjutan setelah selesai QAC 1b ?</h3>
+                    <h3 class="font-bold mb-2">Apakah ada kelas lanjutan setelah selesai QAC 1.0 Lite ?</h3>
                     <p>Ada, yaitu QAC 2.0 Live silakan daftar di Waiting List Kelas QAC 2.0 (<a href="{{ route('kelas.qac-2') }}" class="text-blue-600 hover:underline">Link daftar QAC 2.0</a>)</p>
                 </div>
-                
-                <div class="mb-6">
-                    <h3 class="font-bold mb-2">Bagaimana jika saya sedang belajar QAC 1a dan/atau QAC 1b, namun saya ingin memperpanjang belajar saya, misalnya 2-3 bulan?</h3>
-                    <p>Bisa, jika anda ingin perpanjang, <span class="font-bold">cukup investasi 50% dari harga normal</span></p>
-                </div>
-                
-                <div class="mb-6">
-                    <h3 class="font-bold mb-2">Jika saya daftar kelas QAC 1b (setelah belajar QAC 1a), apakah saya mendapatkan materi QAC 1a juga?</h3>
-                    <p><span class="font-bold">Ya</span>, anda mendapatkan materi QAC 1a, selama belajar QAC 1b berdurasi 1 bulan </p>
-                </div>
-                
-                <div class="mb-6">
-                    <h3 class="font-bold mb-2">Jika saya daftar satu Paket (Kelas 1a dan kelas 1b), apakah saya mendapatkan materi QAC 1a juga?</h3>
-                    <p><span class="font-bold">Ya</span>, anda mendapatkan materi QAC 1a selama berdurasi 2 bulan </p>
-                </div>
-                
+
+                <!-- FAQ Item 4 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Adakah rekaman ONLINE LIVE ZOOM untuk Q & A pembelajaran di setiap akhir pekan?</h3>
-                    <p><span class="font-bold">Tidak ada</span>, jadi silakan manfaatkan sebaik-baiknya untuk Q & A selama ONLINE LIVE
-                    ZOOM</p>
+                    <p><span class="font-bold">Tidak ada</span>, jadi silakan manfaatkan sebaik-baiknya untuk Q & A selama ONLINE LIVE ZOOM</p>
                 </div>
-                
+
+                <!-- FAQ Item 5 -->
                 <div class="mb-6">
                     <h3 class="font-bold mb-2">Apakah ada fasilitas tanya jawab private untuk belajar Bahasa Arab Al-Qur'an ini?</h3>
-                    <p>Kami menyediakan <span class="font-bold">fasilitas grup WA QAC 1 a dan QAC 1 b</span> untuk menjawab pertanyaan selama belajar, dibuat agar bisa saling belajar dari pertanyaan teman-teman</p>
+                    <p>Kami menyediakan <span class="font-bold">fasilitas grup WA QAC 1.0 Lite</span> untuk menjawab pertanyaan selama belajar, dibuat agar bisa saling belajar dari pertanyaan teman-teman</p>
                 </div>
             </div>
         </div>
