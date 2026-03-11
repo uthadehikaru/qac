@@ -58,7 +58,7 @@
         @foreach ($orders as $order)
             <div class="flex justify-between my-2 p-4 items-start border border-[#ffdf79] rounded-lg">
                 <div class="flex flex-col gap-2">
-                    <div class="text-sm font-bold">Langganan Program Alumni {{ $order->months }} bulan</div>
+                    <div class="text-sm font-bold">Langganan Acara Alumni {{ $order->months }} bulan</div>
                     @if($order->verified_at)
                     <div class="text-xs">Pembayaran pada {{ $order->verified_at->format('d M Y') }}</div>
                     <div class="text-xs">Langganan aktif hingga {{ $order->end_date?->format('d M Y') }}</div>

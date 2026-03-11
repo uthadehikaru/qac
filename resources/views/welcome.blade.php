@@ -121,7 +121,7 @@
                 <div class="text-center mb-8">
                     <a href="{{ route('ecourses.index') }}">
                         <h1 class="text-md md:text-3xl font-bold text-center text-gray-900 mb-4">
-                        Program Alumni QAC
+                        Acara Alumni QAC
                         </h1>
                     </a>
                     <div class="w-full mb-4">

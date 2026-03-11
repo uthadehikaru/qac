@@ -2,7 +2,7 @@
     <div class="container mx-auto px-2 pt-4 pb-2 text-gray-800">
         <div class="text-center mb-20">
             <h1 class="text-md md:text-xl font-bold text-center text-gray-900 mb-4">
-            Program Alumni QAC
+            Acara Alumni QAC
             </h1>
             <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -21,7 +21,7 @@
             <div class="w-1/2 p-4">
                 <a href="#" title="Quality Time with Qur’an">
                     <div class="p-6 rounded-lg">
-                        <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="program alumni 1">
+                        <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 1.png') }}" alt="acara alumni 1">
                         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Quality Time with Qur’an</h2>
                         <p class="text-sm text-gray-500">164 Videos</p>
                     </div>
@@ -31,7 +31,7 @@
             <div class="w-1/2 p-4">
                 <a href="#" title="Tadarus Ramadhan 'Redefinition'">
                     <div class="p-6 rounded-lg">
-                        <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="program alumni 2">
+                        <img class="rounded-lg w-full object-cover object-center mb-6" src="{{ asset('images/program alumni 2.png') }}" alt="acara alumni 2">
                         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Tadarus Ramadhan "Redefinition"</h2>
                         <p class="text-sm text-gray-500">164 Videos</p>
                     </div>
