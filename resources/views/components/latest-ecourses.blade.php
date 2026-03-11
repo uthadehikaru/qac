@@ -6,7 +6,7 @@
             </h1>
             <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-            <p class="lg:w-1/2 w-full leading-relaxed text-gray-100">Terdapat lebih dari 100+ video Tadabbur Al-Qur’an</p>
+            <p class="lg:w-1/2 w-full leading-relaxed text-gray-100">Terdapat lebih dari 200+ video Tadabbur Al-Qur'an</p>
             </div>
             <div class="flex justify-between border rounded-full p-1 border-yellow-500">
                 <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">Recommended</a>
