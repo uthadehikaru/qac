@@ -36,8 +36,7 @@ class Ecourse extends Model
 
     public function scopeRecomendation(Builder $query): void
     {
-        $query->whereNotNull('recomendation')
-        ->orderBy('recomendation', 'asc');
+        $query->whereNotNull('recomendation');
     }
 
     public function scopePublished(Builder $query): void

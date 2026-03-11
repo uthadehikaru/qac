@@ -19,7 +19,7 @@ class EcourseService
 {
     public function latestEcourses($limit = 8)
     {
-        return Ecourse::published()->latest()->take($limit)->get();
+        return Ecourse::published()->latest('updated_at')->take($limit)->get();
     }
 
     public function publishedEcourses($category = null)
@@ -33,7 +33,7 @@ class EcourseService
             });
         }
 
-        return $query->latest()->get();
+        return $query->latest('updated_at')->get();
     }
 
     public function recommendedEcourses()
@@ -42,7 +42,7 @@ class EcourseService
         ->with('category')
         ->withCount('lessons')
         ->recomendation()
-        ->get();
+        ->latest('updated_at')->get();
     }
 
     public function publicEcourses($category_id = null)
@@ -55,7 +55,7 @@ class EcourseService
                 $query->where('id', $category_id);
             });
         })
-        ->get();
+        ->latest('updated_at')->get();
     }
 
     public function updateOrCreate($data, $id = null): Ecourse
@@ -118,6 +118,8 @@ class EcourseService
             $data['lesson_uu'] = Str::uuid();
             $lesson = Lesson::create($data);
         }
+
+        $lesson->ecourse->touch();
 
         return $lesson;
     }

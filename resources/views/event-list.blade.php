@@ -36,6 +36,7 @@
                         onerror="this.onerror=null; this.src='{{ asset('images/placeholder.png') }}';">
                         <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
                         <p class="text-xs md:text-base text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
+                        <p class="text-xs text-gray-400 mt-2">Diperbarui: {{ $event->updated_at->format('d M Y') }}</p>
                     </div>
                 </a>
             </div>
