@@ -37,7 +37,7 @@ class BatchRegistration extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
