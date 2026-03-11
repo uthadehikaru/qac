@@ -41,7 +41,7 @@
                     </label>
                     <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                     id="grid-name" name="type">
-                        <option value="event" {{ old('type', $category?$category->type:'event') == 'event' ? 'selected' : '' }}>Event</option>
+                        <option value="event" {{ old('type', $category?$category->type:'event') == 'event' ? 'selected' : '' }}>Acara Umum</option>
                         <option value="course" {{ old('type', $category?$category->type:'course') == 'course' ? 'selected' : '' }}>Acara Alumni</option>
                     </select>
                 </div>

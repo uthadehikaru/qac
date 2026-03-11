@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline">
-            Data {{ __('Events') }}
+            Data Acara Umum
         </h2>
-        <x-link-button href="{{ route('admin.events.create') }}" class="float-right">New @lang('Events')</x-button>
+        <x-link-button href="{{ route('admin.events.create') }}" class="float-right">Acara Umum Baru</x-button>
     </x-slot>
 
     <x-panel>

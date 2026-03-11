@@ -21,7 +21,7 @@ class EventController extends Controller
      */
     public function index(Request $request, EventDataTable $dataTable)
     {
-        $data['title'] = 'Data Event';
+        $data['title'] = 'Data Acara Umum';
         if ($request->has('deleted')) {
             $dataTable->deleted();
         }
@@ -72,7 +72,7 @@ class EventController extends Controller
 
         $event = Event::create($data);
 
-        return redirect()->route('admin.events.index')->with('status', 'Event created');
+        return redirect()->route('admin.events.index')->with('status', 'Acara umum dibuat');
     }
 
     /**
@@ -130,7 +130,7 @@ class EventController extends Controller
 
         $event->update($data);
 
-        return redirect()->route('admin.events.index')->with('status', 'Event updated');
+        return redirect()->route('admin.events.index')->with('status', 'Acara umum diperbarui');
     }
 
     /**

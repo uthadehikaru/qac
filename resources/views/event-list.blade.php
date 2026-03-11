@@ -1,5 +1,5 @@
 <x-web-layout>
-    <x-slot name="title"> - Event QAC</x-slot>
+    <x-slot name="title"> - Acara Umum QAC</x-slot>
     <section class="mt-20 md:mt-24 text-gray-600 body-font overflow-hidden">
         @if($endCourse)
         <x-end-course :endCourse="$endCourse" />
@@ -42,7 +42,7 @@
             </div>
             @empty
             <div class="w-full text-center p-4 h-64 flex items-center justify-center">
-                <p class="text-black font-bold text-xs md:text-base">Segera Hadir Event-Event Baru, Insyaa Allah</p>
+                <p class="text-black font-bold text-xs md:text-base">Segera Hadir Acara Umum Baru, Insyaa Allah</p>
             </div>
             @endforelse
         </div>

@@ -1,5 +1,5 @@
 <x-web-layout>
-    <x-slot name="title"> - Event {{ $event->title }}</x-slot>
+    <x-slot name="title"> - Acara Umum {{ $event->title }}</x-slot>
     <section class="mt-20 bg-white text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-24 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -90,7 +90,7 @@
             </div>
             <div class="flex flex-wrap px-6 justify-center">
                 <a href="{{ route('event.list') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Lihat Event Lainnya
+                    Lihat Acara Umum Lainnya
                 </a>
             </div>
         </div>

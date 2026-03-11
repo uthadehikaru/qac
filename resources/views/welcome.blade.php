@@ -172,7 +172,7 @@
             <div class="container px-5 py-2 mx-auto">
                 <div class="text-center mb-8">
                     <h1 class="text-base md:text-3xl font-bold text-center title-font text-gray-900 mb-4">
-                    Event QAC
+                    Acara Umum QAC
                     </h1>
                     <div class="w-full mb-4">
                         <x-divider />

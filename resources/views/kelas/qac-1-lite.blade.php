@@ -104,7 +104,7 @@
                         <span class="font-bold">ONLINE LIVE ZOOM</span> untuk  Q & A pembelajaran <span class="font-bold">di setiap akhir pekan selama 4 kali/bulan</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">Video Free Event QAC</span> : Contoh Ngobrolin Quran, Free Sharing, dl bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
+                        <span class="font-bold">Video Free Acara Umum QAC</span> : Contoh Ngobrolin Quran, Free Sharing, dl bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
                         Masuk <span class="font-bold">grup WA QAC 1a</span>
@@ -123,7 +123,7 @@
                         <span class="font-bold">ONLINE LIVE ZOOM</span> untuk  Q & A pembelajaran <span class="font-bold">di setiap akhir pekan selama 4 kali/bulan</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
-                        <span class="font-bold">Video Free Event dan Acara Alumni QAC</span> : contoh tadabbur Al-Qur’an, Step tadabbur pemula, Travel to Allah, Invitation to Baitullah, Redefinition, Surah at Glance dll, bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
+                        <span class="font-bold">Video Free Acara Umum dan Acara Alumni QAC</span> : contoh tadabbur Al-Qur’an, Step tadabbur pemula, Travel to Allah, Invitation to Baitullah, Redefinition, Surah at Glance dll, bisa diakses <span class="font-bold">selama 1 bulan dari waktu daftar</span>
                         </li>
                         <li class="p-4 text-center border-b border-black">
                         <p>Masuk <span class="font-bold">grup WA QAC 1b dan *grup WA info alumni</span></p>

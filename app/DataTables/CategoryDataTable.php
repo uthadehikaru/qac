@@ -20,7 +20,7 @@ class CategoryDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('type', function ($row) {
-                return $row->type == 'course' ? 'Acara Alumni' : 'Event';
+                return $row->type == 'course' ? 'Acara Alumni' : 'Acara Umum';
             })
             ->addColumn('action', function ($row) {
                 $btn = '';

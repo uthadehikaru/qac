@@ -68,7 +68,7 @@
                     <a href="{{ route('ecourses.index') }}" class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 {{ request()->is('ecourses*') ? 'text-[#7b0c00]' : 'text-black' }} no-underline text-center hover:text-red-800">Acara Alumni</a>
                 </li>
                 <li class="">
-                    <a href="{{ route('event.list') }}" class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 {{ request()->is('event*') ? 'text-[#7b0c00]' : 'text-black' }} no-underline text-center hover:text-red-800">Event</a>
+                    <a href="{{ route('event.list') }}" class="inline-block py-2 text-xs md:text-base md:py-2 md:px-4 {{ request()->is('event*') ? 'text-[#7b0c00]' : 'text-black' }} no-underline text-center hover:text-red-800">Acara Umum</a>
                 </li>
             </ul>
             <div class="block pr-4">

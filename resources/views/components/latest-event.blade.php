@@ -2,7 +2,7 @@
     <div class="container px-5 py-2 mx-auto">
         <div class="text-center mb-20">
             <h1 class="text-md md:text-xl font-bold text-center title-font text-gray-900 mb-4">
-            Event QAC
+            Acara Umum QAC
             </h1>
             <div class="w-full mb-4">
                 <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>

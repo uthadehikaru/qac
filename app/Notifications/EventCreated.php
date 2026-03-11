@@ -51,7 +51,7 @@ class EventCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $message = (new MailMessage)
-            ->subject('Event QAC : '.$this->event->title)
+            ->subject('Acara Umum QAC : '.$this->event->title)
             ->line($this->getMessage())
             ->action(__('Detail'), $this->getLink())
             ->markdown('vendor.notifications.email', ['token' => Crypt::encryptString($this->user->id)]);
@@ -63,7 +63,7 @@ class EventCreated extends Notification implements ShouldQueue
         $message->viewData['event'] = $this->event;
         $message->viewData['user'] = $notifiable;
 
-        Log::channel('email')->info('Event '.$this->event->title.' sent to '.$notifiable->email);
+        Log::channel('email')->info('Acara Umum '.$this->event->title.' sent to '.$notifiable->email);
 
         return $message;
     }
