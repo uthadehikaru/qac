@@ -44,7 +44,7 @@
                 </svg>
             </button>
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
-                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
+                <div class="flex justify-start filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
                     @foreach($sections as $section)
                     <a href="{{ route('member.ecourses.lessons', [ 'slug' => $ecourse->slug, 'section' => $section->id]) }}" class="px-4 py-2 {{ $video->section_id == $section->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $section->name }}</a>
                     @endforeach
