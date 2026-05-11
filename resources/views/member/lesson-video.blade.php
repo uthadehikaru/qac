@@ -1,10 +1,11 @@
 <x-web-layout>
 
     <x-panel class="mt-12">
-        @if($activeOrder)
-        <div class="border rounded-full text-center py-2 px-4 bg-green-500 w-fit mx-auto mb-4">
-            <p>Kelas atau Langganan Anda aktif hingga {{ $activeOrder->end_date->setTimezone('Asia/Jakarta')->isoFormat('D MMMM Y') }}</p>
-        </div>
+        @if($endCourse)
+        <x-end-course :endCourse="$endCourse" />
+        @endif
+        @if($endOrder)
+        <x-active-order :order="$endOrder" />
         @endif
         <nav class="flex mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
