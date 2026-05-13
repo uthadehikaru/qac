@@ -26,7 +26,9 @@ class EcourseController extends Controller
         }
 
         $data['isAlumni'] = false;
-        if(Auth::check() && Auth::user()->member){
+        if(Auth::check() && Auth::user()->role === 'admin'){
+            $data['isAlumni'] = true;
+        }elseif(Auth::check() && Auth::user()->member){
             $data['isAlumni'] = $memberService->isAlumni(Auth::user()->member->id);
         }
 

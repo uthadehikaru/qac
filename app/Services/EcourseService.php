@@ -210,6 +210,10 @@ class EcourseService
 
     public function addHistory($lesson_id, $member_id)
     {
+        if(Auth::check() && Auth::user()->role === 'admin'){
+            return null;
+        }
+        
         $history = CompletedLesson::firstOrCreate([
             'lesson_id' => $lesson_id,
             'member_id' => $member_id,

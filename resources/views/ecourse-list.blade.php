@@ -81,7 +81,7 @@
         </div>
         <script>
             jQuery(document).ready(function($){
-                @if(!$isAlumni || !$activeOrder)
+                @if(auth()->check() && (!$isAlumni || !$activeOrder))
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');

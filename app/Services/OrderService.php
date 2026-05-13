@@ -44,6 +44,10 @@ class OrderService
 
     public function activeOrder()
     {
+        if(Auth::check() && Auth::user()->role === 'admin'){
+            return true;
+        }
+        
         return Order::where('member_id', Auth::user()->member?->id)->verified()->latest('end_date')->first();
     }
 }
