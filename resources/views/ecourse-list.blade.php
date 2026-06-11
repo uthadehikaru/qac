@@ -16,9 +16,9 @@
             </button>
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
                 <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
-                    <a href="{{ route('ecourses.index') }}" class="{{ $selected_category == null ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} px-4 py-2 rounded-full flex items-center whitespace-nowrap mr-2">Recommended</a>
+                    <a href="{{ route('ecourses.index', array_filter(['search' => $search ?? null])) }}" class="{{ $selected_category == null ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} px-4 py-2 rounded-full flex items-center whitespace-nowrap mr-2">Recommended</a>
                     @foreach($categories as $category)
-                    <a href="{{ route('ecourses.index', ['category' => $category->slug]) }}" class="px-4 py-2 {{ $category->slug == $selected_category ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $category->name }}</a>
+                    <a href="{{ route('ecourses.index', array_filter(['category' => $category->slug, 'search' => $search ?? null])) }}" class="px-4 py-2 {{ $category->slug == $selected_category ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
@@ -28,24 +28,41 @@
                 </svg>
             </button>
         </div>
+
+        <x-ecourse-search
+            :action="route('ecourses.index')"
+            :search="$search ?? ''"
+            :category="$selected_category"
+        />
+
         <div class="flex flex-wrap mx-2">
-            @forelse($ecourses as $ecourse)
-            <div class="w-full md:w-1/3 p-4">
-                <a href="{{ route('member.ecourses.lessons', $ecourse->slug) }}" class="ecourse" title="{{ $ecourse->title }}">
-                    <div class="rounded-lg">
-                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}"
-                        onerror="this.onerror=null; this.src='{{ asset('images/placeholder.png') }}';">
-                        <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
-                        <p class="text-xs md:text-base text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
-                        <p class="text-xs text-gray-400 mt-2">Diperbarui: {{ $ecourse->updated_at->format('d M Y') }}</p>
-                    </div>
-                </a>
-            </div>
-            @empty
-            <div class="w-full text-center p-4 h-64 flex items-center justify-center">
-                <p class="text-black font-bold text-xs md:text-base">Segera Hadir Program-Program Baru, Insyaa Allah</p>
-            </div>
-            @endforelse
+            @if(!empty($search))
+                @forelse($lessons as $lesson)
+                <x-lesson-search-card :lesson="$lesson" />
+                @empty
+                <div class="w-full text-center p-4 h-64 flex items-center justify-center">
+                    <p class="text-black font-bold text-xs md:text-base">Tidak ditemukan video yang sesuai dengan "{{ $search }}"</p>
+                </div>
+                @endforelse
+            @else
+                @forelse($ecourses as $ecourse)
+                <div class="w-full md:w-1/3 p-4">
+                    <a href="{{ route('member.ecourses.lessons', $ecourse->slug) }}" class="ecourse" title="{{ $ecourse->title }}">
+                        <div class="rounded-lg">
+                            <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $ecourse->imageUrl('thumbnail') }}" alt="{{ $ecourse->title }}"
+                            onerror="this.onerror=null; this.src='{{ asset('images/placeholder.png') }}';">
+                            <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $ecourse->title }}</h2>
+                            <p class="text-xs md:text-base text-gray-500">{{ $ecourse->lessons_count }} Videos</p>
+                            <p class="text-xs text-gray-400 mt-2">Diperbarui: {{ $ecourse->updated_at->format('d M Y') }}</p>
+                        </div>
+                    </a>
+                </div>
+                @empty
+                <div class="w-full text-center p-4 h-64 flex items-center justify-center">
+                    <p class="text-black font-bold text-xs md:text-base">Segera Hadir Program-Program Baru, Insyaa Allah</p>
+                </div>
+                @endforelse
+            @endif
         </div>
     </section>
     @if(auth()->check())
@@ -81,7 +98,7 @@
         </div>
         <script>
             jQuery(document).ready(function($){
-                @if(auth()->check() && (!$isAlumni || !$activeOrder))
+                @if(!auth()->check() || !$isAlumni || !$activeOrder)
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');

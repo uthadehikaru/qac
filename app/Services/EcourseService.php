@@ -58,6 +58,43 @@ class EcourseService
         ->latest('updated_at')->get();
     }
 
+    public function searchAlumniLessons(string $search, ?string $category = null, bool $recommendedOnly = false)
+    {
+        return Lesson::query()
+            ->with('ecourse')
+            ->where('subject', 'like', '%'.$search.'%')
+            ->whereHas('ecourse', function ($query) use ($category, $recommendedOnly) {
+                $query->published();
+                if ($recommendedOnly) {
+                    $query->recomendation();
+                }
+                if ($category) {
+                    $query->whereHas('category', function ($query) use ($category) {
+                        $query->where('slug', $category);
+                    });
+                }
+            })
+            ->latest('updated_at')
+            ->get();
+    }
+
+    public function searchPublicLessons(string $search, ?int $category_id = null)
+    {
+        return Lesson::query()
+            ->with('ecourse')
+            ->where('subject', 'like', '%'.$search.'%')
+            ->whereHas('ecourse', function ($query) use ($category_id) {
+                $query->published()->public();
+                if ($category_id) {
+                    $query->whereHas('category', function ($query) use ($category_id) {
+                        $query->where('id', $category_id);
+                    });
+                }
+            })
+            ->latest('updated_at')
+            ->get();
+    }
+
     public function updateOrCreate($data, $id = null): Ecourse
     {
         if (!$data['course_id']) {

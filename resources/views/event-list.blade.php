@@ -17,7 +17,7 @@
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
                 <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
                     @foreach($eventCategories as $category)
-                    <a href="{{ route('event.list', ['category' => $category->slug]) }}" class="px-4 py-2 {{ $category->id == $selectedEventCategory->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $category->name }}</a>
+                    <a href="{{ route('event.list', array_filter(['category' => $category->slug, 'search' => $search ?? null])) }}" class="px-4 py-2 {{ $category->id == $selectedEventCategory->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
@@ -27,31 +27,47 @@
                 </svg>
             </button>
         </div>
+
+        <x-ecourse-search
+            :action="route('event.list')"
+            :search="$search ?? ''"
+            :category="$selectedEventCategory->slug"
+        />
+
         <div class="flex flex-wrap mx-2">
-            @forelse($latest_events as $event)
-            <div class="w-full md:w-1/3 p-4">
-                <a href="{{ route('member.ecourses.lessons', $event->slug) }}" class="ecourse" title="{{ $event->title }}">
-                    <div class="rounded-lg">
-                        <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}"
-                        onerror="this.onerror=null; this.src='{{ asset('images/placeholder.png') }}';">
-                        <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
-                        <p class="text-xs md:text-base text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
-                        <p class="text-xs text-gray-400 mt-2">Diperbarui: {{ $event->updated_at->format('d M Y') }}</p>
-                    </div>
-                </a>
-            </div>
-            @empty
-            <div class="w-full text-center p-4 h-64 flex items-center justify-center">
-                <p class="text-black font-bold text-xs md:text-base">Segera Hadir Acara Umum Baru, Insyaa Allah</p>
-            </div>
-            @endforelse
+            @if(!empty($search))
+                @forelse($lessons as $lesson)
+                <x-lesson-search-card :lesson="$lesson" />
+                @empty
+                <div class="w-full text-center p-4 h-64 flex items-center justify-center">
+                    <p class="text-black font-bold text-xs md:text-base">Tidak ditemukan video yang sesuai dengan "{{ $search }}"</p>
+                </div>
+                @endforelse
+            @else
+                @forelse($latest_events as $event)
+                <div class="w-full md:w-1/3 p-4">
+                    <a href="{{ route('member.ecourses.lessons', $event->slug) }}" class="ecourse" title="{{ $event->title }}">
+                        <div class="rounded-lg">
+                            <img class="rounded-lg border border-gray-200 w-full object-cover object-center mb-6" src="{{ $event->imageUrl('thumbnail') }}" alt="{{ $event->title }}"
+                            onerror="this.onerror=null; this.src='{{ asset('images/placeholder.png') }}';">
+                            <h2 class="text-xs md:text-base text-gray-900 font-medium title-font mb-2">{{ $event->title }}</h2>
+                            <p class="text-xs md:text-base text-gray-500">{{ $event->lessons_count }} Videos, {{ $event->ebooks_count }} E-Books</p>
+                            <p class="text-xs text-gray-400 mt-2">Diperbarui: {{ $event->updated_at->format('d M Y') }}</p>
+                        </div>
+                    </a>
+                </div>
+                @empty
+                <div class="w-full text-center p-4 h-64 flex items-center justify-center">
+                    <p class="text-black font-bold text-xs md:text-base">Segera Hadir Acara Umum Baru, Insyaa Allah</p>
+                </div>
+                @endforelse
+            @endif
         </div>
     </section>
     @if(auth()->check())
     <x-whatsapp-button />
     @endif
     <x-slot name="scripts">
-    @if(auth()->check() && !$activeOrder)
     <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="subscriptionModal">
         <div class="flex items-center justify-center min-h-screen">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75"></div>
@@ -60,17 +76,23 @@
                     <img src="{{ asset('images/close.png') }}" alt="Close" class="w-6 h-6">
                 </button>
                 <h3 class="text-xl font-bold mb-4 text-center flex items-center justify-center gap-2"><img src="{{ asset('images/lock.png') }}" alt="Akses Terkunci" class="w-10 h-10 inline-block">Akses Terkunci!!! <img src="{{ asset('images/lock.png') }}" alt="Akses Terkunci" class="w-10 h-10 inline-block"></h3>
+                @if(!auth()->check())
+                <p class="text-gray-600 mb-6 text-center">Untuk menonton full video ini, kamu perlu daftar/masuk <span class="font-bold text-black">dan berlangganan</span> agar dapat menikmati <span class="font-bold text-black">rekaman free sharing lainnya 😊</span></p>
+                <div class="flex justify-center gap-4">
+                    <x-qac-button href="{{ route('login') }}">Daftar/Masuk</x-qac-button>
+                </div>
+                @elseif(!$activeOrder)
                 <p class="text-gray-600 mb-6 text-center">Untuk menonton full video ini, kamu <span class="font-bold text-black">perlu langganan</span> agar dapat menikmati <span class="font-bold text-black">rekaman free sharing lainnya 😊</span></p>
                 <div class="flex justify-center gap-4">
                     <x-qac-button href="{{ route('checkout') }}">Langganan Sekarang</x-qac-button>
                 </div>
+                @endif
             </div>
         </div>
     </div>
-    @endif
     <script>
             jQuery(document).ready(function($){
-                @if(auth()->check() && !$activeOrder)
+                @if(!auth()->check() || !$activeOrder)
                 $('.ecourse').click(function(e){
                     e.preventDefault();
                     $('#subscriptionModal').removeClass('hidden');
