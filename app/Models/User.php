@@ -67,4 +67,15 @@ class User extends Authenticatable
     {
         return $this->hasOne(Member::class);
     }
+
+    public function needsPhoneNumber(): bool
+    {
+        if (! $this->is_member) {
+            return false;
+        }
+
+        $member = $this->member;
+
+        return $member && blank($member->phone);
+    }
 }

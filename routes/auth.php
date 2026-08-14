@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\CompletePhoneController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -62,3 +63,11 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+Route::get('/phone', [CompletePhoneController::class, 'create'])
+    ->middleware('auth')
+    ->name('phone.complete');
+
+Route::post('/phone', [CompletePhoneController::class, 'store'])
+    ->middleware('auth')
+    ->name('phone.complete.store');

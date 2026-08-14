@@ -37,6 +37,10 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
+        if (Auth::user()->needsPhoneNumber()) {
+            return redirect()->route('phone.complete');
+        }
+
         if (session()->has('url.intended')) {
             return redirect(session()->get('url.intended'));
         }

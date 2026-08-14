@@ -124,6 +124,10 @@ class OtpController extends Controller
 
             Auth::login($user);
 
+            if ($user->needsPhoneNumber()) {
+                return redirect()->route('phone.complete');
+            }
+
             return redirect()->route('member.dashboard');
         }
 
