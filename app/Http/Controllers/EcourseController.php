@@ -14,10 +14,16 @@ class EcourseController extends Controller
 {
     public function index(EcourseService $ecourseService, OrderService $orderService, MemberService $memberService, Request $request)
     {
+        $search = $request->search;
+        $data['lessons'] = collect();
         $data['ecourses'] = [];
-        if ($request->category) {
+        if ($search) {
+            $data['lessons'] = $request->category
+                ? $ecourseService->searchAlumniLessons($search, $request->category)
+                : $ecourseService->searchAlumniLessons($search, recommendedOnly: true);
+        } elseif ($request->category) {
             $data['ecourses'] = $ecourseService->publishedEcourses($request->category);
-        }else{
+        } else {
             $data['ecourses'] = $ecourseService->recommendedEcourses();
         }
         $data['activeOrder'] = null;
@@ -26,12 +32,15 @@ class EcourseController extends Controller
         }
 
         $data['isAlumni'] = false;
-        if(Auth::check() && Auth::user()->member){
+        if(Auth::check() && Auth::user()->role === 'admin'){
+            $data['isAlumni'] = true;
+        }elseif(Auth::check() && Auth::user()->member){
             $data['isAlumni'] = $memberService->isAlumni(Auth::user()->member->id);
         }
 
         $data['categories'] = Category::where('type', 'course')->get();
         $data['selected_category'] = $request->category;
+        $data['search'] = $search;
 
         return view('ecourse-list', $data);
     }

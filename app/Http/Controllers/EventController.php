@@ -17,7 +17,13 @@ class EventController extends Controller
         
         $data['eventCategories'] = Category::where('type', 'event')->get();
         $data['selectedEventCategory'] = $request->has('category') ? $data['eventCategories']->where('slug', $request->category)->first() : $data['eventCategories']->first();
-        $data['latest_events'] = $ecourseService->publicEcourses($data['selectedEventCategory']->id);
+        $data['search'] = $request->search;
+        $data['lessons'] = collect();
+        if ($data['search']) {
+            $data['lessons'] = $ecourseService->searchPublicLessons($data['search'], $data['selectedEventCategory']->id);
+        } else {
+            $data['latest_events'] = $ecourseService->publicEcourses($data['selectedEventCategory']->id);
+        }
         $data['activeOrder'] = null;
         if(Auth::check()){
             $data['activeOrder'] = $orderService->activeOrder();

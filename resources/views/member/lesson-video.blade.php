@@ -1,10 +1,11 @@
 <x-web-layout>
 
     <x-panel class="mt-12">
-        @if($activeOrder)
-        <div class="border rounded-full text-center py-2 px-4 bg-green-500 w-fit mx-auto mb-4">
-            <p>Kelas atau Langganan Anda aktif hingga {{ $activeOrder->end_date->setTimezone('Asia/Jakarta')->isoFormat('D MMMM Y') }}</p>
-        </div>
+        @if($endCourse)
+        <x-end-course :endCourse="$endCourse" />
+        @endif
+        @if($endOrder)
+        <x-active-order :order="$endOrder" />
         @endif
         <nav class="flex mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -43,7 +44,7 @@
                 </svg>
             </button>
             <div class="overflow-hidden mx-8 border border-yellow-500 py-1 px-2 rounded-full">
-                <div class="flex justify-start lg:justify-center filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
+                <div class="flex justify-start filter-carousel transition-transform duration-300 ease-in-out text-black text-xs md:text-base">
                     @foreach($sections as $section)
                     <a href="{{ route('member.ecourses.lessons', [ 'slug' => $ecourse->slug, 'section' => $section->id]) }}" class="px-4 py-2 {{ $video->section_id == $section->id ? 'bg-yellow-500 hover:text-white' : 'hover:bg-yellow-500 hover:text-white' }} rounded-full flex items-center whitespace-nowrap mr-2">{{ $section->name }}</a>
                     @endforeach
