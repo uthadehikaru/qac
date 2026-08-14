@@ -47,6 +47,13 @@
                         <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required />
                     </div>
 
+                    <!-- Phone -->
+                    <div class="mt-4">
+                        <x-label for="phone" :value="__('Phone')" />
+
+                        <x-input id="phone" class="block mt-1 w-full" placeholder="6281234567890" type="text" name="phone" :value="old('phone')" required />
+                    </div>
+
                     <!-- Password -->
                     <div class="mt-4">
                         <x-label for="password" :value="__('Password')" />

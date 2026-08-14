@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'phone' => 'nullable|numeric|unique:members|min:8',
+            'phone' => 'required|numeric|unique:members|min:8',
             'gender' => 'nullable|in:pria,wanita',
             'regency_id' => 'nullable|exists:regencies,id',
             'session' => 'sometimes',
