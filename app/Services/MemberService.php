@@ -42,24 +42,29 @@ class MemberService
             ->where('status', '>=', MemberBatch::STATUS_PAID)
             ->latest('approved_at')
             ->first();
-        if($isLite && $memberBatch){
+        if (! $memberBatch) {
+            return null;
+        }
+
+        if ($isLite) {
             $approved_at = $memberBatch->approved_at;
             $duration = System::value('ecource_access_month', 1);
-            if($memberBatch->session == 'bundling'){
+            if ($memberBatch->session == 'bundling') {
                 $duration = $duration * 2;
             }
             $end_course = Carbon::parse($approved_at)->addMonths($duration);
-            if($end_course->isPast()){
+            if ($end_course->isPast()) {
                 return null;
             }
-        }elseif(!$isLite){
+        } else {
             $end_at = $memberBatch->batch->end_at;
             $duration = System::value('ecource_access_month', 1);
             $end_course = Carbon::parse($end_at)->addMonths($duration);
-            if($end_course->isPast()){
+            if ($end_course->isPast()) {
                 return null;
             }
         }
+
         return $memberBatch;
     }
 
