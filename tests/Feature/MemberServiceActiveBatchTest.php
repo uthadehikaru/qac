@@ -38,7 +38,7 @@ class MemberServiceActiveBatchTest extends TestCase
             'value' => 2,
         ]);
 
-        $memberBatch = MemberBatch::create([
+        MemberBatch::create([
             'member_id' => $member->id,
             'batch_id' => $batch->id,
             'status' => MemberBatch::STATUS_PAID,
@@ -48,7 +48,8 @@ class MemberServiceActiveBatchTest extends TestCase
         $result = (new MemberService)->checkMemberActiveBatch($member->id, $course->id);
 
         $this->assertNotNull($result);
-        $this->assertEquals($memberBatch->id, $result->id);
+        $this->assertEquals($member->id, $result->member_id);
+        $this->assertEquals($batch->id, $result->batch_id);
     }
 
     public function test_returns_null_when_non_lite_access_has_expired(): void
