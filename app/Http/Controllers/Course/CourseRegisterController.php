@@ -89,7 +89,7 @@ class CourseRegisterController extends Controller
             if(isset($data['batch_id'])){
                 $batch = Batch::find($data['batch_id']);
             }
-            $regency = $data['regency'] ? Regency::find($data['regency']) : null;
+            $regency = ! empty($data['regency']) ? Regency::find($data['regency']) : null;
 
             $user = null;
             $member = null;
@@ -177,16 +177,15 @@ class CourseRegisterController extends Controller
                     }
                 }
             }elseif($batch){
-                $lastBatch = Auth::user()->member->batches()
-                    ->wherePivot('status', MemberBatch::STATUS_GRADUATED)
-                    ->orderBy('pivot_id', 'desc')->first();
-                $lastLevel = $lastBatch ? $lastBatch->course->level : 0;
-                $currentLevel = $batch ? $batch->course->level : 0;
-                if ($lastBatch && $lastBatch->id == $batch->id) {
+                $lastLevel = $member->level() ?? 0;
+                $currentLevel = $batch->course->level;
+                if ($member->batches()->where('batches.id', $batch->id)->wherePivot('status', '>', MemberBatch::STATUS_CANCELED)->exists()) {
+                    DB::rollBack();
                     return back()->with('error', 'Anda telah mendaftar kelas ini');
                 }
 
                 if ($lastLevel < $currentLevel - 1) {
+                    DB::rollBack();
                     return back()->with('error', 'Maaf, Anda belum menyelesaikan level sebelumnya');
                 }
                 $member->batches()->attach($batch->id);

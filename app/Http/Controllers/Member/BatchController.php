@@ -47,12 +47,11 @@ class BatchController extends Controller
             'session' => 'sometimes',
         ]);
 
-        $lastBatch = Auth::user()->member->batches()
-            ->wherePivot('status', MemberBatch::STATUS_GRADUATED)
-            ->orderBy('pivot_id', 'desc')->first();
-        $lastLevel = $lastBatch ? $lastBatch->course->level : 0;
-        $currentLevel = $batch ? $batch->course->level : 0;
-        if ($lastBatch && $lastBatch->id == $batch->id) {
+        $member = Auth::user()->member;
+        $lastLevel = $member->level() ?? 0;
+        $currentLevel = $batch->course->level;
+
+        if ($member->batches()->where('batches.id', $batch->id)->wherePivot('status', '>', MemberBatch::STATUS_CANCELED)->exists()) {
             return back()->with('error', 'Anda telah mendaftar kelas ini');
         }
 
@@ -72,8 +71,6 @@ class BatchController extends Controller
         if ($request->has('reseat')) {
             $additional['reseat'] = 1;
         }
-
-        $member = Auth::user()->member;
 
         $member->batches()->attach($batch->id, $additional);
 
