@@ -16,6 +16,8 @@ class MemberBatch extends Pivot
 
     protected $primaryKey = 'id';
 
+    public $incrementing = true;
+
     protected $fillable = [
         'member_id',
         'batch_id',

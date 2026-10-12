@@ -50,7 +50,8 @@ class EcourseTest extends TestCase
 
     public function test_user_can_see_ecourse_video(): void
     {
-        $member = Member::factory()->for(User::factory()->create(['role' => 'member']))->create();
+        $user = User::factory()->create(['role' => 'member']);
+        $member = $user->member;
         Order::factory()->for($member)->create([
             'start_date' => CarbonImmutable::now()->subMonth(),
             'end_date' => CarbonImmutable::now()->addMonth(),
@@ -59,7 +60,7 @@ class EcourseTest extends TestCase
         $ecourse = Ecourse::factory()->has(Lesson::factory(3)->for(Section::factory()))->published()->create();
         $lesson = $ecourse->lessons->first();
 
-        $this->actingAs($member->user)->get(route('member.ecourses.lessons', [$ecourse->slug, $lesson->section->id]))
+        $this->actingAs($user)->get(route('member.ecourses.lessons', $ecourse->slug))
             ->assertSee($lesson->subject);
     }
 

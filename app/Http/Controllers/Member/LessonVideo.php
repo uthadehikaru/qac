@@ -26,11 +26,12 @@ class LessonVideo extends Controller
         if(!$ecourse){
             return abort(404);
         }
-        $activeOrder = $orderService->activeOrder();
-        if(!$activeOrder){
-            return redirect()->route('checkout')->with('error', 'Anda belum memiliki langganan aktif');
-        }elseif($ecourse->is_only_active_batch){
-            $isLite = Str::startsWith($ecourse->course->name, 'QAC 1.0 Lite');
+
+        // Batch-only ecourses (Kelas Aktif) are unlocked by paid batch enrollment,
+        // not by a separate subscription order/checkout.
+        $activeOrder = null;
+        if($ecourse->is_only_active_batch){
+            $isLite = Str::startsWith($ecourse->course->name ?? '', 'QAC 1.0 Lite');
             if($isLite){
                 $batch1a = $memberService->checkMemberActiveBatch($member_id, System::value('qac_1_lite_1a'), true);
                 $batch1b = $memberService->checkMemberActiveBatch($member_id, System::value('qac_1_lite_1b'), true);
@@ -40,10 +41,15 @@ class LessonVideo extends Controller
             }
             if(!$activeBatch){
                 if($isLite){
-                    return redirect()->route('kelas.qac-1-lite')->with('error', 'Anda belum memiliki langganan aktif');
+                    return redirect()->route('kelas.qac-1-lite')->with('error', 'Anda belum memiliki akses kelas aktif');
                 }else{
-                    return redirect()->route('kelas.qac-'.$ecourse->course->level)->with('error', 'Anda belum memiliki langganan aktif');
+                    return redirect()->route('kelas.qac-'.$ecourse->course->level)->with('error', 'Anda belum memiliki akses kelas aktif');
                 }
+            }
+        }else{
+            $activeOrder = $orderService->activeOrder();
+            if(!$activeOrder){
+                return redirect()->route('checkout')->with('error', 'Anda belum memiliki langganan aktif');
             }
         }
         $data['activeOrder'] = $activeOrder;
