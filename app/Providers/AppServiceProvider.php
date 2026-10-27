@@ -50,13 +50,7 @@ class AppServiceProvider extends ServiceProvider
                 $qac_lite_1b = $batch1b ? true : false;
                 $endOrder = (new OrderService())->activeOrder();
                 if($batch1a && $batch1b){
-                    $verified_at = $batch1a ? $batch1a->approved_at : $batch1b->approved_at;
-                    $session = $batch1a ? $batch1a->session : $batch1b->session;
-                    $duration = System::value('ecource_access_month', 1);
-                    if($session == 'bundling'){
-                        $duration = $duration * 2;
-                    }
-                    $endCourse = Carbon::parse($verified_at)->addMonths($duration);
+                    $endCourse = Carbon::parse($batch1a->approved_at)->addMonths($batch1a->accessMonths());
                 }
             }
             $view->with('qac_lite_1a', $qac_lite_1a);

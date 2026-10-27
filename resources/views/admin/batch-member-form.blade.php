@@ -53,10 +53,16 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-session">
                         Session
                     </label>
+                    @php
+                        $sessionOptions = $sessions ?? [];
+                        if ($batchMember && $batchMember->session && ! in_array($batchMember->session, $sessionOptions, true)) {
+                            $sessionOptions[] = $batchMember->session;
+                        }
+                    @endphp
                     <select id="grid-session" name="session"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
                         <option value="">-- choose session --</option>
-                        @foreach($sessions as $session)
+                        @foreach($sessionOptions as $session)
                             <option value="{{ $session }}" {{ $batchMember && $batchMember->session==$session?'selected':'' }}>{{ $session }}</option>
                         @endforeach
                     </select>
