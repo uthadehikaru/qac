@@ -70,6 +70,24 @@ class MemberBatch extends Pivot
         });
     }
 
+    /**
+     * Months of class access granted when this registration is paid.
+     * Bundling covers QAC Lite 1a and 1b, so it lasts twice the configured period.
+     */
+    public function accessMonths(): int
+    {
+        $months = (int) System::value('ecource_access_month', 1);
+        if ($months < 1) {
+            $months = 1;
+        }
+
+        if (is_string($this->session) && stripos($this->session, 'bundling') !== false) {
+            $months *= 2;
+        }
+
+        return $months;
+    }
+
     public function member()
     {
         return $this->belongsTo(Member::class);

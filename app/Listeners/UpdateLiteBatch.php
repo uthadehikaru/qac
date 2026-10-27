@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Events\MemberBatchUpdated;
 use App\Models\MemberBatch;
 use App\Models\Order;
-use App\Models\System;
 use App\Services\OrderService;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -45,10 +44,7 @@ class UpdateLiteBatch
                             'approved_at' => now(),
                         ]);
                 }
-                $months = System::value('ecource_access_month',1);
-                if($event->memberBatch->session == 'bundling') {
-                    $months = $months * 2;
-                }
+                $months = $event->memberBatch->accessMonths();
                 $activeOrder = Order::where('member_id', $event->memberBatch->member_id)->verified()->latest()->first();
                 $startDate = CarbonImmutable::now();
                 $endDate = CarbonImmutable::now();

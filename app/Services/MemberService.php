@@ -48,11 +48,7 @@ class MemberService
 
         if ($isLite) {
             $approved_at = $memberBatch->approved_at;
-            $duration = System::value('ecource_access_month', 1);
-            if ($memberBatch->session == 'bundling') {
-                $duration = $duration * 2;
-            }
-            $end_course = Carbon::parse($approved_at)->addMonths($duration);
+            $end_course = Carbon::parse($approved_at)->addMonths($memberBatch->accessMonths());
             if ($end_course->isPast()) {
                 return null;
             }

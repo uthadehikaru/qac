@@ -155,8 +155,14 @@ class MemberBatchController extends Controller
         }
 
         $memberBatch = MemberBatch::find($id);
+        $session = $request->session;
+        if (($session === null || $session === '')
+            && is_string($memberBatch->session)
+            && stripos($memberBatch->session, 'bundling') !== false) {
+            $session = $memberBatch->session;
+        }
         $data = [
-            'session' => $request->session,
+            'session' => $session,
             'status' => $request->status,
             'note' => $request->note,
             'new_book' => $request->new_book ?? 0,
